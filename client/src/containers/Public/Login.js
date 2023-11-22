@@ -1,0 +1,98 @@
+import React, { useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { path } from '../../utils/constant';
+
+const Login = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    // const { isLoggedIn, msg, update } = useSelector(state => state.auth)
+    const [invalidFields, setInvalidFields] = useState([])
+    const [payload, setPayload] = useState({
+        phone: '', password: '',
+    });
+
+    const validate = (payload) => {
+        let invalids = 0;
+        let fields = Object.entries(payload);
+        fields.forEach(item => {
+            if (item[1] === '') {
+                setInvalidFields(prev => [...prev, {
+                    name: item[0],
+                    msg: 'You must not vacate this field!'
+                }])
+                invalids++;
+                return;
+            } else if (item[1] !== '') {
+                switch (item[0]) {
+                    case 'password': {
+                        if (item[1].length < 6) {
+                            setInvalidFields(prev => [...prev, {
+                                name: item[0],
+                                msg: 'Password is at least 6 characters!'
+                            }])
+                            invalids++;
+                        }
+                        break;
+                    }
+                    case 'phone': {
+                        if (!+item[1]) {
+                            setInvalidFields(prev => [...prev, {
+                                name: item[0],
+                                msg: 'Invalid phone number!'
+                            }])
+                            invalids++;
+                        }
+                        break;
+                    }
+                    default: break;
+                }
+            }
+        })
+        return invalids;
+    }
+
+    return (
+        <div className='bg-frame center'>
+            <div className='frame'>
+                <h3 className='title'>LOGIN</h3>
+                <div className='forminput'>
+                    <InputForm
+                        setInvalidFields={setInvalidFields}
+                        invalidFields={invalidFields}
+                        label={'PHONE'}
+                        value={payload.phone}
+                        setValue={setPayload}
+                        keyPayload={'phone'}
+                        type='tel'
+                    />
+                    <InputForm
+                        setInvalidFields={setInvalidFields}
+                        invalidFields={invalidFields}
+                        label={'PASSWORD'}
+                        value={payload.password}
+                        setValue={setPayload}
+                        keyPayload={'password'}
+                        type='password'
+                    />
+                </div>
+                <div className='formbutton'>
+                    <Button
+                        text='LOGIN'
+                        fullWidth
+                    // onClick={handleSubmit}
+                    />
+                </div>
+                <div className='transit between'>
+                    <small className='text'
+                        onClick={() => { navigate('/' + path.FORGOT) }}>Forgot password</small>
+                    <small className='text'
+                        onClick={() => { navigate('/' + path.REGISTER) }}>Register an account</small>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Login
