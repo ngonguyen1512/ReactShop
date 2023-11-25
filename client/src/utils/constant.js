@@ -5,4 +5,7 @@ export const path = {
 
     HOME: '/*',
     HOME__PAGE: ':page',
+
+    HOMESERVER: 'webserver/*',
+    DASHBOARD: 'webserver/*',
 }

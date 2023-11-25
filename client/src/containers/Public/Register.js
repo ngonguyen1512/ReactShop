@@ -1,19 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { InputForm, Button } from "../../components"
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import Swal from 'sweetalert2'
-import { path } from '../../utils/constant'
+import React, { useState, useEffect } from 'react';
+import { InputForm, Button } from "../../components";
+import * as actions from '../../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { path } from '../../utils/constant';
 
 const Register = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // const { isLoggedIn, msg, update } = useSelector(state => state.auth)
+    const { isLoggedIn, msg, update } = useSelector(state => state.auth)
     const [invalidFields, setInvalidFields] = useState([])
     const [payload, setPayload] = useState({
-        name: '', phone: '', email: '',
-        password: '', idPermission: '3', state: '1'
+        name: '', phone: '', email: '', address: '',
+        password: '', idPermission: '4', idState: '2'
     });
+
+    const handleSubmit = async () => {
+        let finalPayload = payload
+        let invalids = validate(finalPayload);
+        if (invalids === 0) { 
+            dispatch(actions.register(payload));
+            Swal.fire('Success!', 'Create account successful.', 'error');
+        }
+    }
 
     const validate = (payload) => {
         let invalids = 0;
@@ -65,6 +75,10 @@ const Register = () => {
         return invalids;
     }
 
+    useEffect(() => {
+        isLoggedIn && navigate('/');
+    }, [isLoggedIn, navigate]);
+
     return (
         <div className='bg-frame center'>
             <div className='frame'>
@@ -100,6 +114,15 @@ const Register = () => {
                     <InputForm
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
+                        label={'ADDRESS'}
+                        value={payload.address}
+                        setValue={setPayload}
+                        keyPayload={'address'}
+                        type='text'
+                    />
+                    <InputForm
+                        setInvalidFields={setInvalidFields}
+                        invalidFields={invalidFields}
                         label={'PASSWORD'}
                         value={payload.password}
                         setValue={setPayload}
@@ -111,7 +134,7 @@ const Register = () => {
                     <Button
                         text={'REGISTER'}
                         fullWidth
-                        // onClick={handleSubmit}
+                        onClick={handleSubmit}
                     />
                 </div>
                 <div className='transit'>

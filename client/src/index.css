@@ -5,7 +5,6 @@
 * {
     font-family: 'Oswald' !important;
 }
-
 .center {
     display: flex;
     align-items: center;
@@ -56,16 +55,55 @@
 .header .header-content .logo-cate .logo {
     align-items: center;
     display: flex;
-    margin-right: 20%;
+    margin-right: 5%;
 }
 .header .header-content .logo-cate .cate {
-    font-size: medium;
     height: 100%;
+    margin-left: 6%;
+    font-size: medium;
+}
+.header .header-content .logo-cate .cate .content {
+    text-transform: uppercase;
+    padding: 0 1.5%;
+}
+.header .header-content .logo-cate .cate .content:hover{
+    background-color: #e7e7e7;
+    font-weight: 700;
 }
 .header .header-content .search-cart-login {
     gap: 8%;
     right: 4%;
     position: absolute; 
+}
+.header .header-content .search-cart-login .login .account {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: end;
+}
+.header .header-content .search-cart-login .login .account .info {
+    font-size: medium;
+    font-weight: 400;
+    margin-right: 0.5%;
+}
+.header .header-content .search-cart-login .login .menu {
+    right: 0;
+    top: 105%;
+    z-index: 50;
+    display: flex;
+    font-weight: 400;
+    min-width: 150px;
+    font-size: medium;
+    position: absolute;
+    flex-direction: column;
+    background-color: #fff;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    padding: 0.5rem 1.25rem 1rem 1.25rem;
+    box-shadow:
+        -10px 0 10px -5px rgba(0, 0, 0, 0.2), /* Cạnh bên trái */
+        10px 0 10px -5px rgba(0, 0, 0, 0.2), /* Cạnh bên phải */
+        0 10px 10px -5px rgba(0, 0, 0, 0.2); /* Cạnh dưới */
 }
 
 .main {
@@ -106,4 +144,16 @@
 }
 .bg-frame .frame .transit .text:hover {
     color: #3482F6;
+}
+
+@media (max-width: 809px) {
+    .header .header-content .logo-cate .logo .text-logo {
+        display: none;
+    }
+}
+
+@media (max-width: 679px) {
+    .header .header-content .logo-cate .cate {
+        display: none;
+    }
 }

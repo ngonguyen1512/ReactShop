@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import Swal from 'sweetalert2';
+import React, { useEffect, useState } from 'react'
+import * as actions from '../../store/actions'
 import { Button, InputForm } from '../../components'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,11 +9,17 @@ import { path } from '../../utils/constant';
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const { isLoggedIn, msg, update } = useSelector(state => state.auth)
+    const { isLoggedIn, msg, update } = useSelector(state => state.auth)
     const [invalidFields, setInvalidFields] = useState([])
     const [payload, setPayload] = useState({
         phone: '', password: '',
     });
+
+    const handleSubmit = async () => {
+        let finalPayload = payload
+        let invalids = validate(finalPayload);
+        if (invalids === 0) dispatch(actions.login(payload));
+    }
 
     const validate = (payload) => {
         let invalids = 0;
@@ -53,6 +61,14 @@ const Login = () => {
         return invalids;
     }
 
+    useEffect(() => {
+        isLoggedIn && navigate('/');
+    }, [isLoggedIn, navigate]);
+
+    useEffect(() => {
+        msg && Swal.fire('Oops !', msg, 'error');
+    }, [msg, update]);
+
     return (
         <div className='bg-frame center'>
             <div className='frame'>
@@ -81,7 +97,7 @@ const Login = () => {
                     <Button
                         text='LOGIN'
                         fullWidth
-                    // onClick={handleSubmit}
+                        onClick={handleSubmit}
                     />
                 </div>
                 <div className='transit between'>
