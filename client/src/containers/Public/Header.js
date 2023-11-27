@@ -66,7 +66,7 @@ const Header = () => {
           ) : (
             <div className='cate center'>
               {transfers?.length > 0 && transfers.map(item => {
-                if (item.idPermission === currentData.idPermission)
+                if (item.idPermission === currentData.idPermission && (item.relation === 0 || item.relation === 1))
                   return (
                     <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content'>
                       {item.name}

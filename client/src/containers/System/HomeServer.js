@@ -34,7 +34,7 @@ const HomeServer = () => {
   return (
     <div className='home'>
       <Header />
-      <div className='main center'>
+      <div className='main'>
         <Outlet />
       </div>
     </div>

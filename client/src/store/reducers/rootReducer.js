@@ -1,6 +1,7 @@
 import authReducer from "./authReducer";
 import userReducer from "./userReducer";
 import menuReducer from "./menuReducer";
+import functionReducer from "./functionReducer";
 import transferReducer from "./transferReducer";
 import categoryReducer from "./categoryReducer";
 import { combineReducers } from "redux";
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     auth: persistReducer(authConfig, authReducer),
     user: userReducer,
     menu: menuReducer,
+    function: functionReducer,
     transfer: transferReducer,
     category: categoryReducer,
 })

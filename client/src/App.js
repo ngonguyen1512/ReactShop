@@ -1,7 +1,7 @@
 import { path } from './utils/constant'
 import { Routes, Route } from 'react-router-dom'
 import { Home, Login, HomePage, Forgot, Register } from './containers/Public'
-import { HomeServer, Dashboard } from './containers/System'
+import { HomeServer, Dashboard, Type, Sample, Category } from './containers/System'
 
 function App() {
   return (
@@ -15,6 +15,10 @@ function App() {
         </Route>
         <Route path={path.HOMESERVER} element={<HomeServer />}>
           <Route path='*' element={<Dashboard />} />
+          <Route path={path.TYPE} element={<Type />}>
+            <Route path={path.SAMPLE} element={<Sample />} />
+            <Route path={path.CATEGORY} element={<Category />} />
+          </Route>
         </Route>
       </Routes>
     </div>

@@ -15,6 +15,11 @@
     align-items: center;
     justify-content: space-between;
 }
+.end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 
 .home {
     width: 100%;
@@ -145,6 +150,30 @@
 .bg-frame .frame .transit .text:hover {
     color: #3482F6;
 }
+
+/* TYPE */
+.type, .category {
+    margin-top: 1%;
+}
+.type .header-type .content{
+    margin-right: 1%;
+}
+.type .header-type .content span {
+    padding: 0 2% 0.5% 2%;
+    border-bottom: 1px solid #000;
+}
+.type .header-type .content span:active {
+    background-color: #000;
+    color: #fff;
+}
+.type .main-type {
+    margin-top: 1%;
+}
+
+/* .category .heaedr-category {
+    display: ;
+} */
+
 
 @media (max-width: 809px) {
     .header .header-content .logo-cate .logo .text-logo {

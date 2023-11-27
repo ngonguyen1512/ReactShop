@@ -8,4 +8,7 @@ export const path = {
 
     HOMESERVER: 'webserver/*',
     DASHBOARD: 'webserver/*',
+    TYPE: 'type/*',
+    CATEGORY: 'type/*',
+    SAMPLE: 'sample',
 }

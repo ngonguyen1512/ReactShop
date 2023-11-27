@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Transfer.init({
     name: DataTypes.STRING,
-    idPermission: DataTypes.INTEGER
+    idPermission: DataTypes.INTEGER,
+    relation: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Transfer',
