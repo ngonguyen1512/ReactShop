@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import * as actions from '../../store/actions'
 import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
-import Sample from './Sample';
-import Category from './Category';
+import { Sample, Category } from './index';
 
 const Type = () => {
     const location = useLocation()

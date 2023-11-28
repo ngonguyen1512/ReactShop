@@ -171,7 +171,7 @@
 }
 
 /* TYPE */
-.type, .category {
+.type, .category, .account, .sample {
     margin-top: 1%;
 }
 .type .header-type .content{
@@ -190,7 +190,7 @@
 } */
 
 .category .header-category,
-.sample .header-sample {
+.sample .header-sample, .account .header-account {
     margin: 1% 0;
 }
 .category .form-category {
@@ -212,7 +212,7 @@
     flex-direction: 2;
 }
 .category .list-category,
-.sample .list-sample {
+.sample .list-sample, .account .list-account {
     margin: 1% 0;
     height: 500px;
 }

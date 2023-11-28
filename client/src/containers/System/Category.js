@@ -85,7 +85,6 @@ const Category = () => {
     }
   }
 
-
   const validate = (payload) => {
     let invalids = 0;
     let fields = Object.entries(payload);

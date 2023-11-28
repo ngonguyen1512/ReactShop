@@ -24,7 +24,7 @@ export const registerService = ({ name, phone, email, address, password, idPermi
         const token = response[1] && jwt.sign({ id: response[0].id, phone: response[0].phone }, process.env.SECRET_KEY, { expiresIn: '1d' });
         resolve({
             err: token ? 0 : 2,
-            msg: token ? 'Successful registration!' : 'The phone number has been registered.',
+            msg: token ? 'Successful registration.' : 'The phone number has been registered.',
             token: token || null
         })
     } catch (error) { reject(error); }

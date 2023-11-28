@@ -11,4 +11,5 @@ export const path = {
     TYPE: 'type/*',
     CATEGORY: 'type/*',
     SAMPLE: 'sample',
+    ACCOUNT: 'account',
 }
