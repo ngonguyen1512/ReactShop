@@ -1,90 +1,90 @@
 import actionTypes from './actionTypes';
 import * as apis from '../../services';
 
-export const getTransfers = () => async (dispatch) => {
+export const getStates = () => async (dispatch) => {
     try {
-        const response = await apis.apiGetTransfers();
+        const response = await apis.apiGetStates();
         if (response?.data.err === 0) {
             dispatch({
-                type: actionTypes.GET_TRANSFER,
-                transfers: response.data.response,
+                type: actionTypes.GET_STATE,
+                states: response.data.response,
             })
         } else {
             dispatch({
-                type: actionTypes.GET_TRANSFER,
+                type: actionTypes.GET_STATE,
                 msg: response.data.msg,
-                transfers: null,
+                states: null,
             })
         }
     } catch (error) {
         dispatch({
-            type: actionTypes.GET_TRANSFER,
+            type: actionTypes.GET_STATE,
             data: null,
         })
     }
 }
 
-export const createTransfers = (payloadt) => async (dispatch) => {
+export const createStates = (payloadt) => async (dispatch) => {
     try {
-        const response = await apis.apiCreateTransfers(payloadt);
+        const response = await apis.apiCreateStates(payloadt);
         if (response?.data.err === 0) {
             dispatch({
-                type: actionTypes.CREATE_TRANSFER,
+                type: actionTypes.CREATE_STATE,
                 data: response.data.response,
             });
         } else {
             dispatch({
-                type: actionTypes.CREATE_TRANSFER,
+                type: actionTypes.CREATE_STATE,
                 msg: response.data.msg,
             });
         }
     } catch (error) {
         dispatch({
-            type: actionTypes.CREATE_TRANSFER,
-            msg: 'Failed to create transfer.',
+            type: actionTypes.CREATE_STATE,
+            msg: 'Failed to create states.',
         });
     }
 };
 
-export const deleteTransfers = (payloadtt) => async (dispatch) => {
+export const deleteStates = (payloadtt) => async (dispatch) => {
     try {
-        const response = await apis.apiDeleteTransfers(payloadtt);
+        const response = await apis.apiDeleteStates(payloadtt);
         if (response?.data.err === 0) {
             dispatch({
-                type: actionTypes.DELETE_TRANSFER,
+                type: actionTypes.DELETE_STATE,
                 data: response.data.response,
             })
         } else {
             dispatch({
-                type: actionTypes.DELETE_TRANSFER,
+                type: actionTypes.DELETE_STATE,
                 msg: response.data.msg,
             })
         }
     } catch (error) {
         dispatch({
-            type: actionTypes.DELETE_TRANSFER,
+            type: actionTypes.DELETE_STATE,
             data: null,
         })
     }
 }
 
-export const updateTransfers = (payloadt) => async (dispatch) => {
+export const updateStates = (payloadt) => async (dispatch) => {
     try {
-        const response = await apis.apiUpdateTransfers(payloadt);
+        const response = await apis.apiUpdateStates(payloadt);
         if (response?.data.err === 0) {
             dispatch({
-                type: actionTypes.UPDATE_TRANSFER,
+                type: actionTypes.UPDATE_STATE,
                 data: response.data.response,
             })
         } else {
             dispatch({
-                type: actionTypes.UPDATE_TRANSFER,
+                type: actionTypes.UPDATE_STATE,
                 msg: response.data.msg,
             })
         }
     } catch (error) {
         dispatch({
-            type: actionTypes.UPDATE_TRANSFER,
+            type: actionTypes.UPDATE_STATE,
             data: null,
         })
     }

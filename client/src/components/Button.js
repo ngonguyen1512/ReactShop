@@ -1,10 +1,10 @@
 import React, {memo} from 'react';
 
-const Button = ({text, textColor, bgColor, IcAfter, onClick, fullWidth }) => {
+const Button = ({text, IcAfter, onClick }) => {
   return (
     <button 
       type='button' 
-      className={`py-1 px-2 ${textColor} ${bgColor} ${fullWidth && 'w-full'} border border-[#000] hover:bg-[#000] hover:text-[#fff] font-semibold flex items-center justify-center`}
+      className='py-1 px-2 w-full border border-[#000] hover:bg-[#000] hover:text-[#fff] font-semibold flex items-center justify-center'
       onClick={onClick}
     >
         <span>{text}</span>

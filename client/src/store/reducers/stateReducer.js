@@ -1,35 +1,35 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
-    transfers: [],
+    states: [],
     msg: '',
 }
 
-const transferReducer = (state = initState, action) => {
+const stateReducer = (state = initState, action) => {
     switch (action.type) {
-        case actionTypes.GET_TRANSFER:
+        case actionTypes.GET_STATE:
             return {
                 ...state,
-                transfers: action.transfers || {},
+                states: action.states || {},
                 msg: action.msg || '',
             }
 
-        case actionTypes.CREATE_TRANSFER:
+        case actionTypes.CREATE_STATE:
             return {
                 ...state,
-                transfers: action.data || [],
+                states: action.data || [],
                 msg: action.msg || '',
             }
-        case actionTypes.DELETE_TRANSFER:
+        case actionTypes.DELETE_STATE:
             return {
                 ...state,
-                transfers: action.data,
+                states: action.data,
                 msg: action.msg || '',
             }
-        case actionTypes.UPDATE_TRANSFER:
+        case actionTypes.UPDATE_STATE:
             return {
                 ...state,
-                transfers: action.data,
+                states: action.data,
                 msg: action.msg || '',
             }
         default:
@@ -37,4 +37,4 @@ const transferReducer = (state = initState, action) => {
     }
 }
 
-export default transferReducer;
+export default stateReducer;

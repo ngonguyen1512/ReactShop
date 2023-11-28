@@ -1,7 +1,11 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../store/actions'
 import { Button, InputForm } from '../../components'
+import icons from '../../utils/icons'
+
+const { TiDeleteOutline } = icons;
 
 const styletd = 'text-center px-4 py-2 '
 
@@ -10,10 +14,12 @@ const Category = () => {
   const [searchValue, setSearchValue] = useState("")
   const [shouldReload, setShouldReload] = useState(false)
   const [invalidFields, setInvalidFields] = useState([])
+  // const { states } = useSelector(state => state.state)
+  const { currentData } = useSelector(state => state.user)
   const { functions } = useSelector(state => state.function)
   const { categories } = useSelector(state => state.category)
-  const { currentData } = useSelector(state => state.user)
   const permis = currentData.idPermission
+
   const [payload, setPayload] = useState({
     id: '' || null, name: '', image: ''
   });
@@ -30,15 +36,83 @@ const Category = () => {
     );
   }
 
+  const uploadFileAndDispatch = (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    return axios.post('http://localhost:5000/api/v1/image/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+  };
+  const handleSubmitCreate = async () => {
+    let finalPayload = { ...payload };
+    let fileInput = document.querySelector('input[type="file"]');
+    let file = fileInput.files[0];
+    finalPayload.image = file.name; // Use the file name directly
+    let invalids = validate(finalPayload);
+    if (invalids === 0) {
+      dispatch(actions.createCategories(finalPayload)).then(() => {
+        uploadFileAndDispatch(file)
+          .then(response => {
+            console.log('File uploaded to server:', response.data);
+          }).catch(error => {
+            console.error('Error uploading file:', error);
+          });
+      }).catch(error => {
+        console.error('Error dispatching action:', error);
+      });
+    }
+  }
+  const handleSubmitUpdate = async () => {
+    let finalPayload = { ...payload };
+    let fileInput = document.querySelector('input[type="file"]');
+    let file = fileInput.files[0];
+    finalPayload.image = file.name; // Use the file name directly
+    let invalids = validate(finalPayload);
+    if (invalids === 0) {
+      dispatch(actions.updateCategories(finalPayload)).then(() => {
+        uploadFileAndDispatch(file)
+          .then(response => {
+            console.log('File uploaded to server:', response.data);
+          }).catch(error => {
+            console.error('Error uploading file:', error);
+          });
+        setPayload({ id: '', name: '', image: '' })
+      }).catch(error => {
+        console.error('Error dispatching action:', error);
+      });
+    }
+  }
+
+
+  const validate = (payload) => {
+    let invalids = 0;
+    let fields = Object.entries(payload);
+
+    fields.forEach(item => {
+      if (item[1] === '') {
+        setInvalidFields(prev => [...prev, {
+          name: item[0],
+          msg: 'You must not leave this input blank!'
+        }])
+        invalids++;
+        return;
+      }
+    })
+    return invalids;
+  }
+
   useEffect(() => {
-    dispatch(actions.getFunctions(permis))
+    let searchParamsObject = {}
+    if (permis) searchParamsObject.permis = permis
+    // dispatch(actions.getStates())
     dispatch(actions.getCategories())
+    dispatch(actions.getFunctions(searchParamsObject))
   }, [dispatch, permis])
 
   const mapRows = (data) => {
     return data.map((item) => {
       const handleClickRow = () => {
-        setPayload({ ...payload, id: item.id, name: item.name, image: item.image, state: item.state });
+        setPayload({ ...payload, id: item.id, name: item.name });
       };
       return (
         <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
@@ -57,14 +131,65 @@ const Category = () => {
       <div className='header-category between'>
         <span></span>
         <input
-          className='text-[#000] outline-none bg-[#e7e7e7] p-2 rounded-md w-[20%] '
+          className='text-[#000] outline-none bg-[#e7e7e7] p-2 rounded-md w-[40%] '
           type="text"
           placeholder='Search by name'
           value={searchValue}
           onChange={handleSearch}
         />
       </div>
-      <div className='list-table h-96'>
+      {functions?.length > 0 && functions.map(item => item.name === 'Create' && item.idPermission === 1 && (
+        <div className='form-category'>
+          <InputForm
+            setInvalidFields={setInvalidFields}
+            invalidFields={invalidFields}
+            label={'NAME'}
+            value={payload.name}
+            setValue={setPayload}
+            keyPayload={'name'}
+            type='text'
+          />
+          <InputForm
+            setInvalidFields={setInvalidFields}
+            invalidFields={invalidFields}
+            label={'IMAGE'}
+            value={payload.image}
+            setValue={setPayload}
+            keyPayload={'image'}
+            type='file'
+          />
+          {/* <div>
+            <label className='text-xs mt-4'>STATE</label>
+            <select value={payload.state}
+              onChange={(e) => setPayload({ ...payload, state: e.target.value })}
+              className='text-[#000] outline-none h-[46px] bg-[#cacaca] p-2 rounded-md w-full'>
+              <option value="">Select STATE</option>
+              {states?.length > 0 && states.map(item => (item.id === 1 || item.id === 2) && (
+                <option value={item.id}>{item.id} - {item.name}</option>
+              ))}
+            </select>
+          </div> */}
+          {payload.id ? (
+            <div className='update-category'>
+              <Button
+                text={'UPDATE'}
+                value={payload.id}
+                onClick={handleSubmitUpdate}
+              />
+              <span onClick={() => setPayload({ ...payload, id: '', name: '', image: '' })}
+                className='icons-clear center'>
+                <TiDeleteOutline />
+              </span>
+            </div>
+          ) : (
+            <Button
+              text={'CREATE'}
+              onClick={handleSubmitCreate}
+            />
+          )}
+        </div>
+      ))}
+      <div className='list-category list-table'>
         <table className='w-full'>
           <thead>
             <tr>
