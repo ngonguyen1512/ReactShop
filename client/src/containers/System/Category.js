@@ -14,7 +14,7 @@ const Category = () => {
   const [searchValue, setSearchValue] = useState("")
   const [shouldReload, setShouldReload] = useState(false)
   const [invalidFields, setInvalidFields] = useState([])
-  // const { states } = useSelector(state => state.state)
+  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { currentData } = useSelector(state => state.user)
   const { functions } = useSelector(state => state.function)
   const { categories } = useSelector(state => state.category)
@@ -57,6 +57,7 @@ const Category = () => {
           }).catch(error => {
             console.error('Error uploading file:', error);
           });
+        setShouldRefetch(true)
       }).catch(error => {
         console.error('Error dispatching action:', error);
       });
@@ -77,6 +78,7 @@ const Category = () => {
             console.error('Error uploading file:', error);
           });
         setPayload({ id: '', name: '', image: '' })
+        setShouldRefetch(true)
       }).catch(error => {
         console.error('Error dispatching action:', error);
       });
@@ -104,10 +106,15 @@ const Category = () => {
   useEffect(() => {
     let searchParamsObject = {}
     if (permis) searchParamsObject.permis = permis
-    // dispatch(actions.getStates())
-    dispatch(actions.getCategories())
-    dispatch(actions.getFunctions(searchParamsObject))
-  }, [dispatch, permis])
+    if (shouldRefetch) {
+      dispatch(actions.getCategories())
+      dispatch(actions.getFunctions(searchParamsObject))
+      setShouldRefetch(false)
+    } else {
+      dispatch(actions.getCategories())
+      dispatch(actions.getFunctions(searchParamsObject))
+    }
+  }, [dispatch, permis, shouldRefetch])
 
   const mapRows = (data) => {
     return data.map((item) => {

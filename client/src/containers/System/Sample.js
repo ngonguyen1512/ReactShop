@@ -13,6 +13,7 @@ const Sample = () => {
   const [searchValue, setSearchValue] = useState("")
   const [shouldReload, setShouldReload] = useState(false)
   const [invalidFields, setInvalidFields] = useState([])
+  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { states } = useSelector(state => state.state)
   const { samples } = useSelector(state => state.sample)
   const { currentData } = useSelector(state => state.user)
@@ -42,11 +43,13 @@ const Sample = () => {
     if (invalids === 0) {
       dispatch(actions.createSamples(payload))
       setPayload({ id: '', idCategory: '', name: '', idState: '' })
+      setShouldRefetch(true)
     }
   }
   const handleSubmitUpdate = async () => {
     dispatch(actions.updateSamples(payload))
     setPayload({ id: '', idCategory: '', name: '', idState: '' })
+    setShouldRefetch(true)
   }
   const validate = (payload) => {
     let invalids = 0;
@@ -82,11 +85,16 @@ const Sample = () => {
   useEffect(() => {
     let searchParamsObject = {}
     if (permis) searchParamsObject.permis = permis
-    dispatch(actions.getStates())
-    dispatch(actions.getCategories())
-    dispatch(actions.getAllSamples())
-    dispatch(actions.getFunctions(searchParamsObject))
-  }, [dispatch, permis, payload.idCategory])
+    if (shouldRefetch) {
+      dispatch(actions.getAllSamples())
+      setShouldRefetch(false);
+    } else {
+      dispatch(actions.getStates())
+      dispatch(actions.getCategories())
+      dispatch(actions.getAllSamples())
+      dispatch(actions.getFunctions(searchParamsObject))
+    }
+  }, [dispatch, permis, shouldRefetch])
 
   return (
     <div className='sample'>
