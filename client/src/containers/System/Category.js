@@ -131,7 +131,7 @@ const Category = () => {
       <div className='header-category between'>
         <span></span>
         <input
-          className='text-[#000] outline-none bg-[#e7e7e7] p-2 rounded-md w-[40%] '
+          className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
           type="text"
           placeholder='Search by name'
           value={searchValue}
@@ -158,17 +158,7 @@ const Category = () => {
             keyPayload={'image'}
             type='file'
           />
-          {/* <div>
-            <label className='text-xs mt-4'>STATE</label>
-            <select value={payload.state}
-              onChange={(e) => setPayload({ ...payload, state: e.target.value })}
-              className='text-[#000] outline-none h-[46px] bg-[#cacaca] p-2 rounded-md w-full'>
-              <option value="">Select STATE</option>
-              {states?.length > 0 && states.map(item => (item.id === 1 || item.id === 2) && (
-                <option value={item.id}>{item.id} - {item.name}</option>
-              ))}
-            </select>
-          </div> */}
+          <span className='hide'></span>
           {payload.id ? (
             <div className='update-category'>
               <Button

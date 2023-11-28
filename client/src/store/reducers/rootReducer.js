@@ -2,6 +2,7 @@ import authReducer from "./authReducer";
 import userReducer from "./userReducer";
 import menuReducer from "./menuReducer";
 import stateReducer from "./stateReducer";
+import sampleReducer from "./sampleReducer";
 import functionReducer from "./functionReducer";
 import transferReducer from "./transferReducer";
 import categoryReducer from "./categoryReducer";
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     menu: menuReducer,
     state: stateReducer,
+    sample: sampleReducer,
     function: functionReducer,
     transfer: transferReducer,
     category: categoryReducer,
