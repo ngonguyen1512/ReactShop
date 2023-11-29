@@ -18,7 +18,8 @@ const Header = () => {
   const parts = pathurl.split('/')[1]
   const { isLoggedIn } = useSelector(state => state.auth)
   const { currentData } = useSelector(state => state.user)
-  const { transfers } = useSelector(state => state.transfer)
+  const permis = currentData.idPermission
+  const { transmissions } = useSelector(state => state.transmission)
   const { categories } = useSelector(state => state.category)
   const [isShowMenu, setIsShowMenu] = useState(false)
 
@@ -41,10 +42,13 @@ const Header = () => {
   }
 
   useEffect(() => {
+    let searchParamsObject = {}
+    if (permis) searchParamsObject.permis = permis
     dispatch(actions.getCurrent())
     dispatch(actions.getTransfers())
     dispatch(actions.getCategories())
-  }, [dispatch]);
+    dispatch(actions.getTransmissions(searchParamsObject))
+  }, [dispatch, permis]);
 
   return (
     <div className='header'>
@@ -65,15 +69,16 @@ const Header = () => {
             </div>
           ) : (
             <div className='cate center'>
-              {transfers?.length > 0 && transfers.map(item => {
-                if (item.idPermission === currentData.idPermission && (item.relation === 0 || item.relation === 1))
+              {transmissions?.length > 0 && transmissions.map(item => {
+                if (item.idPermission === currentData.idPermission)
                   return (
-                    <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content'>
-                      {item.name}
+                    <NavLink key={item.id} to={`${formatVietnameseToString(item?.transmission_transfer.name)}`} className='content'>
+                      {item?.transmission_transfer.name}
                     </NavLink>
                   )
-                return null
-              })}
+              })
+
+              }
             </div>
           )}
         </div>

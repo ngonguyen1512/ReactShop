@@ -1,7 +1,11 @@
 import { path } from './utils/constant'
 import { Routes, Route } from 'react-router-dom'
 import { Home, Login, HomePage, Forgot, Register } from './containers/Public'
-import { HomeServer, Dashboard, Type, Sample, Category, Account } from './containers/System'
+import {
+  HomeServer, Dashboard, Type, Sample, Category, Account, Size, List, Menu,
+  Dimension, State, Slide, Color, Image, Invoice, Product, Transfer, Quantity, Function,
+  Permission, Role
+} from './containers/System'
 
 function App() {
   return (
@@ -13,12 +17,31 @@ function App() {
           <Route path={path.FORGOT} element={<Forgot />} />
           <Route path={path.REGISTER} element={<Register />} />
         </Route>
+        
         <Route path={path.HOMESERVER} element={<HomeServer />}>
           <Route path='*' element={<Dashboard />} />
+          <Route path={path.SLIDE} element={<Slide />} />
           <Route path={path.ACCOUNT} element={<Account />} />
+          <Route path={path.INVOICE} element={<Invoice />} />
+
           <Route path={path.TYPE} element={<Type />}>
             <Route path={path.SAMPLE} element={<Sample />} />
             <Route path={path.CATEGORY} element={<Category />} />
+          </Route>
+          <Route path={path.LIST} element={<List />}>
+            <Route path={path.DIMENSION} element={<Dimension />} />
+            <Route path={path.COLOR} element={<Color />} />
+            <Route path={path.IMAGE} element={<Image />} />
+            <Route path={path.PRODUCT} element={<Product />} />
+            <Route path={path.QUANTITY} element={<Quantity />} />
+            <Route path={path.PERMISSION} element={<Permission />} />
+          </Route>
+          <Route path={path.ROLE} element={<Role />}>
+            <Route path={path.MENU} element={<Menu />} />
+            <Route path={path.STATE} element={<State />} />
+            <Route path={path.TRANSFER} element={<Transfer />} />
+            <Route path={path.FUNCTION} element={<Function />} />
+            <Route path={path.PERMISSION} element={<Permission />} />
           </Route>
         </Route>
       </Routes>

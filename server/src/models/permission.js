@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Permission.hasOne(models.Menu, {foreignKey: 'idPermission', as: 'menu_permission'})
       Permission.hasOne(models.Account, {foreignKey: 'idPermission', as: 'account_permission'})
-      Permission.hasOne(models.Transfer, {foreignKey: 'idPermission', as: 'transfer_permission'})
+      Permission.hasOne(models.Transmission, {foreignKey: 'idPermission', as: 'transmission_permission'})
       Permission.hasOne(models.Function, {foreignKey: 'idPermission', as: 'function_permission'})
       Permission.belongsTo(models.State, { foreignKey: 'idState', targetKey: 'id', as: 'permission_state' });
     }

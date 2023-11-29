@@ -13,9 +13,9 @@ export const getTransfers = async (req, res) => {
 }
 
 export const createTransfers = async (req, res) => {
-    const { name, idPermission } = req.body;
+    const { name } = req.body;
     try {
-        if (!name || !idPermission) return res.status(400).json({
+        if (!name ) return res.status(400).json({
             err: 1,
             msg: 'Please fill in the field!'
         })
@@ -43,9 +43,9 @@ export const deleteTransfers = async (req, res) => {
 }
 
 export const updateTransfers = async (req, res) => {
-    const { id, name, idPermission } = req.body;
+    const { id, name } = req.body;
     try {
-        if (!name || !idPermission) return res.status(400).json({
+        if (!name ) return res.status(400).json({
             err: 1,
             msg: 'Please fill in the field!'
         })

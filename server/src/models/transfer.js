@@ -5,13 +5,12 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Transfer extends Model {
     static associate(models) {
-      Transfer.belongsTo(models.Permission, { foreignKey: 'idPermission', targetKey: 'id', as: 'transfer_permission' });
+      Transfer.hasOne(models.Allocation, {foreignKey: 'idTransfer', as: 'allocation_transfer'})
+      Transfer.hasOne(models.Transmission, {foreignKey: 'idTransfer', as: 'transmission_transfer'})
     }
   }
   Transfer.init({
-    name: DataTypes.STRING,
-    idPermission: DataTypes.INTEGER,
-    relation: DataTypes.INTEGER
+    name: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Transfer',

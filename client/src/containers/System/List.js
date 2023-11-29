@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom';
 import * as actions from '../../store/actions'
 import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
-import { Sample, Category } from './index';
+import { Product, Dimension, Color, Image, Quantity } from './index';
 
-const Type = () => {
+const List = () => {
     const location = useLocation()
     const dispatch = useDispatch()
     const pathurl = location.pathname
     const parts = pathurl.split('/')
-    const idTransfer = 3
+    const idTransfer = 4
     const last = parts[parts.length - 1];
     const { allocations } = useSelector(state => state.allocation)
 
@@ -21,8 +21,8 @@ const Type = () => {
     }, [dispatch]);
 
     return (
-        <div className='type'>
-            <div className='header-type'>
+        <div className='list'>
+            <div className='header-list'>
                 {allocations?.length > 0 && allocations.map(item => (
                     <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content'>
                         <span>{item.name}</span>
@@ -30,15 +30,21 @@ const Type = () => {
                 )
                 )}
             </div>
-            <div className='main-type'>
-                {last === 'sample' ? (
-                    <Sample />
+            <div className='main-list'>
+                {last === 'dimension' ? (
+                    <Dimension />
+                ) : last === 'color' ? (
+                    <Color />
+                ) : last === 'image' ? (
+                    <Image />
+                ) : last === 'quantity' ? (
+                    <Quantity />
                 ) : (
-                    <Category />
+                    <Product />
                 )}
             </div>
         </div>
     )
 }
 
-export default Type
+export default List

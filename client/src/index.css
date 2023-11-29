@@ -172,25 +172,25 @@
 }
 
 /* TYPE */
-.type, .category, .account, .sample {
+.type, .category, .sample, 
+.list, .product, .dimension, .color, .quantity, .image, 
+.role, .permission, .transfer, .function, .menu, .state,
+.invoice, .account, .slide {
     margin-top: 1%;
 }
-.type .header-type .content{
+.type .header-type .content, .list .header-list .content, .role .header-role .content{
     margin-right: 1%;
 }
-.type .header-type .content span {
+.type .header-type .content span, .list .header-list .content span, .role .header-role .content span {
     padding: 0 2% 0.5% 2%;
     border-bottom: 1px solid #000;
 }
-.type .header-type .content span:active {
-    background-color: #000;
-    color: #fff;
-}
 
-.category .header-category, .sample .header-sample, .account .header-account {
+.category .header-category, .sample .header-sample, .account .header-account, .role .header-role,
+.color .header-color, .dimension .header-dimension, .image .header-image, .quantity .header-quantity{
     margin: 1rem 0;
 }
-.category .form-category {
+.category .form-category, .color .form-color, .dimension .form-dimension {
     gap: 1%;
     width: 100%;
     display: grid;
@@ -203,14 +203,18 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-.update-category, .update-sample, .update-category {
+.update-category, .update-sample, .update-category, .update-dimension, .update-color {
     gap: 1%;
     display: flex;
     flex-direction: 2;
 }
-.category .list-category, .sample .list-sample, .account .list-account {
+.category .list-category, .sample .list-sample, .account .list-account, .color .list-color, .dimension .list-dimension{
     margin: 1rem 0;
     height: 480px;
+}
+.product .list-product, .image .list-image, .quantity .list-quantity{
+    margin: 1rem 0;
+    height: 580px;
 }
 
 @media (max-width: 809px) {

@@ -8,8 +8,25 @@ export const path = {
 
     HOMESERVER: 'webserver/*',
     DASHBOARD: 'webserver/*',
+    ACCOUNT: 'account',
+    SLIDE: 'slide',
+    INVOICE: 'invoice',
+    
     TYPE: 'type/*',
     CATEGORY: 'type/*',
     SAMPLE: 'sample',
-    ACCOUNT: 'account',
+
+    LIST: 'list/*',
+    COLOR: 'color',
+    IMAGE: 'image',
+    PRODUCT: 'list/*',
+    QUANTITY: 'quantity',
+    DIMENSION: 'dimension',
+    
+    ROLE: 'role',
+    MENU: 'menu',
+    STATE: 'state',
+    TRANSFER: 'transfer',
+    FUNCTION: 'function',
+    PERMISSION: 'permission',
 }

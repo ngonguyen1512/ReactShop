@@ -2,9 +2,7 @@ import db from '../models';
 
 export const getAllTransfersService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Transfer.findAll({
-            include: [{ model: db.Permission, as: 'transfer_permission' }]
-        });
+        const response = await db.Transfer.findAll({});
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get transfer',
@@ -13,12 +11,9 @@ export const getAllTransfersService = () => new Promise(async (resolve, reject) 
     } catch (error) { reject(error); }
 });
 
-export const createTransferService = ({ name, idPermission }) => new Promise(async (resolve, reject) => {
+export const createTransferService = ({ name }) => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Transfer.create({
-            name, idPermission,
-            include: [{ model: db.Permission, as: 'transfer_permission' },],
-        });
+        const response = await db.Transfer.create({name});
         resolve({
             err: response ? 0 : 2,
             msg: response ? 'Tạo chuyển trang thành công.' : 'Tạo chuyển trang không thành công',
@@ -32,7 +27,6 @@ export const deleteTransfersService = (id) => new Promise(async (resolve, reject
         const whereClause = {};
         whereClause.id = id;
         const response = await db.Transfer.findOne({
-            include: [{ model: db.Permission, as: 'transfer_permission' },],
             where: whereClause
         });
         await response.destroy();
@@ -44,10 +38,10 @@ export const deleteTransfersService = (id) => new Promise(async (resolve, reject
     } catch (error) { reject(error) }
 });
 
-export const updateTransfersService = ({ id, name, idPermission }) => new Promise(async (resolve, reject) => {
+export const updateTransfersService = ({ id, name }) => new Promise(async (resolve, reject) => {
     try {
         const transfer = await db.Transfer.findByPk(id);
-        const response = await transfer.update({ name, idPermission });
+        const response = await transfer.update({ name });
         resolve({
             err: response ? 0 : 2,
             msg: response ? 'Cập nhật chuyển trang thành công.' : 'Cập nhật chuyển trang không thành công',
