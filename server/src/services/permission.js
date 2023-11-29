@@ -13,3 +13,41 @@ export const getAllPermissionService = () => new Promise(async (resolve, reject)
         });
     } catch (error) { reject(error); }
 });
+
+export const createPermissionService = ({ name, idState }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Permission.create({
+            name,
+            idState,
+            include: [
+                { model: db.State, as: 'permission_state' },
+            ],
+        });
+
+        resolve({
+            err: response ? 0 : 2,
+            msg: response ? 'Create permission successful.' : 'Create permission failed.',
+            response: response || null
+        });
+    } catch (error) { reject(error) }
+})
+
+export const updatePermissionService = ({ id, name, idState }) => new Promise(async (resolve, reject) => {
+    try {
+        const permissions = await db.Permission.findByPk(id);
+        if (!permissions) {
+            resolve({
+                err: 1,
+                msg: 'No function found.',
+                response: null
+            });
+            return;
+        }
+        const response = await permissions.update({ name, idState });
+        resolve({
+            err: response ? 0 : 2,
+            msg: response ? 'Update permission successful.' : 'Update permission failed.',
+            response: response || null
+        });
+    } catch (error) { reject(error) }
+})

@@ -30,7 +30,7 @@ export const createSamples = async (req, res) => {
     try {
         if (!name || !idCategory || !idState) return res.status(400).json({
             err: 1,
-            msg: 'Vui lòng điền vào tất cả các trường!'
+            msg: 'Please fill in the field!'
         })
         const response = await services.createSamplesService(req.body);
         return res.status(200).json(response);
@@ -47,7 +47,7 @@ export const updateSamples = async (req, res) => {
     try {
         if (!name || !idCategory || !idState) return res.status(400).json({
             err: 1,
-            msg: 'Vui lòng điền vào tất cả các trường!'
+            msg: 'Please fill in the field!'
         })
         const response = await services.updateSamplesService(req.body);
         return res.status(200).json(response);
