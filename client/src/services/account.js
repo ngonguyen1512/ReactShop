@@ -12,6 +12,19 @@ export const apiGetAccounts = () => new Promise(async (resolve, reject) => {
     }
 });
 
+export const apiCreateAccount = (payload) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'post',
+            url: 'api/v1/account/create',
+            data: payload
+        })
+        resolve(response);
+    } catch (error) {
+        reject(error);
+    }
+});
+
 export const apiUpdateAccountsByAdmin = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({

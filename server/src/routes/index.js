@@ -7,6 +7,7 @@ import accountRouter from './account'
 import functionRouter from './function'
 import transferRouter from './transfer'
 import categoryRouter from './category'
+import permissionRouter from './permission'
 import uplodaImageRouter from './uplodaImage'
 
 const initRoutes = (app) => {
@@ -16,10 +17,12 @@ const initRoutes = (app) => {
     app.use('/api/v1/state', stateRouter)
     app.use('/api/v1/sample', sampleRouter)
     app.use('/api/v1/account', accountRouter)
+    app.use('/api/v1/image', uplodaImageRouter)
     app.use('/api/v1/function', functionRouter)
     app.use('/api/v1/transfer', transferRouter)
     app.use('/api/v1/category', categoryRouter)
-    app.use('/api/v1/image', uplodaImageRouter)
+    app.use('/api/v1/permission', permissionRouter)
+    
 
     return app.use('/', (req, res) => {
         res.send('Server on...');

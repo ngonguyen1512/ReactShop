@@ -114,7 +114,7 @@ const Sample = () => {
             <label className='text-xs mt-4'>ID CATEGORY</label>
             <select value={payload.idCategory}
               onChange={(e) => setPayload({ ...payload, idCategory: e.target.value })}
-              className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full '>
+              className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
               <option value="">Select ID CATEGORY</option>
               {categories?.length > 0 && categories.map(item => (
                 <option value={item.id}>{item.name}</option>
@@ -134,13 +134,14 @@ const Sample = () => {
             <label className='text-xs mt-4'>STATE</label>
             <select value={payload.idState}
               onChange={(e) => setPayload({ ...payload, idState: e.target.value })}
-              className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full'>
+              className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
               <option value="">Select STATE</option>
               {states?.length > 0 && states.map(item => (item.id === 1 || item.id === 2) && (
                 <option value={item.id}>{item.id} - {item.name}</option>
               ))}
             </select>
           </div>
+          <span className='hide'></span>
           {payload.id ? (
             <div className='update-category'>
               <Button

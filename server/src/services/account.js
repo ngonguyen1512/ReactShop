@@ -15,6 +15,28 @@ export const getAllAccountsService = () => new Promise(async (resolve, reject) =
     } catch (error) { reject(error) }
 });
 
+export const createAccountService = ({ name, phone, email, address, password, idPermission, idState }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Account.findOrCreate({
+            where: { phone },
+            defaults: {
+                name,
+                phone,
+                email,
+                address,
+                password: hashPassword(password),
+                idPermission,
+                idState,
+            }
+        })
+        resolve({
+            err: response ? 0 : 2,
+            msg: response ? 'Create account successful.' : 'The phone number has been registered.',
+            token: response || null
+        })
+    } catch (error) { reject(error); }
+})
+
 export const updateAccountsByAdminService = ({ id, idPermission, idState }) => new Promise(async (resolve, reject) => {
     try {
         const account = await db.Account.findByPk(id);

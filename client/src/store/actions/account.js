@@ -24,6 +24,28 @@ export const getAccounts = () => async (dispatch) => {
     }
 }
 
+export const createAccount = (payload) => async (dispatch) => {
+    try {
+        const response = await apis.apiCreateAccount(payload);
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.CREATE_ACCOUNT,
+                data: response.data.response,
+            })
+        } else {
+            dispatch({
+                type: actionTypes.CREATE_ACCOUNT,
+                data: response.data.msg,
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.CREATE_ACCOUNT,
+            data: null,
+        })
+    }
+}
+
 export const updateAccountsByAdmin = (payload) => async (dispatch) => {
     try {
         const response = await apis.apiUpdateAccountsByAdmin(payload);

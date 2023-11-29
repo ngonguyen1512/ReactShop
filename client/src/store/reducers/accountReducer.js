@@ -13,6 +13,12 @@ const accountReducer = (state = initState, action) => {
                 accounts: action.accounts || [],
                 msg: action.msg || '',
             }
+        case actionTypes.CREATE_ACCOUNT:
+            return {
+                ...state,
+                accounts: action.data,
+                msg: ''
+            }
         case actionTypes.UPDATE_ACCOUNT_BYAD:
             return {
                 ...state,

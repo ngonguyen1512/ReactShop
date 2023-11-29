@@ -7,6 +7,7 @@ import accountReducer from "./accountReducer";
 import functionReducer from "./functionReducer";
 import transferReducer from "./transferReducer";
 import categoryReducer from "./categoryReducer";
+import permissionReducer from "./permissionReducer";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
     function: functionReducer,
     transfer: transferReducer,
     category: categoryReducer,
+    permission: permissionReducer,
 })
 
 export default rootReducer;
