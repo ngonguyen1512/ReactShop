@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../store/actions'
 import { Button, InputForm } from '../../components'
 import icons from '../../utils/icons'
+import Swal from 'sweetalert2';
 
 const { TiDeleteOutline } = icons;
 
@@ -18,19 +19,88 @@ const Dimension = () => {
   const { states } = useSelector(state => state.state)
   const { currentData } = useSelector(state => state.user)
   const { functions } = useSelector(state => state.function)
-  const { categories } = useSelector(state => state.category)
+  const { dimensions, msg } = useSelector(state => state.dimension)
   const permis = currentData.idPermission
 
+  const handleSearch = (event) => {
+    setSearchValue(event.target.value);
+    setShouldReload(event.target.value !== "");
+  };
+  let filteredDimensions = [];
+  if (dimensions && Array.isArray(dimensions)) {
+    filteredDimensions = dimensions.filter((item) =>
+      item.name.includes(searchValue)
+    );
+  }
+
   const [payload, setPayload] = useState({
-    id: '' || null, name: '', idState: ''
+    id: '' || null, code: '', name: '', idState: ''
   });
+  const handleSubmitCreate = async () => {
+    let finalPayload = payload;
+    let invalids = validate(finalPayload);
+    if (invalids === 0) {
+      dispatch(actions.createDimensions(payload))
+      setPayload({ id: '', code: '', name: '', idState: '' })
+      setShouldRefetch(true)
+    }
+  }
+  const handleSubmitUpdate = async () => {
+    dispatch(actions.updateDimensions(payload))
+    setPayload({ id: '', code: '', name: '', idState: '' })
+    setShouldRefetch(true)
+  }
+  const validate = (payload) => {
+    let invalids = 0;
+    let fields = Object.entries(payload);
+
+    fields.forEach(item => {
+      if (item[1] === '') {
+        setInvalidFields(prev => [...prev, {
+          name: item[0],
+          msg: 'You must not leave this input blank!'
+        }])
+        invalids++;
+        return;
+      }
+    })
+    return invalids;
+  }
+
+  useEffect(() => {
+    msg && Swal.fire('Oops !', msg, 'error');
+  }, [msg]);
 
   useEffect(() => {
     let searchParamsObject = {}
     if (permis) searchParamsObject.permis = permis
-    dispatch(actions.getStates())
-    dispatch(actions.getFunctions(searchParamsObject))
-  }, [dispatch, permis])
+    if (shouldRefetch) {
+      dispatch(actions.getStates())
+      dispatch(actions.getDimensions())
+      dispatch(actions.getFunctions(searchParamsObject))
+      setShouldRefetch(false)
+    } else {
+      dispatch(actions.getStates())
+      dispatch(actions.getDimensions())
+      dispatch(actions.getFunctions(searchParamsObject))
+    }
+  }, [dispatch, permis, shouldRefetch])
+
+  const renderTableRow = (item) => {
+    const handleClickRow = () => {
+      setPayload({ ...payload, id: item.id, code: item.code, name: item.name, idState: item.idState });
+    };
+    return (
+      <>
+        <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
+          <td className={`w-[4%] ${styletd}`}>{item.id}</td>
+          <td className={styletd}>{item.code}</td>
+          <td className='py-2'>{item.name}</td>
+          <td className={styletd}>{item.idState}</td>
+        </tr>
+      </>
+    );
+  };
 
   return (
     <div className='dimension'>
@@ -41,11 +111,20 @@ const Dimension = () => {
           type="text"
           placeholder='Search by name'
           value={searchValue}
-        // onChange={handleSearch}
+          onChange={handleSearch}
         />
       </div>
       {functions?.length > 0 && functions.map(item => item.name === 'Create' && item.idPermission === 1 && (
         <div className='form-dimension'>
+          <InputForm
+            setInvalidFields={setInvalidFields}
+            invalidFields={invalidFields}
+            label={'CODE'}
+            value={payload.code}
+            setValue={setPayload}
+            keyPayload={'code'}
+            type='text'
+          />
           <InputForm
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
@@ -66,25 +145,24 @@ const Dimension = () => {
               ))}
             </select>
           </div>
-          {/* <span className='hide'></span> */}
-          {/* {payload.id ? (
-                        <div className='update-dimension'>
-                            <Button
-                                text={'UPDATE'}
-                                value={payload.id}
-                                onClick={handleSubmitUpdate}
-                            />
-                            <span onClick={() => setPayload({ ...payload, id: '', idCategory: '', name: '', idState: '' })}
-                                className='icons-clear center'>
-                                <TiDeleteOutline />
-                            </span>
-                        </div>
-                    ) : ( */}
-          <Button
-            text={'CREATE'}
-          // onClick={handleSubmitCreate}
-          />
-          {/* )} */}
+          {payload.id ? (
+            <div className='update-dimension'>
+              <Button
+                text={'UPDATE'}
+                value={payload.id}
+                onClick={handleSubmitUpdate}
+              />
+              <span onClick={() => setPayload({ ...payload, id: '', idCategory: '', name: '', idState: '' })}
+                className='icons-clear center'>
+                <TiDeleteOutline />
+              </span>
+            </div>
+          ) : (
+            <Button
+              text={'CREATE'}
+              onClick={handleSubmitCreate}
+            />
+          )}
         </div>
       ))}
       <div className='list-dimension list-table'>
@@ -92,13 +170,14 @@ const Dimension = () => {
           <thead>
             <tr>
               <th>ID</th>
+              <th>CODE</th>
               <th>NAME</th>
               <th>STATE</th>
             </tr>
           </thead>
           <tbody>
-            {/* {shouldReload && filteredAccounts.length > 0 && filteredAccounts.map((item) => renderTableRow(item))}
-            {!shouldReload && Array.isArray(accounts) && accounts?.length > 0 && accounts.map((item) => renderTableRow(item))} */}
+            {shouldReload && filteredDimensions.length > 0 && filteredDimensions.map((item) => renderTableRow(item))}
+            {!shouldReload && Array.isArray(dimensions) && dimensions?.length > 0 && dimensions.map((item) => renderTableRow(item))}
           </tbody>
         </table>
       </div>

@@ -3,7 +3,7 @@ import { GoSearch } from "react-icons/go";
 import { BiDetail } from "react-icons/bi";
 import { GiWolfHowl } from "react-icons/gi";
 import { TiDeleteOutline } from "react-icons/ti";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineShoppingCart, MdOutlineDeleteSweep } from "react-icons/md";
 
 const icons = {
     CiEdit,
@@ -11,6 +11,7 @@ const icons = {
     BiDetail,
     GiWolfHowl,
     TiDeleteOutline,
+    MdOutlineDeleteSweep,
     MdOutlineShoppingCart,
 }
 export default icons

@@ -1,27 +1,27 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    permissions: [],
+    colors: [],
     msg: '',
 }
 
-const permissionReducer = (state = initState, action) => {
+const colorReducer = (state = initState, action) => {
     switch (action.type) {
-        case actionTypes.GET_PERMISSION:
+        case actionTypes.GET_COLOR:
             return {
                 ...state,
-                permissions: action.permissions || [],
+                colors: action.colors || [],
                 msg: action.msg || '',
             }
-        case actionTypes.CREATE_PERMISSION:
+        case actionTypes.CREATE_COLOR:
             return {
                 ...state,
-                permissions: action.data || [],
+                colors: action.data || [],
                 msg: action.msg || '',
             }
-        case actionTypes.UPDATE_PERMISSION:
+        case actionTypes.UPDATE_COLOR:
             return {
                 ...state,
-                permissions: action.data,
+                colors: action.data,
                 msg: action.msg || '',
             }
         default:
@@ -29,4 +29,4 @@ const permissionReducer = (state = initState, action) => {
     }
 }
 
-export default permissionReducer;
+export default colorReducer;

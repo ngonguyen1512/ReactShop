@@ -1,27 +1,27 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    permissions: [],
+    dimensions: [],
     msg: '',
 }
 
-const permissionReducer = (state = initState, action) => {
+const dimensionReducer = (state = initState, action) => {
     switch (action.type) {
-        case actionTypes.GET_PERMISSION:
+        case actionTypes.GET_DIMENSION:
             return {
                 ...state,
-                permissions: action.permissions || [],
+                dimensions: action.dimensions || [],
                 msg: action.msg || '',
             }
-        case actionTypes.CREATE_PERMISSION:
+        case actionTypes.CREATE_DIMENSION:
             return {
                 ...state,
-                permissions: action.data || [],
+                dimensions: action.data || [],
                 msg: action.msg || '',
             }
-        case actionTypes.UPDATE_PERMISSION:
+        case actionTypes.UPDATE_DIMENSION:
             return {
                 ...state,
-                permissions: action.data,
+                dimensions: action.data,
                 msg: action.msg || '',
             }
         default:
@@ -29,4 +29,4 @@ const permissionReducer = (state = initState, action) => {
     }
 }
 
-export default permissionReducer;
+export default dimensionReducer;

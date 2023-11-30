@@ -157,7 +157,8 @@ const Account = () => {
       setPayload({ ...payload, id: item.id });
       setPayloadu({ ...payloadu, id: item.id, idPermission: item.idPermission, idState: item.idState });
     };
-    const handleDetail = () => {
+    const handleDetail = (e) => {
+      e.stopPropagation();
       if (payloada.id === item.id) {
         setPayloada({ id: null });
         setIsShowDetail(false);
@@ -180,7 +181,7 @@ const Account = () => {
               IcAfter={BiDetail}
               value={payloada.id}
               setValue={setPayloada}
-              onClick={() => handleDetail()}
+              onClick={(e) => handleDetail(e)}
             />
           </td>
         </tr>

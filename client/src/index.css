@@ -178,43 +178,49 @@
 .invoice, .account, .slide {
     margin-top: 1%;
 }
-.type .header-type .content, .list .header-list .content, .role .header-role .content{
+.type .header-type .content, .list .header-list .content, 
+.role .header-role .content, .permission .header-permission .content,
+.slide .header-slide .content{
     margin-right: 1%;
 }
-.type .header-type .content span, .list .header-list .content span, .role .header-role .content span {
+.type .header-type .content span, .list .header-list .content span, 
+.role .header-role .content span, .slide .header-slide .content span {
     padding: 0 2% 0.5% 2%;
     border-bottom: 1px solid #000;
 }
 
 .category .header-category, .sample .header-sample, .account .header-account, .role .header-role,
-.color .header-color, .dimension .header-dimension, .image .header-image, .quantity .header-quantity{
+.color .header-color, .dimension .header-dimension, .image .header-image, .quantity .header-quantity,
+.permission .header-permission, .slide .header-slide {
     margin: 1rem 0;
 }
-.category .form-category, .color .form-color, .dimension .form-dimension {
+.category .form-category, .permission .form-permission {
     gap: 1%;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
-.sample .form-sample,
-.account .form-account {
+.sample .form-sample, .account .form-account, .color .form-color,
+.dimension .form-dimension, .slide .form-slide {
     gap: 1%;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-.update-category, .update-sample, .update-category, .update-dimension, .update-color {
+.update-category, .update-sample, .update-category, .update-dimension, 
+.update-color, .update-permission, .update-slide {
     gap: 1%;
     display: flex;
     flex-direction: 2;
 }
-.category .list-category, .sample .list-sample, .account .list-account, .color .list-color, .dimension .list-dimension{
+.category .list-category, .sample .list-sample, .account .list-account, 
+.color .list-color, .dimension .list-dimension, .permission .list-permission{
     margin: 1rem 0;
     height: 480px;
 }
-.product .list-product, .image .list-image, .quantity .list-quantity{
+.product .list-product, .image .list-image, .quantity .list-quantity, .slide .list-slide {
     margin: 1rem 0;
-    height: 580px;
+    height: 550px;
 }
 
 @media (max-width: 809px) {
@@ -231,7 +237,8 @@
         font-size: x-large;
     }
     .sample .form-sample,.category .form-category,
-    .account .form-account {
+    .account .form-account, .permission .form-permssion, 
+    .slide .form-slide, .color .form-color, .dimension .form-dimension {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .hide {

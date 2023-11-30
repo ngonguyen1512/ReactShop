@@ -1,10 +1,10 @@
 import axiosConfig from "../axiosConfig";
 
-export const apiGetPermissions = (payload) => new Promise(async (resolve, reject) => {
+export const apiGetColors = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: 'api/v1/permission/all',
+            url: 'api/v1/color/all',
         })
         resolve(response);
     } catch (error) {
@@ -12,11 +12,11 @@ export const apiGetPermissions = (payload) => new Promise(async (resolve, reject
     }
 });
 
-export const apiCreatePermissions = (payload) => new Promise(async (resolve, reject) => {
+export const apiCreateColors = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'post',
-            url: 'api/v1/permission/create',
+            url: 'api/v1/color/create',
             data: payload,
         });
         resolve(response);
@@ -25,11 +25,11 @@ export const apiCreatePermissions = (payload) => new Promise(async (resolve, rej
     }
 });
 
-export const apiUpdatePermissions = (payload) => new Promise(async (resolve, reject) => {
+export const apiUpdateColors = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'put',
-            url: 'api/v1/permission/update',
+            url: 'api/v1/color/update',
             data: payload
         })
         resolve(response)
