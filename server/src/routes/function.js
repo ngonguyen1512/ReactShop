@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/all', controllers.getFunctions)
 router.get('/alls', controllers.getAllsFunctions)
-router.put('/update', controllers.updateCategories)
+router.put('/update', controllers.updateFunctions)
 router.post('/create', controllers.createFunctions)
 router.delete('/delete', controllers.deleteFunctions)
 

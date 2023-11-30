@@ -20,12 +20,6 @@ const stateReducer = (state = initState, action) => {
                 states: action.data || [],
                 msg: action.msg || '',
             }
-        case actionTypes.DELETE_STATE:
-            return {
-                ...state,
-                states: action.data,
-                msg: action.msg || '',
-            }
         case actionTypes.UPDATE_STATE:
             return {
                 ...state,

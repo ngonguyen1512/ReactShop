@@ -7,7 +7,6 @@ import icons from '../../utils/icons'
 import Swal from 'sweetalert2';
 
 const { TiDeleteOutline, MdOutlineDeleteSweep } = icons;
-
 const styletd = 'text-center px-4 py-2 '
 
 const Slide = () => {
@@ -87,7 +86,6 @@ const Slide = () => {
     }
     const handleSubmitDelete = async () => {
         dispatch(actions.deleteSlides(payload))
-        setPayload({ id: '', name: '', image: '', idState: '' });
         setShouldRefetch(true);
     }
     const validate = (payload) => {
@@ -128,14 +126,14 @@ const Slide = () => {
         };
         return (
             <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
-                <td className={`w-[30%] ${styletd}`}>{item.id}</td>
-                <td className='w-[10%]'>
+                <td className={`${styletd}`}>{item.id}</td>
+                <td className='w-[20%]'>
                     <img src={`/images/${item.image}`} alt={item.name} className='w-[100%] object-cover' />
                 </td>
                 <td className='px-4 py-2'>{item.name}</td>
-                <td className='px-4 py-2'>{item.idState}</td>
+                <td className={styletd}>{item.idState}</td>
                 {functions?.length > 0 && functions.map(item => item.name === 'Delete' && item.idPermission === 1 && (
-                    <th className='w-[5%]'>
+                    <th className='w-[8%]'>
                         <Button
                             IcAfter={MdOutlineDeleteSweep}
                             value={item.id}
@@ -219,7 +217,7 @@ const Slide = () => {
                             <th>NAME</th>
                             <th>STATE</th>
                             {functions?.length > 0 && functions.map(item => item.name === 'Delete' && item.idPermission === 1 && (
-                                <th className='w-[5%]'></th>
+                                <th className='w-[8%]'></th>
                             ))}
                         </tr>
                     </thead>

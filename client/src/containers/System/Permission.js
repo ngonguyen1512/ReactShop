@@ -92,7 +92,7 @@ const Permission = () => {
         return (
             <>
                 <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
-                    <td className={`w-[4%] ${styletd}`}>{item.id}</td>
+                    <td className={`${styletd}`}>{item.id}</td>
                     <td className={styletd}>{new Date(item.createdAt).toLocaleDateString()}</td>
                     <td className='py-2'>{item.name}</td>
                     <td className={styletd}>{item.idState}</td>
@@ -161,7 +161,7 @@ const Permission = () => {
                 <table className='w-full'>
                     <thead>
                         <tr>
-                            <th className='w-[4%]'>ID</th>
+                            <th>ID</th>
                             <th>DATE</th>
                             <th>NAME</th>
                             <th>STATE</th>

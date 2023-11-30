@@ -25,19 +25,6 @@ export const apiCreateStates = (payloadt) => new Promise(async (resolve, reject)
     }
 });
 
-export const apiDeleteStates = (payloadtt) => new Promise(async(resolve, reject) => {
-    try {
-        const response = await axiosConfig({
-            method: 'delete',
-            url: 'api/v1/state/delete',
-            data: payloadtt
-        })
-        resolve(response);
-    } catch (error) {
-        reject(error);
-    }
-});
-
 export const apiUpdateStates = (payloadt) => new Promise(async(resolve, reject) => {
     try {
         const response = await axiosConfig({

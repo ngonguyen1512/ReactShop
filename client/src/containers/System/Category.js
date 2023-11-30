@@ -122,8 +122,8 @@ const Category = () => {
       };
       return (
         <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
-          <td className={`w-[30%] ${styletd}`}>{item.id}</td>
-          <td className='w-[10%]'>
+          <td className={`${styletd}`}>{item.id}</td>
+          <td className='w-[20%]'>
             <img src={`/images/${item.image}`} alt={item.name} className='w-[100%] object-cover' />
           </td>
           <td className='px-4 py-2'>{item.name}</td>
@@ -189,8 +189,8 @@ const Category = () => {
         <table className='w-full'>
           <thead>
             <tr>
-              <th className='w-[30%]'>ID</th>
-              <th className='w-[10%]'>IMAGE</th>
+              <th className=''>ID</th>
+              <th className='w-[20%]'>IMAGE</th>
               <th className=''>NAME</th>
             </tr>
           </thead>

@@ -22,22 +22,6 @@ export const createStatesService = ({ name }) => new Promise(async (resolve, rej
     } catch (error) { reject(error) }
 })
 
-export const deleteStatesService = (id) => new Promise(async (resolve, reject) => {
-    try {
-        const whereClause = {};
-        whereClause.id = id;
-        const response = await db.State.findOne({
-            where: whereClause
-        });
-        await response.destroy();
-        resolve({
-            err: response ? 0 : 1,
-            msg: response ? 'Delete state successful.' : 'Delete state failed.',
-            response
-        });
-    } catch (error) { reject(error) }
-});
-
 export const updateStatesService = ({ id, name }) => new Promise(async (resolve, reject) => {
     try {
         const transfer = await db.State.findByPk(id);

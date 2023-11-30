@@ -29,19 +29,6 @@ export const createStates = async (req, res) => {
     }
 }
 
-export const deleteStates = async (req, res) => {
-    const { id } = req.body
-    try {
-        const response = await services.deleteStatesService(id);
-        return res.status(200).json(response)
-    } catch (error) {
-        return res.status(500).json({
-            err: -1,
-            message: 'Failed at Transfer controller' + error,
-        })
-    }
-}
-
 export const updateStates = async (req, res) => {
     const { id, name } = req.body;
     try {

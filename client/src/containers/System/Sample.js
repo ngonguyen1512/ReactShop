@@ -75,7 +75,7 @@ const Sample = () => {
     return (
       <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
         <td className={styletd}>{item.id}</td>
-        <td className={styletd}>{item.idCategory}</td>
+        <td className='px-4 py-2'>{item.idCategory} - {item?.sample_category.name}</td>
         <td className='px-4 py-2'>{item.name}</td>
         <td className={styletd}>{item.idState}</td>
       </tr>
@@ -167,7 +167,7 @@ const Sample = () => {
           <thead>
             <tr>
               <th className='text-lg'>ID</th>
-              <th className='text-lg'>ID CATEGORY</th>
+              <th className='text-lg'>CATEGORY</th>
               <th className='text-lg'>NAME</th>
               <th className='text-lg'>STATE</th>
             </tr>

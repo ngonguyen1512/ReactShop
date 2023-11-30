@@ -25,12 +25,12 @@ export const apiGetAllsFunctions = () => new Promise(async (resolve, reject) => 
     }
 });
 
-export const apiCreateFunction = (payloadf) => new Promise(async (resolve, reject) => {
+export const apiCreateFunction = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'post',
             url: 'api/v1/function/create',
-            data: payloadf,
+            data: payload,
         });
         resolve(response);
     } catch (error) {
@@ -38,12 +38,12 @@ export const apiCreateFunction = (payloadf) => new Promise(async (resolve, rejec
     }
 });
 
-export const apiDeleteFunctions = (payloadf) => new Promise(async(resolve, reject) => {
+export const apiDeleteFunctions = (payload) => new Promise(async(resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'delete',
             url: 'api/v1/function/delete',
-            data: payloadf
+            data: payload
         })
         resolve(response);
     } catch (error) {
@@ -51,12 +51,12 @@ export const apiDeleteFunctions = (payloadf) => new Promise(async(resolve, rejec
     }
 });
 
-export const apiUpdateFunctions = (payloadf) => new Promise(async(resolve, reject) => {
+export const apiUpdateFunctions = (payload) => new Promise(async(resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'put',
             url: 'api/v1/function/update',
-            data: payloadf
+            data: payload
         })
         resolve(response)
     } catch (error) {

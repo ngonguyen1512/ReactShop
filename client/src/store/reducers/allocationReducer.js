@@ -19,6 +19,24 @@ const allocationReducer = (state = initState, action) => {
                 allallocations: action.allallocations || [],
                 msg: action.msg || '',
             }
+        case actionTypes.CREATE_ALLOCATION:
+            return {
+                ...state,
+                allallocations: action.data || [],
+                msg: action.msg || '',
+            }
+        case actionTypes.DELETE_ALLOCATION:
+            return {
+                ...state,
+                allallocations: action.data,
+                msg: action.msg || '',
+            }
+        case actionTypes.UPDATE_ALLOCATION:
+            return {
+                ...state,
+                allallocations: action.data,
+                msg: action.msg || '',
+            }
         default:
             return state;
     }

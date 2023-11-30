@@ -44,9 +44,9 @@ export const getAllsFunctions = () => async (dispatch) => {
     }
 }
 
-export const createFunction = (payloadf) => async (dispatch) => {
+export const createFunction = (payload) => async (dispatch) => {
     try {
-        const response = await apis.apiCreateFunction(payloadf);
+        const response = await apis.apiCreateFunction(payload);
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.CREATE_FUNCTION,
@@ -66,9 +66,9 @@ export const createFunction = (payloadf) => async (dispatch) => {
     }
 };
 
-export const deleteFunctions = (payloadf) => async (dispatch) => {
+export const deleteFunctions = (payload) => async (dispatch) => {
     try {
-        const response = await apis.apiDeleteFunctions(payloadf);
+        const response = await apis.apiDeleteFunctions(payload);
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.DELETE_FUNCTION,
@@ -88,9 +88,9 @@ export const deleteFunctions = (payloadf) => async (dispatch) => {
     }
 }
 
-export const updateFunctions = (payloadf) => async (dispatch) => {
+export const updateFunctions = (payload) => async (dispatch) => {
     try {
-        const response = await apis.apiUpdateFunctions(payloadf);
+        const response = await apis.apiUpdateFunctions(payload);
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.UPDATE_FUNCTION,

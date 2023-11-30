@@ -4,7 +4,7 @@ const Button = ({text, IcAfter, onClick, fullWidth }) => {
   return (
     <button 
       type='button' 
-      className={`py-1 px-2 w-full border border-[#000] ${fullWidth && 'w-full'} hover:bg-[#000] hover:text-[#fff] font-semibold flex items-center justify-center`}
+      className={`py-1 px-2 border border-[#000] ${fullWidth && 'w-full'} hover:bg-[#000] hover:text-[#fff] font-semibold flex items-center justify-center`}
       onClick={onClick}
     >
         <span>{text}</span>

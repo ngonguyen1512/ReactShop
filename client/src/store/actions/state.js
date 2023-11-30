@@ -45,29 +45,6 @@ export const createStates = (payloadt) => async (dispatch) => {
         });
     }
 };
-
-export const deleteStates = (payloadtt) => async (dispatch) => {
-    try {
-        const response = await apis.apiDeleteStates(payloadtt);
-        if (response?.data.err === 0) {
-            dispatch({
-                type: actionTypes.DELETE_STATE,
-                data: response.data.response,
-            })
-        } else {
-            dispatch({
-                type: actionTypes.DELETE_STATE,
-                msg: response.data.msg,
-            })
-        }
-    } catch (error) {
-        dispatch({
-            type: actionTypes.DELETE_STATE,
-            data: null,
-        })
-    }
-}
-
 export const updateStates = (payloadt) => async (dispatch) => {
     try {
         const response = await apis.apiUpdateStates(payloadt);

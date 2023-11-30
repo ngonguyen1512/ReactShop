@@ -9,49 +9,45 @@ import Swal from 'sweetalert2';
 const { TiDeleteOutline, MdOutlineDeleteSweep } = icons;
 const styletd = 'text-center py-2 '
 
-const Menu = () => {
+const TransferPage = () => {
     const dispatch = useDispatch();
     const [searchValue, setSearchValue] = useState("")
     const [shouldReload, setShouldReload] = useState(false)
     const [invalidFields, setInvalidFields] = useState([])
     const [shouldRefetch, setShouldRefetch] = useState(false)
-    const { menus, msg } = useSelector(state => state.menu)
     const { currentData } = useSelector(state => state.user)
     const { functions } = useSelector(state => state.function)
     const { permissions } = useSelector(state => state.permission)
+    const { transfers } = useSelector(state => state.transfer)
     const permis = currentData.idPermission
 
     const handleSearch = (event) => {
         setSearchValue(event.target.value);
         setShouldReload(event.target.value !== "");
     };
-    let filteredMenus = [];
-    if (menus && Array.isArray(menus)) {
-        filteredMenus = menus.filter((item) =>
+    let filteredTransfers = [];
+    if (transfers && Array.isArray(transfers)) {
+        filteredTransfers = transfers.filter((item) =>
             item.name.includes(searchValue)
         );
     }
 
     const [payload, setPayload] = useState({
-        id: '' || null, url: '', name: '', idPermission: ''
+        id: '' || null, name: ''
     })
     const handleSubmitCreate = async () => {
         let finalPayload = payload;
         let invalids = validate(finalPayload);
         if (invalids === 0) {
-            dispatch(actions.createMenus(payload))
-            setPayload({ id: '', url: '', name: '', idPermission: '' })
+            dispatch(actions.createTransfers(payload))
+            setPayload({ id: '', name: '' })
             setShouldRefetch(true)
         }
     }
     const handleSubmitUpdate = async () => {
-        dispatch(actions.updateMenus(payload))
-        setPayload({ id: '', url: '', name: '', idPermission: '' })
+        dispatch(actions.updateTransfers(payload))
+        setPayload({ id: '', name: '' })
         setShouldRefetch(true)
-    }
-    const handleSubmitDelete = async () => {
-        dispatch(actions.deleteMenus(payload))
-        setShouldRefetch(true);
     }
     const validate = (payload) => {
         let invalids = 0;
@@ -69,53 +65,40 @@ const Menu = () => {
         })
         return invalids;
     }
-    useEffect(() => {
-        msg && Swal.fire('Oops !', msg, 'error');
-    }, [msg]);
 
     useEffect(() => {
         let searchParamsObject = {}
         if (permis) searchParamsObject.permis = permis
         if (shouldRefetch) {
-            dispatch(actions.getMenus())
             dispatch(actions.getPermissions())
+            dispatch(actions.getTransfers())
             dispatch(actions.getFunctions(searchParamsObject))
             setShouldRefetch(false)
         } else {
-            dispatch(actions.getMenus())
             dispatch(actions.getPermissions())
+            dispatch(actions.getTransfers())
             dispatch(actions.getFunctions(searchParamsObject))
         }
     }, [dispatch, permis, shouldRefetch])
 
     const renderTableRow = (item) => {
         const handleClickRow = () => {
-            setPayload({ ...payload, id: item.id, url: item.url, name: item.name, idPermission: item.idPermission });
+            setPayload({ ...payload, id: item.id, name: item.name, idPermission: item.idPermission });
         };
         return (
             <>
                 <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
-                    <td className={`${styletd}`}>{item.id}</td>
-                    <td className={styletd}>{item.url}</td>
+                    <td className={styletd}>{item.id}</td>
+                    <td className={styletd}>{new Date(item.createdAt).toLocaleDateString()}</td>
                     <td className='py-2'>{item.name}</td>
-                    <td className={styletd}>{item.idPermission}</td>
-                    {functions?.length > 0 && functions.map(item => item.name === 'Delete' && item.idPermission === 1 && (
-                    <th className='w-[5%]'>
-                        <Button
-                            IcAfter={MdOutlineDeleteSweep}
-                            value={item.id}
-                            onClick={handleSubmitDelete}
-                        />
-                    </th>
-                ))}
                 </tr>
             </>
         );
     };
 
     return (
-        <div className='menu'>
-            <div className='header-menu between'>
+        <div className='transfer_page'>
+            <div className='header-transfer_page between'>
                 <span></span>
                 <input
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
@@ -126,16 +109,7 @@ const Menu = () => {
                 />
             </div>
             {functions?.length > 0 && functions.map(item => item.name === 'Create' && item.idPermission === 1 && (
-                <div className='form-menu'>
-                    <InputForm
-                        setInvalidFields={setInvalidFields}
-                        invalidFields={invalidFields}
-                        label={'URL'}
-                        value={payload.url}
-                        setValue={setPayload}
-                        keyPayload={'url'}
-                        type='text'
-                    />
+                <div className='form-transfer_page'>
                     <InputForm
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
@@ -145,19 +119,8 @@ const Menu = () => {
                         keyPayload={'name'}
                         type='text'
                     />
-                    <div>
-                        <label className='text-xs mt-4'>PERMISSION</label>
-                        <select value={payload.idPermission}
-                            onChange={(e) => setPayload({ ...payload, idPermission: e.target.value })}
-                            className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
-                            <option value="">Select PERMISSION</option>
-                            {permissions?.length > 0 && permissions.map(item => (
-                                <option value={item.id}>{item.id} - {item.name}</option>
-                            ))}
-                        </select>
-                    </div>
                     {payload.id ? (
-                        <div className='update-menu'>
+                        <div className='update-transfer_page'>
                             <Button
                                 text={'UPDATE'}
                                 value={payload.id}
@@ -177,22 +140,18 @@ const Menu = () => {
                     )}
                 </div>
             ))}
-            <div className='list-menu list-table'>
+            <div className='list-transfer_page list-table'>
                 <table className='w-full'>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>URL</th>
+                            <th>DATE</th>
                             <th>NAME</th>
-                            <th>PERMISSION</th>
-                            {functions?.length > 0 && functions.map(item => item.name === 'Delete' && item.idPermission === 1 && (
-                                <th className='w-[5%]'></th>
-                            ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {shouldReload && filteredMenus.length > 0 && filteredMenus.map((item) => renderTableRow(item))}
-                        {!shouldReload && Array.isArray(menus) && menus?.length > 0 && menus.map((item) => renderTableRow(item))}
+                        {shouldReload && filteredTransfers.length > 0 && filteredTransfers.map((item) => renderTableRow(item))}
+                        {!shouldReload && Array.isArray(transfers) && transfers?.length > 0 && transfers.map((item) => renderTableRow(item))}
                     </tbody>
                 </table>
             </div>
@@ -200,4 +159,4 @@ const Menu = () => {
     )
 }
 
-export default Menu
+export default TransferPage

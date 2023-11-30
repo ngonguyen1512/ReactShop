@@ -29,7 +29,12 @@ export const getTransmissionsService = (permis) => new Promise(async (resolve, r
 
 export const getAllTransmissionsService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Transmission.findAll();
+        const response = await db.Transmission.findAll({
+            include: [
+                { model: db.Transfer, as: 'transmission_transfer', attributes: ['id', 'name'] },
+                { model: db.Permission, as: 'transmission_permission', attributes: ['id', 'name'] },
+            ],
+        });
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get Transmission',
@@ -37,3 +42,55 @@ export const getAllTransmissionsService = () => new Promise(async (resolve, reje
         });
     } catch (error) { reject(error); }
 });
+
+export const createTransmissionsService = ({ idTransfer, idPermission }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Transmission.create({
+            idTransfer,
+            idPermission,
+            include: [
+                { model: db.Transfer, as: 'transmission_transfer', attributes: ['id', 'name'] },
+                { model: db.Permission, as: 'transmission_permission', attributes: ['id', 'name'] },
+            ],
+        });
+        resolve({
+            err: response ? 0 : 2,
+            msg: response ? 'Create transmission successful.' : 'Create transmission failed.',
+            response: response || null
+        });
+    } catch (error) { reject(error) }
+})
+
+export const deleteTransmissionsService = (id) => new Promise(async (resolve, reject) => {
+    try {
+        const whereClause = {};
+        whereClause.id = id;
+        const response = await db.Transmission.findOne({
+            include: [
+                { model: db.Transfer, as: 'transmission_transfer', attributes: ['id', 'name'] },
+                { model: db.Permission, as: 'transmission_permission', attributes: ['id', 'name'] },
+            ],
+            where: whereClause
+        });
+        await response.destroy();
+        resolve({
+            err: response ? 0 : 1,
+            msg: response ? 'Delete transmission successful.' : 'Delete transmission failed.',
+            response
+        });
+    } catch (error) { reject(error) }
+});
+
+export const updateTransmissionsService = ({ id, idTransfer, idPermission }) => new Promise(async (resolve, reject) => {
+    try {
+        const transmission = await db.Transmission.findByPk(id);
+        const response = await transmission.update({
+            idTransfer, idPermission,
+        });
+        resolve({
+            err: response ? 0 : 2,
+            msg: response ? 'Update transmission successful.' : 'Update transmission failed.',
+            response: response || null
+        });
+    } catch (error) { reject(error); }
+})

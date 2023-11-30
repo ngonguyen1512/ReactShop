@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom';
 import * as actions from '../../store/actions'
 import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
-import { Permission, Menu, State, Transfer, Function } from './index';
+import { Permission, Menu, State, Function } from './index';
 
 const Role = () => {
     const location = useLocation()
@@ -34,8 +34,6 @@ const Role = () => {
                     <Menu />
                 ) : last === 'state' ? (
                     <State />
-                ) : last === 'transfer' ? (
-                    <Transfer />
                 ) : last === 'function' ? (
                     <Function />
                 ) : (
