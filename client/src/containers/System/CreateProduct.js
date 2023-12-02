@@ -18,28 +18,65 @@ const CreateProduct = () => {
   const [shouldReload, setShouldReload] = useState(false)
   const [invalidFields, setInvalidFields] = useState([])
   const [shouldRefetch, setShouldRefetch] = useState(false)
-  const { products, msg } = useSelector(state => state.menu)
-  const { currentData } = useSelector(state => state.user)
+  const { products, msg } = useSelector(state => state.product)
   const { states } = useSelector(state => state.state)
   const { samples } = useSelector(state => state.sample)
-  const permis = currentData.idPermission
+  const { categories } = useSelector(state => state.category)
 
   const [payload, setPayload] = useState({
     id: '' || null, idCategory: '', idSample: '', name: '',
     discount: '', price: '', information: '', idState: ''
   })
 
-  const handleCreateClick = () => {
-    navigate(path.CREATE_INFO);
-  };
+  const handleSubmitCreate = async () => {
+    let finalPayload = payload;
+    let invalids = validate(finalPayload);
+    if (invalids === 0) {
+      dispatch(actions.createProducts(payload))
+      navigate(path.CREATE_INFO);
+    }
+  }
+
+  const validate = (payload) => {
+    let invalids = 0;
+    let fields = Object.entries(payload);
+
+    fields.forEach(item => {
+      if (item[1] === '') {
+        setInvalidFields(prev => [...prev, {
+          name: item[0],
+          msg: 'You must not leave this input blank!'
+        }])
+        invalids++;
+        return;
+      }
+    })
+    return invalids;
+  }
+
+  useEffect(() => {
+    msg && Swal.fire('Oops !', msg, 'error');
+  }, [msg]);
 
   useEffect(() => {
     dispatch(actions.getStates())
     dispatch(actions.getAllSamples())
+    dispatch(actions.getCategories())
   }, [dispatch])
 
   return (
     <div className='create_product'>
+      <div>
+        <label className='text-xs mt-4'>CATEGORY</label>
+        <select value={payload.idCategory}
+          onChange={(e) => setPayload({ ...payload, idCategory: e.target.value })}
+          className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
+          <option value="">Select CATEGORY</option>
+          {categories?.length > 0 && categories.map(item => (
+            <option value={item.id}>{item.id} - {item.name}</option>)
+          )}
+        </select>
+      </div>
       <div>
         <label className='text-xs mt-4'>SAMPLE</label>
         <select value={payload.idSample}
@@ -99,10 +136,11 @@ const CreateProduct = () => {
         type='text'
       />
       <span className='show'></span>
+      <span className='shows'></span>
       <Button
         class='col-span-2'
         text={'NEXT'}
-        onClick={handleCreateClick}
+        onClick={handleSubmitCreate}
       />
     </div>
   )

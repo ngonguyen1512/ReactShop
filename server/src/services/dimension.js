@@ -2,9 +2,7 @@ import db from '../models';
 
 export const getAllDimensionService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Size.findAll({
-            // order: [['updatedAt', 'DESC']]
-        });
+        const response = await db.Size.findAll();
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get size',

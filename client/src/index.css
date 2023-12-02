@@ -248,6 +248,14 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.create_product .shows {
+    grid-column: span 2 / span 2;
+}
+.create_info .form-create_info {
+    gap: 1%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
 @media (max-width: 809px) {
     .header .header-content .logo-cate .logo .text-logo {
@@ -255,6 +263,9 @@
     }
     .create_product {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .create_product .shows {
+        grid-column: span 1 / span 1;
     }
 }
 
@@ -275,7 +286,7 @@
     .hide {
         display: block;
     }
-    .show {
+    .create_product .shows, .show {
         display: none;
     }
     .create_product {

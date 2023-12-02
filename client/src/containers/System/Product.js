@@ -94,7 +94,7 @@ const Product = () => {
                 {isShowDetail && payload.id === item.id && (
                     <tr className='bg-[#ddd]'>
                         <td colSpan={2} className={styletd}>{item.idCategory} - {item?.product_category.name}</td>
-                        <td colSpan={5} className={styletd}>{item.information}</td>
+                        <td colSpan={6} className={styletd}>{item.information}</td>
                     </tr>
                 )}
             </>

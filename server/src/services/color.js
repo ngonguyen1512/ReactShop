@@ -2,9 +2,7 @@ import db from '../models';
 
 export const getAllColorService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Color.findAll({
-            // order: [['updatedAt', 'DESC']]
-        });
+        const response = await db.Color.findAll();
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get color',

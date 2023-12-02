@@ -2,7 +2,7 @@ import db from '../models';
 
 export const getAllStatesService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.State.findAll({raw: true});
+        const response = await db.State.findAll();
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'Get states successful.' : 'Get states failed.',
