@@ -16,22 +16,25 @@ const Product = () => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState("")
     const [shouldReload, setShouldReload] = useState(false)
+    const [isShowDetail, setIsShowDetail] = useState(false)
     const [invalidFields, setInvalidFields] = useState([])
     const [shouldRefetch, setShouldRefetch] = useState(false)
+    const { products } = useSelector(state => state.product)
     const { currentData } = useSelector(state => state.user)
     const { functions } = useSelector(state => state.function)
     const permis = currentData.idPermission
+    console.log(products)
 
     const handleSearch = (event) => {
         setSearchValue(event.target.value);
         setShouldReload(event.target.value !== "");
     };
     let filteredProducts = [];
-    // if (products && Array.isArray(products)) {
-    //     filteredProducts = products.filter((item) =>
-    //         item.name.includes(searchValue)
-    //     );
-    // }
+    if (products && Array.isArray(products)) {
+        filteredProducts = products.filter((item) =>
+            item.name.includes(searchValue)
+        );
+    }
 
     const handleCreateClick = () => {
         navigate(path.CREATE_PRODUCT);
@@ -41,12 +44,63 @@ const Product = () => {
         let searchParamsObject = {}
         if (permis) searchParamsObject.permis = permis
         if (shouldRefetch) {
+            dispatch(actions.getProducts())
             dispatch(actions.getFunctions(searchParamsObject))
             setShouldRefetch(false)
         } else {
+            dispatch(actions.getProducts())
             dispatch(actions.getFunctions(searchParamsObject))
         }
     }, [dispatch, permis, shouldRefetch])
+
+    const [payload, setPayload] = useState({ id: '' || null })
+    const renderTableRow = (item) => {
+        const handleClickRow = () => { setPayload({ ...payload, id: item.id }) };
+        const handleDetail = () => {
+            if (payload.id === item.id) {
+                setPayload({ id: null });
+                setIsShowDetail(false);
+            } else {
+                setPayload({ ...payload, id: item.id });
+                setIsShowDetail(true);
+            }
+        };
+        return (
+            <>
+                <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
+                    <td className={styletd}>{item.id}</td>
+                    <td className={styletd}>{item.idSample}</td>
+                    <td className='py-2'>{item.name}</td>
+                    <td className={styletd}>{item.discount}</td>
+                    <td className={styletd}>{(item.price).toLocaleString()} đ</td>
+                    <td className={styletd}>{item.idState}</td>
+                    <td className={`w-[4%] ${styletd}`}>
+                        <Button fullWidth
+                            IcAfter={BiDetail}
+                            value={payload.id}
+                            setValue={setPayload}
+                            onClick={() => handleDetail()}
+                        />
+                    </td>
+                    <td className={`w-[4%] ${styletd}`}>
+                        <Button fullWidth
+                            IcAfter={CiEdit}
+                            // value={payload.id}
+                            // setValue={setPayload}
+                            // onClick={() => handleDetail()}
+                        />
+                    </td>
+                </tr>
+                {isShowDetail && payload.id === item.id && (
+                    <tr className='bg-[#ddd]'>
+                        <td colSpan={2} className={styletd}>{item.idCategory} - {item?.product_category.name}</td>
+                        <td colSpan={5} className={styletd}>{item.information}</td>
+                    </tr>
+                )}
+            </>
+        );
+    };
+
 
     return (
         <div className='product'>
@@ -80,8 +134,8 @@ const Product = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {shouldReload && filteredProducts.length > 0 && mapRows(filteredProducts)}
-                        {!shouldReload && products?.length > 0 && mapRows(products)} */}
+                        {shouldReload && filteredProducts.length > 0 && filteredProducts.map((item) => renderTableRow(item))}
+                        {!shouldReload && Array.isArray(products) && products?.length > 0 && products.map((item) => renderTableRow(item))}
                     </tbody>
                 </table>
             </div>

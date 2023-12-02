@@ -20,6 +20,7 @@ export const path = {
     COLOR: 'color',
     IMAGE: 'image',
     PRODUCT: 'product',
+    CREATE_INFO: 'create_info',
     CREATE_PRODUCT: 'create_product',
     UPDATE_PRODUCT: 'update_product/:id',
     QUANTITY: 'quantity',

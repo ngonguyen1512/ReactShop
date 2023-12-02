@@ -6,6 +6,7 @@ import slideReducer from "./slideReducer";
 import stateReducer from "./stateReducer";
 import sampleReducer from "./sampleReducer";
 import accountReducer from "./accountReducer";
+import productReducer from "./productReducer";
 import functionReducer from "./functionReducer";
 import transferReducer from "./transferReducer";
 import categoryReducer from "./categoryReducer";
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
     state: stateReducer,
     sample: sampleReducer,
     account: accountReducer,
+    product: productReducer,
     function: functionReducer,
     transfer: transferReducer,
     category: categoryReducer,

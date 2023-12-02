@@ -6,6 +6,7 @@ import slideRouter from './slide'
 import stateRouter from './state'
 import sampleRouter from './sample'
 import accountRouter from './account'
+import productRouter from './product'
 import functionRouter from './function'
 import transferRouter from './transfer'
 import categoryRouter from './category'
@@ -25,6 +26,7 @@ const initRoutes = (app) => {
     app.use('/api/v1/sample', sampleRouter)
     app.use('/api/v1/account', accountRouter)
     app.use('/api/v1/image', uplodaImageRouter)
+    app.use('/api/v1/product', productRouter)
     app.use('/api/v1/function', functionRouter)
     app.use('/api/v1/transfer', transferRouter)
     app.use('/api/v1/category', categoryRouter)

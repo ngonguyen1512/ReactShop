@@ -5,7 +5,7 @@ export const getSamplesService = (idCategory) => new Promise(async (resolve, rej
         let response;
         if (idCategory) {
             response = await db.Sample.findAll({
-                include: [{ model: db.Category, as: 'sample_category', attributes: ['name'] }],
+                include: [{ model: db.Category, as: 'sample_category', attributes: ['id','name'] }],
                 where: { idCategory: idCategory }
             });
         } else {
@@ -28,7 +28,7 @@ export const getAllSamplesService = () => new Promise(async (resolve, reject) =>
     try {
         const response = await db.Sample.findAll({
             include: [
-                { model: db.Category, as: 'sample_category', attributes: ['name'] },
+                { model: db.Category, as: 'sample_category', attributes: ['id','name'] },
                 { model: db.State, as: 'sample_state' }
             ],
         });
