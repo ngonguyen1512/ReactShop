@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom';
 import * as actions from '../../store/actions'
 import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
-import { Product, Dimension, Color, Image, Quantity, CreateProduct, UpdateProduct, CreateInfo } from './index';
+import { Product, Dimension, Color, Image, Quantity, CreateProduct, UpdateProduct, CreateDetail, CreateImage } from './index';
 
 const List = () => {
     const location = useLocation()
@@ -39,8 +39,10 @@ const List = () => {
                     <Image />
                 ) : last === 'quantity' ? (
                     <Quantity />
-                ) : last === 'create_info' ? (
-                    <CreateInfo />
+                ) : last === 'create_image' ? (
+                    <CreateImage />
+                ) : last === 'create_detail' ? (
+                    <CreateDetail />
                 ) : last === 'create_product' ? (
                     <CreateProduct />
                 ) : last === 'update_product' ? (

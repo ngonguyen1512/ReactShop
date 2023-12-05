@@ -23,7 +23,6 @@ const Product = () => {
     const { currentData } = useSelector(state => state.user)
     const { functions } = useSelector(state => state.function)
     const permis = currentData.idPermission
-    console.log(products)
 
     const handleSearch = (event) => {
         setSearchValue(event.target.value);

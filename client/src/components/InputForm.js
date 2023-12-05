@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-const InputForm = ({ label, text, value, setValue, keyPayload, type, invalidFields, setInvalidFields, disabled }) => {
+const InputForm = ({ label, text, value, multiple, setValue, keyPayload, type, invalidFields, setInvalidFields, disabled }) => {
   return (
     <div>
       <label htmlFor='phone' className='text-xs mt-4'>{label}</label>
@@ -13,6 +13,7 @@ const InputForm = ({ label, text, value, setValue, keyPayload, type, invalidFiel
         onChange={(e) => setValue(prev => ({ ...prev, [keyPayload]: e.target.value }))}
         onFocus={() => setInvalidFields([])}
         disabled={disabled}
+        multiple={multiple}
       />
 
       {invalidFields.length > 0

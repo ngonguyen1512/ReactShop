@@ -5,9 +5,10 @@ export const getTransmissionsService = (permis) => new Promise(async (resolve, r
         let response;
         if (permis) {
             response = await db.Transmission.findAll({
+                attributes: [ 'id', 'idTransfer', 'idPermission' ],
                 include: [
-                    { model: db.Transfer, as: 'transmission_transfer', attributes: ['id', 'name'] },
-                    { model: db.Permission, as: 'transmission_permission', attributes: ['id', 'name'] },
+                    { model: db.Transfer, as: 'transmission_transfer', attributes: ['name'] },
+                    { model: db.Permission, as: 'transmission_permission', attributes: ['name'] },
                 ],
                 where: { idPermission: permis }
             });
@@ -30,9 +31,10 @@ export const getTransmissionsService = (permis) => new Promise(async (resolve, r
 export const getAllTransmissionsService = () => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Transmission.findAll({
+            attributes: [ 'id', 'idTransfer', 'idPermission' ],
             include: [
-                { model: db.Transfer, as: 'transmission_transfer', attributes: ['id', 'name'] },
-                { model: db.Permission, as: 'transmission_permission', attributes: ['id', 'name'] },
+                { model: db.Transfer, as: 'transmission_transfer', attributes: ['name'] },
+                { model: db.Permission, as: 'transmission_permission', attributes: ['name'] },
             ],
         });
         resolve({
@@ -46,12 +48,7 @@ export const getAllTransmissionsService = () => new Promise(async (resolve, reje
 export const createTransmissionsService = ({ idTransfer, idPermission }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Transmission.create({
-            idTransfer,
-            idPermission,
-            include: [
-                { model: db.Transfer, as: 'transmission_transfer', attributes: ['id', 'name'] },
-                { model: db.Permission, as: 'transmission_permission', attributes: ['id', 'name'] },
-            ],
+            idTransfer, idPermission
         });
         resolve({
             err: response ? 0 : 2,
@@ -66,10 +63,6 @@ export const deleteTransmissionsService = (id) => new Promise(async (resolve, re
         const whereClause = {};
         whereClause.id = id;
         const response = await db.Transmission.findOne({
-            include: [
-                { model: db.Transfer, as: 'transmission_transfer', attributes: ['id', 'name'] },
-                { model: db.Permission, as: 'transmission_permission', attributes: ['id', 'name'] },
-            ],
             where: whereClause
         });
         await response.destroy();

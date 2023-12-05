@@ -4,12 +4,14 @@ import menuReducer from "./menuReducer";
 import colorReducer from "./colorReducer";
 import slideReducer from "./slideReducer";
 import stateReducer from "./stateReducer";
+import imagesReducer from "./imageReducer"
 import sampleReducer from "./sampleReducer";
 import accountReducer from "./accountReducer";
 import productReducer from "./productReducer";
 import functionReducer from "./functionReducer";
 import transferReducer from "./transferReducer";
 import categoryReducer from "./categoryReducer";
+import quantityReducer from "./quantityReducer";
 import dimensionReducer from "./dimensionReducer";
 import allocationReducer from "./allocationReducer";
 import permissionReducer from "./permissionReducer";
@@ -18,6 +20,7 @@ import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import { persistReducer } from "redux-persist";
+import imageReducer from "./imageReducer";
 
 const commonConfig = {
     storage,
@@ -37,12 +40,14 @@ const rootReducer = combineReducers({
     color: colorReducer,
     slide: slideReducer,
     state: stateReducer,
+    image: imageReducer,
     sample: sampleReducer,
     account: accountReducer,
     product: productReducer,
     function: functionReducer,
     transfer: transferReducer,
     category: categoryReducer,
+    quantity: quantityReducer,
     dimension: dimensionReducer,
     allocation: allocationReducer,
     permission: permissionReducer,

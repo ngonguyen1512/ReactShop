@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import { Home, Login, HomePage, Forgot, Register } from './containers/Public'
 import {
   HomeServer, Dashboard, Type, Sample, Category, Account, Size, List, Menu,
-  Dimension, State, Slide, Color, Image, Invoice, Product, Transfer, Quantity, Function,
-  Permission, Role, Transmission, Allocation, TransferPage, CreateProduct, UpdateProduct, CreateInfo
+  Dimension, State, Slide, Color, Image, Invoice, Product, Transfer, Quantity, Function, CreateImage,
+  Permission, Role, Transmission, Allocation, TransferPage, CreateProduct, UpdateProduct, CreateDetail
 } from './containers/System'
 
 function App() {
@@ -33,7 +33,8 @@ function App() {
             <Route path={path.COLOR} element={<Color />} />
             <Route path={path.IMAGE} element={<Image />} />
             <Route path={path.PRODUCT} element={<Product />}>
-              <Route path={path.CREATE_INFO} element={<CreateInfo />} />
+              <Route path={path.CREATE_IMAGE} element={<CreateImage />} />
+              <Route path={path.CREATE_DETAIL} element={<CreateDetail />} />
               <Route path={path.CREATE_PRODUCT} element={<CreateProduct />} />
               <Route path={path.UPDATE_PRODUCT} element={<UpdateProduct />} />
             </Route>

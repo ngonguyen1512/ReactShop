@@ -6,7 +6,11 @@ const hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(12
 
 export const getAllAccountsService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Account.findAndCountAll({});
+        const response = await db.Account.findAndCountAll({
+            attributes: [
+                'id', 'name', 'phone', 'email', 'address', 'password', 'idPermission', 'idState'
+            ],
+        });
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'Get account successful' : 'Get account failed.',
@@ -20,13 +24,9 @@ export const createAccountService = ({ name, phone, email, address, password, id
         const response = await db.Account.findOrCreate({
             where: { phone },
             defaults: {
-                name,
-                phone,
-                email,
-                address,
+                name, phone, email, address,
                 password: hashPassword(password),
-                idPermission,
-                idState,
+                idPermission, idState,
             }
         })
         resolve({

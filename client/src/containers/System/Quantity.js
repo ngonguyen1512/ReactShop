@@ -15,10 +15,75 @@ const Quantity = () => {
     const [shouldReload, setShouldReload] = useState(false)
     const [invalidFields, setInvalidFields] = useState([])
     const [shouldRefetch, setShouldRefetch] = useState(false)
-    const { currentData } = useSelector(state => state.user)
-    const { functions } = useSelector(state => state.function)
-    const { categories } = useSelector(state => state.category)
-    const permis = currentData.idPermission
+    const { quantities } = useSelector(state => state.quantity)
+
+    const handleSearch = (event) => {
+        setSearchValue(event.target.value);
+        setShouldReload(event.target.value !== "");
+    };
+    let filteredQuantity = [];
+    // if (quantities && Array.isArray(quantities)) {
+    //     filteredQuantity = quantities.filter((item) =>
+    //         item.name.includes(searchValue)
+    //     );
+    // }
+
+    useEffect(() => {
+        if (shouldRefetch) {
+            dispatch(actions.getQuantities())
+            setShouldRefetch(false)
+        } else {
+            dispatch(actions.getQuantities())
+        }
+    }, [dispatch, shouldRefetch])
+
+    const renderTableRow = (item) => {
+        // const handleClickRow = () => { setPayload({ ...payload, id: item.id }) };
+        // const handleDetail = () => {
+        //     if (payload.id === item.id) {
+        //         setPayload({ id: null });
+        //         setIsShowDetail(false);
+        //     } else {
+        //         setPayload({ ...payload, id: item.id });
+        //         setIsShowDetail(true);
+        //     }
+        // };
+        return (
+            <>
+                <tr key={item.id} className='hover:bg-blue-200 cursor-pointer'>
+                    <td className={styletd}>{item.id}</td>
+                    <td className={styletd}>{item.idProduct}</td>
+                    <td className={styletd}>{item.idColor}</td>
+                    <td className={styletd}>{item.idSize}</td>
+                    <td className={styletd}>{(item.quantity)}</td>
+                    <td className={styletd}>{item.idState}</td>
+                    {/* <td className={`w-[4%] ${styletd}`}>
+                        <Button fullWidth
+                            IcAfter={BiDetail}
+                            value={payload.id}
+                            setValue={setPayload}
+                            onClick={() => handleDetail()}
+                        />
+                    </td>
+                    <td className={`w-[4%] ${styletd}`}>
+                        <Button fullWidth
+                            IcAfter={CiEdit} */}
+                        {/* // value={payload.id}
+                        // setValue={setPayload}
+                        // onClick={() => handleDetail()}
+                        /> */}
+                    {/* </td> */}
+                </tr>
+                {/* {isShowDetail && payload.id === item.id && (
+                    <tr className='bg-[#ddd]'>
+                        <td colSpan={2} className={styletd}>{item.idCategory} - {item?.product_category.name}</td>
+                        <td colSpan={6} className={styletd}>{item.information}</td>
+                    </tr>
+                )} */}
+            </>
+        );
+    };
+
 
     return (
         <div className='quantity'>
@@ -36,14 +101,17 @@ const Quantity = () => {
                 <table className='w-full'>
                     <thead>
                         <tr>
-                            <th className='w-[5%]'>ID</th>
-                            <th className='w-[10%]'>PRODUCT</th>
-                            <th>IMAGE</th>
+                            <th>ID</th>
+                            <th>PRODUCT</th>
+                            <th>COLOR</th>
+                            <th>SIZE</th>
+                            <th>QUANTITY</th>
+                            <th>STATE</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {shouldReload && filteredAccounts.length > 0 && filteredAccounts.map((item) => renderTableRow(item))}
-            {!shouldReload && Array.isArray(accounts) && accounts?.length > 0 && accounts.map((item) => renderTableRow(item))} */}
+                        {shouldReload && filteredQuantity.length > 0 && filteredQuantity.map((item) => renderTableRow(item))}
+                        {!shouldReload && Array.isArray(quantities) && quantities?.length > 0 && quantities.map((item) => renderTableRow(item))}
                     </tbody>
                 </table>
             </div>

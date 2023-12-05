@@ -4,7 +4,7 @@ const { Op } = require("sequelize")
 export const getAllPermissionService = () => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Permission.findAll({
-            // order: [['updatedAt', 'DESC']]
+            attributes: [ 'id', 'name', 'idState'],
         });
         resolve({
             err: response ? 0 : 1,
@@ -16,13 +16,7 @@ export const getAllPermissionService = () => new Promise(async (resolve, reject)
 
 export const createPermissionService = ({ name, idState }) => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Permission.create({
-            name,
-            idState,
-            include: [
-                { model: db.State, as: 'permission_state' },
-            ],
-        });
+        const response = await db.Permission.create({ name, idState });
 
         resolve({
             err: response ? 0 : 2,

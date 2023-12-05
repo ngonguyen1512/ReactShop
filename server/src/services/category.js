@@ -3,7 +3,11 @@ import db from '../models';
 //Get all categories
 export const getAllCategoriesService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Category.findAll({ raw: true });
+        const response = await db.Category.findAll({ 
+            attributes: [
+                'id', 'image', 'name'
+            ],
+         });
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'Get category successful' : 'Get category failed.',

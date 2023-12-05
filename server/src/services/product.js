@@ -4,10 +4,14 @@ const { Op } = require("sequelize");
 export const getAllProductsService = () => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Product.findAll({
+            attributes: [
+                'id', 'idCategory', 'idSample', 'name', 'discount', 'price',
+                'information', 'idState'
+            ],
             include: [
-                { model: db.Category, as: 'product_category', attributes: ['id', 'name'] },
-                { model: db.State, as: 'product_state', attributes: ['id', 'name'] },
-                { model: db.Sample, as: 'product_sample', attributes: ['id', 'idCategory', 'name']},
+                { model: db.Category, as: 'product_category', attributes: ['name'] },
+                { model: db.State, as: 'product_state', attributes: ['name'] },
+                { model: db.Sample, as: 'product_sample', attributes: ['idCategory', 'name']},
             ],
         });
         resolve({
@@ -21,12 +25,7 @@ export const getAllProductsService = () => new Promise(async (resolve, reject) =
 export const createProductsService = ({ idCategory, idSample, name, discount, price, information, idState }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Product.create({
-            idCategory, idSample, name, discount, price, information, idState,
-            include: [
-                { model: db.Category, as: 'product_category', attributes: ['id', 'name'] },
-                { model: db.State, as: 'product_state', attributes: ['id', 'name'] },
-                { model: db.Sample, as: 'product_sample', attributes: ['id', 'idCategory', 'name'] },
-            ],
+            idCategory, idSample, name, discount, price, information, idState
         })
         resolve({
             err: response ? 0 : 2,

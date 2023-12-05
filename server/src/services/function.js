@@ -8,7 +8,7 @@ export const getAllFunctionsService = (permis) => new Promise(async (resolve, re
             response = await db.Function.findAll({
                 attributes: ['id', 'name', 'idPermission'],
                 include: [
-                    { model: db.Permission, as: 'function_permission', attributes: ['id', 'name'] },
+                    { model: db.Permission, as: 'function_permission', attributes: ['name'] },
                 ],
                 where: { idPermission: permis }
             });
@@ -33,7 +33,7 @@ export const getAllsFunctionsService = () => new Promise(async (resolve, reject)
         let response = await db.Function.findAll({
             attributes: ['id', 'name', 'idPermission'],
             include: [
-                { model: db.Permission, as: 'function_permission', attributes: ['id', 'name'] },
+                { model: db.Permission, as: 'function_permission', attributes: [ 'name'] },
             ],
             order: [['updatedAt', 'DESC']],
         });
@@ -48,11 +48,7 @@ export const getAllsFunctionsService = () => new Promise(async (resolve, reject)
 export const createFunctionService = ({ name, idPermission }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Function.create({
-            name,
-            idPermission,
-            include: [
-                { model: db.Permission, as: 'function_permission' },
-            ],
+            name, idPermission
         });
 
         resolve({
@@ -68,9 +64,6 @@ export const deleteFunctionService = (id) => new Promise(async (resolve, reject)
         const whereClause = {};
         whereClause.id = id;
         const response = await db.Function.findOne({
-            include: [
-                { model: db.Permission, as: 'function_permission' },
-            ],
             where: whereClause
         });
         await response.destroy();

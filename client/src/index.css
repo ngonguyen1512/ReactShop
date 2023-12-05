@@ -243,7 +243,7 @@
     height: 550px;
 }
 
-.create_product {
+.create_product, .create_image .form-create_image {
     gap: 1%;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -251,10 +251,10 @@
 .create_product .shows {
     grid-column: span 2 / span 2;
 }
-.create_info .form-create_info {
+.create_detail .form-create_detail {
     gap: 1%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 @media (max-width: 809px) {

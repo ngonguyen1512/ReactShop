@@ -2,7 +2,9 @@ import db from '../models';
 
 export const getAllTransfersService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Transfer.findAll({});
+        const response = await db.Transfer.findAll({
+            attributes: ['id', 'name']
+        });
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get transfer',
@@ -13,7 +15,7 @@ export const getAllTransfersService = () => new Promise(async (resolve, reject) 
 
 export const createTransferService = ({ name }) => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Transfer.create({name});
+        const response = await db.Transfer.create({ name });
         resolve({
             err: response ? 0 : 2,
             msg: response ? 'Tạo chuyển trang thành công.' : 'Tạo chuyển trang không thành công',

@@ -2,7 +2,14 @@ import db from '../models';
 
 export const getAllSlideService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Slide.findAll();
+        const response = await db.Slide.findAll({
+            attributes: [
+                'id', 'image', 'name', 'idState'
+            ],
+            include: [
+                { model: db.State, as: 'slide_state', attributes: ['name'] }
+            ]
+        });
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get slide',

@@ -5,7 +5,10 @@ export const getAllMenusService = (permis) => new Promise(async (resolve, reject
         const whereClause = {};
         if (permis) whereClause.idPermission = permis;
         const response = await db.Menu.findAll({
-            include: [{ model: db.Permission, as: 'menu_permission' }],
+            attributes: [
+                'id', 'url', 'name', 'idPermission'
+            ],
+            include: [{ model: db.Permission, as: 'menu_permission', attributes: ['name']}],
             where: whereClause
         });
         resolve({
@@ -19,10 +22,7 @@ export const getAllMenusService = (permis) => new Promise(async (resolve, reject
 export const createMenusService = ({ url, name, idPermission }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Menu.create({
-            url,
-            name,
-            idPermission,
-            include: [{ model: db.Permission, as: 'menu_permission' }],
+            url, name, idPermission
         });
         resolve({
             err: response ? 0 : 2,
@@ -37,7 +37,6 @@ export const deleteMenusService = (id) => new Promise(async (resolve, reject) =>
         const whereClause = {};
         whereClause.id = id;
         const response = await db.Menu.findOne({
-            include: [{ model: db.Permission, as: 'menu_permission' }],
             where: whereClause
         });
         await response.destroy();

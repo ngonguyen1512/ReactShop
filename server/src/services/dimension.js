@@ -2,7 +2,11 @@ import db from '../models';
 
 export const getAllDimensionService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Size.findAll();
+        const response = await db.Size.findAll({
+            attributes: [
+                'id', 'code', 'name', 'idState'
+            ],
+        });
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get size',
@@ -14,12 +18,7 @@ export const getAllDimensionService = () => new Promise(async (resolve, reject) 
 export const createDimensionService = ({ code, name, idState }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Size.create({
-            code,
-            name,
-            idState,
-            include: [
-                { model: db.State, as: 'size_state' },
-            ],
+            code, name, idState
         });
 
         resolve({

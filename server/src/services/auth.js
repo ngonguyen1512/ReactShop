@@ -12,13 +12,9 @@ export const registerService = ({ name, phone, email, address, password, idPermi
         const response = await db.Account.findOrCreate({
             where: { phone },
             defaults: {
-                name,
-                phone,
-                email,
-                address,
+                name, phone, email, address,
                 password: hashPassword(password),
-                idPermission,
-                idState,
+                idPermission, idState,
             }
         })
         const token = response[1] && jwt.sign({ id: response[0].id, phone: response[0].phone }, process.env.SECRET_KEY, { expiresIn: '1d' });
@@ -85,7 +81,7 @@ export const forgotPassword = ({ phone, email }) => new Promise(async (resolve, 
         });
         if (account) {
             const newPassword = generateRandomPassword(8);
-            sendEmail(email, 'REACTAPPLE FORGOT PASSWORD',
+            sendEmail(email, 'FASHION SEND YOUR NEW PASSWORD',
                 `Phone: ${phone} & email: ${email}. Your new password is: ${newPassword}`
             );
             const updatedAccount = await db.Account.update(

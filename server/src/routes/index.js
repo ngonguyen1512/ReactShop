@@ -4,12 +4,14 @@ import menuRouter from './menu'
 import colorRouter from './color'
 import slideRouter from './slide'
 import stateRouter from './state'
+import imageRouter from './image'
 import sampleRouter from './sample'
 import accountRouter from './account'
 import productRouter from './product'
 import functionRouter from './function'
 import transferRouter from './transfer'
 import categoryRouter from './category'
+import quantityRouter from './quantity'
 import dimensionRouter from './dimension'
 import allocationRouter from './allocation'
 import permissionRouter from './permission'
@@ -23,6 +25,7 @@ const initRoutes = (app) => {
     app.use('/api/v1/color', colorRouter)
     app.use('/api/v1/slide', slideRouter)
     app.use('/api/v1/state', stateRouter)
+    app.use('/api/v1/image', imageRouter)
     app.use('/api/v1/sample', sampleRouter)
     app.use('/api/v1/account', accountRouter)
     app.use('/api/v1/image', uplodaImageRouter)
@@ -30,6 +33,7 @@ const initRoutes = (app) => {
     app.use('/api/v1/function', functionRouter)
     app.use('/api/v1/transfer', transferRouter)
     app.use('/api/v1/category', categoryRouter)
+    app.use('/api/v1/quantity', quantityRouter)
     app.use('/api/v1/dimension', dimensionRouter)
     app.use('/api/v1/allocation', allocationRouter)
     app.use('/api/v1/permission', permissionRouter)

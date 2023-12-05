@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Image.init({
     idProduct: DataTypes.INTEGER,
-    image: DataTypes.TEXT,
+    image1: DataTypes.STRING,
+    image2: DataTypes.STRING,
+    image3: DataTypes.STRING,
+    image4: DataTypes.STRING,
     idColor: DataTypes.INTEGER
   }, {
     sequelize,

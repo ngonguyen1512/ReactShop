@@ -2,7 +2,9 @@ import db from '../models';
 
 export const getAllStatesService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.State.findAll();
+        const response = await db.State.findAll({
+            attributes: ['id', 'name']
+        });
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'Get states successful.' : 'Get states failed.',
@@ -13,7 +15,7 @@ export const getAllStatesService = () => new Promise(async (resolve, reject) => 
 
 export const createStatesService = ({ name }) => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.State.create({ name});
+        const response = await db.State.create({ name });
         resolve({
             err: response ? 0 : 2,
             msg: response ? 'Create states successful.' : 'Create state failed.',

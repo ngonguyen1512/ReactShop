@@ -12,8 +12,17 @@ module.exports = {
       idProduct: {
         type: Sequelize.INTEGER
       },
-      image: {
-        type: Sequelize.TEXT
+      image1: {
+        type: Sequelize.STRING
+      },
+      image2: {
+        type: Sequelize.STRING
+      },
+      image3: {
+        type: Sequelize.STRING
+      },
+      image4: {
+        type: Sequelize.STRING
       },
       idColor: {
         type: Sequelize.INTEGER

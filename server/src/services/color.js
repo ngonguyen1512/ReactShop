@@ -2,7 +2,11 @@ import db from '../models';
 
 export const getAllColorService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Color.findAll();
+        const response = await db.Color.findAll({
+            attributes: [
+                'id', 'code', 'name', 'idState'
+            ],
+        });
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get color',
@@ -14,12 +18,7 @@ export const getAllColorService = () => new Promise(async (resolve, reject) => {
 export const createColorService = ({ code, name, idState }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Color.create({
-            code,
-            name,
-            idState,
-            include: [
-                { model: db.State, as: 'color_state' },
-            ],
+            code, name, idState,
         });
 
         resolve({

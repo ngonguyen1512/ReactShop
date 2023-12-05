@@ -33,7 +33,7 @@ const CreateProduct = () => {
     let invalids = validate(finalPayload);
     if (invalids === 0) {
       dispatch(actions.createProducts(payload))
-      navigate(path.CREATE_INFO);
+      navigate(path.CREATE_DETAIL);
     }
   }
 

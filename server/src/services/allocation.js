@@ -5,8 +5,11 @@ export const getAllocationsService = (idTransfer) => new Promise(async (resolve,
         let response;
         if (idTransfer) {
             response = await db.Allocation.findAll({
+                attributes: [
+                    'id', 'idTransfer', 'name'
+                ],
                 include: [
-                    { model: db.Transfer, as: 'allocation_transfer', attributes: ['id', 'name'] },
+                    { model: db.Transfer, as: 'allocation_transfer', attributes: ['name'] },
                 ],
                 where: { idTransfer: idTransfer }
             });
@@ -30,7 +33,7 @@ export const getAllAllocationsService = () => new Promise(async (resolve, reject
     try {
         const response = await db.Allocation.findAll({
             include: [
-                { model: db.Transfer, as: 'allocation_transfer', attributes: ['id', 'name'] },
+                { model: db.Transfer, as: 'allocation_transfer', attributes: ['name'] },
             ],
         });
         resolve({
@@ -44,11 +47,7 @@ export const getAllAllocationsService = () => new Promise(async (resolve, reject
 export const createAllocationsService = ({ idTransfer, name }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Allocation.create({
-            idTransfer,
-            name,
-            include: [
-                { model: db.Transfer, as: 'allocation_transfer', attributes: ['id', 'name'] },
-            ],
+            idTransfer, name,
         });
         resolve({
             err: response ? 0 : 2,
