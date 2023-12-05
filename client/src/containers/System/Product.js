@@ -82,12 +82,9 @@ const Product = () => {
                         />
                     </td>
                     <td className={`w-[4%] ${styletd}`}>
-                        <Button fullWidth
-                            IcAfter={CiEdit}
-                            // value={payload.id}
-                            // setValue={setPayload}
-                            // onClick={() => handleDetail()}
-                        />
+                        <Link to={path.UPDATE_PRODUCT+`/${item.id}`}>
+                            <Button fullWidth IcAfter={CiEdit} textColor='text-secondary' />
+                        </Link>
                     </td>
                 </tr>
                 {isShowDetail && payload.id === item.id && (

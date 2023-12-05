@@ -123,11 +123,12 @@ const State = () => {
           {payload.id ? (
             <div className='update-category'>
               <Button
+                fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}
               />
-              <span onClick={() => setPayload({ ...payload, id: '', name: ''})}
+              <span onClick={() => setPayload({ ...payload, id: '', name: '' })}
                 className='icons-clear center'>
                 <TiDeleteOutline />
               </span>

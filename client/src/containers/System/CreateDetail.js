@@ -49,6 +49,7 @@ const CreateDetail = () => {
 
   return (
     <div className='create_detail'>
+      <span className='title'>DETAIL 1</span>
       <div className='form-create_detail'>
         <div>
           <label className='text-xs mt-4'>PRODUCT</label>
@@ -116,15 +117,15 @@ const CreateDetail = () => {
           >
             <option value="">Select STATE</option>
             {states?.length > 0 &&
-              states.map((item) => (
+              states.map((item) => (item.id === 1 || item.id === 2) && (
                 <option key={item.id} value={item.id}>
                   {item.id} - {item.name}
                 </option>
               ))}
           </select>
         </div>
-
       </div>
+      <span className='title'>DETAIL 2</span>
       <div className='form-create_detail'>
         <div>
           <label className='text-xs mt-4'>PRODUCT</label>
@@ -192,7 +193,7 @@ const CreateDetail = () => {
           >
             <option value="">Select STATE</option>
             {states?.length > 0 &&
-              states.map((item) => (
+              states.map((item) => (item.id === 1 || item.id === 2) && (
                 <option key={item.id} value={item.id}>
                   {item.id} - {item.name}
                 </option>
@@ -200,6 +201,7 @@ const CreateDetail = () => {
           </select>
         </div>
       </div>
+      <span className='title'>DETAIL 3</span>
       <div className='form-create_detail'>
         <div>
           <label className='text-xs mt-4'>PRODUCT</label>
@@ -267,7 +269,7 @@ const CreateDetail = () => {
           >
             <option value="">Select STATE</option>
             {states?.length > 0 &&
-              states.map((item) => (
+              states.map((item) => (item.id === 1 || item.id === 2) && (
                 <option key={item.id} value={item.id}>
                   {item.id} - {item.name}
                 </option>
@@ -276,7 +278,9 @@ const CreateDetail = () => {
         </div>
 
       </div>
-      <Button class='col-span-2' text={'CREATE'} onClick={handleSubmitCreate} />
+      <div className='center mt-5'>
+        <Button text={'CREATE'} onClick={handleSubmitCreate} />
+      </div>
     </div>
   )
 }

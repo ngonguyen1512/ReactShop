@@ -6,6 +6,14 @@ export const path = {
     HOME: '/*',
     HOME__PAGE: ':page',
 
+    LIKE: 'like',
+    ORDER: 'order',
+    PERSONAL: 'personal',
+    INFORMATION: 'infromation',
+    CHANGEPASSWORD: 'change_password',
+    
+
+
     HOMESERVER: 'webserver/*',
     DASHBOARD: 'dashboard',
     ACCOUNT: 'account',
@@ -23,7 +31,7 @@ export const path = {
     CREATE_IMAGE: 'create_image',
     CREATE_DETAIL: 'create_detail',
     CREATE_PRODUCT: 'create_product',
-    UPDATE_PRODUCT: 'update_product/:id',
+    UPDATE_PRODUCT: 'update_product',
     QUANTITY: 'quantity',
     DIMENSION: 'dimension',
 

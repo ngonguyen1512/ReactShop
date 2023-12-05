@@ -2,9 +2,10 @@ import { path } from './utils/constant'
 import { Routes, Route } from 'react-router-dom'
 import { Home, Login, HomePage, Forgot, Register } from './containers/Public'
 import {
-  HomeServer, Dashboard, Type, Sample, Category, Account, Size, List, Menu,
+  HomeServer, Dashboard, Type, Sample, Category, Account, List, Menu, Personal,
   Dimension, State, Slide, Color, Image, Invoice, Product, Transfer, Quantity, Function, CreateImage,
-  Permission, Role, Transmission, Allocation, TransferPage, CreateProduct, UpdateProduct, CreateDetail
+  Permission, Role, Transmission, Allocation, TransferPage, CreateProduct, UpdateProduct, CreateDetail,
+  Information, ChangePassword, Order, Like
 } from './containers/System'
 
 function App() {
@@ -16,6 +17,12 @@ function App() {
           <Route path={path.LOGIN} element={<Login />} />
           <Route path={path.FORGOT} element={<Forgot />} />
           <Route path={path.REGISTER} element={<Register />} />
+          <Route path={path.PERSONAL} element={<Personal />}>
+            <Route path={path.LIKE} element={<Like />} />
+            <Route path={path.ORDER} element={<Order />} />
+            <Route path={path.INFORMATION} element={<Information />} />
+            <Route path={path.CHANGEPASSWORD} element={<ChangePassword />} />
+          </Route>
         </Route>
 
         <Route path={path.HOMESERVER} element={<HomeServer />}>

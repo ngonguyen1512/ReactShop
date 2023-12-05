@@ -145,6 +145,7 @@ const Sample = () => {
           {payload.id ? (
             <div className='update-category'>
               <Button
+                fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}

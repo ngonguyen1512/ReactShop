@@ -150,6 +150,7 @@ const Color = () => {
                     {payload.id ? (
                         <div className='update-color'>
                             <Button
+                                fullWidth
                                 text={'UPDATE'}
                                 value={payload.id}
                                 onClick={handleSubmitUpdate}

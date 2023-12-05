@@ -80,6 +80,7 @@ const Transmission = () => {
           {payload.id ? (
             <div className='update-transmission'>
               <Button
+                fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}

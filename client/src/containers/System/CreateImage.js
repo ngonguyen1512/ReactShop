@@ -138,8 +138,8 @@ const CreateImage = () => {
                     </select>
                 </div>
             </div>
-            <div className='center mt-2'>
-                <Button class='col-span-2' text={'CREATE'} onClick={handleSubmitCreate} />
+            <div className='center mt-5'>
+                <Button text={'CREATE'} onClick={handleSubmitCreate} />
             </div>
         </div>
     )

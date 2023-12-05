@@ -27,11 +27,14 @@ const Image = () => {
         setShouldReload(event.target.value !== "");
     };
     let filteredImages = [];
-    // if (quantities && Array.isArray(quantities)) {
-    //     filteredImages = quantities.filter((item) =>
-    //         item.name.includes(searchValue)
-    //     );
-    // }
+    const searchValueAsNumber = parseInt(searchValue, 10); // Chuyển đổi searchValue thành số nguyên
+
+    if (!isNaN(searchValueAsNumber) && images && Array.isArray(images)) {
+        filteredImages = images.filter((item) =>
+            // Kiểm tra nếu item.idProduct là số nguyên và giống với searchValueAsNumber
+            Number.isInteger(item.idProduct) && item.idProduct === searchValueAsNumber
+        );
+    }
 
     useEffect(() => {
         if (shouldRefetch) {
@@ -43,16 +46,6 @@ const Image = () => {
     }, [dispatch, shouldRefetch])
 
     const renderTableRow = (item) => {
-        // const handleClickRow = () => { setPayload({ ...payload, id: item.id }) };
-        // const handleDetail = () => {
-        //     if (payload.id === item.id) {
-        //         setPayload({ id: null });
-        //         setIsShowDetail(false);
-        //     } else {
-        //         setPayload({ ...payload, id: item.id });
-        //         setIsShowDetail(true);
-        //     }
-        // };
         return (
             <>
                 <tr key={item.id} className='hover:bg-blue-200 cursor-pointer'>
@@ -71,29 +64,7 @@ const Image = () => {
                         <img src={`/images/${item.image4}`} alt={item.image4} className='w-[100%] object-cover' />
                     </td>
                     <td className={styletd}>{item.idColor}</td>
-                    {/* <td className={`w-[4%] ${styletd}`}>
-                        <Button fullWidth
-                            IcAfter={BiDetail}
-                            value={payload.id}
-                            setValue={setPayload}
-                            onClick={() => handleDetail()}
-                        />
-                    </td>
-                    <td className={`w-[4%] ${styletd}`}>
-                        <Button fullWidth
-                            IcAfter={CiEdit} */}
-                    {/* // value={payload.id}
-                        // setValue={setPayload}
-                        // onClick={() => handleDetail()}
-                        /> */}
-                    {/* </td> */}
                 </tr>
-                {/* {isShowDetail && payload.id === item.id && (
-                    <tr className='bg-[#ddd]'>
-                        <td colSpan={2} className={styletd}>{item.idCategory} - {item?.product_category.name}</td>
-                        <td colSpan={6} className={styletd}>{item.information}</td>
-                    </tr>
-                )} */}
             </>
         );
     };
@@ -105,9 +76,9 @@ const Image = () => {
                 <input
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
                     type="text"
-                    placeholder='Search by name'
+                    placeholder='Search by id product'
                     value={searchValue}
-                // onChange={handleSearch}
+                    onChange={handleSearch}
                 />
             </div>
             <div className='list-image list-table'>

@@ -66,82 +66,80 @@ const CreateProduct = () => {
 
   return (
     <div className='create_product'>
-      <div>
-        <label className='text-xs mt-4'>CATEGORY</label>
-        <select value={payload.idCategory}
-          onChange={(e) => setPayload({ ...payload, idCategory: e.target.value })}
-          className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
-          <option value="">Select CATEGORY</option>
-          {categories?.length > 0 && categories.map(item => (
-            <option value={item.id}>{item.id} - {item.name}</option>)
-          )}
-        </select>
+      <div className='form-create_product'>
+        <div>
+          <label className='text-xs mt-4'>CATEGORY</label>
+          <select value={payload.idCategory}
+            onChange={(e) => setPayload({ ...payload, idCategory: e.target.value })}
+            className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
+            <option value="">Select CATEGORY</option>
+            {categories?.length > 0 && categories.map(item => (
+              <option value={item.id}>{item.id} - {item.name}</option>)
+            )}
+          </select>
+        </div>
+        <div>
+          <label className='text-xs mt-4'>SAMPLE</label>
+          <select value={payload.idSample}
+            onChange={(e) => setPayload({ ...payload, idSample: e.target.value })}
+            className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
+            <option value="">Select SAMPLE</option>
+            {samples?.length > 0 && samples.map(item => (
+              <option value={item.id}>{item.id} - {item.name}</option>)
+            )}
+          </select>
+        </div>
+        <InputForm
+          setInvalidFields={setInvalidFields}
+          invalidFields={invalidFields}
+          label={'NAME'}
+          value={payload.name}
+          setValue={setPayload}
+          keyPayload={'name'}
+          type='text'
+        />
+        <InputForm
+          setInvalidFields={setInvalidFields}
+          invalidFields={invalidFields}
+          label={'DISCOUNT'}
+          value={payload.discount}
+          setValue={setPayload}
+          keyPayload={'discount'}
+          type='number'
+        />
+        <InputForm
+          setInvalidFields={setInvalidFields}
+          invalidFields={invalidFields}
+          label={'PRICE'}
+          value={payload.price}
+          setValue={setPayload}
+          keyPayload={'price'}
+          type='number'
+        />
+        <div>
+          <label className='text-xs mt-4'>STATE</label>
+          <select value={payload.idState}
+            onChange={(e) => setPayload({ ...payload, idState: e.target.value })}
+            className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
+            <option value="">Select STATE</option>
+            {states?.length > 0 && states.map(item => (item.id === 1 || item.id === 2) && (
+              <option value={item.id}>{item.id} - {item.name}</option>
+            ))}
+          </select>
+        </div>
+        <TextArea
+          setInvalidFields={setInvalidFields}
+          invalidFields={invalidFields}
+          label={'INFORMATION'}
+          value={payload.information}
+          setValue={setPayload}
+          keyPayload={'information'}
+          type='text'
+        />
       </div>
-      <div>
-        <label className='text-xs mt-4'>SAMPLE</label>
-        <select value={payload.idSample}
-          onChange={(e) => setPayload({ ...payload, idSample: e.target.value })}
-          className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
-          <option value="">Select SAMPLE</option>
-          {samples?.length > 0 && samples.map(item => (
-            <option value={item.id}>{item.id} - {item.name}</option>)
-          )}
-        </select>
+      <div className='center mt-5'>
+        <Button text={'NEXT'} onClick={handleSubmitCreate} />
       </div>
-      <InputForm
-        setInvalidFields={setInvalidFields}
-        invalidFields={invalidFields}
-        label={'NAME'}
-        value={payload.name}
-        setValue={setPayload}
-        keyPayload={'name'}
-        type='text'
-      />
-      <InputForm
-        setInvalidFields={setInvalidFields}
-        invalidFields={invalidFields}
-        label={'DISCOUNT'}
-        value={payload.discount}
-        setValue={setPayload}
-        keyPayload={'discount'}
-        type='number'
-      />
-      <InputForm
-        setInvalidFields={setInvalidFields}
-        invalidFields={invalidFields}
-        label={'PRICE'}
-        value={payload.price}
-        setValue={setPayload}
-        keyPayload={'price'}
-        type='number'
-      />
-      <div>
-        <label className='text-xs mt-4'>STATE</label>
-        <select value={payload.idState}
-          onChange={(e) => setPayload({ ...payload, idState: e.target.value })}
-          className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'>
-          <option value="">Select STATE</option>
-          {states?.length > 0 && states.map(item => (
-            <option value={item.id}>{item.id} - {item.name}</option>
-          ))}
-        </select>
-      </div>
-      <TextArea
-        setInvalidFields={setInvalidFields}
-        invalidFields={invalidFields}
-        label={'INFORMATION'}
-        value={payload.information}
-        setValue={setPayload}
-        keyPayload={'information'}
-        type='text'
-      />
-      <span className='show'></span>
-      <span className='shows'></span>
-      <Button
-        class='col-span-2'
-        text={'NEXT'}
-        onClick={handleSubmitCreate}
-      />
     </div>
   )
 }

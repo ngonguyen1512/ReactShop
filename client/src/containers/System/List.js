@@ -12,11 +12,17 @@ const List = () => {
     const parts = pathurl.split('/')
     const idTransfer = 4
     const last = parts[parts.length - 1];
+    const index = parts.indexOf("1");
+    const { products } = useSelector(state => state.product)
+
+    // Lấy phần từ ngay trước phần tử "/1"
+    const updateProduct = parts[index - 1];
     const { allocations } = useSelector(state => state.allocation)
 
     useEffect(() => {
         let searchParamsObject = {}
         if (idTransfer) searchParamsObject.idTransfer = idTransfer
+        dispatch(actions.getProducts())
         dispatch(actions.getAllocations(searchParamsObject))
     }, [dispatch]);
 
@@ -45,8 +51,25 @@ const List = () => {
                     <CreateDetail />
                 ) : last === 'create_product' ? (
                     <CreateProduct />
-                ) : last === 'update_product' ? (
-                    <UpdateProduct />
+                ) : updateProduct === 'update_product' ? (
+                    <>
+                        {products?.length > 0 && products.map(item => {
+                            if (item.id === parseInt(last))
+                                return (
+                                    <UpdateProduct
+                                        id={parseInt(last)}
+                                        name={item.name}
+                                        idCategory={item.idCategory}
+                                        idSample={item.idSample}
+                                        price={item.price}
+                                        discount={item.discount}
+                                        information={item.information}
+                                        idState={item.idState}
+                                    />
+                                )
+                            return null
+                        })}
+                    </>
                 ) : (
                     <Product />
                 )}

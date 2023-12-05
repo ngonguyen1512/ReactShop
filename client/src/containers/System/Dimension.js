@@ -148,6 +148,7 @@ const Dimension = () => {
           {payload.id ? (
             <div className='update-dimension'>
               <Button
+                fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}

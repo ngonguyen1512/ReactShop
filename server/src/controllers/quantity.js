@@ -31,9 +31,9 @@ export const createQuantities = async (req, res) => {
 }
 
 export const updateQuantities = async (req, res) => {
-    const { idProduct, idColor, idSize, quantity, idState } = req.body;
+    const { quantity, idState } = req.body;
     try {
-        if (!idProduct || !idColor || !idSize || !quantity || !idState)
+        if (!quantity || !idState)
             return res.status(400).json({
                 err: 1,
                 msg: 'Please fill in the field!'

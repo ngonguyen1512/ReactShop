@@ -55,11 +55,11 @@ export const createQuantitiesService = ({ idProduct, idColor, idSize, quantity, 
     }
 })
 
-export const updateQuantitiesService = ({ id, idProduct, idColor, idSize, quantity, idState }) => new Promise(async (resolve, reject) => {
+export const updateQuantitiesService = ({ id, quantity, idState }) => new Promise(async (resolve, reject) => {
     try {
         const product = await db.Quantity.findByPk(id);
         const response = await product.update({
-            idProduct, idColor, idSize, quantity, idState
+            quantity, idState
         });
         resolve({
             err: response ? 0 : 2,

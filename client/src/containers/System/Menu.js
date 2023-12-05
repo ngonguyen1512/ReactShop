@@ -100,14 +100,14 @@ const Menu = () => {
                     <td className='py-2'>{item.name}</td>
                     <td className={styletd}>{item.idPermission}</td>
                     {functions?.length > 0 && functions.map(item => item.name === 'Delete' && item.idPermission === 1 && (
-                    <th className='w-[5%]'>
-                        <Button
-                            IcAfter={MdOutlineDeleteSweep}
-                            value={item.id}
-                            onClick={handleSubmitDelete}
-                        />
-                    </th>
-                ))}
+                        <th className='w-[5%]'>
+                            <Button
+                                IcAfter={MdOutlineDeleteSweep}
+                                value={item.id}
+                                onClick={handleSubmitDelete}
+                            />
+                        </th>
+                    ))}
                 </tr>
             </>
         );
@@ -159,6 +159,7 @@ const Menu = () => {
                     {payload.id ? (
                         <div className='update-menu'>
                             <Button
+                                fullWidth
                                 text={'UPDATE'}
                                 value={payload.id}
                                 onClick={handleSubmitUpdate}

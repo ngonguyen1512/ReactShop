@@ -186,12 +186,12 @@
 .role .header-role .content, .permission .header-permission .content,
 .slide .header-slide .content, .state .header-state .content,
 .menu .header-menu .content, .function .header-function .content,
-.transfer .header-transfer .content {
+.transfer .header-transfer .content, .personal .menu-personal .content{
     margin-right: 1%;
 }
 .type .header-type .content span, .list .header-list .content span, 
 .role .header-role .content span, .slide .header-slide .content span,
-.transfer .header-transfer .content span {
+.transfer .header-transfer .content span, .personal .menu-personal .content span{
     padding: 0 2% 0.5% 2%;
     border-bottom: 1px solid #000;
 }
@@ -200,11 +200,13 @@
 .color .header-color, .dimension .header-dimension, .image .header-image, .quantity .header-quantity,
 .permission .header-permission, .slide .header-slide, .state .header-state,
 .menu .header-menu, .function .header-function, .transfer_page .header-transfer_page,
-.transmission .header-transmission, .allocation .header-allocation, .create_product, .update-product{
+.transmission .header-transmission, .allocation .header-allocation, .create_product, .update-product, 
+.create_detail {
     margin: 1rem 0;
 }
 .category .form-category, .permission .form-permission, .function .form-function, 
-.transmission .form-transmission, .allocation .form-allocation {
+.transmission .form-transmission, .allocation .form-allocation, 
+.quantity .form-quantity {
     gap: 1%;
     width: 100%;
     display: grid;
@@ -225,7 +227,8 @@
 }
 .update-category, .update-sample, .update-category, .update-dimension, 
 .update-color, .update-permission, .update-slide, .update-state, .update-menu,
-.update-function, .update-transfer_page, .update-transmission, .update-allocation {
+.update-function, .update-transfer_page, .update-transmission, .update-allocation,
+.update-quantity {
     gap: 1%;
     display: flex;
     flex-direction: 2;
@@ -233,28 +236,59 @@
 .category .list-category, .sample .list-sample, .account .list-account, 
 .color .list-color, .dimension .list-dimension, .permission .list-permission,
 .state .list-state, .menu .list-menu, .function .list-function,
-.transfer_page .list-transfer_page, .allocation .list-allocation {
+.transfer_page .list-transfer_page, .allocation .list-allocation,
+.quantity .list-quantity {
     margin: 1rem 0;
     height: 480px;
 }
-.product .list-product, .image .list-image, .quantity .list-quantity, .slide .list-slide,
+.product .list-product, .image .list-image, .slide .list-slide,
 .transmission .list-transmission {
     margin: 1rem 0;
     height: 550px;
 }
 
-.create_product, .create_image .form-create_image {
+.create_product .form-create_product, .create_image .form-create_image,
+.update_product .form-update_product {
     gap: 1%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-.create_product .shows {
-    grid-column: span 2 / span 2;
+.create_detail .title {
+    font-size: medium;
+    font-weight: 600;
 }
 .create_detail .form-create_detail {
     gap: 1%;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.personal {
+    margin: 2% 0;
+}
+.personal .title {
+    font-weight: 700;
+    font-size: xx-large;
+    letter-spacing: 0.05em;
+}
+.personal .name_account {
+    font-size: larger;
+}
+
+.footer {
+    width: 100%;
+    background-color: #fff;
+    min-height: 100%;
+    padding-top: 2rem;
+}
+.footer .title {
+    display: flex;
+    gap: 0.625rem;
+    font-size: xx-large ;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    margin-left: 3rem;
 }
 
 @media (max-width: 809px) {
@@ -280,7 +314,7 @@
     .account .form-account, .permission .form-permssion, 
     .slide .form-slide, .color .form-color, .dimension .form-dimension, 
     .function .form-function, .transmission .form-transmission,
-    .allocation .form-allocation{
+    .allocation .form-allocation, .quantity .form-quantity{
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .hide {

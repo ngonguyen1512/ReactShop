@@ -234,9 +234,10 @@ const Account = () => {
                   ))}
                 </select>
               </div>
-              <span className='hide'></span>
+              <span></span>
               <div className='update-category'>
                 <Button
+                  fullWidth
                   class='col-span-2'
                   text={'UPDATE'}
                   value={payloadu.id}
@@ -320,6 +321,7 @@ const Account = () => {
                 </select>
               </div>
               <Button
+                fullWidth
                 class='col-span-2'
                 text={'CREATE'}
                 onClick={handleSubmitCreate}
