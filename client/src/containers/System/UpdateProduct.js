@@ -19,8 +19,8 @@ const UpdateProduct = (item) => {
   })
 
   const handleSubmitUpdate = () => {
-      dispatch(actions.updateProducts(payload))
-      navigate(path.PRODUCT)
+    dispatch(actions.updateProducts(payload))
+    navigate(path.PRODUCT)
   }
 
   useEffect(() => {

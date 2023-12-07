@@ -50,3 +50,16 @@ export const apiUpdateAccountOne = (payload) => new Promise(async (resolve, reje
         reject(error)
     }
 })
+
+export const apiUpdateAccountPassword = (payload) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'put',
+            url: 'api/v1/account/updatepass',
+            data: payload
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

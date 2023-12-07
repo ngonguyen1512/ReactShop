@@ -31,6 +31,12 @@ const accountReducer = (state = initState, action) => {
                 accounts: action.data,
                 msg: action.msg || '',
             }
+        case actionTypes.UPDATE_ACCOUNT_PASS:
+            return {
+                ...state,
+                accounts: action.data,
+                msg: action.msg || '',
+            }
         default:
             return state;
     }

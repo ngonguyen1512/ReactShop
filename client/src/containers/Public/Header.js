@@ -22,6 +22,8 @@ const Header = () => {
   const { transmissions } = useSelector(state => state.transmission)
   const { categories } = useSelector(state => state.category)
   const [isShowMenu, setIsShowMenu] = useState(false)
+  const [isShowSearch, setIsShowSearch] = useState(false)
+  const [isShowMiniCart, setIsShowMiniCart] = useState(false)
 
   const handleFilterPosts = (id) => {
     navigate({

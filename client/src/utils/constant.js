@@ -6,14 +6,22 @@ export const path = {
     HOME: '/*',
     HOME__PAGE: ':page',
 
+    TOP: 'top',
+    CART: 'cart',
+    OUTER: 'outer',
+    SEARCH: 'search',
+    BOTTOM: 'bottom',
+    PAYMENT: 'payment',
+    ACCESSORIES: 'accessories',
+    DETAIL: ':nameCategory/detail/:title/:productId',
+
     LIKE: 'like',
     ORDER: 'order',
     PERSONAL: 'personal',
     INFORMATION: 'infromation',
+    UPDATE_ACCOUNT: 'update_account',
     CHANGEPASSWORD: 'change_password',
     
-
-
     HOMESERVER: 'webserver/*',
     DASHBOARD: 'dashboard',
     ACCOUNT: 'account',

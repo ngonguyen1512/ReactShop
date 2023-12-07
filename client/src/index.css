@@ -63,6 +63,12 @@
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+.header.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
 .header .header-content {
     width: 100%;
     padding: 0 5%;
@@ -186,12 +192,12 @@
 .role .header-role .content, .permission .header-permission .content,
 .slide .header-slide .content, .state .header-state .content,
 .menu .header-menu .content, .function .header-function .content,
-.transfer .header-transfer .content, .personal .menu-personal .content{
+.transfer .header-transfer .content {
     margin-right: 1%;
 }
 .type .header-type .content span, .list .header-list .content span, 
 .role .header-role .content span, .slide .header-slide .content span,
-.transfer .header-transfer .content span, .personal .menu-personal .content span{
+.transfer .header-transfer .content span {
     padding: 0 2% 0.5% 2%;
     border-bottom: 1px solid #000;
 }
@@ -275,6 +281,19 @@
     font-size: larger;
 }
 
+.information .title {
+    padding-bottom: 1%;
+    font-weight: 600;
+    font-size: larger;
+    letter-spacing: 0.005em;
+    border-bottom: 1px solid #a0a0a0;
+}
+.information .content_information {
+    padding: 1% 0;
+    font-size: medium;
+}
+
+
 .footer {
     width: 100%;
     background-color: #fff;
@@ -289,6 +308,27 @@
     cursor: pointer;
     letter-spacing: 0.1em;
     margin-left: 3rem;
+}
+
+@media (min-width: 500px) {
+    .personal .main-personal {
+        margin: 4% 0;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0,1fr));
+    }
+    .personal .main-personal .menu-personal {
+        gap: 5%;
+        display: flex;
+        font-size: large;
+        flex-direction: column;
+        text-decoration-line: underline;
+    }
+    .personal .main-personal .menu-personal .content span{
+        padding: 4% 0;
+    }
+    .personal .main-personal .page-personal {
+        grid-column: span 3 / span 3;
+    }
 }
 
 @media (max-width: 809px) {
@@ -329,5 +369,16 @@
 }
 
 @media (max-width: 499px) {
-    
+    .personal .main-personal .menu-personal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .personal .main-personal .menu-personal .content{
+        margin-right: 1%;
+    }
+    .personal .main-personal .menu-personal .content span{
+        padding: 0 2% 0.5% 2%;
+        border-bottom: 1px solid #000;
+    }
 }

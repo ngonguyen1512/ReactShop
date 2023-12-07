@@ -6,17 +6,14 @@ import { formatVietnameseToString } from '../../utils/common/formatVietnameseToS
 import { Product, Dimension, Color, Image, Quantity, CreateProduct, UpdateProduct, CreateDetail, CreateImage } from './index';
 
 const List = () => {
+    const idTransfer = 4
     const location = useLocation()
     const dispatch = useDispatch()
     const pathurl = location.pathname
     const parts = pathurl.split('/')
-    const idTransfer = 4
     const last = parts[parts.length - 1];
-    const index = parts.indexOf("1");
+    const updateProduct = parts[parts.length - 2];
     const { products } = useSelector(state => state.product)
-
-    // Lấy phần từ ngay trước phần tử "/1"
-    const updateProduct = parts[index - 1];
     const { allocations } = useSelector(state => state.allocation)
 
     useEffect(() => {

@@ -1,11 +1,11 @@
 import { path } from './utils/constant'
 import { Routes, Route } from 'react-router-dom'
-import { Home, Login, HomePage, Forgot, Register } from './containers/Public'
+import { Home, Login, HomePage, Forgot, Register, Cart, Retal, Detail } from './containers/Public'
 import {
   HomeServer, Dashboard, Type, Sample, Category, Account, List, Menu, Personal,
   Dimension, State, Slide, Color, Image, Invoice, Product, Transfer, Quantity, Function, CreateImage,
   Permission, Role, Transmission, Allocation, TransferPage, CreateProduct, UpdateProduct, CreateDetail,
-  Information, ChangePassword, Order, Like
+  Information, ChangePassword, Order, Like, UpdateAccount
 } from './containers/System'
 
 function App() {
@@ -21,8 +21,15 @@ function App() {
             <Route path={path.LIKE} element={<Like />} />
             <Route path={path.ORDER} element={<Order />} />
             <Route path={path.INFORMATION} element={<Information />} />
+            <Route path={path.UPDATE_ACCOUNT} element={<UpdateAccount />} />
             <Route path={path.CHANGEPASSWORD} element={<ChangePassword />} />
           </Route>
+          <Route path={path.CART} element={<Cart />} component={Cart}/>
+          <Route path={path.DETAIL} element={<Detail />} />
+          <Route path={path.TOP} element={<Retal />} />
+          <Route path={path.OUTER} element={<Retal />} />
+          <Route path={path.BOTTOM} element={<Retal />} />
+          <Route path={path.ACCESSORIES} element={<Retal />} />
         </Route>
 
         <Route path={path.HOMESERVER} element={<HomeServer />}>
@@ -30,7 +37,6 @@ function App() {
           <Route path={path.SLIDE} element={<Slide />} />
           <Route path={path.ACCOUNT} element={<Account />} />
           <Route path={path.INVOICE} element={<Invoice />} />
-
           <Route path={path.TYPE} element={<Type />}>
             <Route path={path.SAMPLE} element={<Sample />} />
             <Route path={path.CATEGORY} element={<Category />} />

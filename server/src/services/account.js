@@ -47,7 +47,7 @@ export const updateAccountsByAdminService = ({ id, idPermission, idState }) => n
                 msg: response ? 'Update account successful.' : 'Update account failed.',
                 response: response || null
             });
-        }else {
+        } else {
             resolve({
                 err: 1,
                 msg: 'You may not update the customer of account',
@@ -57,7 +57,22 @@ export const updateAccountsByAdminService = ({ id, idPermission, idState }) => n
     } catch (error) { reject(error) }
 })
 
-export const updateAccountOneService = ({ id, name, email, address, passwordold, passwordnew }) => new Promise(async (resolve, reject) => {
+export const updateAccountOneService = ({ id, name, email, address }) => new Promise(async (resolve, reject) => {
+    try {
+        const account = await db.Account.findByPk(id);
+        const response = await account.update({
+            name, email, address
+        });
+        resolve({
+            err: response ? 0 : 2,
+            msg: response ? 'Successful information account update.' : 'Update information account failed',
+            response: response || null
+        });
+
+    } catch (error) { reject(error) }
+})
+
+export const updateAccountPasswordService = ({ id, passwordold, passwordnew }) => new Promise(async (resolve, reject) => {
     try {
         const account = await db.Account.findByPk(id);
         const accounts = await db.Account.findOne({
@@ -66,11 +81,11 @@ export const updateAccountOneService = ({ id, name, email, address, passwordold,
         const isCorrectPassword = bcrypt.compareSync(passwordold, accounts.password);
         if (isCorrectPassword) {
             const response = await account.update({
-                name, email, address, password: hashPassword(passwordnew)
+                password: hashPassword(passwordnew)
             });
             resolve({
                 err: response ? 0 : 2,
-                msg: response ? 'Successful information account update.' : 'Update information account failed',
+                msg: response ? 'Successful password update.' : 'Update password failed',
                 response: response || null
             });
         } else

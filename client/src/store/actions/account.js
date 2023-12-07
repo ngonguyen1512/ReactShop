@@ -89,3 +89,25 @@ export const updateAccountOne = (payload) => async (dispatch) => {
         })
     }
 }
+
+export const updateAccountPassword = (payload) => async (dispatch) => {
+    try {
+        const response = await apis.apiUpdateAccountPassword(payload);
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.UPDATE_ACCOUNT_PASS,
+                data: response.data.response,
+            })
+        } else {
+            dispatch({
+                type: actionTypes.UPDATE_ACCOUNT_PASS,
+                msg: response.data.msg,
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.UPDATE_ACCOUNT_PASS,
+            data: null,
+        })
+    }
+}

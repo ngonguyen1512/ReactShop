@@ -5,14 +5,14 @@ import * as actions from '../../store/actions'
 import { useNavigate } from 'react-router-dom'
 import { path } from '../../utils/constant'
 
-const ChangePassword = () => {
+const UpdateAccount = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [invalidFields, setInvalidFields] = useState([])
   const { currentData } = useSelector(state => state.user)
   const idcurrent = parseInt(currentData.id)
   const [payload, setPayload] = useState({
-    id: idcurrent, passwordold: '', passwordnew: '',
+    id: idcurrent, name: '', email: '', address: ''
   });
   console.log(payload)
   const validate = (payload) => {
@@ -28,11 +28,11 @@ const ChangePassword = () => {
         return;
       } else if (item[1] !== '') {
         switch (item[0]) {
-          case 'password': {
-            if (item[1].length < 6) {
+          case 'email': {
+            if (!/\S+@\S+\.\S+/.test(item[1])) {
               setInvalidFields(prev => [...prev, {
                 name: item[0],
-                msg: 'Password is at least 6 characters!'
+                msg: 'Invalid email!'
               }])
               invalids++;
             }
@@ -47,9 +47,9 @@ const ChangePassword = () => {
   const handleSubmit = () => {
     let finalPayload = payload
     let invalids = validate(finalPayload);
-    if (invalids === 0) dispatch(actions.updateAccountPassword(payload));
-    dispatch(actions.logout())
-    navigate('/' + path.LOGIN)
+    if (invalids === 0) dispatch(actions.updateAccountOne(payload));
+    navigate('/'+path.PERSONAL)
+    window.location.reload();
   }
 
   return (
@@ -59,26 +59,34 @@ const ChangePassword = () => {
           <InputForm
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
-            label={'PASSWORD OLD'}
-            value={payload.passwordold}
+            label={'NAME'}
+            value={payload.name}
             setValue={setPayload}
-            keyPayload={'passwordold'}
-            type='password'
+            keyPayload={'name'}
+            type='text'
           />
           <InputForm
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
-            label={'PASSWORD NEW'}
-            value={payload.passwordnew}
+            label={'EMAIL'}
+            value={payload.email}
             setValue={setPayload}
-            keyPayload={'passwordnew'}
-            type='password'
+            keyPayload={'email'}
+            type='email'
+          />
+          <InputForm
+            setInvalidFields={setInvalidFields}
+            invalidFields={invalidFields}
+            label={'ADDRESS'}
+            value={payload.address}
+            setValue={setPayload}
+            keyPayload={'address'}
+            type='text'
           />
         </div>
-
         <div className='formbutton'>
           <Button
-            text='CHANGE'
+            text='UPDATE'
             fullWidth
             onClick={handleSubmit}
           />
@@ -88,4 +96,4 @@ const ChangePassword = () => {
   )
 }
 
-export default ChangePassword
+export default UpdateAccount
