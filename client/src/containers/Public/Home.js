@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <div className='home'>
       <Header />
-      {parts === '' && <Slide />}
+      {/* {parts === '' && <Slide />} */}
       <div className='main'>
         <Outlet />
       </div>

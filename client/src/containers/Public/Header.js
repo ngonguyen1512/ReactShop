@@ -19,9 +19,13 @@ const Header = () => {
   const { isLoggedIn } = useSelector(state => state.auth)
   const { currentData } = useSelector(state => state.user)
   const permis = currentData.idPermission
+  const { images } = useSelector(state => state.image)
+  const { products } = useSelector(state => state.product)
   const { transmissions } = useSelector(state => state.transmission)
   const { categories } = useSelector(state => state.category)
+  const [searchValue, setSearchValue] = useState("")
   const [isShowMenu, setIsShowMenu] = useState(false)
+  const [shouldReload, setShouldReload] = useState(false)
   const [isShowSearch, setIsShowSearch] = useState(false)
   const [isShowMiniCart, setIsShowMiniCart] = useState(false)
 
@@ -31,6 +35,18 @@ const Header = () => {
       search: createSearchParams({ id }).toString()
     });
   };
+
+  const handleSearch = (event) => {
+    setSearchValue(event.target.value);
+    setShouldReload(event.target.value !== "");
+  };
+
+  let filteredProducts = [];
+  if (products && Array.isArray(products)) {
+    filteredProducts = products.filter((item) =>
+      item.name.includes(searchValue)
+    );
+  }
 
   const goLogin = useCallback((flag) => {
     navigate('/' + path.LOGIN, { state: { flag } })
@@ -46,11 +62,29 @@ const Header = () => {
   useEffect(() => {
     let searchParamsObject = {}
     if (permis) searchParamsObject.permis = permis
+    dispatch(actions.getImages())
     dispatch(actions.getCurrent())
+    dispatch(actions.getProducts())
     dispatch(actions.getTransfers())
     dispatch(actions.getCategories())
     dispatch(actions.getTransmissions(searchParamsObject))
   }, [dispatch, permis]);
+
+  const renderTableRow = (item) => {
+    return (
+      <NavLink onClick={() => setIsShowSearch(false)} to={`/${item?.categories?.name}/detail/${formatVietnameseToString(item?.name)}/${item.id}`} className='flex py-1'>
+        <div className='w-[25%]'>
+          {images?.length > 0 && images.map(items => items.idProduct === item.id && (
+            <img  src={`/images/${items.image1}`} alt={item.name} className='w-[70%]' />
+          ))}
+        </div>
+        <div>
+          <p>{item.name}</p>
+          <span>{(item.price).toLocaleString()}</span>
+        </div>
+      </NavLink>
+    );
+  };
 
   return (
     <div className='header'>
@@ -92,14 +126,17 @@ const Header = () => {
                 {isShowSearch &&
                   <>
                     <span className='square'></span>
-                    <div className='search_content bg-red-500'>
+                    <div className='search_content'>
                       <input
                         className='outline-none bg-[#e7e7e7] p-2 rounded-md w-full text-[#000]'
                         type="text"
                         placeholder='Search by name'
-                      // value={searchValue}
-                      // onChange={handleSearch}
+                        value={searchValue}
+                        onChange={handleSearch}
                       />
+                      <div className='search_product'>
+                        {shouldReload && filteredProducts.length > 0 && filteredProducts.map((item) => renderTableRow(item))}
+                      </div>
                     </div>
                   </>
                 }

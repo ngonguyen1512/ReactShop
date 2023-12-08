@@ -27,23 +27,55 @@ const CreateImage = () => {
         });
     };
 
+    // const handleSubmitCreate = async () => {
+    //     let finalPayload = { ...payload };
+    //     let fileInput = document.querySelector('input[type="file"]');
+    //     let file = fileInput.files[0];
+    //     finalPayload = {
+    //         ...payload, image1: file.name, image2: file.name, image3: file.name, image4: file.name,
+    //     };
+    //     dispatch(actions.createImages(finalPayload)).then(() => {
+    //         uploadFileAndDispatch(file)
+    //             .then(response => {
+    //                 console.log('File uploaded to server:', response.data);
+    //             }).catch(error => {
+    //                 console.error('Error uploading file:', error);
+    //             });
+    //     }).catch(error => {
+    //         console.error('Error dispatching action:', error);
+    //     });
+    //     Swal.fire({
+    //         title: 'Bạn có muốn thêm ảnh tiếp hay hoành thành?',
+    //         icon: 'question',
+    //         showCancelButton: true,
+    //         confirmButtonText: 'Hoành thành',
+    //         cancelButtonText: 'Thêm tiếp',
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             navigate(path.PRODUCT);
+    //         } else {
+    //             setPayload([]);
+    //             navigate(path.CREATE_IMAGE, { replace: true });
+    //             window.location.reload();
+    //         }
+    //     });
+    // }
     const handleSubmitCreate = async () => {
-        let finalPayload = { ...payload };
-        let fileInput = document.querySelector('input[type="file"]');
-        let file = fileInput.files[0];
-        finalPayload = {
-            ...payload, image1: file.name, image2: file.name, image3: file.name, image4: file.name,
-        };
-        dispatch(actions.createImages(finalPayload)).then(() => {
-            uploadFileAndDispatch(file)
-                .then(response => {
-                    console.log('File uploaded to server:', response.data);
-                }).catch(error => {
-                    console.error('Error uploading file:', error);
-                });
-        }).catch(error => {
-            console.error('Error dispatching action:', error);
-        });
+        const finalPayload = { ...payload };
+        try {
+            const imageInputs = document.querySelectorAll('input[type="file"]');
+
+            for (let i = 0; i < imageInputs.length; i++) {
+                const fileInput = imageInputs[i];
+                const file = fileInput.files[0];
+                finalPayload[`image${i + 1}`] = file.name;
+                uploadFileAndDispatch(file);
+            }
+
+        } catch (error) {
+            console.error('Error handling form submission:', error);
+        }
+        dispatch(actions.createImages(finalPayload));
         Swal.fire({
             title: 'Bạn có muốn thêm ảnh tiếp hay hoành thành?',
             icon: 'question',
@@ -59,7 +91,8 @@ const CreateImage = () => {
                 window.location.reload();
             }
         });
-    }
+    };
+
 
     useEffect(() => {
         dispatch(actions.getColors())
