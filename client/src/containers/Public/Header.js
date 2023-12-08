@@ -87,8 +87,22 @@ const Header = () => {
         <div className='search-cart-login text-xl'>
           {parts !== 'webserver' &&
             <>
-              <div className='search'>
-                <span><GoSearch /></span>
+              <div className='search' >
+                <span onClick={() => setIsShowSearch(prev => !prev)}><GoSearch /></span>
+                {isShowSearch &&
+                  <>
+                    <span className='square'></span>
+                    <div className='search_content bg-red-500'>
+                      <input
+                        className='outline-none bg-[#e7e7e7] p-2 rounded-md w-full text-[#000]'
+                        type="text"
+                        placeholder='Search by name'
+                      // value={searchValue}
+                      // onChange={handleSearch}
+                      />
+                    </div>
+                  </>
+                }
               </div>
               <div className='cart'>
                 <MdOutlineShoppingCart />

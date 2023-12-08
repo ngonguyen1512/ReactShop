@@ -139,6 +139,44 @@
         10px 0 10px -5px rgba(0, 0, 0, 0.2), /* Cạnh bên phải */
         0 10px 10px -5px rgba(0, 0, 0, 0.2); /* Cạnh dưới */
 }
+.header .header-content .search-cart-login .search {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: end;
+}
+.header .header-content .search-cart-login .search .square {
+    width: 25px;
+    height: 25px;
+    z-index: 40;
+    transform: rotate(45deg);
+    right: -30%;
+    top: 40px;
+    position: absolute;
+    background-color: #000;
+}
+.header .header-content .search-cart-login .search .search_content {
+    right: -100%;
+    top: 50px;
+    height: auto;
+    z-index: 50;
+    display: flex;
+    font-weight: 400;
+    min-width: 300px;
+    font-size: medium;
+    position: absolute;
+    flex-direction: column;
+    background-color: #000;
+    border-radius: 10px;
+    padding: 0.5rem 1.25rem 0.5rem 1.25rem;
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+}
+.header .header-content .search-cart-login .search .search_content .close {
+    display: flex;
+    justify-content: end;
+    padding: 4%;
+    font-size: xx-large;
+}
 
 .main {
     width: 100%;
