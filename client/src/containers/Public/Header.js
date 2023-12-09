@@ -71,12 +71,19 @@ const Header = () => {
   }, [dispatch, permis]);
 
   const renderTableRow = (item) => {
+    let displayedImage = false;
     return (
       <NavLink onClick={() => setIsShowSearch(false)} to={`/${item?.categories?.name}/detail/${formatVietnameseToString(item?.name)}/${item.id}`} className='flex py-1'>
         <div className='w-[25%]'>
-          {images?.length > 0 && images.map(items => items.idProduct === item.id && (
-            <img  src={`/images/${items.image1}`} alt={item.name} className='w-[70%]' />
-          ))}
+          {images?.length > 0 && images.map(items => {
+            if (items.idProduct === item.id && !displayedImage) {
+              displayedImage = true;
+              return (
+                <img src={`/images/${items.image1}`} alt={item.name} className='w-[70%]' />
+              )
+            }
+            return null;
+          })}
         </div>
         <div>
           <p>{item.name}</p>

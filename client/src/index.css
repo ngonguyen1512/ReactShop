@@ -189,6 +189,14 @@
     flex-direction: column;
 }
 
+.homepage {
+    width: 100%;
+    flex-direction: column;
+}
+.homepage .list-pagination {
+    width: 100%;
+}
+
 /* ---------- LOGIN - REGISTER - FORGOT ---------- */
 .bg-frame {
     width: 100%;
@@ -223,125 +231,11 @@
     color: #3482F6;
 }
 
-/* TYPE */
-.type, .category, .sample, 
-.list, .product, .dimension, .color, .quantity, .image, 
-.role, .permission, .function, .menu, .state,
-.invoice, .account, .slide,
-.transfer, .transmission, .allocation, .transfer_page {
-    margin-top: 1%;
-}
-.type .header-type .content, .list .header-list .content, 
-.role .header-role .content, .permission .header-permission .content,
-.slide .header-slide .content, .state .header-state .content,
-.menu .header-menu .content, .function .header-function .content,
-.transfer .header-transfer .content {
-    margin-right: 1%;
-}
-.type .header-type .content span, .list .header-list .content span, 
-.role .header-role .content span, .slide .header-slide .content span,
-.transfer .header-transfer .content span {
-    padding: 0 2% 0.5% 2%;
-    border-bottom: 1px solid #000;
-}
-
-.category .header-category, .sample .header-sample, .account .header-account, .role .header-role,
-.color .header-color, .dimension .header-dimension, .image .header-image, .quantity .header-quantity,
-.permission .header-permission, .slide .header-slide, .state .header-state,
-.menu .header-menu, .function .header-function, .transfer_page .header-transfer_page,
-.transmission .header-transmission, .allocation .header-allocation, .create_product, .update-product, 
-.create_detail {
-    margin: 1rem 0;
-}
-.category .form-category, .permission .form-permission, .function .form-function, 
-.transmission .form-transmission, .allocation .form-allocation, 
-.quantity .form-quantity {
-    gap: 1%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-.sample .form-sample, .account .form-account, .color .form-color,
-.dimension .form-dimension, .slide .form-slide, .menu .form-menu {
-    gap: 1%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.state .form-state, .transfer_page .form-transfer_page {
-    gap: 1%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.update-category, .update-sample, .update-category, .update-dimension, 
-.update-color, .update-permission, .update-slide, .update-state, .update-menu,
-.update-function, .update-transfer_page, .update-transmission, .update-allocation,
-.update-quantity {
-    gap: 1%;
-    display: flex;
-    flex-direction: 2;
-}
-.category .list-category, .sample .list-sample, .account .list-account, 
-.color .list-color, .dimension .list-dimension, .permission .list-permission,
-.state .list-state, .menu .list-menu, .function .list-function,
-.transfer_page .list-transfer_page, .allocation .list-allocation,
-.quantity .list-quantity {
-    margin: 1rem 0;
-    height: 480px;
-}
-.product .list-product, .image .list-image, .slide .list-slide,
-.transmission .list-transmission {
-    margin: 1rem 0;
-    height: 550px;
-}
-
-.create_product .form-create_product, .create_image .form-create_image,
-.update_product .form-update_product {
-    gap: 1%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.create_detail .title {
-    font-size: medium;
-    font-weight: 600;
-}
-.create_detail .form-create_detail {
-    gap: 1%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.personal {
-    margin: 2% 0;
-}
-.personal .title {
-    font-weight: 700;
-    font-size: xx-large;
-    letter-spacing: 0.05em;
-}
-.personal .name_account {
-    font-size: larger;
-}
-
-.information .title {
-    padding-bottom: 1%;
-    font-weight: 600;
-    font-size: larger;
-    letter-spacing: 0.005em;
-    border-bottom: 1px solid #a0a0a0;
-}
-.information .content_information {
-    padding: 1% 0;
-    font-size: medium;
-}
-
-
 .footer {
     width: 100%;
     background-color: #fff;
     min-height: 100%;
-    padding-top: 2rem;
+    padding: 2% 5%;
 }
 .footer .title {
     display: flex;
@@ -352,76 +246,43 @@
     letter-spacing: 0.1em;
     margin-left: 3rem;
 }
-
-@media (min-width: 500px) {
-    .personal .main-personal {
-        margin: 4% 0;
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0,1fr));
-    }
-    .personal .main-personal .menu-personal {
-        gap: 5%;
-        display: flex;
-        font-size: large;
-        flex-direction: column;
-        text-decoration-line: underline;
-    }
-    .personal .main-personal .menu-personal .content span{
-        padding: 4% 0;
-    }
-    .personal .main-personal .page-personal {
-        grid-column: span 3 / span 3;
-    }
+.footer .icons-media {
+    font-size: x-large;
+    padding-right: 2%;
 }
 
-@media (max-width: 809px) {
-    .header .header-content .logo-cate .logo .text-logo {
-        display: none;
-    }
-    .create_product {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .create_product .shows {
-        grid-column: span 1 / span 1;
-    }
+.wrapper-heading-home-instagram {
+    padding-bottom: 0px !important;
+    font-family: 'Oswald' !important;
+    width: 100%;
+    font-size: 5.85vw;
+    height: auto!important;
+    overflow: hidden;
+    text-transform: uppercase;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-fill-color: hsl(0deg 0% 100%);
 }
-
-@media (max-width: 679px) {
-    .header .header-content .logo-cate .cate {
-        display: none;
-    }
-    .icons-clear {
-        font-size: x-large;
-    }
-    .sample .form-sample,.category .form-category,
-    .account .form-account, .permission .form-permssion, 
-    .slide .form-slide, .color .form-color, .dimension .form-dimension, 
-    .function .form-function, .transmission .form-transmission,
-    .allocation .form-allocation, .quantity .form-quantity{
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .hide {
-        display: block;
-    }
-    .create_product .shows, .show {
-        display: none;
-    }
-    .create_product {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
+.wrapper-heading-home {
+    padding: 20px 0;
+    text-align: center;
 }
-
-@media (max-width: 499px) {
-    .personal .main-personal .menu-personal {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .personal .main-personal .menu-personal .content{
-        margin-right: 1%;
-    }
-    .personal .main-personal .menu-personal .content span{
-        padding: 0 2% 0.5% 2%;
-        border-bottom: 1px solid #000;
-    }
+.wrapper-animation2 {
+    animation: animationText2 15s linear infinite;
+    white-space: nowrap;
+}
+.wrapper-animation2 {
+    animation-name: animationText2;
+}
+.text-animation-2 {
+    display: inline-flex;
+    justify-content: space-around;
+    width: 100%;
+}
+@keyframes animationText2 {
+0% {
+    transform: translateZ(0);
+}
+100% {
+    transform: translate3d(-100vw,0,0);
+}
 }

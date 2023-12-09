@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { Header } from './index'
+import { Footer, Header } from './index'
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Slide } from '../../components/index'
+import { Slide, TextSlide } from '../../components/index'
 import $ from 'jquery';
 import * as actions from '../../store/actions'
 
@@ -37,6 +37,8 @@ const Home = () => {
       <div className='main'>
         <Outlet />
       </div>
+      <TextSlide />
+      <Footer />
     </div>
   )
 }

@@ -19,7 +19,7 @@ const Slide = () => {
                 {slides.map(item => item.idState === 2 && (
                     <NavLink to={`${formatVietnameseToString(item.name)}`}>
                         <div key={item.id}>
-                            <img style={{ width: '100%', height: 'auto' }} src={`/images/${item.image}`} alt='' />
+                            <img style={{ width: '100%', height: 'auto' }} src={`/images/${item.image}`} alt={item.name} loading='lazy'/>
                         </div>
                     </NavLink>
                 ))}
