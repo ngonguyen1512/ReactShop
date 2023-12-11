@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Footer, Header } from './index'
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,12 +7,19 @@ import $ from 'jquery';
 import * as actions from '../../store/actions'
 
 const Home = () => {
-  // const headerRef = useRef()
+  const headerRef = useRef()
   const location = useLocation()
   const dispatch = useDispatch()
   const pathurl = location.pathname
   const parts = pathurl.split('/')[1]
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page')
+  const sample = searchParams.get('sample')
   const { isLoggedIn } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [page, sample])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,9 +38,9 @@ const Home = () => {
   }, [isLoggedIn, dispatch])
 
   return (
-    <div className='home'>
+    <div ref={headerRef} className='home'>
       <Header />
-      {/* {parts === '' && <Slide />} */}
+      {parts === '' && <Slide />}
       <div className='main'>
         <Outlet />
       </div>

@@ -8,9 +8,9 @@ export const getAllQuantitiesService = () => new Promise(async (resolve, reject)
                 'id', 'idProduct', 'idColor', 'idSize', 'quantity', 'idState'
             ],
             include: [
-                { model: db.Size, as: 'quantity_size', attributes: ['name'] },
+                { model: db.Size, as: 'quantity_size', attributes: ['code' ,'name'] },
                 { model: db.State, as: 'quantity_state', attributes: ['name'] },
-                { model: db.Color, as: 'quantity_color', attributes: ['name'] },
+                { model: db.Color, as: 'quantity_color', attributes: ['code' ,'name'] },
                 { model: db.Product, as: 'quantity_product', attributes: ['name'] },
 
             ],

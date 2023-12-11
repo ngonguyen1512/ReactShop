@@ -1,8 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { Filter } from '../../components/index';
+import { List, Pagination } from './index';
+import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
 
 const Retal = () => {
+  const { categories } = useSelector(state => state.category)
+  const { count, products_limit } = useSelector(state => state.product)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [idCategory, setIdCategory] = useState('none');
+  const location = useLocation()
+  const path = location.pathname;
+  const parts = path.split('/');
+  const lastPart = parts[parts.length - 1];
+
+  useEffect(() => {
+    const category = categories?.find(item => `/${item.name}` === location.pathname)
+    if (category) setIdCategory(category.id)
+  }, [location, categories]);
+
   return (
-    <div>Retal</div>
+    <div className='retal center'>
+      <div className='retal-header' >
+        <p className='retal-header_title center'>{lastPart}</p>
+        <Filter content={categories} type='sample' list={lastPart} texts={lastPart} />
+      </div>
+      <div className='retal-main'>
+        <List category={idCategory} />
+        {Math.ceil(count / 12) > 1 && (<Pagination count={count} currentPage={currentPage}
+          setCurrentPage={setCurrentPage} counts={products_limit} />
+        )}
+      </div>
+    </div>
   )
 }
 

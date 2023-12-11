@@ -1,3 +1,4 @@
+/* --------------- PERSONAL  ---------------*/
 .personal {
     margin: 2% 0;
 }
@@ -22,11 +23,130 @@
     font-size: medium;
 }
 
-.list {
+.like {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.like-unlike {
+    height: 5%;
+    color: #000;
+    display: flex;
+    align-items:flex-end;
+    padding: 2rem 1rem 0 0px;
+    justify-content: end;
+    font-size: larger;
+}
+/* --------------- LIST_FILTER_ITEM_RETAL  ---------------*/
+.lists {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
+.retal {
+    width: 100%;
+    flex-direction: column;
+}
+.retal .retal-header {
+    width: 100%;
+}
+.retal .retal-header .retal-header_title {
+    margin-top: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 2.25rem;
+    letter-spacing: 0.1em;
+}
+.filter {
+    width: 100%;
+    margin: 2% 0;
+}
+.filter .filter-category {
+    width: 100%;
+}
+.filter .filter-category .tagname {
+    gap: 5%;
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    font-size: large;
+    text-decoration-line: underline;
+}
+.filter .filter-price {
+    display: flex;
+}
+.filter .filter-price .filter-title {
+    width: 40%;
+}
+.item {
+    display: inline-block;
+    
+}
+.item .product_content .tag {
+    flex-direction: column;
+    margin-top: 0.5rem;
+}
+.item .product_content .tag .price {
+    font-size: large;
+    font-weight: 600;
+    margin: 1px;
+}
+.item .product_content .tag .basic_price-discount {
+    display: flex;
+}
+.item .product_content .tag .basic_price-discount .basic_price {
+    text-decoration-line: line-through;
+    font-family: 'Oswald' !important;
+    font-size: small;
+    margin: 1px;
+    color: #a0a0a0;
+}
+.item .product_content .tag .basic_price-discount .discount {
+    margin: 1px;
+    background-color: #000;
+    padding: 0.025rem 0.35rem;
+    color: #fff;
+    font-weight: 600;
+    font-size: small;
+}
 
+/* --------------- DETAIL --------------- */
+.detail {
+    margin: 2% 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.detail .detail_image {
+    gap: 2%;
+    display: flex;
+}
+.detail .detail_image-bar {
+    width: 10%;
+}
+.detail .detail_content {
+    padding: 10% 4% 0 4%;
+}
+.detail .detail_content .detail_content-title {
+    font-weight: 700;
+    font-size: xx-large;
+}
+.detail .detail_content .detail_content-id {
+    color: #a0a0a0;
+    font-size: small;
+}
+.detail .detail_content .detail_content-price {
+    margin: 5% 0;
+}
+.detail .detail_content .detail_content-price .price {
+    font-weight: 600;
+    font-size: x-large;
+}
+.detail .detail_content .detail_content-select .select-color .box_color {
+    width: 20px;
+    height: 20px;
+    margin-right: 0 4%;
+}
+
+/* --------------- WEBSERVER --------------- */
 /* TYPE */
 .type, .category, .sample, 
 .list, .product, .dimension, .color, .quantity, .image, 

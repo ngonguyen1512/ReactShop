@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/all', controllers.getProducts)
 router.put('/update', controllers.updateProducts)
-// router.get('/limit', controllers.getProductsLimit)
+router.get('/limit', controllers.getProductsLimit)
 router.post('/create', controllers.createProducts)
 // router.get('/newproduct', controllers.getNewProducts)
 

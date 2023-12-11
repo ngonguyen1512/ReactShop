@@ -11,8 +11,46 @@ export const getAllProductsService = () => new Promise(async (resolve, reject) =
             include: [
                 { model: db.Category, as: 'product_category', attributes: ['name'] },
                 { model: db.State, as: 'product_state', attributes: ['name'] },
-                { model: db.Sample, as: 'product_sample', attributes: ['idCategory', 'name']},
+                { model: db.Sample, as: 'product_sample', attributes: ['idCategory', 'name'] },
             ],
+        });
+        resolve({
+            err: response ? 0 : 1,
+            msg: response ? 'OK' : 'Failed to get product',
+            response
+        });
+    } catch (error) { reject(error); }
+});
+
+export const getProductsLimitService = (page, category, query, { min, max, sample }) => new Promise(async (resolve, reject) => {
+    try {
+        let offset = (!page || +page <= 1) ? 0 : (+page - 1)
+        const queries = { ...query }
+        const whereClause = {};
+        if (min) {
+            whereClause.price = {
+                [db.Sequelize.Op.gt]: min, // Greater than min
+            };
+        }
+        if (max) {
+            whereClause.price = {
+                ...(whereClause.price || {}),
+                [db.Sequelize.Op.lt]: max,
+            };
+        }
+        if (sample) whereClause.idSample = sample;
+        if (category) whereClause.idCategory = category;
+
+        const response = await db.Product.findAndCountAll({
+            where: queries,
+            offset: offset * +process.env.LIMIT,
+            limit: +process.env.LIMIT,
+            include: [
+                { model: db.State, as: 'product_state', attributes: ['name'] },
+                { model: db.Category, as: 'product_category', attributes: ['name'] },
+                { model: db.Sample, as: 'product_sample', attributes: ['idCategory', 'name'] },
+            ],
+            where: whereClause,
         });
         resolve({
             err: response ? 0 : 1,

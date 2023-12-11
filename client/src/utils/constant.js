@@ -13,7 +13,7 @@ export const path = {
     BOTTOM: 'bottom',
     PAYMENT: 'payment',
     ACCESSORIES: 'accessories',
-    DETAIL: ':nameCategory/detail/:title/:productId',
+    DETAIL: ':nameCategory/:title/:productId',
 
     LIKE: 'like',
     ORDER: 'order',

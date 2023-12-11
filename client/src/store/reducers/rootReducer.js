@@ -1,3 +1,4 @@
+import appReducer from "./appReducer";
 import authReducer from "./authReducer";
 import userReducer from "./userReducer";
 import menuReducer from "./menuReducer";
@@ -35,6 +36,7 @@ const authConfig = {
 
 const rootReducer = combineReducers({
     auth: persistReducer(authConfig, authReducer),
+    app: appReducer,
     user: userReducer,
     menu: menuReducer,
     color: colorReducer,

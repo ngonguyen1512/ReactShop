@@ -1,4 +1,4 @@
-@media (min-width: 500px) {
+@media (min-width: 850px) {
     .personal .main-personal {
         margin: 4% 0;
         display: grid;
@@ -19,6 +19,21 @@
     }
 }
 
+@media (max-width: 849px) {
+    .personal .main-personal .menu-personal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .personal .main-personal .menu-personal .content{
+        margin-right: 1%;
+    }
+    .personal .main-personal .menu-personal .content span{
+        padding: 0 2% 0.5% 2%;
+        border-bottom: 1px solid #000;
+    }
+}
+
 @media (max-width: 809px) {
     .header .header-content .logo-cate .logo .text-logo {
         display: none;
@@ -28,6 +43,9 @@
     }
     .create_product .shows {
         grid-column: span 1 / span 1;
+    }
+    .list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
@@ -54,19 +72,13 @@
     .create_product {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
+    .like {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 499px) {
-    .personal .main-personal .menu-personal {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .personal .main-personal .menu-personal .content{
-        margin-right: 1%;
-    }
-    .personal .main-personal .menu-personal .content span{
-        padding: 0 2% 0.5% 2%;
-        border-bottom: 1px solid #000;
+    .list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }

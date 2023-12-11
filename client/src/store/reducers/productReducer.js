@@ -1,12 +1,11 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    products: [],
-    // productall: [],
     msg: '',
-    countp: 0,
-    // newProducts: [],
+    count: 0,
+    products: [],
     productid: [],
     update: false,
+    products_limit: [],
 }
 
 const productReducer = (state = initState, action) => {
@@ -17,20 +16,14 @@ const productReducer = (state = initState, action) => {
                 products: action.products || [],
                 msg: action.msg || '',
                 countp: action.countp || 0
-            } 
-        // case actionTypes.GET_PRODUCTS_LIMIT:
-        //     return {
-        //         ...state,
-        //         products: action.products || [],
-        //         msg: action.msg || '',
-        //         countp: action.countp || 0
-        //     } 
-        // case actionTypes.GET_NEW_PRODUCTS:
-        //     return {
-        //         ...state,
-        //         msg: action.msg || '',
-        //         newProducts: action.newProducts || []
-        //     } 
+            }
+        case actionTypes.GET_PRODUCT_LIMIT:
+            return {
+                ...state,
+                products_limit: action.products_limit || [],
+                msg: action.msg || '',
+                count: action.count || 0
+            }
         case actionTypes.CREATE_PRODUCT:
             return {
                 ...state,
@@ -42,7 +35,7 @@ const productReducer = (state = initState, action) => {
                 ...state,
                 products: action.data,
                 msg: action.msg || '',
-            }          
+            }
         default:
             return state;
     }
