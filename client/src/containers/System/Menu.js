@@ -27,8 +27,9 @@ const Menu = () => {
     };
     let filteredMenus = [];
     if (menus && Array.isArray(menus)) {
+        const searchRegex = new RegExp(searchValue, 'i');
         filteredMenus = menus.filter((item) =>
-            item.name.includes(searchValue)
+            searchRegex.test(item.name)
         );
     }
 

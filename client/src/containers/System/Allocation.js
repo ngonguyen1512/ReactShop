@@ -27,8 +27,9 @@ const Allocations = () => {
   };
   let filteredAllocations = [];
   if (allallocations && Array.isArray(allallocations)) {
+    const searchRegex = new RegExp(searchValue, 'i');
     filteredAllocations = allallocations.filter((item) =>
-      item.name.includes(searchValue)
+      searchRegex.test(item.name)
     );
   }
 

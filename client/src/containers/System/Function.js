@@ -26,8 +26,9 @@ const Function = () => {
   };
   let filteredFunctions = [];
   if (allfunctions && Array.isArray(allfunctions)) {
+    const searchRegex = new RegExp(searchValue, 'i');
     filteredFunctions = allfunctions.filter((item) =>
-      item.name.includes(searchValue)
+      searchRegex.test(item.name)
     );
   }
 

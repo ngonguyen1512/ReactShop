@@ -28,8 +28,9 @@ const Dimension = () => {
   };
   let filteredDimensions = [];
   if (dimensions && Array.isArray(dimensions)) {
+    const searchRegex = new RegExp(searchValue, 'i');
     filteredDimensions = dimensions.filter((item) =>
-      item.name.includes(searchValue)
+      searchRegex.test(item.name)
     );
   }
 

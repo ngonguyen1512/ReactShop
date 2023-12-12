@@ -43,8 +43,9 @@ const Header = () => {
 
   let filteredProducts = [];
   if (products && Array.isArray(products)) {
+    const searchRegex = new RegExp(searchValue, 'i');
     filteredProducts = products.filter((item) =>
-      item.name.includes(searchValue)
+      searchRegex.test(item.name)
     );
   }
 
@@ -73,7 +74,7 @@ const Header = () => {
   const renderTableRow = (item) => {
     let displayedImage = false;
     return (
-      <NavLink onClick={() => setIsShowSearch(false)} to={`/${item?.categories?.name}/detail/${formatVietnameseToString(item?.name)}/${item.id}`} className='flex py-1'>
+      <NavLink onClick={() => setIsShowSearch(false)} to={`/${item?.product_category?.name}/${formatVietnameseToString(item?.name)}/${item.id}`} className='flex py-1'>
         <div className='w-[25%]'>
           {images?.length > 0 && images.map(items => {
             if (items.idProduct === item.id && !displayedImage) {
@@ -119,9 +120,7 @@ const Header = () => {
                       {item?.transmission_transfer.name}
                     </NavLink>
                   )
-              })
-
-              }
+              })}
             </div>
           )}
         </div>

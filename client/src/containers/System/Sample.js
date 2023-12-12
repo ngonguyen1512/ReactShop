@@ -32,8 +32,9 @@ const Sample = () => {
 
   let filteredSamples = [];
   if (samples && Array.isArray(samples)) {
+    const searchRegex = new RegExp(searchValue, 'i');
     filteredSamples = samples.filter((item) =>
-      item.name.includes(searchValue)
+      searchRegex.test(item.name)
     );
   }
 

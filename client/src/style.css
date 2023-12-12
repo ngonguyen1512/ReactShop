@@ -111,19 +111,22 @@
 
 /* --------------- DETAIL --------------- */
 .detail {
-    margin: 2% 0 0 0;
+    height: 600px;
+    margin: 5% 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .detail .detail_image {
     gap: 2%;
+    height: 100%;
     display: flex;
 }
 .detail .detail_image-bar {
-    width: 10%;
+    width: 20%;
 }
 .detail .detail_content {
-    padding: 10% 4% 0 4%;
+    height: 100%;
+    padding: 0 4% 0 4%;
 }
 .detail .detail_content .detail_content-title {
     font-weight: 700;
@@ -133,17 +136,38 @@
     color: #a0a0a0;
     font-size: small;
 }
-.detail .detail_content .detail_content-price {
+.detail .detail_content .detail_content-price,
+.detail .detail_content .detail_content-select .select-size {
     margin: 5% 0;
 }
 .detail .detail_content .detail_content-price .price {
     font-weight: 600;
     font-size: x-large;
 }
+.detail .detail_content .detail_content-select .select-color .select-color_box {
+    display: flex;
+}
 .detail .detail_content .detail_content-select .select-color .box_color {
-    width: 20px;
-    height: 20px;
-    margin-right: 0 4%;
+    width: 30px;
+    height: 30px;
+    margin-right: 2%;
+}
+
+.detail .detail_content .detail_content-select .select-size .box_size {
+    gap: 2%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.detail .detail_content .detail_content-button {
+    gap: 2%;
+    font-size: larger;
+    display: grid;
+    margin: 10% 0 5% 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.detail .detail_content .detail_content-infor .infor_title {
+    font-weight: 600;
 }
 
 /* --------------- WEBSERVER --------------- */

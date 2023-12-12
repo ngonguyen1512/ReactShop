@@ -27,8 +27,9 @@ const Permission = () => {
     };
     let filteredPermissions = [];
     if (permissions && Array.isArray(permissions)) {
+        const searchRegex = new RegExp(searchValue, 'i');
         filteredPermissions = permissions.filter((item) =>
-            item.name.includes(searchValue)
+            searchRegex.test(item.name)
         );
     }
 

@@ -27,8 +27,9 @@ const TransferPage = () => {
     };
     let filteredTransfers = [];
     if (transfers && Array.isArray(transfers)) {
+        const searchRegex = new RegExp(searchValue, 'i');
         filteredTransfers = transfers.filter((item) =>
-            item.name.includes(searchValue)
+            searchRegex.test(item.name)
         );
     }
 

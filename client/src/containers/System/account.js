@@ -32,8 +32,9 @@ const Account = () => {
 
   let filteredAccounts = [];
   if (accounts && Array.isArray(accounts)) {
+    const searchRegex = new RegExp(searchValue, 'i');
     filteredAccounts = accounts.filter((item) =>
-      item.name.includes(searchValue)
+      searchRegex.test(item.name)
     );
   }
 

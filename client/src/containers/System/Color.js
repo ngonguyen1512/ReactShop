@@ -28,8 +28,9 @@ const Color = () => {
     };
     let filteredColors = [];
     if (colors && Array.isArray(colors)) {
+        const searchRegex = new RegExp(searchValue, 'i');
         filteredColors = colors.filter((item) =>
-            item.name.includes(searchValue)
+            searchRegex.test(item.name)
         );
     }
 

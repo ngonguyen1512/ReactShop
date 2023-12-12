@@ -27,8 +27,9 @@ const Slide = () => {
     };
     let filteredSlides = [];
     if (slides && Array.isArray(slides)) {
+        const searchRegex = new RegExp(searchValue, 'i');
         filteredSlides = slides.filter((item) =>
-            item.name.includes(searchValue)
+            searchRegex.test(item.name)
         );
     }
 

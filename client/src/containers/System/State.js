@@ -26,8 +26,9 @@ const State = () => {
   };
   let filteredStates = [];
   if (states && Array.isArray(states)) {
+    const searchRegex = new RegExp(searchValue, 'i');
     filteredStates = states.filter((item) =>
-      item.name.includes(searchValue)
+      searchRegex.test(item.name)
     );
   }
 

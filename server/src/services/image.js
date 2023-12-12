@@ -8,7 +8,7 @@ export const getAllImagesService = () => new Promise(async (resolve, reject) => 
                 'id', 'idProduct', 'image1', 'image2', 'image3', 'image4', 'idColor'
             ],
             include: [
-                { model: db.Color, as: 'image_color', attributes: ['name'] },
+                { model: db.Color, as: 'image_color', attributes: ['code','name'] },
                 { model: db.Product, as: 'image_product', attributes: ['name'] },
 
             ],

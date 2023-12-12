@@ -31,8 +31,9 @@ const Category = () => {
 
   let filteredCategories = [];
   if (categories && Array.isArray(categories)) {
+    const searchRegex = new RegExp(searchValue, 'i');
     filteredCategories = categories.filter((item) =>
-      item.name.includes(searchValue)
+      searchRegex.test(item.name)
     );
   }
 

@@ -30,8 +30,9 @@ const Product = () => {
     };
     let filteredProducts = [];
     if (products && Array.isArray(products)) {
+        const searchRegex = new RegExp(searchValue, 'i');
         filteredProducts = products.filter((item) =>
-            item.name.includes(searchValue)
+            searchRegex.test(item.name)
         );
     }
 
@@ -82,9 +83,9 @@ const Product = () => {
                         />
                     </td>
                     <td className={`w-[4%] ${styletd}`}>
-                        <Link to={path.UPDATE_PRODUCT+`/${item.id}`}>
-                            <Button fullWidth IcAfter={CiEdit} textColor='text-secondary' 
-                                // onClick={handleUpdate(item.id)}
+                        <Link to={path.UPDATE_PRODUCT + `/${item.id}`}>
+                            <Button fullWidth IcAfter={CiEdit} textColor='text-secondary'
+                            // onClick={handleUpdate(item.id)}
                             />
                         </Link>
                     </td>
