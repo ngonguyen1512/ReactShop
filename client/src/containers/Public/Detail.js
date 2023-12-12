@@ -4,6 +4,8 @@ import { Button } from '../../components/index'
 import * as actions from '../../store/actions'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { CartContext } from '../../contexts/Cart'
+import { path } from '../../utils/constant'
 
 const { IoHeartSharp, IoHeartOutline } = icons
 
@@ -19,6 +21,7 @@ const Detail = () => {
   const [isLiked, setIsLiked] = useState(false)
   const { likes } = useSelector(state => state.app)
   const [currentPath, setCurrentPath] = useState('')
+  const { colors } = useSelector(state => state.color)
   const { images } = useSelector(state => state.image)
   const { isLoggedIn } = useSelector(state => state.auth)
   const { currentData } = useSelector(state => state.user)
@@ -26,9 +29,27 @@ const Detail = () => {
   const { products } = useSelector(state => state.product)
   const [selectedImageUrl, setSelectedImageUrl] = useState('')
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [selectedSize, setSelectedSize] = useState(null)
+
+  const [idSize, setIdSize] = useState(null)
+  const [idColor, setIdColor] = useState(null)
+
+  console.log("id color: " + idColor)
+
+  const handleSelectIdColor = (code) => {
+    if (Array.isArray(colors)) {
+      const foundItem = colors.find((item) => item.code === code);
+
+      if (foundItem) {
+        setIdColor(foundItem.id);
+      }
+    }
+  };
+  const handleSelectIdSize = (idSize) => {
+    setIdSize(idSize)
+  }
 
   const handleButtonClick = (size) => {
     setSelectedSize(size);
@@ -38,10 +59,7 @@ const Detail = () => {
     setCurrentPath(location.pathname);
     window.scrollTo(0, 0);
 
-    const firstColor = quantities?.[0]?.quantity_color?.code || '';
-    setSelectedColor(firstColor);
-
-    const firstImage = images.find(item => item.idProduct === id && item.image_color.code === firstColor);
+    const firstImage = images.find(item => item.idProduct === id);
     if (firstImage) {
       setSelectedImageIndex(0);
       setSelectedImage(firstImage);
@@ -51,9 +69,11 @@ const Detail = () => {
     if (quantities?.length > 0) {
       const firstColorCode = quantities[0].quantity_color.code;
       setSelectedColor(firstColorCode);
+      setIdColor(quantities[0].idColor)
 
       const firstSizeCode = quantities[0].quantity_size.code;
       setSelectedSize(firstSizeCode);
+      setIdSize(quantities[0].idSize)
     }
   }, [id, images, quantities, location.pathname]);
 
@@ -93,64 +113,33 @@ const Detail = () => {
   }
 
   const handleLike = (id) => {
-    const updatedPayload = {
-      idAccount: currentData.id, idProduct: id
-    };
-    if (Array.isArray(likess)) {
-      const existingLikeIndex = likess.findIndex(
-        (item) => item.idProduct === id && item.idAccount === currentData.id
-      );
-      if (existingLikeIndex > -1) {
-        setIsLiked(true);
-        return;
-      }
+    const updatedPayload = { idAccount: currentData.id, idProduct: id };
+    if (Array.isArray(likes) && !likes.some((item) => item.idProduct === id && item.idAccount === currentData.id)) {
+      dispatch(actions.createLikes(updatedPayload));
+      setLikess([...likess, updatedPayload]);
+      setIsLiked(true);
     }
-    dispatch(actions.createLikes(updatedPayload));
-
-    const updatedLikes = [...likess, updatedPayload];
-    setLikess(updatedLikes);
-    setIsLiked(true);
   };
 
   const handleUnLike = (id) => {
-    const updatedPayload = {
-      idAccount: currentData.id,
-      idProduct: id,
-    };
+    const updatedPayload = { idAccount: currentData.id, idProduct: id };
     dispatch(actions.deleteLikes(updatedPayload));
-
-    const updatedLikes = likess.filter(
-      (item) => item.idProduct !== id || item.idAccount !== currentData.id
-    );
+    const updatedLikes = likess.filter((item) => item.idProduct !== id || item.idAccount !== currentData.id);
     setLikess(updatedLikes);
-
-    const hasSomeLikes = updatedLikes.some(
-      (item) => item.idProduct === id && item.idAccount === currentData.id
-    );
-    setIsLiked(hasSomeLikes || false);
+    setIsLiked(updatedLikes.some((item) => item.idProduct === id && item.idAccount === currentData.id) || false);
   };
 
   useEffect(() => {
-    if (Array.isArray(likes)) {
-      const hasLiked = likes.some(
-        (item) => item.idProduct === id && item.idAccount === currentData.id
-      );
-      setIsLiked(hasLiked);
-    }
-  }, [likes, id, currentData]);
-
-  useEffect(() => {
     dispatch(actions.getLikes())
+    dispatch(actions.getColors())
     dispatch(actions.getImages())
     dispatch(actions.getProducts())
     dispatch(actions.getQuantities())
   }, [dispatch])
 
   const formatInformation = (information) => {
-    const descriptions = information.split(/\n(?=\S)|\n(?=[A-Z])/);
-    const formattedDescriptions = descriptions.map((desc, index) => (
-      <p key={index}>- {desc.trim()}</p>
-    ));
+    const formattedDescriptions = information.split(/\n(?=\S)|\n(?=[A-Z])/)
+      .map((desc, index) => <p key={index}>- {desc.trim()}</p>);
     return formattedDescriptions;
   };
 
@@ -207,12 +196,18 @@ const Detail = () => {
                           return uniqueColors;
                         }, [])
                           .map(color => (
-                            <div
-                              key={color.code}
-                              className={`box_color ${selectedColor === color.code ? 'selected' : ''}`}
-                              style={{ backgroundColor: color.code }}
-                              onClick={() => handleColorClick(color.code)}
-                            ></div>
+                            <div className={`p-[0.5%] mr-2% rounded-full ${selectedColor === color.code ? 'selected' : ''}`}
+                              style={{ border: selectedColor === color.code ? '1px solid black' : '' }}>
+                              <div
+                                key={color.id}
+                                className={`box_color center ${selectedColor === color.code ? 'selected' : ''}`}
+                                style={{ backgroundColor: color.code }}
+                                onClick={() => {
+                                  handleColorClick(color.code)
+                                  handleSelectIdColor(color.code)
+                                }}
+                              ></div>
+                            </div>
                           ))}
                       </div>
                     )}
@@ -228,7 +223,10 @@ const Detail = () => {
                               fullWidth
                               key={item.id}
                               text={item?.quantity_size?.code}
-                              onClick={() => handleButtonClick(item.quantity_size.code)}
+                              onClick={() => {
+                                handleButtonClick(item.quantity_size.code)
+                                handleSelectIdSize(item.idSize)
+                              }}
                               backgroundSelect={isSelected ? '#000' : ''}
                               colorSelect={isSelected ? '#fff' : ''}
                             />
@@ -240,8 +238,25 @@ const Detail = () => {
                   </div>
                 </div>
                 <div className='detail_content-button'>
-                  <Button fullWidth text={'ADD TO CART'} />
-                  <Button fullWidth text={'BUY NOW'} />
+                  <CartContext.Consumer>
+                    {({ addToCart }) =>
+                      <>
+                        <Button
+                          fullWidth
+                          text={'ADD TO CART'}
+                          onClick={() => addToCart(product, idColor, idSize)}
+                        />
+                        <Button
+                          fullWidth
+                          text={'BUY NOW'}
+                          onClick={() => {
+                            addToCart(product)
+                            navigate('/' + path.CART)
+                          }}
+                        />
+                      </>
+                    }
+                  </CartContext.Consumer>
                 </div>
                 <div className='detail_content-infor'>
                   <div className='infor_title'>INFORMATION</div>

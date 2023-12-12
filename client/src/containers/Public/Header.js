@@ -1,33 +1,38 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
 import icons from '../../utils/icons'
-import { NavLink, createSearchParams, useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
 import { path } from '../../utils/constant'
 import * as actions from '../../store/actions'
 import { Button, Menu } from '../../components'
+import { CartContext } from '../../contexts/Cart'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
+import { NavLink, createSearchParams, useLocation, useNavigate } from 'react-router-dom'
 
-const { GoSearch, GiWolfHowl, MdOutlineShoppingCart } = icons
+const { GoSearch, GiWolfHowl, MdOutlineShoppingCart, TiDeleteOutline } = icons
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation()
   const dispatch = useDispatch()
   const showMenuRef = useRef(null)
+  const containerRef = useRef(null)
   const pathurl = location.pathname
   const parts = pathurl.split('/')[1]
-  const { isLoggedIn } = useSelector(state => state.auth)
-  const { currentData } = useSelector(state => state.user)
-  const permis = currentData.idPermission
-  const { images } = useSelector(state => state.image)
-  const { products } = useSelector(state => state.product)
-  const { transmissions } = useSelector(state => state.transmission)
-  const { categories } = useSelector(state => state.category)
+  const cartContext = useContext(CartContext)
+  const { removeAllFromCart } = cartContext
   const [searchValue, setSearchValue] = useState("")
   const [isShowMenu, setIsShowMenu] = useState(false)
+  const { images } = useSelector(state => state.image)
   const [shouldReload, setShouldReload] = useState(false)
   const [isShowSearch, setIsShowSearch] = useState(false)
+  const { isLoggedIn } = useSelector(state => state.auth)
+  const { products } = useSelector(state => state.product)
+  const { currentData } = useSelector(state => state.user)
+  const { quantities } = useSelector(state => state.quantity)
   const [isShowMiniCart, setIsShowMiniCart] = useState(false)
+  const { categories } = useSelector(state => state.category)
+  const { transmissions } = useSelector(state => state.transmission)
+  const permis = currentData.idPermission
 
   const handleFilterPosts = (id) => {
     navigate({
@@ -54,7 +59,7 @@ const Header = () => {
   }, [navigate])
 
   const handleLogout = () => {
-    // removeAllFromCart();
+    removeAllFromCart();
     setIsShowMenu(false);
     dispatch(actions.logout());
     navigate('/');
@@ -67,6 +72,7 @@ const Header = () => {
     dispatch(actions.getCurrent())
     dispatch(actions.getProducts())
     dispatch(actions.getTransfers())
+    dispatch(actions.getQuantities())
     dispatch(actions.getCategories())
     dispatch(actions.getTransmissions(searchParamsObject))
   }, [dispatch, permis]);
@@ -93,6 +99,25 @@ const Header = () => {
       </NavLink>
     );
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        // Clicked outside the component, close everything
+        setIsShowSearch(false);
+        setIsShowMenu(false);
+        setIsShowMiniCart(false);
+      }
+    };
+
+    // Add event listener when the component mounts
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    // Remove event listener when the component unmounts
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
 
   return (
     <div className='header'>
@@ -124,7 +149,7 @@ const Header = () => {
             </div>
           )}
         </div>
-        <div className='search-cart-login text-xl'>
+        <div className='search-cart-login text-xl' ref={containerRef}>
           {parts !== 'webserver' &&
             <>
               <div className='search' >
@@ -140,16 +165,80 @@ const Header = () => {
                         value={searchValue}
                         onChange={handleSearch}
                       />
-                      <div className='search_product'>
-                        {shouldReload && filteredProducts.length > 0 && filteredProducts.map((item) => renderTableRow(item))}
-                      </div>
+                      {searchValue && (
+                        <div className='search_product'>
+                          {shouldReload && filteredProducts.length > 0 && filteredProducts.map((item) => renderTableRow(item))}
+                        </div>
+                      )}
                     </div>
                   </>
                 }
               </div>
-              <div className='cart'>
-                <MdOutlineShoppingCart />
-              </div>
+              <CartContext.Consumer>
+                {({ cartItems, updateQuantity, removeFromCart }) => {
+                  const total = cartItems.reduce((accumulator, product) =>
+                    accumulator + (product.price * product.quantity), 0);
+                  return (
+                    <div className='minicart'>
+                      <span className='center' onClick={() => setIsShowMiniCart(prev => !prev)}><MdOutlineShoppingCart /> ({cartItems.length})</span>
+                      {isShowMiniCart &&
+                        <>
+                          <span className='square'></span>
+
+                          {cartItems.length === 0 ? (
+                            <div className='minicart_content text-[#fff] center min-w-[200px]'>
+                              <p>There is no product</p>
+                            </div>
+                          ) : (
+                            <div className='minicart_content text-[#fff] min-w-[600px]'>
+                              <table className='w-full'>
+                                <tr className='border-b'>
+                                  <th className=''>NAME</th>
+                                  <th className=''>SIZE</th>
+                                  <th className=''>COLOR</th>
+                                  <th className=''>QUANTITY</th>
+                                  <th className=''>PRICE</th>
+                                  <th className='w-[5%]'></th>
+                                </tr>
+                                {cartItems.map((product) => (
+                                  <tr className='border-b border-dashed' key={product.id}>
+                                    <td className=''>{product.name}</td>
+                                    <td className='text-center'>{product.idSize}</td>
+                                    <td className='text-center'>{product.idColor}</td>
+                                    <td className='text-center '>
+                                      <button className='px-1.5 bg-gray-500 rounded-sm mx-1.5'
+                                        onClick={() => updateQuantity(product, product.quantity - 1)}>-</button>
+                                      {product.quantity}
+                                      <button className='px-1.5 bg-gray-500 rounded-sm mx-1.5'
+                                        onClick={() => updateQuantity(product, product.quantity + 1)}>+</button>
+                                    </td>
+                                    <td className='text-center '>{(product.price * product.quantity).toLocaleString()}</td>
+                                    <td className='text-red-500 text-xl w-[5%]'>
+                                      <button onClick={() => removeFromCart(product.id, product.idSize, product.idColor)}><TiDeleteOutline /></button>
+                                    </td>
+                                  </tr>
+                                ))}
+                                <tr className='border-t border-black'>
+                                  <td className='font-semibold pl-10 text-lg' colSpan={2}>TOTAL</td>
+                                  <td className='text-center text-xl font-semibold' colSpan={2}>{total.toLocaleString()} đ</td>
+                                  <td></td>
+                                </tr>
+                              </table>
+                              <Button
+                                text={'Go to cart'}
+                                onClick={() => {
+                                  navigate('/' + path.CART);
+                                  setIsShowMiniCart(false)
+                                }}
+                              />
+                            </div>
+                          )}
+                        </>
+                      }
+                    </div>
+                  )
+                }}
+              </CartContext.Consumer>
             </>
           }
           <div className='login'>
