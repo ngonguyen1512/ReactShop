@@ -14,7 +14,6 @@ const UpdateAccount = () => {
   const [payload, setPayload] = useState({
     id: idcurrent, name: '', email: '', address: ''
   });
-  console.log(payload)
   const validate = (payload) => {
     let invalids = 0;
     let fields = Object.entries(payload);

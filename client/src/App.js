@@ -1,10 +1,10 @@
 import { path } from './utils/constant'
 import { Routes, Route } from 'react-router-dom'
-import { Home, Login, HomePage, Forgot, Register, Cart, Retal, Detail, Personal, Information, ChangePassword, Order, Like, UpdateAccount, Payment} from './containers/Public'
+import { Home, Login, HomePage, Forgot, Register, Cart, Retal, Detail, Personal, Information, ChangePassword, Order, Like, UpdateAccount, Payment } from './containers/Public'
 import {
-  HomeServer, Dashboard, Type, Sample, Category, Account, List, Menu, 
+  HomeServer, Dashboard, Type, Sample, Category, Account, List, Menu,
   Dimension, State, Slide, Color, Image, Invoice, Product, Transfer, Quantity, Function, CreateImage,
-  Permission, Role, Transmission, Allocation, TransferPage, CreateProduct, UpdateProduct, CreateDetail
+  Permission, Role, Transmission, Allocation, TransferPage, CreateProduct, UpdateProduct, CreateDetail, Completion, Processing
 } from './containers/System'
 import { CartProvider } from './contexts/Cart';
 
@@ -38,7 +38,10 @@ function App() {
             <Route path='*' element={<Dashboard />} />
             <Route path={path.SLIDE} element={<Slide />} />
             <Route path={path.ACCOUNT} element={<Account />} />
-            <Route path={path.INVOICE} element={<Invoice />} />
+            <Route path={path.INVOICE} element={<Invoice />}>
+              <Route path={path.COMPLETION} element={<Completion />} />
+              <Route path={path.PROCESSING} element={<Processing />} />
+            </Route>
             <Route path={path.TYPE} element={<Type />}>
               <Route path={path.SAMPLE} element={<Sample />} />
               <Route path={path.CATEGORY} element={<Category />} />

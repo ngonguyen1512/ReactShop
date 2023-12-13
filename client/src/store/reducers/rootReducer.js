@@ -9,6 +9,7 @@ import imagesReducer from "./imageReducer"
 import sampleReducer from "./sampleReducer";
 import accountReducer from "./accountReducer";
 import productReducer from "./productReducer";
+import invoiceReducer from "./invoiceReducer";
 import functionReducer from "./functionReducer";
 import transferReducer from "./transferReducer";
 import categoryReducer from "./categoryReducer";
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
     state: stateReducer,
     image: imageReducer,
     sample: sampleReducer,
+    invoice: invoiceReducer,
     account: accountReducer,
     product: productReducer,
     function: functionReducer,

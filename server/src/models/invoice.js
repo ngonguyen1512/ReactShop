@@ -12,8 +12,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Invoice.init({
     idAccount: DataTypes.INTEGER,
+    phone: DataTypes.INTEGER,
+    address: DataTypes.STRING,
+    ship: DataTypes.INTEGER,
     total: DataTypes.FLOAT,
     idAccept: DataTypes.INTEGER,
+    idShip: DataTypes.INTEGER,
     idState: DataTypes.INTEGER
   }, {
     sequelize,

@@ -195,6 +195,29 @@
     width: 100%;
 }
 
+/* --------------- PAYMENT --------------- */
+.payment {
+    gap: 2%;
+    display: grid;
+    margin: 5% 0 2% 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.payment .payment_proudct .payment_table .temporary-ship-total {
+    margin: 5% 0;
+}
+.payment .payment_proudct .payment_table .temporary-ship-total .total {
+    font-weight: 600;
+    margin-top: 2%;
+    padding-top: 2%;
+    font-size: larger;
+    border-top: 1px dashed #a0a0a0;
+}
+.payment .payment_information .payment_title {
+    font-weight: 600;
+    font-size: x-large;
+    
+}
+
 /* --------------- WEBSERVER --------------- */
 /* TYPE */
 .type, .category, .sample, 
@@ -208,12 +231,12 @@
 .role .header-role .content, .permission .header-permission .content,
 .slide .header-slide .content, .state .header-state .content,
 .menu .header-menu .content, .function .header-function .content,
-.transfer .header-transfer .content {
+.transfer .header-transfer .content, .invoice .header-invoice .content {
     margin-right: 1%;
 }
 .type .header-type .content span, .list .header-list .content span, 
 .role .header-role .content span, .slide .header-slide .content span,
-.transfer .header-transfer .content span {
+.transfer .header-transfer .content span, .invoice .header-invoice .content span {
     padding: 0 2% 0.5% 2%;
     border-bottom: 1px solid #000;
 }

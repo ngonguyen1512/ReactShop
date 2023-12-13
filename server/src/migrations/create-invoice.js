@@ -12,10 +12,22 @@ module.exports = {
       idAccount: {
         type: Sequelize.INTEGER
       },
+      phone: {
+        type: Sequelize.INTEGER
+      },
+      address: {
+        type: Sequelize.STRING
+      },
+      ship: {
+        type: Sequelize.INTEGER
+      },
       total: {
         type: Sequelize.FLOAT
       },
       idAccept: {
+        type: Sequelize.INTEGER
+      },
+      idShip: {
         type: Sequelize.INTEGER
       },
       idState: {

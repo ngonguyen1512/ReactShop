@@ -26,7 +26,10 @@ export const path = {
     DASHBOARD: 'dashboard',
     ACCOUNT: 'account',
     SLIDE: 'slide',
+
     INVOICE: 'invoice',
+    PROCESSING: 'processing',
+    COMPLETION: 'completion',
 
     TYPE: 'type/*',
     CATEGORY: 'category',

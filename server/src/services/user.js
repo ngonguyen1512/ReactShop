@@ -5,7 +5,7 @@ export const getOneService = (id) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Account.findOne({
             where: { id },
-            attributes: ['id', 'name', 'email', 'phone', 'idPermission'],
+            attributes: ['id', 'name', 'email', 'phone', 'address', 'idPermission'],
             raw: true
         });
         resolve({
