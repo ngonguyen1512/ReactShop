@@ -11,49 +11,46 @@ const { IoHeartSharp, IoHeartOutline } = icons
 
 const Detail = () => {
   const location = useLocation()
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
   const url = location.pathname
   const parts = url.split('/')
   const lastPart = parts[parts.length - 1]
   const id = parseInt(lastPart)
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const uniqueSizeIds = new Set()
   const [likess, setLikess] = useState([])
+  const [idSize, setIdSize] = useState(null)
+  const [idColor, setIdColor] = useState(null)
   const [isLiked, setIsLiked] = useState(false)
   const { likes } = useSelector(state => state.app)
   const [currentPath, setCurrentPath] = useState('')
   const { colors } = useSelector(state => state.color)
   const { images } = useSelector(state => state.image)
   const { isLoggedIn } = useSelector(state => state.auth)
-  const { currentData } = useSelector(state => state.user)
-  const { quantities } = useSelector(state => state.quantity)
-  const { products } = useSelector(state => state.product)
-  const [selectedImageUrl, setSelectedImageUrl] = useState('')
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [selectedColor, setSelectedColor] = useState(null)
   const [selectedImage, setSelectedImage] = useState(null)
-  const [selectedSize, setSelectedSize] = useState(null)
-
-  const [idSize, setIdSize] = useState(null)
-  const [idColor, setIdColor] = useState(null)
-
-  console.log("id color: " + idColor)
+  const { currentData } = useSelector(state => state.user)
+  const { products } = useSelector(state => state.product)
+  const { quantities } = useSelector(state => state.quantity)
+  const { dimensions } = useSelector(state => state.dimension)
+  const [selectedImageUrl, setSelectedImageUrl] = useState('')
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
   const handleSelectIdColor = (code) => {
     if (Array.isArray(colors)) {
       const foundItem = colors.find((item) => item.code === code);
-
-      if (foundItem) {
-        setIdColor(foundItem.id);
-      }
+      if (foundItem) setIdColor(foundItem.id);
+    }
+    setSelectedColor(code);
+    const selectedImage = images.find(item => item.idProduct === id && item.image_color.code === code);
+    if (selectedImage) {
+      setSelectedImage(selectedImage);
+      setSelectedImageUrl(selectedImage.image1);
     }
   };
-  const handleSelectIdSize = (idSize) => {
-    setIdSize(idSize)
-  }
-
-  const handleButtonClick = (size) => {
-    setSelectedSize(size);
-  };
+  const handleSelectIdSize = (idSize) => { setIdSize(idSize) }
+  // const handleButtonClick = (size) => { setSelectedSize(size) };
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -66,25 +63,14 @@ const Detail = () => {
       setSelectedImageUrl(firstImage.image1);
     }
 
+    const firstColor = quantities.find(item => item.idProduct === id);
     if (quantities?.length > 0) {
-      const firstColorCode = quantities[0].quantity_color.code;
-      setSelectedColor(firstColorCode);
-      setIdColor(quantities[0].idColor)
-
-      const firstSizeCode = quantities[0].quantity_size.code;
-      setSelectedSize(firstSizeCode);
+      setIdColor(firstColor.idColor)
       setIdSize(quantities[0].idSize)
+      setSelectedColor(firstColor?.quantity_color.code);
     }
   }, [id, images, quantities, location.pathname]);
 
-  const handleColorClick = (color) => {
-    setSelectedColor(color);
-    const selectedImage = images.find(item => item.idProduct === id && item.image_color.code === color);
-    if (selectedImage) {
-      setSelectedImage(selectedImage);
-      setSelectedImageUrl(selectedImage.image1);
-    }
-  };
   useEffect(() => {
     const defaultImageUrl = images.find(item => item.idProduct === id)?.image1 || '';
     setSelectedImageUrl(defaultImageUrl);
@@ -135,6 +121,7 @@ const Detail = () => {
     dispatch(actions.getImages())
     dispatch(actions.getProducts())
     dispatch(actions.getQuantities())
+    dispatch(actions.getDimensions())
   }, [dispatch])
 
   const formatInformation = (information) => {
@@ -150,15 +137,15 @@ const Detail = () => {
           return (
             <div className='detail'>
               <div className='detail_image'>
-                <div className='detail_image-bar h-[60%]'>
+                <div className='detail_image-bar'>
                   <ul>{generateThumbnailList()}</ul>
                 </div>
                 {selectedImageUrl && (
                   <img src={`/images/${selectedImageUrl}`} alt={product.name}
-                    className='h-[70%] object-cover transition duration-300'
+                    className='image-img object-cover transition duration-300'
                   />
                 )}
-                <div className='w-[10%] h-[60%]'></div>
+                <div className='space-bar'></div>
               </div>
               <div className='detail_content'>
                 {isLoggedIn ? (
@@ -202,10 +189,7 @@ const Detail = () => {
                                 key={color.id}
                                 className={`box_color center ${selectedColor === color.code ? 'selected' : ''}`}
                                 style={{ backgroundColor: color.code }}
-                                onClick={() => {
-                                  handleColorClick(color.code)
-                                  handleSelectIdColor(color.code)
-                                }}
+                                onClick={() => handleSelectIdColor(color.code)}
                               ></div>
                             </div>
                           ))}
@@ -215,25 +199,30 @@ const Detail = () => {
                   <div className='select-size'>
                     <div className=''>Size</div>
                     <div className='box_size'>
-                      {quantities?.length > 0 && quantities.map(item => {
-                        if (item.idProduct === id && item.quantity_color.code === selectedColor && item.quantity > 2) {
-                          const isSelected = item.quantity_size.code === selectedSize;
-                          return (
-                            <Button
-                              fullWidth
-                              key={item.id}
-                              text={item?.quantity_size?.code}
-                              onClick={() => {
-                                handleButtonClick(item.quantity_size.code)
-                                handleSelectIdSize(item.idSize)
-                              }}
-                              backgroundSelect={isSelected ? '#000' : ''}
-                              colorSelect={isSelected ? '#fff' : ''}
-                            />
-                          );
-                        }
-                        return null;
-                      })}
+                      {quantities?.length > 0 && quantities.map((item) =>
+                        item.idProduct === id && item.quantity > 2 && (
+                          <>
+                            {dimensions?.length > 0 && dimensions.map(size => {
+                              if (size.id === item.idSize && !uniqueSizeIds.has(size.id)) {
+                                const isSelected = size.id === idSize;
+                                uniqueSizeIds.add(size.id);
+                                return (
+                                  <Button
+                                    fullWidth
+                                    key={size.id}
+                                    text={size.code}
+                                    onClick={() => {
+                                      handleSelectIdSize(size.id)
+                                    }}
+                                    backgroundSelect={isSelected ? '#000' : ''}
+                                    colorSelect={isSelected ? '#fff' : ''}
+                                  />
+                                );
+                              }
+                              return null;
+                            })}
+                          </>
+                        ))}
                     </div>
                   </div>
                 </div>

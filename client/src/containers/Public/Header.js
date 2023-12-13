@@ -28,7 +28,6 @@ const Header = () => {
   const { isLoggedIn } = useSelector(state => state.auth)
   const { products } = useSelector(state => state.product)
   const { currentData } = useSelector(state => state.user)
-  const { quantities } = useSelector(state => state.quantity)
   const [isShowMiniCart, setIsShowMiniCart] = useState(false)
   const { categories } = useSelector(state => state.category)
   const { transmissions } = useSelector(state => state.transmission)
@@ -72,7 +71,6 @@ const Header = () => {
     dispatch(actions.getCurrent())
     dispatch(actions.getProducts())
     dispatch(actions.getTransfers())
-    dispatch(actions.getQuantities())
     dispatch(actions.getCategories())
     dispatch(actions.getTransmissions(searchParamsObject))
   }, [dispatch, permis]);
@@ -103,17 +101,12 @@ const Header = () => {
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
-        // Clicked outside the component, close everything
         setIsShowSearch(false);
         setIsShowMenu(false);
         setIsShowMiniCart(false);
       }
     };
-
-    // Add event listener when the component mounts
     document.addEventListener('mousedown', handleOutsideClick);
-
-    // Remove event listener when the component unmounts
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
@@ -145,6 +138,7 @@ const Header = () => {
                       {item?.transmission_transfer.name}
                     </NavLink>
                   )
+                return null
               })}
             </div>
           )}
@@ -184,7 +178,6 @@ const Header = () => {
                       {isShowMiniCart &&
                         <>
                           <span className='square'></span>
-
                           {cartItems.length === 0 ? (
                             <div className='minicart_content text-[#fff] center min-w-[200px]'>
                               <p>There is no product</p>
@@ -193,16 +186,16 @@ const Header = () => {
                             <div className='minicart_content text-[#fff] min-w-[600px]'>
                               <table className='w-full'>
                                 <tr className='border-b'>
-                                  <th className=''>NAME</th>
-                                  <th className=''>SIZE</th>
-                                  <th className=''>COLOR</th>
-                                  <th className=''>QUANTITY</th>
-                                  <th className=''>PRICE</th>
+                                  <th>NAME</th>
+                                  <th>SIZE</th>
+                                  <th>COLOR</th>
+                                  <th>QUANTITY</th>
+                                  <th>PRICE</th>
                                   <th className='w-[5%]'></th>
                                 </tr>
                                 {cartItems.map((product) => (
                                   <tr className='border-b border-dashed' key={product.id}>
-                                    <td className=''>{product.name}</td>
+                                    <td>{product.name}</td>
                                     <td className='text-center'>{product.idSize}</td>
                                     <td className='text-center'>{product.idColor}</td>
                                     <td className='text-center '>

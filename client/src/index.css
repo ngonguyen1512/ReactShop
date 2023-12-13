@@ -157,9 +157,14 @@
     position: absolute;
     background-color: #000;
 }
-.header .header-content .search-cart-login .search .search_content,
+.header .header-content .search-cart-login .search .search_content {
+    right: -100%;
+}
 .header .header-content .search-cart-login .minicart .minicart_content {
     right: -100%;
+}
+.header .header-content .search-cart-login .search .search_content,
+.header .header-content .search-cart-login .minicart .minicart_content { 
     top: 50px;
     height: auto;
     z-index: 50;

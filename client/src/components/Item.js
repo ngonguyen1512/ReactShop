@@ -9,60 +9,33 @@ import { formatVietnameseToString } from '../utils/common/formatVietnameseToStri
 const { IoHeartSharp, IoHeartOutline } = icons
 
 const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
-  let displayedImage = false;
+  let displayedImage = false
+  const dispatch = useDispatch()
+  const [likess, setLikess] = useState([])
+  const [isLiked, setIsLiked] = useState(false)
   const { likes } = useSelector(state => state.app)
-  const { isLoggedIn } = useSelector(state => state.auth)
-  const [isLiked, setIsLiked] = useState(false);
-  const [likess, setLikess] = useState([]);
-  const dispatch = useDispatch();
   const { images } = useSelector(state => state.image)
-  const [changedImage, setChangedImage] = useState(null);
+  const [changedImage, setChangedImage] = useState(null)
+  const { isLoggedIn } = useSelector(state => state.auth)
 
-  const handleMouseEnter = () => {
-    setChangedImage('image2');
-  };
-
-  const handleMouseLeave = () => {
-    setChangedImage('image1');
-  };
+  const handleMouseEnter = () => { setChangedImage('image2') };
+  const handleMouseLeave = () => { setChangedImage('image1') };
 
   const handleLike = (id) => {
-    const updatedPayload = {
-      idAccount: idCurrent,
-      idProduct: id,
-    };
-    if (Array.isArray(likess)) {
-      const existingLikeIndex = likess.findIndex(
-        (item) => item.idProduct === id && item.idAccount === idCurrent
-      );
-      if (existingLikeIndex > -1) {
-        setIsLiked(true);
-        return;
-      }
+    const updatedPayload = { idAccount: idCurrent, idProduct: id };
+    if (Array.isArray(likes) && !likes.some((item) => item.idProduct === id && item.idAccount === idCurrent)) {
+      dispatch(actions.createLikes(updatedPayload));
+      setLikess([...likess, updatedPayload]);
+      setIsLiked(true);
     }
-    dispatch(actions.createLikes(updatedPayload));
-
-    const updatedLikes = [...likess, updatedPayload];
-    setLikess(updatedLikes);
-    setIsLiked(true);
   };
 
   const handleUnLike = (id) => {
-    const updatedPayload = {
-      idAccount: idCurrent,
-      idProduct: id,
-    };
+    const updatedPayload = { idAccount: idCurrent, idProduct: id };
     dispatch(actions.deleteLikes(updatedPayload));
-
-    const updatedLikes = likess.filter(
-      (item) => item.idProduct !== id || item.idAccount !== idCurrent
-    );
+    const updatedLikes = likess.filter((item) => item.idProduct !== id || item.idAccount !== idCurrent);
     setLikess(updatedLikes);
-
-    const hasSomeLikes = updatedLikes.some(
-      (item) => item.idProduct === id && item.idAccount === idCurrent
-    );
-    setIsLiked(hasSomeLikes || false);
+    setIsLiked(updatedLikes.some((item) => item.idProduct === id && item.idAccount === idCurrent) || false);
   };
 
   useEffect(() => {
@@ -93,11 +66,9 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
             <span className="icons" onClick={() => handleLike(id)}><IoHeartOutline /></span>
           )}
         </div>
-      ) : (
-        <></>
-      )}
+      ) : (<></>)}
       <NavLink onClick={handleClick} to={`/${formatVietnameseToString(nameCategory)}/${formatVietnameseToString(name)}/${id}`} onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}>
+        onMouseLeave={handleMouseLeave}>
         <div className='image center'>
           {images?.length > 0 && images.map(item => {
             if (item.idProduct === id && !displayedImage) {
@@ -118,7 +89,7 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
                     value={price}
                     currency="VND"
                     minimumFractionDigits={0}
-                  />đ
+                  /> đ
                 </IntlProvider>
               </div>
             </div>

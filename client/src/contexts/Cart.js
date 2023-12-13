@@ -13,6 +13,16 @@ export class CartProvider extends Component {
         this.removeAllFromCart = this.removeAllFromCart.bind(this);
     }
     addToCart(product, idColor, idSize) {
+        if (!idColor || !idSize) {
+            // Display a message if idColor or idSize is not selected
+            Swal.fire({
+                title: 'Warning!',
+                text: 'You have not chosen the color and size.',
+                icon: 'warning',
+                showConfirmButton: true
+            });
+            return; // Stop the function execution
+        }
         const existingProductIndex = this.state.cartItems.findIndex(item =>
             item.id === product.id &&
             item.idColor === idColor &&
