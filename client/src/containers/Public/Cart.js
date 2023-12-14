@@ -65,7 +65,7 @@ const Cart = () => {
                         <>{item.code}</>
                       ))}
                     </td>
-                    <th className='text-center mx-auto'>
+                    <th className='text-center center'>
                       {colors?.length > 0 && colors.map(item => item.id === product.idColor && (
                         <div
                           className={'box_color'}

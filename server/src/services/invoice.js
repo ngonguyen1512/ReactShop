@@ -74,11 +74,12 @@ export const getInvoiceService = () => new Promise(async (resolve, reject) => {
             const response = await db.InvoiceDetail.findAll({
                 where: { idInvoice: invoiceIds },
                 include: [
-                    { model: db.Invoice, as: 'detail_invoice', 
+                    {
+                        model: db.Invoice, as: 'detail_invoice',
                         include: [
                             { model: db.Account, as: 'invoice_account' },
                             { model: db.State, as: 'invoice_state', attributes: ['name'] }
-                        ] 
+                        ]
                     },
                     { model: db.Product, as: 'product_invoicedetail' },
                 ],
@@ -98,24 +99,47 @@ export const getInvoiceService = () => new Promise(async (resolve, reject) => {
     } catch (error) { reject(error); }
 });
 
-export const updateInvoicesService = ({ id, idAccept, idState }) => new Promise(async (resolve, reject) => {
+export const updateInvoicesService = ({ id, idAccept, idShip, idState }) => new Promise(async (resolve, reject) => {
     try {
         const invoice = await db.Invoice.findByPk(id);
         const response = await invoice.update({
-            idAccept, idState
+            idAccept, idShip, idState
+        });
+
+        resolve({
+            err: response ? 0 : 2,
+            msg: response ? 'Cập nhật invoice thành công.' : 'Cập nhật invoice không thành công',
+            response: response || null
+        })
+    } catch (error) { reject(error); }
+});
+
+export const completeInvoicesService = ({ id, idState }) => new Promise(async (resolve, reject) => {
+    try {
+        const invoice = await db.Invoice.findByPk(id);
+        const response = await invoice.update({
+            idState
         });
 
         if (idState === 5) {
             const invoiceDetails = await db.InvoiceDetail.findAll({ where: { idInvoice: id } });
             for (const invoiceDetail of invoiceDetails) {
-                const product = await db.Product.findByPk(invoiceDetail.idProduct);
-                if (product) {
-                    const updatedQuantity = product.quantity - invoiceDetail.quantity;
-                    await product.update({
+                const quantities = await db.Quantity.findAll({
+                    where: {
+                        idProduct: invoiceDetail.idProduct,
+                        idColor: invoiceDetail.idColor,
+                        idSize: invoiceDetail.idSize
+                    }
+                });
+
+                for (const quantity of quantities) {
+                    const updatedQuantity = quantity.quantity - invoiceDetail.quantity;
+                    await quantity.update({
                         quantity: updatedQuantity >= 0 ? updatedQuantity : 0,
                     });
                 }
             }
+
         }
         resolve({
             err: response ? 0 : 2,

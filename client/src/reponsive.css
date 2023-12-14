@@ -51,7 +51,21 @@
     }
     .detail .detail_image .image-img {
         height: 100%;
-    }  
+    }
+    .processing .processing_approve {
+        height: 100%;
+    }
+    .processing .processing_approve .processing_approve-table {
+        height: 200px;
+        grid-column: span 2 / span 2;
+    }
+    .processing .processing_approve .processing_approve-detail-input {
+        height: 220px;
+        grid-column: span 2 / span 2;
+    }
+    .processing .processing_approve .processing_approve-detail-input .processing_approve-detail {
+        height: 150px;
+    }
 }
 
 @media (max-width: 809px) {

@@ -35,6 +35,12 @@ const invoiceReducer = (state = initState, action) => {
                 invoicesall: action.data,
                 msg: action.msg || '',
             }
+        case actionTypes.COMPLETE_INVOICE:
+            return {
+                ...state,
+                invoicesall: action.data,
+                msg: action.msg || '',
+            }
         case actionTypes.GET_TOPSELLING:
             return {
                 ...state,

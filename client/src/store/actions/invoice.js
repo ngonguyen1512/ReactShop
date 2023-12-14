@@ -89,6 +89,27 @@ export const updateInvoices = (payload) => async (dispatch) => {
         })
     }
 }
+export const completeInvoices = (payload) => async (dispatch) => {
+    try {
+        const response = await apis.apiCompleteInvoices(payload);
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.COMPLETE_INVOICE,
+                data: response.data.response,
+            })
+        } else {
+            dispatch({
+                type: actionTypes.COMPLETE_INVOICE,
+                msg: response.data.msg,
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.COMPLETE_INVOICE,
+            data: null,
+        })
+    }
+}
 
 export const getTopSelling = () => async (dispatch) => {
     try {

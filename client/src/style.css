@@ -246,8 +246,8 @@
 .permission .header-permission, .slide .header-slide, .state .header-state,
 .menu .header-menu, .function .header-function, .transfer_page .header-transfer_page,
 .transmission .header-transmission, .allocation .header-allocation, .create_product, .update-product, 
-.create_detail {
-    margin: 1rem 0;
+.create_detail, .processing, .completion .completion_header{
+    margin: 1.5% 0;
 }
 .category .form-category, .permission .form-permission, .function .form-function, 
 .transmission .form-transmission, .allocation .form-allocation, 
@@ -293,7 +293,7 @@
 }
 
 .create_product .form-create_product, .create_image .form-create_image,
-.update_product .form-update_product {
+.update_product .form-update_product, .processing .processing_approve {
     gap: 1%;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -302,8 +302,62 @@
     font-size: medium;
     font-weight: 600;
 }
-.create_detail .form-create_detail {
+.create_detail .form-create_detail, 
+.processing .processing_approve .processing_approve-detail-input .processing_approve-input {
     gap: 1%;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.processing .processing_approve {
+    height: 270px;
+}
+.processing .processing_approve .processing_approve-table {
+    height: 270px;
+}
+.processing .processing_approve .processing_approve-detail-input .processing_approve-detail {
+    height: 190px;
+}
+.processing .processing_ship,
+.processing .processing_approve .processing_approve-table,
+.processing .processing_approve .processing_approve-detail-input {
+    width: 100%;
+    /* height: 100%;  */
+    overflow: auto;
+}
+.processing .processing_ship table thead,
+.completion .completion_table table thead,
+.completion .completion_detail table thead,
+.processing .processing_approve .processing_approve-table table thead,
+.processing .processing_approve .processing_approve-detail-input .processing_approve-detail table thead {
+    position: sticky;
+    top: 0;
+    background-color: #a0a0a0;
+    border-radius: 0.25rem;
+}
+.processing .processing_ship table th, td,
+.completion .completion_table table th, td,
+.completion .completion_detail table th, td,
+.processing .processing_approve .processing_approve-table table table th, td,
+.processing .processing_approve .processing_approve-detail-input .processing_approve-detail table table th, td {
+    padding: 0.5%
+}
+.processing .processing_ship {
+    height: 200px;
+    margin-top: 2%;
+}
+.completion .completion_header .input {
+    width: 30%;
+    font-size: medium;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding: 0 0.5%;
+}
+.completion .completion_table {
+    height: 360px;
+    overflow: auto;
+}
+.completion .completion_detail {
+    height: auto;
+    overflow: auto;
 }
