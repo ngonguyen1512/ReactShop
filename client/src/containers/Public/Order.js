@@ -56,7 +56,7 @@ const Order = () => {
               const invoiceDetail = item?.detail_invoice;
               if (!invoiceDetail) return acc;
               const createdAtDate = new Date(invoiceDetail?.createdAt).toLocaleDateString();
-              const stateColor = invoiceDetail?.idState === 5 ? 'text-green-800' : invoiceDetail?.idState === 4 ? 'text-blue-600' : invoiceDetail?.idState === 6 ? 'text-red-500' : 'text-black';
+              const stateColor = invoiceDetail?.idState === 5 ? 'text-green-800' : invoiceDetail?.idState === 4 ? 'text-blue-600' : invoiceDetail?.idState === 6 ? 'text-red' : 'text-black';
 
               if (!acc.some(accItem => accItem?.invoiceDetailId === invoiceDetail?.id))
                 acc.push({

@@ -4,13 +4,28 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import { path } from '../../utils/constant'
+import * as actions from '../../store/actions';
 
 const Forgot = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // const { msg } = useSelector(state => state.auth)
+    const { msg } = useSelector(state => state.auth)
     const [invalidFields, setInvalidFields] = useState([])
     const [payload, setPayload] = useState({phone: '', email: ''});
+
+    const handleSubmit = async () => {
+        let finalPayload = payload;
+        let invalids = validate(finalPayload);
+        if (invalids === 0) {
+            try {
+                dispatch(actions.forgot(payload));
+                navigate('/' + path.LOGIN)
+            } catch (error) {
+                Swal.fire('Success!', msg, 'success');
+            }
+        }
+    };
+
 
     const validate = (payload) => {
         let invalids = 0;
@@ -81,7 +96,7 @@ const Forgot = () => {
                     <Button
                         text='GET NEW PASSWORD'
                         fullWidth
-                        // onClick={handleSubmit}
+                        onClick={handleSubmit}
                     />
                     <div className='transit center'>
                         <small><span className='text'

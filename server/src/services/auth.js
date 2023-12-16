@@ -44,19 +44,19 @@ export const loginService = ({ phone, password }) => new Promise(async (resolve,
     } catch (error) { reject(error) }
 })
 
-const sendEmail = (email, subject, message) => {
+const sendEmail = (email, subject, htmlContent) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
             user: 'ngonguyenkey1512@gmail.com',
-            pass: 'kfxd ijlv kvos jocr'
+            pass: 'oyce hied uxkl szlq'
         }
     });
     const mailOptions = {
         from: 'ngonguyenkey1512@gmail.com',
         to: email,
         subject: subject,
-        text: message
+        html: htmlContent,
     };
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) console.log(error);
@@ -76,13 +76,24 @@ const generateRandomPassword = (length) => {
 export const forgotPassword = ({ phone, email }) => new Promise(async (resolve, reject) => {
     try {
         const account = await db.Account.findOne({
-            where: { phone },
-            raw: true,
+            where: { phone }
         });
         if (account) {
-            const newPassword = generateRandomPassword(8);
-            sendEmail(email, 'FASHION SEND YOUR NEW PASSWORD',
-                `Phone: ${phone} & email: ${email}. Your new password is: ${newPassword}`
+            const newPassword = generateRandomPassword(6);
+            sendEmail(email, 'REACT FASHION FORGOT PASSWORD',
+                `
+            <div>
+                <p>Dear User,</p>
+                <ul>
+                    <li><strong>Phone:</strong> ${phone}</li>
+                    <li><strong>Email:</strong> ${email}</li>
+                    <li><strong>Your new password is:</strong> ${newPassword}</li>
+                </ul>
+                <p>If you have any questions or need further assistance, feel free to contact us.</p>
+                <p>Best regards,</p>
+                <p>Your Company Name</p>
+            </div>
+          `
             );
             const updatedAccount = await db.Account.update(
                 { password: hashPassword(newPassword) },
