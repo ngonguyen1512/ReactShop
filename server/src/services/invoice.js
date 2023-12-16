@@ -1,9 +1,9 @@
-import db from '../models';
+import db from '../models'
+import nodemailer from 'nodemailer'
 
 export const getCountInvoiceService = () => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Invoice.findAndCountAll({
-            include: [{ model: db.Account, as: 'account_invoice' }],
             include: [
                 { model: db.Account, as: 'invoice_account' },
                 { model: db.State, as: 'invoice_state', attributes: ['name'] },
@@ -19,7 +19,32 @@ export const getCountInvoiceService = () => new Promise(async (resolve, reject) 
     } catch (error) { reject(error) }
 })
 
-export const createInvoices = ({ idAccount, phone, address, ship, total, idState, invoiceDetails }) => new Promise(async (resolve, reject) => {
+const sendEmail = async (email, subject, htmlContent) => {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'ngonguyenkey1512@gmail.com',
+            pass: 'oyce hied uxkl szlq',
+        },
+    });
+
+    const mailOptions = {
+        from: 'ngonguyenkey1512@gmail.com',
+        to: email,
+        subject: subject,
+        html: htmlContent,
+    };
+
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email sent: ' + info.response);
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw error; // Rethrow the error to propagate it to the caller
+    }
+};
+
+export const createInvoices = async ({ idAccount, email, phone, address, ship, total, idState, invoiceDetails }) => {
     try {
         const invoice = await db.Invoice.create({
             idAccount,
@@ -27,8 +52,9 @@ export const createInvoices = ({ idAccount, phone, address, ship, total, idState
             address,
             ship,
             total,
-            idState,
+            idState
         });
+
         if (invoice) {
             const invoiceDetailPromises = [];
             for (let i = 0; i < invoiceDetails.length; i++) {
@@ -43,25 +69,78 @@ export const createInvoices = ({ idAccount, phone, address, ship, total, idState
                     price,
                     discount,
                     amount,
+                    include: [
+                        { model: db.Invoice, as: 'detail_invoice' },
+                        { model: db.Product, as: 'product_invoicedetail' },
+                    ],
                 });
                 invoiceDetailPromises.push(invoiceDetail);
             }
             const createdInvoiceDetails = await Promise.all(invoiceDetailPromises);
-            resolve({
+            const invoiceDetailsHtml = createdInvoiceDetails.map(detail => `
+                <tr>
+                    <td class="text-center">${detail.idProduct}</td>
+                    <td class="text-center">${detail.idSize}</td>
+                    <td class="text-center">${detail.idColor}</td>
+                    <td class="text-center">${detail.price}</td>
+                    <td class="text-center">${detail.quantity}</td>
+                    <td class="text-center">${detail.discount}</td>
+                    <td class="text-center">${detail.amount}</td>
+                </tr>
+            `).join('');
+
+            await sendEmail(email, 'REACT FASHION', `
+                <div>
+                    <p>Dear,</p>
+                    <p>Invoice code: ${invoice.id}</p>
+                    <p>Your order is pending approval and ready for delivery.</p>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>SIZE</th>
+                                <th>COLOR</th>
+                                <th>PRICE</th>
+                                <th>QUANTITY</th>
+                                <th>DISCOUNT</th>
+                                <th>AMOUNT</th>
+                            </tr>
+                            ${invoiceDetailsHtml}
+                            <tr>
+                                <td class="text-center" colSpan="6">Temporary</td>
+                                <td class="text-center">${invoice.ship}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" colSpan="6"><b>TOTAL</b></td>
+                                <td class="text-center"><b>${invoice.total}</b></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p>If you have any questions or need further assistance, feel free to contact us.</p>
+                    <p>Best regards,</p>
+                    <p>FASHION</p>
+                </div>
+            `);
+            return {
                 err: 0,
                 msg: 'Create a successful invoice.',
                 invoice,
-                invoiceDetails: createdInvoiceDetails
-            });
-        } else
-            resolve({
+                invoiceDetails: createdInvoiceDetails,
+            };
+        } else {
+            return {
                 err: 2,
                 msg: 'Invoice creation failed.',
                 invoice: null,
-                invoiceDetails: null
-            })
-    } catch (error) { reject(error) }
-});
+                invoiceDetails: null,
+            };
+        }
+    } catch (error) {
+        console.error('Error creating invoice:', error);
+        throw error;
+    }
+};
+
 
 export const getInvoiceService = () => new Promise(async (resolve, reject) => {
     try {
@@ -99,20 +178,106 @@ export const getInvoiceService = () => new Promise(async (resolve, reject) => {
     } catch (error) { reject(error); }
 });
 
-export const updateInvoicesService = ({ id, idAccept, idShip, idState }) => new Promise(async (resolve, reject) => {
+export const updateInvoicesService = async ({ id, idAccept, idShip, idState }) => {
     try {
         const invoice = await db.Invoice.findByPk(id);
-        const response = await invoice.update({
-            idAccept, idShip, idState
-        });
+        const response = await invoice.update({ idAccept, idShip, idState });
 
-        resolve({
+        const [account, detailInvoice] = await Promise.all([
+            db.Account.findByPk(invoice.idAccount),
+            db.InvoiceDetail.findAll({ where: { idInvoice: id } })
+        ]);
+
+        const invoiceDetailsHtml = detailInvoice.map(detail => `
+            <tr>
+                <td class="text-center">${detail.idProduct}</td>
+                <td class="text-center">${detail.idSize}</td>
+                <td class="text-center">${detail.idColor}</td>
+                <td class="text-center">${detail.price}</td>
+                <td class="text-center">${detail.quantity}</td>
+                <td class="text-center">${detail.discount}</td>
+                <td class="text-center">${detail.amount}</td>
+            </tr>
+        `).join('');
+
+        const email = account.email;
+        if (idState === 6) {
+            await sendEmail(email, 'REACT FASHION', `
+            <div>
+                <p>Dear  ${account.name},</p>
+                <p>Invoice code: ${invoice.id}</p>
+                <p>Your order has been cancelled.</p>
+                <div>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>SIZE</th>
+                            <th>COLOR</th>
+                            <th>PRICE</th>
+                            <th>QUANTITY</th>
+                            <th>DISCOUNT</th>
+                            <th>AMOUNT</th>
+                        </tr>
+                        ${invoiceDetailsHtml}
+                        <tr>
+                            <td class="text-center" colSpan="6">Temporary</td>
+                            <td class="text-center">${invoice.ship}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colSpan="6"><b>TOTAL</b></td>
+                            <td class="text-center"><b>${invoice.total}</b></td>
+                        </tr>
+                    </table>
+                </div>
+                <p>If you have any questions or need further assistance, feel free to contact us.</p>
+                <p>Best regards,</p>
+                <p>FASHION</p>
+            </div>`);
+        } else {
+            await sendEmail(email, 'REACT FASHION', `
+            <div>
+                <p>Dear  ${account.name},</p>
+                <p>Invoice code: ${invoice.id}</p>
+                <p>Your order is pending approval and ready for delivery.</p>
+                <div>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>SIZE</th>
+                            <th>COLOR</th>
+                            <th>PRICE</th>
+                            <th>QUANTITY</th>
+                            <th>DISCOUNT</th>
+                            <th>AMOUNT</th>
+                        </tr>
+                        ${invoiceDetailsHtml}
+                        <tr>
+                            <td class="text-center" colSpan="6">Temporary</td>
+                            <td class="text-center">${invoice.ship}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colSpan="6"><b>TOTAL</b></td>
+                            <td class="text-center"><b>${invoice.total}</b></td>
+                        </tr>
+                    </table>
+                </div>
+                <p>If you have any questions or need further assistance, feel free to contact us.</p>
+                <p>Best regards,</p>
+                <p>FASHION</p>
+            </div>`);
+        }
+
+        return {
             err: response ? 0 : 2,
             msg: response ? 'Cập nhật invoice thành công.' : 'Cập nhật invoice không thành công',
             response: response || null
-        })
-    } catch (error) { reject(error); }
-});
+        };
+    } catch (error) {
+        console.error('Error updating invoice:', error);
+        throw error; // Rethrow the error to propagate it to the caller
+    }
+};
+
 
 export const completeInvoicesService = ({ id, idState }) => new Promise(async (resolve, reject) => {
     try {

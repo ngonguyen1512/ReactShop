@@ -121,8 +121,22 @@
     height: 100%;
     display: flex;
 }
+.detail .detail_image .image-container {
+    width: 70%;
+    cursor: zoom-in;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
 .detail .detail_image .image-img {
-    height: 70%;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+.detail .detail_image .image-container:hover .image-img {
+    transform-origin: var(--x) var(--y);
+    transform: scale(2);
 }
 .detail .detail_image .detail_image-bar {
     width: 20%;

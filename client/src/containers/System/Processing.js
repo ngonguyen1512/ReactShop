@@ -15,7 +15,7 @@ const Processing = () => {
   const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
 
   const [payload, setPayload] = useState({
-    id: '', idAccept: idcurrent, idShip: '', idState: ''
+    id: '', idAccept: idcurrent, idShip: '' || 0, idState: '' || 6
   })
 
   const handleSubmitApprove = async () => {
@@ -25,7 +25,7 @@ const Processing = () => {
   }
 
   const handleSubmitNo = async () => {
-    setPayload(prevPayload => ({ ...prevPayload, idAccept: idcurrent, idShip: 0, idState: 6 }));
+    setPayload(prevPayload => ({ ...prevPayload, idAccept: idcurrent}));
     dispatch(actions.updateInvoices(payload))
     setShouldRefetch(true);
   }

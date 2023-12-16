@@ -2,6 +2,7 @@ import icons from '../../utils/icons'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../../components/index'
 import * as actions from '../../store/actions'
+import { Magnifier } from 'react-image-magnifiers';
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { CartContext } from '../../contexts/Cart'
@@ -23,6 +24,7 @@ const Detail = () => {
   const [idSize, setIdSize] = useState(null)
   const [idColor, setIdColor] = useState(null)
   const [isLiked, setIsLiked] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
   const { likes } = useSelector(state => state.app)
   const [currentPath, setCurrentPath] = useState('')
   const { colors } = useSelector(state => state.color)
@@ -50,7 +52,6 @@ const Detail = () => {
     }
   };
   const handleSelectIdSize = (idSize) => { setIdSize(idSize) }
-  // const handleButtonClick = (size) => { setSelectedSize(size) };
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -129,6 +130,15 @@ const Detail = () => {
       .map((desc, index) => <p key={index}>- {desc.trim()}</p>);
     return formattedDescriptions;
   };
+  const handleMouseMove = (event) => {
+    const image = document.getElementById('zoomImage');
+    const boundingBox = image.getBoundingClientRect();
+    const x = (event.clientX - boundingBox.left) / boundingBox.width;
+    const y = (event.clientY - boundingBox.top) / boundingBox.height;
+
+    image.style.setProperty('--x', x);
+    image.style.setProperty('--y', y);
+  }
 
   return (
     <>
@@ -141,9 +151,13 @@ const Detail = () => {
                   <ul>{generateThumbnailList()}</ul>
                 </div>
                 {selectedImageUrl && (
-                  <img src={`/images/${selectedImageUrl}`} alt={product.name}
-                    className='image-img object-cover transition duration-300'
-                  />
+                  <div class="image-container" onmousemove="handleMouseMove(event)">
+                    <img
+                      src={`/images/${selectedImageUrl}`}
+                      alt={product.name}
+                      className={`image-img object-cover transition duration-300 ${isHovered ? 'zoomed' : ''}`}
+                    />
+                  </div>
                 )}
                 <div className='space-bar'></div>
               </div>
@@ -239,7 +253,7 @@ const Detail = () => {
                           fullWidth
                           text={'BUY NOW'}
                           onClick={() => {
-                            addToCart(product)
+                            addToCart(product, idColor, idSize)
                             navigate('/' + path.CART)
                           }}
                         />

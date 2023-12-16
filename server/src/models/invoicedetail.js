@@ -5,6 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class InvoiceDetail extends Model {
     static associate(models) {
+      InvoiceDetail.belongsTo(models.Size, { foreignKey: 'idSize', targetKey: 'id', as: 'invoicedetail_size' })
+      InvoiceDetail.belongsTo(models.Color, { foreignKey: 'idColor', targetKey: 'id', as: 'invoicedetail_color' })
       InvoiceDetail.belongsTo(models.Invoice, { foreignKey: 'idInvoice', targetKey: 'id', as: 'detail_invoice' });
       InvoiceDetail.belongsTo(models.Product, { foreignKey: 'idProduct', targetKey: 'id', as: 'product_invoicedetail' });
     }

@@ -81,19 +81,17 @@ export const forgotPassword = ({ phone, email }) => new Promise(async (resolve, 
         if (account) {
             const newPassword = generateRandomPassword(6);
             sendEmail(email, 'REACT FASHION FORGOT PASSWORD',
-                `
-            <div>
-                <p>Dear User,</p>
-                <ul>
-                    <li><strong>Phone:</strong> ${phone}</li>
-                    <li><strong>Email:</strong> ${email}</li>
-                    <li><strong>Your new password is:</strong> ${newPassword}</li>
-                </ul>
-                <p>If you have any questions or need further assistance, feel free to contact us.</p>
-                <p>Best regards,</p>
-                <p>Your Company Name</p>
-            </div>
-          `
+                `<div>
+                    <p>Dear ${account.name},</p>
+                    <ul>
+                        <li><strong>Phone:</strong> ${phone}</li>
+                        <li><strong>Email:</strong> ${email}</li>
+                        <li><strong>Your new password:</strong> ${newPassword}</li>
+                    </ul>
+                    <p>If you have any questions or need further assistance, feel free to contact us.</p>
+                    <p>Best regards,</p>
+                    <p>Your Company Name</p>
+                </div>`
             );
             const updatedAccount = await db.Account.update(
                 { password: hashPassword(newPassword) },

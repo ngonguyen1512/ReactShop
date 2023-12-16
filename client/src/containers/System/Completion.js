@@ -25,8 +25,7 @@ const Completion = () => {
 
   if (invoicesall && Array.isArray(invoicesall)) {
     filteredInvoices = invoicesall.filter((item) =>
-      item.createdAt.includes(selectedDate) &&
-      (item.idState === 5 || item.idState === 6)
+      item.createdAt.includes(selectedDate) 
     );
   }
 
