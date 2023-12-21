@@ -1,9 +1,9 @@
+import Slider from 'rc-slider'
+import 'rc-slider/assets/index.css'
 import icons from '../utils/icons'
-import React, { memo, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import * as actions from '../store/actions'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate, createSearchParams } from 'react-router-dom'
 
 const { TiDeleteOutline } = icons
@@ -12,7 +12,7 @@ const Filter = ({ title, isDouble, content, type, list, texts }) => {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
-  const [value, setValue] = useState([0, 0]);
+  const [value, setValue] = useState([0, 0])
   const { samples } = useSelector(state => state.sample)
 
   const handleSliderChange = (newValue) => {
@@ -21,26 +21,24 @@ const Filter = ({ title, isDouble, content, type, list, texts }) => {
       search: createSearchParams({ min: value[0], max: value[1] }).toString()
     });
     setValue(newValue);
-    if (onchange) {
-      onchange(newValue);
-    }
+    if (onchange) onchange(newValue);
   };
   const handleDeleteClick = () => {
-    const newSliderValues = [0, 0];
-    handleSliderChange(newSliderValues);
+    const newSliderValues = [0, 0]
+    handleSliderChange(newSliderValues)
     navigate('/')
   };
 
   useEffect(() => {
-    dispatch(actions.getAllSamples());
+    dispatch(actions.getAllSamples())
   }, [dispatch]);
 
   const handleFilterPosts = (id) => {
     navigate({
       pathname: location?.pathname,
       search: createSearchParams({ [type]: id }).toString()
-    });
-  };
+    })
+  }
 
   return (
     <div className='filter'>
@@ -62,9 +60,8 @@ const Filter = ({ title, isDouble, content, type, list, texts }) => {
           {content?.length > 0 && list?.length > 0 && content.map(item => (
             <div className='tagname center'>
               {samples?.length > 0 && samples.map(items =>
-                items.idCategory === item.id && item.name === list && items.idState === 2 &&(
-                  <div
-                    onClick={() => handleFilterPosts(items.id)}
+                items.idCategory === item.id && item.name === list && items.idState === 2 && (
+                  <div onClick={() => handleFilterPosts(items.id)}
                     className={`mx-2 px-2 py-1 hover:text-blue-500`}
                   >{items.name}</div>
                 )

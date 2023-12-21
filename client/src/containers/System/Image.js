@@ -1,11 +1,6 @@
-import axios from 'axios';
+import * as actions from '../../store/actions'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
-import icons from '../../utils/icons'
-
-const { TiDeleteOutline } = icons;
 
 const styletd = 'text-center px-4 py-2 '
 
@@ -13,12 +8,7 @@ const Image = () => {
     const dispatch = useDispatch();
     const [searchValue, setSearchValue] = useState("")
     const [shouldReload, setShouldReload] = useState(false)
-    const [invalidFields, setInvalidFields] = useState([])
     const [shouldRefetch, setShouldRefetch] = useState(false)
-    const { currentData } = useSelector(state => state.user)
-    const { functions } = useSelector(state => state.function)
-    const { categories } = useSelector(state => state.category)
-    const permis = currentData.idPermission
 
     const { images } = useSelector(state => state.image)
 
@@ -40,9 +30,8 @@ const Image = () => {
         if (shouldRefetch) {
             dispatch(actions.getImages())
             setShouldRefetch(false)
-        } else {
+        } else
             dispatch(actions.getImages())
-        }
     }, [dispatch, shouldRefetch])
 
     const renderTableRow = (item) => {

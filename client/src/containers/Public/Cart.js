@@ -1,24 +1,24 @@
-import React, { useCallback, useContext, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { path } from '../../utils/constant';
+import icons from '../../utils/icons'
 import { Button } from '../../components'
 import { NavLink } from 'react-router-dom'
-import { CartContext } from '../../contexts/Cart';
-import icons from '../../utils/icons'
+import { path } from '../../utils/constant'
 import * as actions from '../../store/actions'
+import { useNavigate } from 'react-router-dom'
+import { CartContext } from '../../contexts/Cart'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useCallback, useContext, useEffect } from 'react'
 
 const { TiDeleteOutline } = icons
 
 const Cart = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { cartItems } = useContext(CartContext)
   const { colors } = useSelector(state => state.color)
   const { images } = useSelector(state => state.image)
-  const { dimensions } = useSelector(state => state.dimension)
   const { isLoggedIn } = useSelector(state => state.auth)
-  const { cartItems } = useContext(CartContext);
-
+  const { dimensions } = useSelector(state => state.dimension)
+  
   const goLogin = useCallback((flag) => {
     navigate('/' + path.LOGIN, { state: { flag } })
   }, [navigate])
@@ -43,8 +43,8 @@ const Cart = () => {
                   <th>ID</th>
                   <th className='image w-[10%]'>IMAGE</th>
                   <th>NAME</th>
-                  <th className=''>SIZE</th>
-                  <th className=''>COLOR</th>
+                  <th>SIZE</th>
+                  <th>COLOR</th>
                   <th>QUANTITY</th>
                   <th>PRICE</th>
                   <th className='w-[25%]'>TOTAL</th>

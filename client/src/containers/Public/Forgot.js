@@ -1,36 +1,38 @@
+import Swal from 'sweetalert2'
 import React, { useState } from 'react'
+import { path } from '../../utils/constant'
+import * as actions from '../../store/actions'
+import { useNavigate } from 'react-router-dom'
 import { InputForm, Button } from "../../components"
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'
-import { path } from '../../utils/constant'
-import * as actions from '../../store/actions';
 
 const Forgot = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { msg } = useSelector(state => state.auth)
     const [invalidFields, setInvalidFields] = useState([])
-    const [payload, setPayload] = useState({phone: '', email: ''});
+    const [payload, setPayload] = useState({phone: '', email: ''})
 
     const handleSubmit = async () => {
         let finalPayload = payload;
         let invalids = validate(finalPayload);
         if (invalids === 0) {
             try {
-                dispatch(actions.forgot(payload));
+                dispatch(actions.forgot(payload))
                 navigate('/' + path.LOGIN)
             } catch (error) {
-                Swal.fire('Success!', msg, 'success');
+                Swal.fire({
+                    title: 'Success!', text: msg,
+                    icon: 'success', timer: 1000,
+                    showConfirmButton: false
+                });
             }
         }
     };
 
-
     const validate = (payload) => {
         let invalids = 0;
         let fields = Object.entries(payload);
-
         fields.forEach(item => {
             if (item[1] === '') {
                 setInvalidFields(prev => [...prev, {

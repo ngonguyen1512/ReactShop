@@ -1,16 +1,16 @@
+import { path } from '../../utils/constant'
+import { useNavigate } from 'react-router-dom'
+import * as actions from '../../store/actions'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
 import { Button, InputForm, TextArea } from '../../components'
-import { path } from '../../utils/constant';
-import { useNavigate } from 'react-router-dom';
 
 const UpdateProduct = (item) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [invalidFields, setInvalidFields] = useState([])
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { states } = useSelector(state => state.state)
   const { samples } = useSelector(state => state.sample)
+  const [invalidFields, setInvalidFields] = useState([])
   const { categories } = useSelector(state => state.category)
 
   const [payload, setPayload] = useState({

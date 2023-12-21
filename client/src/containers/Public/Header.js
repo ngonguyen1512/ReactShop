@@ -8,7 +8,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
 import { NavLink, createSearchParams, useLocation, useNavigate } from 'react-router-dom'
 
-const { GoSearch, GiWolfHowl, MdOutlineShoppingCart, TiDeleteOutline } = icons
+const { IoIosMenu, GoSearch, GiWolfHowl, MdOutlineShoppingCart, TiDeleteOutline } = icons
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const Header = () => {
   const { removeAllFromCart } = cartContext
   const [searchValue, setSearchValue] = useState("")
   const [isShowMenu, setIsShowMenu] = useState(false)
+  const [isShowCate, setIsShowCate] = useState(false)
   const { images } = useSelector(state => state.image)
   const [shouldReload, setShouldReload] = useState(false)
   const [isShowSearch, setIsShowSearch] = useState(false)
@@ -42,12 +43,12 @@ const Header = () => {
 
   const handleSearch = (event) => {
     setSearchValue(event.target.value);
-    setShouldReload(event.target.value !== "");
+    setShouldReload(event.target.value !== "")
   };
 
   let filteredProducts = [];
   if (products && Array.isArray(products)) {
-    const searchRegex = new RegExp(searchValue, 'i');
+    const searchRegex = new RegExp(searchValue, 'i')
     filteredProducts = products.filter((item) =>
       searchRegex.test(item.name)
     );
@@ -101,9 +102,10 @@ const Header = () => {
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
-        setIsShowSearch(false);
-        setIsShowMenu(false);
-        setIsShowMiniCart(false);
+        setIsShowCate(false)
+        setIsShowMenu(false)
+        setIsShowSearch(false)
+        setIsShowMiniCart(false)
       }
     };
     document.addEventListener('mousedown', handleOutsideClick);
@@ -116,6 +118,20 @@ const Header = () => {
     <div className='header'>
       <div className='header-content'>
         <div className='logo-cate'>
+          <div className='menu_mini'>
+            <span onClick={() => setIsShowCate(prev => !prev)}><IoIosMenu /></span>
+            {isShowCate && (
+              <div className='cate_mini'>
+              {categories?.length > 0 && categories.map(item => {
+                return (
+                  <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content' onClick={() => handleFilterPosts(item.id)}>
+                    {item.name}
+                  </NavLink>
+                )
+              })}
+            </div>
+            )}
+          </div>
           <NavLink to={'/'} className='logo text-2xl'>
             <GiWolfHowl /> <p className='text-logo'> FASHION</p>
           </NavLink>

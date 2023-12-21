@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { formatVietnameseToString } from '../utils/common/formatVietnameseToString';
-import { NavLink } from 'react-router-dom';
-import { Fade } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css';
-import * as actions from '../store/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
+import * as actions from '../store/actions'
+import { Fade } from 'react-slideshow-image'
+import 'react-slideshow-image/dist/styles.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { formatVietnameseToString } from '../utils/common/formatVietnameseToString'
 
 const Slide = () => {
     const dispatch = useDispatch();

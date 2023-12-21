@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
-import { Header } from '../Public/index'
-import { Outlet, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
 import $ from 'jquery'
 import Swal from 'sweetalert2'
+import React, { useEffect } from 'react'
+import { Header } from '../Public/index'
+import * as actions from '../../store/actions'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 const HomeServer = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { isLoggedIn } = useSelector(state => state.auth)
 
   useEffect(() => {

@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Filter } from '../../components/index';
-import { List, Pagination } from './index';
 import { useSelector } from 'react-redux'
+import { List, Pagination } from './index'
 import { useLocation } from 'react-router-dom'
-import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
+import { Filter } from '../../components/index'
+import React, { useEffect, useState } from 'react'
 
 const Retal = () => {
+  const location = useLocation()
+  const path = location.pathname
+  const parts = path.split('/')
+  const lastPart = parts[parts.length - 1]
+  const [currentPage, setCurrentPage] = useState(1)
+  const [idCategory, setIdCategory] = useState('none')
   const { categories } = useSelector(state => state.category)
   const { count, products_limit } = useSelector(state => state.product)
-  const [currentPage, setCurrentPage] = useState(1);
-  const [idCategory, setIdCategory] = useState('none');
-  const location = useLocation()
-  const path = location.pathname;
-  const parts = path.split('/');
-  const lastPart = parts[parts.length - 1];
 
   useEffect(() => {
     const category = categories?.find(item => `/${item.name}` === location.pathname)

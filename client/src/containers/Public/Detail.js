@@ -1,12 +1,11 @@
 import icons from '../../utils/icons'
-import React, { useEffect, useState } from 'react'
-import { Button } from '../../components/index'
-import * as actions from '../../store/actions'
-import { Magnifier } from 'react-image-magnifiers';
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { CartContext } from '../../contexts/Cart'
 import { path } from '../../utils/constant'
+import * as actions from '../../store/actions'
+import { Button } from '../../components/index'
+import { CartContext } from '../../contexts/Cart'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const { IoHeartSharp, IoHeartOutline } = icons
 
@@ -56,14 +55,12 @@ const Detail = () => {
   useEffect(() => {
     setCurrentPath(location.pathname);
     window.scrollTo(0, 0);
-
     const firstImage = images.find(item => item.idProduct === id);
     if (firstImage) {
       setSelectedImageIndex(0);
       setSelectedImage(firstImage);
       setSelectedImageUrl(firstImage.image1);
     }
-
     const firstColor = quantities.find(item => item.idProduct === id);
     if (quantities?.length > 0) {
       setIdColor(firstColor.idColor)
@@ -133,12 +130,12 @@ const Detail = () => {
   const handleMouseMove = (event) => {
     const image = document.getElementById('zoomImage');
     const boundingBox = image.getBoundingClientRect();
-    const x = (event.clientX - boundingBox.left) / boundingBox.width;
-    const y = (event.clientY - boundingBox.top) / boundingBox.height;
+    const x = (event.clientX - boundingBox.left) / boundingBox.width * 100;
+    const y = (event.clientY - boundingBox.top) / boundingBox.height * 100;
 
-    image.style.setProperty('--x', x);
-    image.style.setProperty('--y', y);
-  }
+    image.style.setProperty('--x', `${x}%`);
+    image.style.setProperty('--y', `${y}%`);
+  };
 
   return (
     <>
@@ -151,13 +148,15 @@ const Detail = () => {
                   <ul>{generateThumbnailList()}</ul>
                 </div>
                 {selectedImageUrl && (
-                  <div class="image-container" onmousemove="handleMouseMove(event)">
+                  <div class="image-container" onMouseMove={handleMouseMove}>
                     <img
+                      id="zoomImage"
                       src={`/images/${selectedImageUrl}`}
                       alt={product.name}
                       className={`image-img object-cover transition duration-300 ${isHovered ? 'zoomed' : ''}`}
                     />
                   </div>
+
                 )}
                 <div className='space-bar'></div>
               </div>

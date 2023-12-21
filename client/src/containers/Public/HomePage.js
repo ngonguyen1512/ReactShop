@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Filter } from '../../components/index'
-import { List, Pagination } from './index'
 import { useSelector } from 'react-redux'
+import { List, Pagination } from './index'
+import { Filter } from '../../components/index'
 
 const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1)

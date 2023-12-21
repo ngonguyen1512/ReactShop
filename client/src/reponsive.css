@@ -1,3 +1,9 @@
+@media (min-width: 750px) {
+    .header .header-content .logo-cate .menu_mini {
+        display: none;
+    }
+}
+
 @media (min-width: 850px) {
     .personal .main-personal {
         margin: 4% 0;
@@ -78,7 +84,7 @@
     .create_product .shows {
         grid-column: span 1 / span 1;
     }
-    .list {
+    .lists {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
@@ -122,6 +128,27 @@
     .header .header-content .search-cart-login {
         right: 8%;
     }
+    .header .header-content .logo-cate .menu_mini {
+        display: block;
+    }
+    .header .header-content .logo-cate .menu_mini .cate_mini {
+        top: 155%;
+        z-index: 50;
+        display: flex;
+        font-weight: 400;
+        min-width: 150px;
+        font-size: medium;
+        position: absolute;
+        flex-direction: column;
+        background-color: #fff;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        padding: 0.5rem 1.25rem 1rem 1.25rem;
+        box-shadow:
+            -10px 0 10px -5px rgba(0, 0, 0, 0.2), /* Cạnh bên trái */
+            10px 0 10px -5px rgba(0, 0, 0, 0.2), /* Cạnh bên phải */
+            0 10px 10px -5px rgba(0, 0, 0, 0.2); /* Cạnh dưới */
+    }
 }
 @media (max-width: 599px) {
     .cart .cart_table table .image {
@@ -130,7 +157,7 @@
 }
 
 @media (max-width: 499px) {
-    .list {
+    .lists {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .detail .detail_content .detail_content-button {

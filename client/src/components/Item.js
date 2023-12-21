@@ -1,8 +1,8 @@
 import icons from '../utils/icons'
-import React, { useEffect, useState } from 'react'
-import * as actions from '../store/actions'
-import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import * as actions from '../store/actions'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { IntlProvider, FormattedNumber } from 'react-intl'
 import { formatVietnameseToString } from '../utils/common/formatVietnameseToString'
 
@@ -17,16 +17,16 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
   const { images } = useSelector(state => state.image)
   const [changedImage, setChangedImage] = useState(null)
   const { isLoggedIn } = useSelector(state => state.auth)
-
-  const handleMouseEnter = () => { setChangedImage('image2') };
-  const handleMouseLeave = () => { setChangedImage('image1') };
+  const { quantities } = useSelector(state => state.quantity)
+  const handleMouseEnter = () => { setChangedImage('image2') }
+  const handleMouseLeave = () => { setChangedImage('image1') }
 
   const handleLike = (id) => {
     const updatedPayload = { idAccount: idCurrent, idProduct: id };
     if (Array.isArray(likes) && !likes.some((item) => item.idProduct === id && item.idAccount === idCurrent)) {
-      dispatch(actions.createLikes(updatedPayload));
-      setLikess([...likess, updatedPayload]);
-      setIsLiked(true);
+      dispatch(actions.createLikes(updatedPayload))
+      setLikess([...likess, updatedPayload])
+      setIsLiked(true)
     }
   };
 
@@ -34,7 +34,7 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
     const updatedPayload = { idAccount: idCurrent, idProduct: id };
     dispatch(actions.deleteLikes(updatedPayload));
     const updatedLikes = likess.filter((item) => item.idProduct !== id || item.idAccount !== idCurrent);
-    setLikess(updatedLikes);
+    setLikess(updatedLikes)
     setIsLiked(updatedLikes.some((item) => item.idProduct === id && item.idAccount === idCurrent) || false);
   };
 
@@ -42,31 +42,23 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
     if (Array.isArray(likes)) {
       const hasLiked = likes.some(
         (item) => item.idProduct === id && item.idAccount === idCurrent
-      );
-      setIsLiked(hasLiked);
+      )
+      setIsLiked(hasLiked)
     }
-  }, [likes, id, idCurrent]);
+  }, [likes, id, idCurrent])
 
   useEffect(() => {
     dispatch(actions.getLikes())
     dispatch(actions.getImages())
+    dispatch(actions.getQuantities())
   }, [dispatch])
 
   const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   };
 
   return (
     <div className='item' key={id}>
-      {isLoggedIn ? (
-        <div className='like-unlike'>
-          {isLiked ? (
-            <span className="icons" onClick={() => handleUnLike(id)}><IoHeartSharp style={{ color: 'red' }} /></span>
-          ) : (
-            <span className="icons" onClick={() => handleLike(id)}><IoHeartOutline /></span>
-          )}
-        </div>
-      ) : (<></>)}
       <NavLink onClick={handleClick} to={`/${formatVietnameseToString(nameCategory)}/${formatVietnameseToString(name)}/${id}`} onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}>
         <div className='image center'>
@@ -74,7 +66,36 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
             if (item.idProduct === id && !displayedImage) {
               displayedImage = true;
               return (
-                <img key={item.id} src={`/images/${item[changedImage || 'image1']}`} alt={name} className='h-[80%] object-cover transition duration-300' />
+                <div className='relative h-[80%]'>
+                  <div className='heart'>
+                    {isLoggedIn && (
+                      <div className='like-unlike'>
+                        {isLiked ? (
+                          <span className="icons" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleUnLike(id); }}><IoHeartSharp style={{ color: 'red' }} /></span>
+                        ) : (
+                          <span className="icons" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleLike(id) }}><IoHeartOutline /></span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <img key={item.id} alt={name}
+                    src={`/images/${item[changedImage || 'image1']}`}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'duration-300' }}
+                  />
+                  <div className='color'>
+                    {quantities.filter(item => item.idProduct === id).reduce((uniqueColors, item) => {
+                      if (!uniqueColors.some(color => color.code === item.quantity_color.code))
+                        uniqueColors.push({ code: item.quantity_color.code, sizes: [] });
+                      const colorIndex = uniqueColors.findIndex(color => color.code === item.quantity_color.code);
+                      uniqueColors[colorIndex].sizes.push(item.size);
+                      return uniqueColors;
+                    }, [])
+                      .map(color => (
+                        <span className='w-[30px] h-[10px] ' style={{ backgroundColor: color.code }}></span>
+                      )
+                    )}
+                  </div>
+                </div>
               )
             } return null;
           })}

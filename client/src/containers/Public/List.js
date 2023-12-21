@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import * as actions from '../../store/actions'
 import { Item } from '../../components/index'
+import * as actions from '../../store/actions'
 import { useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 const List = ({category}) => {
-  // console.log(category)
   const dispatch = useDispatch();
   const [searchParmas] = useSearchParams();
   const { products_limit } = useSelector(state => state.product)

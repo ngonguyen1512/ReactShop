@@ -1,27 +1,25 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
+import Swal from 'sweetalert2'
 import icons from '../../utils/icons'
-import Swal from 'sweetalert2';
-
-const { TiDeleteOutline, BiDetail, CiEdit } = icons;
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
 const styletd = 'text-center py-2 '
+const { TiDeleteOutline, BiDetail } = icons
 
 const Account = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("")
+  const { states } = useSelector(state => state.state)
+  const [invalidFields, setInvalidFields] = useState([])
   const [isShowDetail, setIsShowDetail] = useState(false)
   const [shouldReload, setShouldReload] = useState(false)
-  const [invalidFields, setInvalidFields] = useState([])
-  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { currentData } = useSelector(state => state.user)
-  const { states } = useSelector(state => state.state)
-  const { functions } = useSelector(state => state.function)
   const { msg, update } = useSelector(state => state.auth)
   const { accounts } = useSelector(state => state.account)
+  const [shouldRefetch, setShouldRefetch] = useState(false)
+  const { functions } = useSelector(state => state.function)
   const { permissions } = useSelector(state => state.permission)
   const permis = currentData.idPermission
 
@@ -35,13 +33,13 @@ const Account = () => {
     const searchRegex = new RegExp(searchValue, 'i');
     filteredAccounts = accounts.filter((item) =>
       searchRegex.test(item.name)
-    );
+    )
   }
 
   const [payload, setPayload] = useState({
     id: '' || null, name: '', phone: '', email: '', address: '',
     password: '', idPermission: '', idState: ''
-  });
+  })
   const handleSubmitCreate = async () => {
     let finalPayload = payload;
     let invalids = validate(finalPayload);
@@ -53,7 +51,7 @@ const Account = () => {
 
   const [payloadu, setPayloadu] = useState({
     id: '', idPermission: '', idState: '',
-  });
+  })
 
   const handleSubmitUpdate = async () => {
     let canUpdate = true;
@@ -63,12 +61,12 @@ const Account = () => {
           canUpdate = false;
           Swal.fire('Oops !', "You can't change customer status or permission.", 'error');
         }
-      });
+      })
     if (canUpdate) {
       dispatch(actions.updateAccountsByAdmin(payloadu));
       setShouldRefetch(true);
     }
-  };
+  }
   const validate = (payload) => {
     let invalids = 0;
     let fields = Object.entries(payload);
@@ -133,7 +131,7 @@ const Account = () => {
 
   useEffect(() => {
     msg && Swal.fire('Oops !', msg, 'error');
-  }, [msg, update]);
+  }, [msg, update])
 
   useEffect(() => {
     let searchParamsObject = {}
@@ -155,9 +153,9 @@ const Account = () => {
   const [payloada, setPayloada] = useState({ id: '' || null })
   const renderTableRow = (item) => {
     const handleClickRow = () => {
-      setPayload({ ...payload, id: item.id });
+      setPayload({ ...payload, id: item.id })
       setPayloadu({ ...payloadu, id: item.id, idPermission: item.idPermission, idState: item.idState });
-    };
+    }
     const handleDetail = (e) => {
       e.stopPropagation();
       if (payloada.id === item.id) {
@@ -167,7 +165,7 @@ const Account = () => {
         setPayloada({ ...payloada, id: item.id });
         setIsShowDetail(true);
       }
-    };
+    }
     return (
       <>
         <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>

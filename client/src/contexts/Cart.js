@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
+import React, { Component } from 'react'
 
-export const CartContext = React.createContext();
+export const CartContext = React.createContext()
 
 export class CartProvider extends Component {
     constructor(props) {

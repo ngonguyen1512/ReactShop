@@ -14,22 +14,18 @@ const Like = () => {
   })
   return (
     <div className='like'>
-      {likes?.length > 0 && likes.map(item => {
-        if (item.idAccount === idcurrent)
-          return (
-            <Item
-              key={item?.like_product?.id}
-              id={item?.like_product?.id}
-              name={item?.like_product?.name}
-              discount={item?.like_product?.discount}
-              price={item?.like_product?.price}
-              idCategory={item?.like_product?.idCategory}
-              nameCategory={item?.like_product?.product_category?.name}
-              idCurrent={idcurrent}
-            />
-          )
-        return null
-      })}
+      {likes?.length > 0 && likes.map(item => item.idAccount === idcurrent && (
+        <Item
+          idCurrent={idcurrent}
+          id={item?.like_product?.id}
+          key={item?.like_product?.id}
+          name={item?.like_product?.name}
+          price={item?.like_product?.price}
+          discount={item?.like_product?.discount}
+          idCategory={item?.like_product?.idCategory}
+          nameCategory={item?.like_product?.product_category?.name}
+        />
+      ))}
     </div>
   )
 }

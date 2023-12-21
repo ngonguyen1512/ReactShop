@@ -1,23 +1,22 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
+import axios from 'axios'
 import icons from '../../utils/icons'
-import Swal from 'sweetalert2';
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
-const { TiDeleteOutline, MdOutlineDeleteSweep } = icons;
 const styletd = 'text-center px-4 py-2 '
+const { TiDeleteOutline, MdOutlineDeleteSweep } = icons
 
 const Slide = () => {
     const dispatch = useDispatch();
     const [searchValue, setSearchValue] = useState("")
-    const [shouldReload, setShouldReload] = useState(false)
-    const [invalidFields, setInvalidFields] = useState([])
-    const [shouldRefetch, setShouldRefetch] = useState(false)
     const { states } = useSelector(state => state.state)
-    const { slides, msg } = useSelector(state => state.slide)
+    const { slides } = useSelector(state => state.slide)
+    const [invalidFields, setInvalidFields] = useState([])
+    const [shouldReload, setShouldReload] = useState(false)
     const { currentData } = useSelector(state => state.user)
+    const [shouldRefetch, setShouldRefetch] = useState(false)
     const { functions } = useSelector(state => state.function)
     const permis = currentData.idPermission
 
@@ -148,8 +147,7 @@ const Slide = () => {
 
     return (
         <div className='slide'>
-            <div className='header-slide between'>
-                <span></span>
+            <div className='header-slide end'>
                 <input
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
                     type="text"

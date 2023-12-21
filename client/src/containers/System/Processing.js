@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { Button, InputForm } from '../../components/index'
-import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button, InputForm } from '../../components/index'
 
 const Processing = () => {
   const dispatch = useDispatch()
   const uniqueSizeIds = new Set()
   const [invalidFields, setInvalidFields] = useState([])
   const { accounts } = useSelector(state => state.account)
+  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { invoicesall } = useSelector(state => state.invoice)
+  const [selectedInvoiceId, setSelectedInvoiceId] = useState(null)
   const { currentData } = useSelector(state => state.user)
   const idcurrent = parseInt(currentData.id)
-  const [shouldRefetch, setShouldRefetch] = useState(false);
-  const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
-
+  
   const [payload, setPayload] = useState({
     id: '', idAccept: idcurrent, idShip: '' || 0, idState: '' || 6
   })

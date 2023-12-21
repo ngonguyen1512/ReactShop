@@ -1,21 +1,19 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
 import icons from '../../utils/icons'
-import Swal from 'sweetalert2';
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
-const { TiDeleteOutline, MdOutlineDeleteSweep } = icons;
 const styletd = 'text-center py-2 '
+const { TiDeleteOutline, MdOutlineDeleteSweep } = icons
 
 const Allocations = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("")
-  const [shouldReload, setShouldReload] = useState(false)
   const [invalidFields, setInvalidFields] = useState([])
-  const [shouldRefetch, setShouldRefetch] = useState(false)
+  const [shouldReload, setShouldReload] = useState(false)
   const { currentData } = useSelector(state => state.user)
+  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { functions } = useSelector(state => state.function)
   const { transfers } = useSelector(state => state.transfer)
   const { allallocations } = useSelector(state => state.allocation)

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Button, InputForm } from '../../components'
-import { useDispatch, useSelector } from 'react-redux'
+import { path } from '../../utils/constant'
 import * as actions from '../../store/actions'
 import { useNavigate } from 'react-router-dom'
-import { path } from '../../utils/constant'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
 const UpdateAccount = () => {
   const navigate = useNavigate()
@@ -11,6 +11,7 @@ const UpdateAccount = () => {
   const [invalidFields, setInvalidFields] = useState([])
   const { currentData } = useSelector(state => state.user)
   const idcurrent = parseInt(currentData.id)
+  
   const [payload, setPayload] = useState({
     id: idcurrent, name: '', email: '', address: ''
   });

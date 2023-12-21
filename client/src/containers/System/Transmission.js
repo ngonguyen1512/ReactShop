@@ -1,19 +1,19 @@
+import icons from '../../utils/icons'
+import { Button } from '../../components'
+import * as actions from '../../store/actions'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button } from '../../components'
-import icons from '../../utils/icons'
 
 const { TiDeleteOutline, MdOutlineDeleteSweep } = icons;
 const styletd = 'text-center py-2 '
 
 const Transmission = () => {
   const dispatch = useDispatch();
-  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { currentData } = useSelector(state => state.user)
+  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { functions } = useSelector(state => state.function)
-  const { permissions } = useSelector(state => state.permission)
   const { transfers } = useSelector(state => state.transfer)
+  const { permissions } = useSelector(state => state.permission)
   const { alltransmissions } = useSelector(state => state.transmission)
   const permis = currentData.idPermission
 

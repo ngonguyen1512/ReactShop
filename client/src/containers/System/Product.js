@@ -1,13 +1,12 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button } from '../../components'
 import icons from '../../utils/icons'
-import { Link, useNavigate } from 'react-router-dom';
-import { path } from '../../utils/constant';
+import { Button } from '../../components'
+import { path } from '../../utils/constant'
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-const { TiDeleteOutline, BiDetail, CiEdit } = icons;
+const { BiDetail, CiEdit } = icons;
 
 const styletd = 'text-center px-4 py-2 '
 
@@ -17,10 +16,9 @@ const Product = () => {
     const [searchValue, setSearchValue] = useState("")
     const [shouldReload, setShouldReload] = useState(false)
     const [isShowDetail, setIsShowDetail] = useState(false)
-    const [invalidFields, setInvalidFields] = useState([])
-    const [shouldRefetch, setShouldRefetch] = useState(false)
     const { products } = useSelector(state => state.product)
     const { currentData } = useSelector(state => state.user)
+    const [shouldRefetch, setShouldRefetch] = useState(false)
     const { functions } = useSelector(state => state.function)
     const permis = currentData.idPermission
 

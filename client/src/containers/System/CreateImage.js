@@ -3,16 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../store/actions'
 import { Button, InputForm } from '../../components'
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
 import { path } from '../../utils/constant';
 import { useNavigate } from 'react-router-dom';
 
 const CreateImage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [invalidFields, setInvalidFields] = useState([])
-    const { states } = useSelector(state => state.state)
     const { colors } = useSelector(state => state.color)
+    const [invalidFields, setInvalidFields] = useState([])
     const { products } = useSelector(state => state.product)
 
     const [payload, setPayload] = useState({
@@ -27,39 +26,6 @@ const CreateImage = () => {
         });
     };
 
-    // const handleSubmitCreate = async () => {
-    //     let finalPayload = { ...payload };
-    //     let fileInput = document.querySelector('input[type="file"]');
-    //     let file = fileInput.files[0];
-    //     finalPayload = {
-    //         ...payload, image1: file.name, image2: file.name, image3: file.name, image4: file.name,
-    //     };
-    //     dispatch(actions.createImages(finalPayload)).then(() => {
-    //         uploadFileAndDispatch(file)
-    //             .then(response => {
-    //                 console.log('File uploaded to server:', response.data);
-    //             }).catch(error => {
-    //                 console.error('Error uploading file:', error);
-    //             });
-    //     }).catch(error => {
-    //         console.error('Error dispatching action:', error);
-    //     });
-    //     Swal.fire({
-    //         title: 'Bạn có muốn thêm ảnh tiếp hay hoành thành?',
-    //         icon: 'question',
-    //         showCancelButton: true,
-    //         confirmButtonText: 'Hoành thành',
-    //         cancelButtonText: 'Thêm tiếp',
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             navigate(path.PRODUCT);
-    //         } else {
-    //             setPayload([]);
-    //             navigate(path.CREATE_IMAGE, { replace: true });
-    //             window.location.reload();
-    //         }
-    //     });
-    // }
     const handleSubmitCreate = async () => {
         const finalPayload = { ...payload };
         try {
@@ -83,9 +49,9 @@ const CreateImage = () => {
             confirmButtonText: 'Hoành thành',
             cancelButtonText: 'Thêm tiếp',
         }).then((result) => {
-            if (result.isConfirmed) {
+            if (result.isConfirmed) 
                 navigate(path.PRODUCT);
-            } else {
+            else {
                 setPayload([]);
                 navigate(path.CREATE_IMAGE, { replace: true });
                 window.location.reload();

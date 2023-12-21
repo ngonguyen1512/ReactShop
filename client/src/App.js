@@ -1,12 +1,12 @@
 import { path } from './utils/constant'
+import { CartProvider } from './contexts/Cart'
 import { Routes, Route } from 'react-router-dom'
-import { Home, Login, HomePage, Forgot, Register, Cart, Retal, Detail, Personal, Information, ChangePassword, Order, Like, UpdateAccount, Payment } from './containers/Public'
-import {
-  HomeServer, Dashboard, Type, Sample, Category, Account, List, Menu,
-  Dimension, State, Slide, Color, Image, Invoice, Product, Transfer, Quantity, Function, CreateImage,
-  Permission, Role, Transmission, Allocation, TransferPage, CreateProduct, UpdateProduct, CreateDetail, Completion, Processing
+import { Home, Login, HomePage, Forgot, Register, Cart, Retal, Detail, Personal, Information, ChangePassword, 
+  Order, Like, UpdateAccount, Payment } from './containers/Public'
+import { HomeServer, Dashboard, Type, Sample, Category, Account, List, Menu, Dimension, State, Slide, Color, 
+  Image, Invoice, Product, Transfer, Quantity, Function, CreateImage,Permission, Role, Transmission, Allocation, 
+  TransferPage, CreateProduct, UpdateProduct, CreateDetail, Completion, Processing
 } from './containers/System'
-import { CartProvider } from './contexts/Cart';
 
 function App() {
   return (

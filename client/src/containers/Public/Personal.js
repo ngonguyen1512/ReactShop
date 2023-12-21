@@ -1,14 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
-import { path } from '../../utils/constant';
-import { Information, ChangePassword, Like, Order, UpdateAccount } from './index';
+import { useSelector } from 'react-redux'
+import { path } from '../../utils/constant'
+import { NavLink, useLocation } from 'react-router-dom'
+import { Information, ChangePassword, Like, Order, UpdateAccount } from './index'
 
 const Personal = () => {
     const location = useLocation()
     const pathurl = location.pathname
     const parts = pathurl.split('/')
-    const last = parts[parts.length - 1];
+    const last = parts[parts.length - 1]
     const { currentData } = useSelector(state => state.user)
 
     return (

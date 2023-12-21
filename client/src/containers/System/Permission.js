@@ -1,12 +1,11 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
+import Swal from 'sweetalert2'
 import icons from '../../utils/icons'
-import Swal from 'sweetalert2';
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
-const { TiDeleteOutline, BiDetail } = icons;
+const { TiDeleteOutline } = icons
 const styletd = 'text-center py-2 '
 
 const Permission = () => {
@@ -91,21 +90,18 @@ const Permission = () => {
             setPayload({ ...payload, id: item.id, name: item.name, idState: item.idState });
         };
         return (
-            <>
-                <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
-                    <td className={`${styletd}`}>{item.id}</td>
-                    <td className={styletd}>{new Date(item.createdAt).toLocaleDateString()}</td>
-                    <td className='py-2'>{item.name}</td>
-                    <td className={styletd}>{item.idState}</td>
-                </tr>
-            </>
+            <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
+                <td className={`${styletd}`}>{item.id}</td>
+                <td className={styletd}>{new Date(item.createdAt).toLocaleDateString()}</td>
+                <td className='py-2'>{item.name}</td>
+                <td className={styletd}>{item.idState}</td>
+            </tr>
         );
     };
 
     return (
         <div className='permission'>
-            <div className='header-permission between'>
-                <span></span>
+            <div className='header-permission end'>
                 <input
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
                     type="text"

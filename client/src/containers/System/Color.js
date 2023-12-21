@@ -1,13 +1,11 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
+import Swal from 'sweetalert2'
 import icons from '../../utils/icons'
-import Swal from 'sweetalert2';
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
-const { TiDeleteOutline } = icons;
-
+const { TiDeleteOutline } = icons
 const styletd = 'text-center px-4 py-2 '
 
 const Color = () => {

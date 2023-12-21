@@ -1,23 +1,21 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
+import Swal from 'sweetalert2'
 import icons from '../../utils/icons'
-import Swal from 'sweetalert2';
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
-const { TiDeleteOutline } = icons;
-
+const { TiDeleteOutline } = icons
 const styletd = 'text-center px-4 py-2 '
 
 const Dimension = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("")
-  const [shouldReload, setShouldReload] = useState(false)
-  const [invalidFields, setInvalidFields] = useState([])
-  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { states } = useSelector(state => state.state)
+  const [invalidFields, setInvalidFields] = useState([])
+  const [shouldReload, setShouldReload] = useState(false)
   const { currentData } = useSelector(state => state.user)
+  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { functions } = useSelector(state => state.function)
   const { dimensions, msg } = useSelector(state => state.dimension)
   const permis = currentData.idPermission

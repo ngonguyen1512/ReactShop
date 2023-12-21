@@ -1,26 +1,18 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
+import { path } from '../../utils/constant'
+import { useNavigate } from 'react-router-dom'
 import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, InputForm, TextArea } from '../../components'
-import icons from '../../utils/icons'
-import Swal from 'sweetalert2';
-import { path } from '../../utils/constant';
-import { useNavigate } from 'react-router-dom';
-
-const { TiDeleteOutline, MdOutlineDeleteSweep } = icons;
-const styletd = 'text-center py-2 '
 
 const CreateProduct = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [searchValue, setSearchValue] = useState("")
-  const [shouldReload, setShouldReload] = useState(false)
-  const [invalidFields, setInvalidFields] = useState([])
-  const [shouldRefetch, setShouldRefetch] = useState(false)
-  const { products, msg } = useSelector(state => state.product)
+  const { msg } = useSelector(state => state.product)
   const { states } = useSelector(state => state.state)
   const { samples } = useSelector(state => state.sample)
+  const [invalidFields, setInvalidFields] = useState([])
   const { categories } = useSelector(state => state.category)
 
   const [payload, setPayload] = useState({

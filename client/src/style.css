@@ -10,11 +10,10 @@
 .personal .name_account {
     font-size: larger;
 }
-
 .information .title {
     padding-bottom: 1%;
     font-weight: 600;
-    font-size: larger;
+    font-size: x-large;
     letter-spacing: 0.005em;
     border-bottom: 1px solid #a0a0a0;
 }
@@ -22,7 +21,13 @@
     padding: 1% 0;
     font-size: medium;
 }
-
+.information .content_information li {
+    margin: 2% 0;
+}
+.order {
+    height: 31rem;
+    overflow: auto;
+}
 .like {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -33,9 +38,11 @@
     color: #000;
     display: flex;
     align-items:flex-end;
-    padding: 2rem 1rem 0 0px;
     justify-content: end;
     font-size: larger;
+}
+.pagination {
+    margin-top: 4%;
 }
 /* --------------- LIST_FILTER_ITEM_RETAL  ---------------*/
 .lists {
@@ -78,8 +85,24 @@
     width: 40%;
 }
 .item {
+    height: 100%;
     display: inline-block;
-    
+}
+.item .image .heart{
+    top: 5%;
+    right: 2%;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: end;
+}
+.item .image .color{
+    gap: 2%;
+    bottom: 8%;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: center;
 }
 .item .product_content .tag {
     flex-direction: column;
@@ -136,7 +159,7 @@
 }
 .detail .detail_image .image-container:hover .image-img {
     transform-origin: var(--x) var(--y);
-    transform: scale(2);
+    transform: scale(3);
 }
 .detail .detail_image .detail_image-bar {
     width: 20%;

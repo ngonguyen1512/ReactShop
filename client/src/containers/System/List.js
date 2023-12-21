@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, useLocation } from 'react-router-dom';
 import * as actions from '../../store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useLocation } from 'react-router-dom'
 import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
 import { Product, Dimension, Color, Image, Quantity, CreateProduct, UpdateProduct, CreateDetail, CreateImage } from './index';
 
@@ -11,8 +11,8 @@ const List = () => {
     const dispatch = useDispatch()
     const pathurl = location.pathname
     const parts = pathurl.split('/')
-    const last = parts[parts.length - 1];
-    const updateProduct = parts[parts.length - 2];
+    const last = parts[parts.length - 1]
+    const updateProduct = parts[parts.length - 2]
     const { products } = useSelector(state => state.product)
     const { allocations } = useSelector(state => state.allocation)
 

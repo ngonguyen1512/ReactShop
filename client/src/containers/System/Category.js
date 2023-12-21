@@ -1,21 +1,21 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
 import icons from '../../utils/icons'
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
 const { TiDeleteOutline } = icons;
 
 const styletd = 'text-center px-4 py-2 '
 
 const Category = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [searchValue, setSearchValue] = useState("")
-  const [shouldReload, setShouldReload] = useState(false)
   const [invalidFields, setInvalidFields] = useState([])
-  const [shouldRefetch, setShouldRefetch] = useState(false)
+  const [shouldReload, setShouldReload] = useState(false)
   const { currentData } = useSelector(state => state.user)
+  const [shouldRefetch, setShouldRefetch] = useState(false)
   const { functions } = useSelector(state => state.function)
   const { categories } = useSelector(state => state.category)
   const permis = currentData.idPermission

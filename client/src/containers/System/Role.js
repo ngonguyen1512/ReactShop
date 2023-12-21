@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, useLocation } from 'react-router-dom';
 import * as actions from '../../store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useLocation } from 'react-router-dom'
+import { Permission, Menu, State, Function } from './index'
 import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
-import { Permission, Menu, State, Function } from './index';
 
 const Role = () => {
+    const idTransfer = 7
     const location = useLocation()
     const dispatch = useDispatch()
     const pathurl = location.pathname
     const parts = pathurl.split('/')
-    const idTransfer = 7
-    const last = parts[parts.length - 1];
+    const last = parts[parts.length - 1]
     const { allocations } = useSelector(state => state.allocation)
 
     useEffect(() => {

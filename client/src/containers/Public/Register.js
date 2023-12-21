@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { InputForm, Button } from "../../components";
-import * as actions from '../../store/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { path } from '../../utils/constant';
+import Swal from 'sweetalert2'
+import { path } from '../../utils/constant'
+import * as actions from '../../store/actions'
+import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { InputForm, Button } from "../../components"
+import { useDispatch, useSelector } from 'react-redux'
 
 const Register = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { isLoggedIn, msg, update } = useSelector(state => state.auth)
+    const { isLoggedIn } = useSelector(state => state.auth)
     const [invalidFields, setInvalidFields] = useState([])
     const [payload, setPayload] = useState({
         name: '', phone: '', email: '', address: '',
@@ -21,7 +21,11 @@ const Register = () => {
         let invalids = validate(finalPayload);
         if (invalids === 0) { 
             dispatch(actions.register(payload));
-            Swal.fire('Success!', 'Create account successful.', 'error');
+            Swal.fire({
+                title: 'Success!', text: 'Create account successful.',
+                icon: 'success', timer: 1000,
+                showConfirmButton: false
+            });
         }
     }
 
@@ -76,7 +80,7 @@ const Register = () => {
     }
 
     useEffect(() => {
-        isLoggedIn && navigate('/');
+        isLoggedIn && navigate('/')
     }, [isLoggedIn, navigate]);
 
     return (

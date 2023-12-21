@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
+import { path } from '../../utils/constant'
+import { useNavigate } from 'react-router-dom'
 import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
 import { Button, InputForm } from '../../components'
-import Swal from 'sweetalert2';
-import { path } from '../../utils/constant';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
 
 const CreateDetail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [invalidFields, setInvalidFields] = useState([])
   const { states } = useSelector(state => state.state)
   const { colors } = useSelector(state => state.color)
+  const [invalidFields, setInvalidFields] = useState([])
   const { products } = useSelector(state => state.product)
   const { dimensions } = useSelector(state => state.dimension)
 
@@ -20,9 +20,13 @@ const CreateDetail = () => {
   const [payload3, setPayload3] = useState({ idProduct: '', idColor: '', idSize: '', quantity: '', idState: '' })
 
   const handleSubmitCreate = async () => {
-    dispatch(actions.createQuantities(payload))
-    dispatch(actions.createQuantities(payload2))
-    dispatch(actions.createQuantities(payload3))
+    if (payload.length > 0) 
+      dispatch(actions.createQuantities(payload));
+    if (payload2.length > 0) 
+      dispatch(actions.createQuantities(payload2));
+    if (payload3.length > 0) 
+      dispatch(actions.createQuantities(payload3));
+    
     Swal.fire({
       title: 'Bạn có muốn thêm detail tiếp hay chuyển thêm ảnh?',
       icon: 'question',
@@ -31,7 +35,7 @@ const CreateDetail = () => {
       cancelButtonText: 'Thêm tiếp',
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate(path.CREATE_IMAGE); // Chuyển đến trang create_image
+        navigate(path.CREATE_IMAGE); 
       } else {
         setPayload([]); setPayload2([]); setPayload3([]);
         navigate(path.CREATE_DETAIL, { replace: true });

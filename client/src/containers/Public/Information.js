@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Button } from '../../components'
-import { useNavigate } from 'react-router-dom'
 import { path } from '../../utils/constant'
+import { useNavigate } from 'react-router-dom'
 
 const Information = () => {
   const navigate = useNavigate()
@@ -14,7 +14,7 @@ const Information = () => {
 
   return (
     <div className='information'>
-      <p className='title'>ACCOUTN INFORMATION</p>
+      <p className='title'>ACCOUNT INFORMATION</p>
       <ul className='content_information'>
         <li>{currentData.name}</li>
         <li>{currentData.phone}</li>

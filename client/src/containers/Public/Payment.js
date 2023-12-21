@@ -1,83 +1,37 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { path } from '../../utils/constant';
-import { Button, InputForm } from '../../components'
-import { NavLink } from 'react-router-dom'
-import { CartContext } from '../../contexts/Cart';
-import icons from '../../utils/icons'
+import Swal from 'sweetalert2'
 import * as actions from '../../store/actions'
-import Swal from 'sweetalert2';
-
-const { TiDeleteOutline } = icons
+import { CartContext } from '../../contexts/Cart'
+import { Button, InputForm } from '../../components'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useContext, useEffect, useState } from 'react'
 
 const Payment = () => {
   const transportFee = 40000
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const cartContext = useContext(CartContext)
-  const { removeAllFromCart } = cartContext
   const { colors } = useSelector(state => state.color)
   const { images } = useSelector(state => state.image)
   const [invalidFields, setInvalidFields] = useState([])
   const { currentData } = useSelector(state => state.user)
   const { dimensions } = useSelector(state => state.dimension)
-  const { isLoggedIn } = useSelector(state => state.auth)
-  const { cartItems } = useContext(CartContext)
+  const { cartItems, cartContext } = useContext(CartContext)
   const idcurrent = parseInt(currentData.id)
+  const { removeAllFromCart } = cartContext
 
   const [payload, setPayload] = useState({
     idAccount: idcurrent, name: '' || currentData.name,
     phone: '' || currentData.phone, email: '' || currentData.email,
     address: '' || currentData.address, ship: '', total: '', idState: '3',
-    invoiceDetails: [],
-  });
-  const validate = (payload) => {
-    let invalids = 0;
-    let fields = Object.entries(payload);
-    fields.forEach(item => {
-      if (item[1] === '') {
-        setInvalidFields(prev => [...prev, {
-          name: item[0],
-          msg: 'You must not vacate this field!'
-        }])
-        invalids++;
-        return;
-      } else if (item[1] !== '') {
-        switch (item[0]) {
-          case 'email': {
-            if (!/\S+@\S+\.\S+/.test(item[1])) {
-              setInvalidFields(prev => [...prev, {
-                name: item[0],
-                msg: 'Invalid email!'
-              }])
-              invalids++;
-            }
-            break;
-          }
-          case 'phone': {
-            if (!+item[1]) {
-              setInvalidFields(prev => [...prev, {
-                name: item[0],
-                msg: 'Invalid phone number!'
-              }])
-              invalids++;
-            }
-            break;
-          }
-          default: break;
-        }
-      }
-    })
-    return invalids;
-  }
+    invoiceDetails: []
+  })
 
   const calculateTotal = (cartItems) => {
     let amount = 0;
     for (const product of cartItems)
       amount += product.price * product.quantity;
     return amount;
-  };
+  }
 
   const handleCreateInvoices = async (cartItems) => {
     const amount = calculateTotal(cartItems);
@@ -92,7 +46,7 @@ const Payment = () => {
       invoiceDetails: invoiceDetails
     };
     try {
-      await dispatch(actions.createInvoices(payload));
+      dispatch(actions.createInvoices(payload));
       Swal.fire({
         title: 'Success!', text: 'Your order has been submitted successfully.',
         icon: 'success', showConfirmButton: true
@@ -102,11 +56,7 @@ const Payment = () => {
     } catch (error) {
       Swal.fire('Oops!', 'Some error occurred while creating invoice', 'error');
     }
-  };
-
-  const goLogin = useCallback((flag) => {
-    navigate('/' + path.LOGIN, { state: { flag } })
-  }, [navigate])
+  }
 
   useEffect(() => {
     dispatch(actions.getColors())

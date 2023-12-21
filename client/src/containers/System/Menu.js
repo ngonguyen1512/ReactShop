@@ -1,22 +1,21 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
+import Swal from 'sweetalert2'
 import icons from '../../utils/icons'
-import Swal from 'sweetalert2';
+import * as actions from '../../store/actions'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
-const { TiDeleteOutline, MdOutlineDeleteSweep } = icons;
 const styletd = 'text-center py-2 '
+const { TiDeleteOutline, MdOutlineDeleteSweep } = icons
 
 const Menu = () => {
     const dispatch = useDispatch();
     const [searchValue, setSearchValue] = useState("")
-    const [shouldReload, setShouldReload] = useState(false)
     const [invalidFields, setInvalidFields] = useState([])
-    const [shouldRefetch, setShouldRefetch] = useState(false)
     const { menus, msg } = useSelector(state => state.menu)
+    const [shouldReload, setShouldReload] = useState(false)
     const { currentData } = useSelector(state => state.user)
+    const [shouldRefetch, setShouldRefetch] = useState(false)
     const { functions } = useSelector(state => state.function)
     const { permissions } = useSelector(state => state.permission)
     const permis = currentData.idPermission
@@ -94,30 +93,27 @@ const Menu = () => {
             setPayload({ ...payload, id: item.id, url: item.url, name: item.name, idPermission: item.idPermission });
         };
         return (
-            <>
-                <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
-                    <td className={`${styletd}`}>{item.id}</td>
-                    <td className={styletd}>{item.url}</td>
-                    <td className='py-2'>{item.name}</td>
-                    <td className={styletd}>{item.idPermission}</td>
-                    {functions?.length > 0 && functions.map(item => item.name === 'Delete' && item.idPermission === 1 && (
-                        <th className='w-[5%]'>
-                            <Button
-                                IcAfter={MdOutlineDeleteSweep}
-                                value={item.id}
-                                onClick={handleSubmitDelete}
-                            />
-                        </th>
-                    ))}
-                </tr>
-            </>
+            <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
+                <td className={`${styletd}`}>{item.id}</td>
+                <td className={styletd}>{item.url}</td>
+                <td className='py-2'>{item.name}</td>
+                <td className={styletd}>{item.idPermission}</td>
+                {functions?.length > 0 && functions.map(item => item.name === 'Delete' && item.idPermission === 1 && (
+                    <th className='w-[5%]'>
+                        <Button
+                            IcAfter={MdOutlineDeleteSweep}
+                            value={item.id}
+                            onClick={handleSubmitDelete}
+                        />
+                    </th>
+                ))}
+            </tr>
         );
     };
 
     return (
         <div className='menu'>
-            <div className='header-menu between'>
-                <span></span>
+            <div className='header-menu end'>
                 <input
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
                     type="text"

@@ -1,10 +1,10 @@
 import Swal from 'sweetalert2';
-import React, { useEffect, useState } from 'react'
+import { path } from '../../utils/constant'
 import * as actions from '../../store/actions'
-import { Button, InputForm } from '../../components'
 import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Button, InputForm } from '../../components'
 import { useDispatch, useSelector } from 'react-redux'
-import { path } from '../../utils/constant';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -62,12 +62,12 @@ const Login = () => {
     }
 
     useEffect(() => {
-        isLoggedIn && navigate('/');
-    }, [isLoggedIn, navigate]);
+        isLoggedIn && navigate('/')
+    }, [isLoggedIn, navigate])
 
     useEffect(() => {
-        msg && Swal.fire('Oops !', msg, 'error');
-    }, [msg, update]);
+        msg && Swal.fire('Oops !', msg, 'error')
+    }, [msg, update])
 
     return (
         <div className='bg-frame center'>
