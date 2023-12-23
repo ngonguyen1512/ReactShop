@@ -97,6 +97,9 @@
     .header .header-content .search-cart-login .minicart .square {
         right: 30%;
     }
+    .tag_category {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 } 
 
 @media (max-width: 679px) {

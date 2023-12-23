@@ -4,7 +4,7 @@ export const path = {
     REGISTER: 'register',
 
     HOME: '/*',
-    HOME__PAGE: ':page',
+    HOME__PAGE: 'all',
 
     TOP: 'top',
     CART: 'cart',

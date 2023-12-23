@@ -1,3 +1,35 @@
+.tag {
+    width: 100%;
+    position: relative;
+}
+.tag_image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.3s;
+}
+.tag:hover .tag_image {
+    filter: brightness(70%);
+}
+.tag_title {
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    font-size: x-large;
+    position: absolute;
+    transition: opacity 0.3s;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+}
+.tag:hover .tag_title {
+    opacity: 1;
+}
+
 /* --------------- PERSONAL  ---------------*/
 .personal {
     margin: 2% 0;
@@ -32,7 +64,6 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
-
 .like-unlike {
     height: 5%;
     color: #000;
@@ -44,6 +75,7 @@
 .pagination {
     margin-top: 4%;
 }
+
 /* --------------- LIST_FILTER_ITEM_RETAL  ---------------*/
 .lists {
     display: grid;

@@ -1,3 +1,4 @@
+export { default as Tag } from './Tag'
 export { default as Menu } from './Menu'
 export { default as Item } from './Item'
 export { default as Slide } from './Slide'

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Footer, Header } from './index'
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Slide, TextSlide } from '../../components/index'
+import { Slide, Tag, TextSlide } from '../../components/index'
 import $ from 'jquery';
 import * as actions from '../../store/actions'
 
@@ -16,7 +16,7 @@ const Home = () => {
   const page = searchParams.get('page')
   const sample = searchParams.get('sample')
   const { isLoggedIn } = useSelector(state => state.auth)
-
+  const { categories } = useSelector(state => state.category)
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [page, sample])
@@ -35,16 +35,27 @@ const Home = () => {
     setTimeout(() => {
       isLoggedIn && dispatch(actions.getCurrent())
     }, 100)
+    dispatch(actions.getCategories())
   }, [isLoggedIn, dispatch])
 
   return (
     <div ref={headerRef} className='home'>
       <Header />
-      {parts === '' && <Slide />}
+      {parts === '' &&
+        <>
+          <Slide />
+          <div className='tag_category'>
+            {categories?.length > 0 && categories.map(item => (
+              <Tag id={item?.id} name={item?.name} image={item?.image} />
+            ))}
+          </div>
+          <TextSlide texts='NEW ARRIVAL' quantity={2}/>
+        </>
+      }
       <div className='main'>
         <Outlet />
       </div>
-      <TextSlide />
+      <TextSlide texts='WELCOME TO FASHION STORE' quantity={1}/>
       <Footer />
     </div>
   )

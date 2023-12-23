@@ -122,14 +122,14 @@ const Header = () => {
             <span onClick={() => setIsShowCate(prev => !prev)}><IoIosMenu /></span>
             {isShowCate && (
               <div className='cate_mini'>
-              {categories?.length > 0 && categories.map(item => {
-                return (
-                  <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content' onClick={() => handleFilterPosts(item.id)}>
-                    {item.name}
-                  </NavLink>
-                )
-              })}
-            </div>
+                {categories?.length > 0 && categories.map(item => {
+                  return (
+                    <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content' onClick={() => handleFilterPosts(item.id)}>
+                      {item.name}
+                    </NavLink>
+                  )
+                })}
+              </div>
             )}
           </div>
           <NavLink to={'/'} className='logo text-2xl'>
@@ -137,6 +137,7 @@ const Header = () => {
           </NavLink>
           {parts !== 'webserver' ? (
             <div className='cate center'>
+              <NavLink to={path.HOME__PAGE} className='content'>ALL</NavLink>
               {categories?.length > 0 && categories.map(item => {
                 return (
                   <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content' onClick={() => handleFilterPosts(item.id)}>
