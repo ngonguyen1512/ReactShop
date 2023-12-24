@@ -54,7 +54,6 @@ const Detail = () => {
 
   useEffect(() => {
     setCurrentPath(location.pathname);
-    window.scrollTo(0, 0);
     const firstImage = images.find(item => item.idProduct === id);
     if (firstImage) {
       setSelectedImageIndex(0);
@@ -156,7 +155,6 @@ const Detail = () => {
                       className={`image-img object-cover transition duration-300 ${isHovered ? 'zoomed' : ''}`}
                     />
                   </div>
-
                 )}
                 <div className='space-bar'></div>
               </div>

@@ -40,7 +40,7 @@ const Order = () => {
         </thead>
         <tbody>
           {invoicesall?.length > 0 && invoicesall
-            .filter(item => item?.detail_invoice.idAccount === idcurrent) // Filter out the unwanted items
+            .filter(item => item?.detail_invoice.idAccount === idcurrent)
             .reduce((acc, item) => {
               const invoiceDetail = item?.detail_invoice;
               if (!invoiceDetail) return acc;

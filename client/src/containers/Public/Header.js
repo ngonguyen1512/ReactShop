@@ -23,6 +23,7 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("")
   const [isShowMenu, setIsShowMenu] = useState(false)
   const [isShowCate, setIsShowCate] = useState(false)
+  const { colors } = useSelector(state => state.color)
   const { images } = useSelector(state => state.image)
   const [shouldReload, setShouldReload] = useState(false)
   const [isShowSearch, setIsShowSearch] = useState(false)
@@ -31,6 +32,7 @@ const Header = () => {
   const { currentData } = useSelector(state => state.user)
   const [isShowMiniCart, setIsShowMiniCart] = useState(false)
   const { categories } = useSelector(state => state.category)
+  const { dimensions } = useSelector(state => state.dimension)
   const { transmissions } = useSelector(state => state.transmission)
   const permis = currentData.idPermission
 
@@ -212,9 +214,24 @@ const Header = () => {
                                 </tr>
                                 {cartItems.map((product) => (
                                   <tr className='border-b border-dashed' key={product.id}>
-                                    <td>{product.name}</td>
-                                    <td className='text-center'>{product.idSize}</td>
-                                    <td className='text-center'>{product.idColor}</td>
+                                    <td>
+                                      <NavLink to={`/${formatVietnameseToString(product?.product_category.name)}/${formatVietnameseToString(product.name)}/${product.id}`}>
+                                        {product.name}
+                                      </NavLink>
+                                    </td>
+                                    <td className='text-center'>
+                                      {dimensions?.length > 0 && dimensions.map(item => item.id === product.idSize && (
+                                        <>{item.code}</>
+                                      ))}
+                                    </td>
+                                    <td className='text-center center'>
+                                      {colors?.length > 0 && colors.map(item => item.id === product.idColor && (
+                                        <div
+                                          className={'box_color'}
+                                          style={{ backgroundColor: item.code, alignSelf: 'center' }}
+                                        ></div>
+                                      ))}
+                                    </td>
                                     <td className='text-center '>
                                       <button className='px-1.5 bg-gray-500 rounded-sm mx-1.5'
                                         onClick={() => updateQuantity(product, product.quantity - 1)}>-</button>

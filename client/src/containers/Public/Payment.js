@@ -15,9 +15,8 @@ const Payment = () => {
   const [invalidFields, setInvalidFields] = useState([])
   const { currentData } = useSelector(state => state.user)
   const { dimensions } = useSelector(state => state.dimension)
-  const { cartItems, cartContext } = useContext(CartContext)
+  const { cartItems, removeAllFromCart } = useContext(CartContext)
   const idcurrent = parseInt(currentData.id)
-  const { removeAllFromCart } = cartContext
 
   const [payload, setPayload] = useState({
     idAccount: idcurrent, name: '' || currentData.name,

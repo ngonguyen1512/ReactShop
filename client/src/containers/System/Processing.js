@@ -15,7 +15,7 @@ const Processing = () => {
   const idcurrent = parseInt(currentData.id)
   
   const [payload, setPayload] = useState({
-    id: '', idAccept: idcurrent, idShip: '' || 0, idState: '' || 6
+    id: '', idAccept: idcurrent, idShip: '' || 0, idState: ''
   })
 
   const handleSubmitApprove = async () => {
@@ -25,7 +25,7 @@ const Processing = () => {
   }
 
   const handleSubmitNo = async () => {
-    setPayload(prevPayload => ({ ...prevPayload, idAccept: idcurrent}));
+    setPayload(prevPayload => ({ ...prevPayload, idAccept: idcurrent, idState: 6}));
     dispatch(actions.updateInvoices(payload))
     setShouldRefetch(true);
   }

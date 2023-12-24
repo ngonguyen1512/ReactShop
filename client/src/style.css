@@ -287,8 +287,8 @@
     
 }
 
+
 /* --------------- WEBSERVER --------------- */
-/* TYPE */
 .type, .category, .sample, 
 .list, .product, .dimension, .color, .quantity, .image, 
 .role, .permission, .function, .menu, .state,
@@ -429,4 +429,5 @@
 .completion .completion_detail {
     height: auto;
     overflow: auto;
+    margin-top: 2%;
 }

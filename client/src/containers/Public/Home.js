@@ -18,6 +18,10 @@ const Home = () => {
   const { isLoggedIn } = useSelector(state => state.auth)
   const { categories } = useSelector(state => state.category)
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  useEffect(() => {
+
     headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [page, sample])
 
