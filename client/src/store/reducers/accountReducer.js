@@ -2,7 +2,7 @@ import actionTypes from "../actions/actionTypes";
 const initState = {
     accounts: [],
     msg: '',
-    count: 0,
+    counta: 0,
 }
 
 const accountReducer = (state = initState, action) => {
@@ -11,6 +11,7 @@ const accountReducer = (state = initState, action) => {
             return {
                 ...state,
                 accounts: action.accounts || [],
+                counta: action.counta || [],
                 msg: action.msg || '',
             }
         case actionTypes.CREATE_ACCOUNT:

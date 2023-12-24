@@ -8,7 +8,7 @@ export const getAccounts = () => async (dispatch) => {
             dispatch({
                 type: actionTypes.GET_ACCOUNT,
                 accounts: response.data.response?.rows,
-                count: response.data.response?.count
+                counta: response.data.response?.count
             })
         } else {
             dispatch({
