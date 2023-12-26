@@ -3,7 +3,7 @@ const initState = {
     msg: '',
     invoices: [],
     invoicesall: [],
-    topselling: [],
+    sellers: [],
     invoiceaccount: [],
     countci: 0,
 }
@@ -41,11 +41,11 @@ const invoiceReducer = (state = initState, action) => {
                 invoicesall: action.data,
                 msg: action.msg || '',
             }
-        case actionTypes.GET_TOPSELLING:
+        case actionTypes.GET_SELLER:
             return {
                 ...state,
                 msg: action.msg || '',
-                topselling: action.topselling,
+                sellers: action.data,
             }
         default:
             return state;

@@ -66,7 +66,8 @@ export const apiGetTopSelling = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: `api/v1/invoice/topselling`,
+            url: `api/v1/invoice/seller`,
+            // data: payload
         })
         resolve(response);
     } catch (error) {

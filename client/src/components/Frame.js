@@ -9,11 +9,11 @@ const Frame = ({ title, total, color, background, icon }) => {
         color: color,
     };
     return (
-        <div className='frame'>
-            <div className='frame_icon center' style={frameIconStyle} >{icon}</div>
-            <div className='frame_content'>
-                <p className='frame_title'  style={frameContentStyle}>{title}</p>
-                <p className='frame_total'>{total}</p>
+        <div className='structure'>
+            <div className='structure_icon center' style={frameIconStyle} >{icon}</div>
+            <div className='structure_content'>
+                <p className='structure_title'  style={frameContentStyle}>{title}</p>
+                <p className='structure_total'>{total.toLocaleString()}</p>
             </div>
         </div>
     )

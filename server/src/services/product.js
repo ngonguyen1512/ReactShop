@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 export const getAllProductsService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Product.findAll({
+        const response = await db.Product.findAndCountAll({
             attributes: [
                 'id', 'idCategory', 'idSample', 'name', 'discount', 'price',
                 'information', 'idState'

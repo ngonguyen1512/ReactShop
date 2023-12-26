@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
     msg: '',
-    count: 0,
+    countp: 0,
     products: [],
     productid: [],
     update: false,

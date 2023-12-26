@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Button, InputForm } from '../../components/index'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../store/actions'
 
@@ -10,8 +9,6 @@ const Completion = () => {
   const { colors } = useSelector(state => state.color)
   const { dimensions } = useSelector(state => state.dimension)
   const { invoicesall } = useSelector(state => state.invoice)
-  const { currentData } = useSelector(state => state.user)
-  const idcurrent = parseInt(currentData.id)
   const [shouldReload, setShouldReload] = useState(false)
   const [shouldRefetch, setShouldRefetch] = useState(false)
   const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);

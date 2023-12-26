@@ -278,7 +278,6 @@ export const updateInvoicesService = async ({ id, idAccept, idShip, idState }) =
     }
 };
 
-
 export const completeInvoicesService = ({ id, idState }) => new Promise(async (resolve, reject) => {
     try {
         const invoice = await db.Invoice.findByPk(id);
@@ -314,12 +313,18 @@ export const completeInvoicesService = ({ id, idState }) => new Promise(async (r
     } catch (error) { reject(error); }
 });
 
-export const getTopSellingProducts = () => new Promise(async (resolve, reject) => {
+export const getTopSellingProducts = ({date}) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.InvoiceDetail.findAll({
-            attributes: ['idProduct', 'createdAt', [db.sequelize.fn('SUM', db.sequelize.col('InvoiceDetail.quantity')), 'totalSold']],
-            include: [{ model: db.Product, as: 'product_invoicedetail' },],
+            attributes: ['idProduct', 'idSize', 'idColor', 'createdAt', [db.sequelize.fn('SUM', db.sequelize.col('InvoiceDetail.quantity')), 'totalSold']],
+            include: [
+                { model: db.Product, as: 'product_invoicedetail' },
+                { model: db.Invoice, as: 'detail_invoice' },
+            ],
             group: ['idProduct'],
+            where: {
+                '$detail_invoice.idState$': 5
+            },
             order: [[db.sequelize.literal('totalSold'), 'DESC']],
             limit: 4,
         });
@@ -337,3 +342,4 @@ export const getTopSellingProducts = () => new Promise(async (resolve, reject) =
             });
     } catch (error) { reject(error) }
 });
+

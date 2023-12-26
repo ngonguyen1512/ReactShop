@@ -112,22 +112,23 @@ export const completeInvoices = (payload) => async (dispatch) => {
 }
 
 export const getTopSelling = () => async (dispatch) => {
+
     try {
         const response = await apis.apiGetTopSelling();
         if (response?.data.err === 0) {
             dispatch({
-                type: actionTypes.GET_TOPSELLING,
-                topselling: response.data.response,
+                type: actionTypes.GET_SELLER,
+                data: response.data.response,
             });
         } else {
             dispatch({
-                type: actionTypes.GET_TOPSELLING,
+                type: actionTypes.GET_SELLER,
                 msg: response.data.msg,
             });
         }
     } catch (error) {
         dispatch({
-            type: actionTypes.GET_TOPSELLING,
+            type: actionTypes.GET_SELLER,
             msg: 'Failed to get top selling.',
         });
     }
