@@ -111,10 +111,9 @@ export const completeInvoices = (payload) => async (dispatch) => {
     }
 }
 
-export const getTopSelling = () => async (dispatch) => {
-
+export const getSellerProducts = () => async (dispatch) => {
     try {
-        const response = await apis.apiGetTopSelling();
+        const response = await apis.apiGetSellerProducts();
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.GET_SELLER,
@@ -130,6 +129,28 @@ export const getTopSelling = () => async (dispatch) => {
         dispatch({
             type: actionTypes.GET_SELLER,
             msg: 'Failed to get top selling.',
+        });
+    }
+};
+
+export const getSellerAccounts = () => async (dispatch) => {
+    try {
+        const response = await apis.apiGetSellerAccounts();
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.GET_SELLERAC,
+                data: response.data.response,
+            });
+        } else {
+            dispatch({
+                type: actionTypes.GET_SELLERAC,
+                msg: response.data.msg,
+            });
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_SELLERAC,
+            msg: 'Failed to get seller account.',
         });
     }
 };

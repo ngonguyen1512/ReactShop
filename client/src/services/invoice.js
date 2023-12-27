@@ -62,12 +62,23 @@ export const apiCompleteInvoices = (payload) => new Promise(async (resolve, reje
     }
 })
 
-export const apiGetTopSelling = () => new Promise(async (resolve, reject) => {
+export const apiGetSellerProducts = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'get',
             url: `api/v1/invoice/seller`,
-            // data: payload
+        })
+        resolve(response);
+    } catch (error) {
+        reject(error);
+    }
+});
+
+export const apiGetSellerAccounts = () => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `api/v1/invoice/sellerac`,
         })
         resolve(response);
     } catch (error) {

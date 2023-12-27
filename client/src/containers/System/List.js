@@ -3,7 +3,7 @@ import * as actions from '../../store/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
 import { formatVietnameseToString } from '../../utils/common/formatVietnameseToString'
-import { Product, Dimension, Color, Image, Quantity, CreateProduct, UpdateProduct, CreateDetail, CreateImage } from './index';
+import { Product, Dimension, Color, Image, Quantity, CreateProduct, UpdateProduct, CreateDetail, CreateImage, CreateDetail2 } from './index';
 
 const List = () => {
     const idTransfer = 4
@@ -46,6 +46,8 @@ const List = () => {
                     <CreateImage />
                 ) : last === 'create_detail' ? (
                     <CreateDetail />
+                ) : last === 'create_detail2' ? (
+                    <CreateDetail2 />
                 ) : last === 'create_product' ? (
                     <CreateProduct />
                 ) : updateProduct === 'update_product' ? (

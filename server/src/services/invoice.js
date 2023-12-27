@@ -141,7 +141,6 @@ export const createInvoices = async ({ idAccount, email, phone, address, ship, t
     }
 };
 
-
 export const getInvoiceService = () => new Promise(async (resolve, reject) => {
     try {
         const invoices = await db.Invoice.findAll({
@@ -313,7 +312,7 @@ export const completeInvoicesService = ({ id, idState }) => new Promise(async (r
     } catch (error) { reject(error); }
 });
 
-export const getTopSellingProducts = ({date}) => new Promise(async (resolve, reject) => {
+export const getSellerProducts = () => new Promise(async (resolve, reject) => {
     try {
         const response = await db.InvoiceDetail.findAll({
             attributes: ['idProduct', 'idSize', 'idColor', 'createdAt', [db.sequelize.fn('SUM', db.sequelize.col('InvoiceDetail.quantity')), 'totalSold']],
@@ -326,7 +325,7 @@ export const getTopSellingProducts = ({date}) => new Promise(async (resolve, rej
                 '$detail_invoice.idState$': 5
             },
             order: [[db.sequelize.literal('totalSold'), 'DESC']],
-            limit: 4,
+            limit: 3,
         });
         if (response.length > 0)
             resolve({
@@ -343,3 +342,32 @@ export const getTopSellingProducts = ({date}) => new Promise(async (resolve, rej
     } catch (error) { reject(error) }
 });
 
+export const getSellerAccount = () => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Invoice.findAll({
+            attributes: [
+                'id', 'idAccount', 'total', 'createdAt', 
+                [db.sequelize.fn('COUNT', db.sequelize.col('Invoice.id')), 'totalInvoices'],
+                [db.sequelize.fn('SUM', db.sequelize.col('Invoice.total')), 'totalAmount']],
+            include: [
+                { model: db.Account, as: 'invoice_account', attributes: ['id', 'name'] },
+            ],
+            group: ['idAccount'],
+            where: {idState: 5},
+            order: [[db.sequelize.literal('totalAmount'), 'DESC']],
+            limit: 5,
+        });
+        if (response.length > 0)
+            resolve({
+                err: 0,
+                msg: 'OK.',
+                response
+            });
+        else
+            resolve({
+                err: 2,
+                msg: 'Không có account nào có số lượng bán cao!',
+                response: null
+            });
+    } catch (error) { reject(error) }
+});

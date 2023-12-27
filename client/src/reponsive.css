@@ -72,6 +72,18 @@
     .processing .processing_approve .processing_approve-detail-input .processing_approve-detail {
         height: 150px;
     }
+    .dashboard .chart-number, 
+    .dashboard .seller-account .seller-account_table {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .dashboard .chart-number .number {
+        gap: 2%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .structure {
+        height: 100%;
+    }
 }
 
 @media (max-width: 809px) {

@@ -198,13 +198,13 @@ const Header = () => {
                         <>
                           <span className='square'></span>
                           {cartItems.length === 0 ? (
-                            <div className='minicart_content text-[#fff] center min-w-[200px]'>
+                            <div className='minicart_content center min-w-[200px]'>
                               <p>There is no product</p>
                             </div>
                           ) : (
-                            <div className='minicart_content text-[#fff] min-w-[600px]'>
+                            <div className='minicart_content min-w-[600px]'>
                               <table className='w-full'>
-                                <tr className='border-b'>
+                                <tr className='border-b border-[#000]'>
                                   <th>NAME</th>
                                   <th>SIZE</th>
                                   <th>COLOR</th>

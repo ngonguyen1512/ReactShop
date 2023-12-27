@@ -8,6 +8,7 @@ router.put('/update', controllers.updateInvoices)
 router.put('/complete', controllers.completeInvoices)
 router.get('/count', controllers.getCountInvoices)
 router.post('/create', controllers.createInvoices)
-router.get('/seller', controllers.getTopSellingProducts)
+router.get('/seller', controllers.getSellerProducts)
+router.get('/sellerac', controllers.getSellerAccounts)
 
 export default router;

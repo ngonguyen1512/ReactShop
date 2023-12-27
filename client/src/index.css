@@ -163,7 +163,7 @@
     right: -30%;
     top: 40px;
     position: absolute;
-    background-color: #000;
+    background-color: #a0a0a0;
 }
 .header .header-content .search-cart-login .search .search_content {
     right: -100%;
@@ -181,7 +181,7 @@
     font-size: medium;
     position: absolute;
     flex-direction: column;
-    background-color: #000;
+    background-color: #a0a0a0;
     border-radius: 10px;
     padding:  0.75rem 1.25rem 0.75rem 1.25rem;
     box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
@@ -189,11 +189,8 @@
 .header .header-content .search-cart-login .search .search_content {
     min-width: 300px;
 }
-/* .header .header-content .search-cart-login .minicart .minicart_content {
-    min-width: 600px;
-} */
 .header .header-content .search-cart-login .search .search_content .search_product {
-    color: #fff;
+    color: #000;
     margin-top: 5%;
     padding: 2%;
 }

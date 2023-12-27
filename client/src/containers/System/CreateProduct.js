@@ -25,7 +25,26 @@ const CreateProduct = () => {
     let invalids = validate(finalPayload);
     if (invalids === 0) {
       dispatch(actions.createProducts(payload))
-      navigate(path.CREATE_DETAIL);
+      Swal.fire({
+        title: 'Bạn có muốn thêm detail product hay thêm detail accessories hay thoát?',
+        icon: 'question',
+        showCancelButton: true,
+        showDenyButton: true,
+        confirmButtonText: 'Thêm detail product',
+        cancelButtonText: 'Thoát',
+        denyButtonText: 'Thêm detail accessories',
+        denyButtonColor: '#0000FF',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setPayload([]);
+          navigate(path.CREATE_DETAIL, { replace: true })
+        } else if (result.isDenied) {
+          setPayload([]);
+          navigate(path.CREATE_DETAIL2, { replace: true });
+        } else {
+          navigate(path.PRODUCT)
+        }
+      });
     }
   }
 
