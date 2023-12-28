@@ -1,9 +1,9 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    samples: [],
     msg: '',
-    sampledepend: [],
+    samples: [],
     update: false,
+    sampledepend: [],
 }
 
 const sampleReducer = (state = initState, action) => {

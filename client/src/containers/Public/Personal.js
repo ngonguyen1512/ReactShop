@@ -19,18 +19,10 @@ const Personal = () => {
             </div>
             <div className='main-personal'>
                 <div className='menu-personal'>
-                    <NavLink to={path.INFORMATION} className='content'>
-                        <span>Information</span>
-                    </NavLink>
-                    <NavLink to={path.CHANGEPASSWORD} className='content'>
-                        <span>Password</span>
-                    </NavLink>
-                    <NavLink to={path.ORDER} className='content'>
-                        <span>Order</span>
-                    </NavLink>
-                    <NavLink to={path.LIKE} className='content'>
-                        <span>Like</span>
-                    </NavLink>
+                    <NavLink to={path.INFORMATION} className='content'>Information</NavLink>
+                    <NavLink to={path.CHANGEPASSWORD} className='content'>Password</NavLink>
+                    <NavLink to={path.ORDER} className='content'>Order</NavLink>
+                    <NavLink to={path.LIKE} className='content'>Like</NavLink>
                 </div>
                 <div className='page-personal'>
                     {last === 'change_password' ? (

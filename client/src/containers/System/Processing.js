@@ -75,11 +75,7 @@ const Processing = () => {
                           <td className='text-center'>{item?.detail_invoice?.idAccount}</td>
                           <td className='text-center'>{(item?.detail_invoice?.total).toLocaleString()}</td>
                           <th>
-                            <Button
-                              text={'No'}
-                              fullWidth
-                              onClick={handleSubmitNo}
-                            />
+                            <Button text={'No'} fullWidth onClick={handleSubmitNo}/>
                           </th>
                         </tr>
                       )
@@ -122,14 +118,13 @@ const Processing = () => {
                 </table>
               </div>
               <div className='processing_approve-input'>
-                <InputForm
+                <InputForm type="number"
                   setInvalidFields={setInvalidFields}
                   invalidFields={invalidFields}
                   label={'ID INVOICE'}
                   value={payload.id}
                   setValue={setPayload}
                   keyPayload={'id'}
-                  type='number'
                   disabled
                 />
                 <div>
@@ -143,11 +138,7 @@ const Processing = () => {
                     ))}
                   </select>
                 </div>
-                <Button
-                  fullWidth
-                  text={'Approve'}
-                  onClick={handleSubmitApprove}
-                />
+                <Button fullWidth text={'Approve'} onClick={handleSubmitApprove}/>
               </div>
             </div>
           </div>
@@ -220,11 +211,8 @@ const Processing = () => {
                       <td className='text-center'>{item?.detail_invoice?.idShip}</td>
                       <td className='text-center'>{item?.detail_invoice?.idState}</td>
                       <th>
-                        <Button
-                          text={'Complete'}
-                          fullWidth
-                          onClick={() => handleSubmitComplete(item?.detail_invoice?.id)}
-                        />
+                        <Button text={'Complete'} fullWidth
+                          onClick={() => handleSubmitComplete(item?.detail_invoice?.id)}/>
                       </th>
                     </tr>
                   )

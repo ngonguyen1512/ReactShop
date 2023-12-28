@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    dimensions: [],
     msg: '',
+    dimensions: [],
 }
 
 const dimensionReducer = (state = initState, action) => {

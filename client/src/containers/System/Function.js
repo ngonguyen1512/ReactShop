@@ -109,11 +109,9 @@ const Function = () => {
 
   return (
     <div className='function'>
-      <div className='header-function between'>
-        <span></span>
-        <input
+      <div className='header-function end'>
+        <input type="text"
           className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-          type="text"
           placeholder='Search by name'
           value={searchValue}
           onChange={handleSearch}
@@ -121,14 +119,13 @@ const Function = () => {
       </div>
       {functions?.length > 0 && functions.map(item => item.name === 'Create' && item.idPermission === 1 && (
         <div className='form-function'>
-          <InputForm
+          <InputForm type="text"
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'NAME'}
             value={payload.name}
             setValue={setPayload}
             keyPayload={'name'}
-            type='text'
           />
           <div>
             <label className='text-xs mt-4'>PERMISSION</label>
@@ -144,8 +141,7 @@ const Function = () => {
           <span className='hide'></span>
           {payload.id ? (
             <div className='update-function'>
-              <Button
-                fullWidth
+              <Button fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}
@@ -156,11 +152,7 @@ const Function = () => {
               </span>
             </div>
           ) : (
-            <Button
-              class='col-span-2'
-              text={'CREATE'}
-              onClick={handleSubmitCreate}
-            />
+            <Button class='col-span-2' text={'CREATE'} onClick={handleSubmitCreate}/>
           )}
         </div>
       ))}

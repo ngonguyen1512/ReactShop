@@ -1,12 +1,12 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
     msg: '',
-    invoices: [],
-    invoicesall: [],
-    sellers: [],
-    selleracs: [],
-    invoiceaccount: [],
     countci: 0,
+    sellers: [],
+    invoices: [],
+    selleracs: [],
+    invoicesall: [],
+    invoiceaccount: [],
 }
 
 const invoiceReducer = (state = initState, action) => {

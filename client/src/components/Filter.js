@@ -1,6 +1,6 @@
 import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css'
 import icons from '../utils/icons'
+import 'rc-slider/assets/index.css'
 import * as actions from '../store/actions'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import { useLocation, useNavigate, createSearchParams } from 'react-router-dom'
 
 const { TiDeleteOutline } = icons
 
-const Filter = ({ title, isDouble, content, type, list, texts }) => {
+const Filter = ({ title, isDouble, content, type, list }) => {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
@@ -46,11 +46,8 @@ const Filter = ({ title, isDouble, content, type, list, texts }) => {
         <div className='filter-price center'>
           <p className='filter-tilte'>{title}: {value[0].toLocaleString()} - {value[1].toLocaleString()}</p>
           <Slider
-            min={0}
-            max={2000000}
-            range
-            value={value}
-            onChange={handleSliderChange}
+            min={0} max={2000000} range
+            value={value} onChange={handleSliderChange}
             style={{ width: '55%', margin: '0 2%' }}
           />
           <p className='w-[5%]' onClick={handleDeleteClick}><TiDeleteOutline /></p>

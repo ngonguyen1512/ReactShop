@@ -1,13 +1,8 @@
 import React, { memo } from 'react'
 
-const Frame = ({ title, total, color, background, icon }) => {
-    const frameIconStyle = {
-        backgroundColor: background,
-    };
-
-    const frameContentStyle = {
-        color: color,
-    };
+const Frame = ({ title, total, color, icon }) => {
+    const frameIconStyle = {backgroundColor: color};
+    const frameContentStyle = {color: color};
     return (
         <div className='structure'>
             <div className='structure_icon center' style={frameIconStyle} >{icon}</div>

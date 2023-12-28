@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { List, Pagination } from './index'
+import { path } from '../../utils/constant'
 import { Filter, Button } from '../../components/index'
 import { NavLink, useLocation } from 'react-router-dom'
-import { path } from '../../utils/constant'
 
 const HomePage = () => {
   const location = useLocation()
@@ -14,12 +14,12 @@ const HomePage = () => {
 
   return (
     <div className='homepage center'>
-      {parts !== '' && <Filter title='Sort price' isDouble={true} /> }
+      {parts !== '' && <Filter title='Sort price' isDouble={true} />}
       <div className='list-pagination'>
         <List />
         {parts === '' && Math.ceil(count / 12) > 1 && (
           <NavLink className='center mt-[4%]' to={path.HOME__PAGE}>
-            <Button text='Load more'/>
+            <Button text='Load more' />
           </NavLink>
         )}
         {parts !== '' && Math.ceil(count / 12) > 1 && (<Pagination count={count} currentPage={currentPage}

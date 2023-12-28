@@ -18,7 +18,7 @@ const Cart = () => {
   const { images } = useSelector(state => state.image)
   const { isLoggedIn } = useSelector(state => state.auth)
   const { dimensions } = useSelector(state => state.dimension)
-  
+
   const goLogin = useCallback((flag) => {
     navigate('/' + path.LOGIN, { state: { flag } })
   }, [navigate])
@@ -69,7 +69,7 @@ const Cart = () => {
                       {colors?.length > 0 && colors.map(item => item.id === product.idColor && (
                         <div
                           className={'box_color'}
-                          style={{ backgroundColor: item.code, alignSelf: 'center'}}
+                          style={{ backgroundColor: item.code, alignSelf: 'center' }}
                         ></div>
                       ))}
                     </th>
@@ -83,7 +83,7 @@ const Cart = () => {
                     <td className='text-center'>{product.price.toLocaleString()}</td>
                     <td className='text-center text-blue-500 w-[25%]'>{(product.price * product.quantity).toLocaleString()}</td>
                     <td className='text-red-500 text-xl'>
-                      <button onClick={() => removeFromCart(product.id)}><TiDeleteOutline /></button>
+                      <button onClick={() => removeFromCart(product.id, product.idSize, product.idColor)}><TiDeleteOutline /></button>
                     </td>
                   </tr>
                 ))}
@@ -98,12 +98,12 @@ const Cart = () => {
         }}
       </CartContext.Consumer>
       {!isLoggedIn ? (
-        <div className='footer'>
+        <div className='footer center'>
           <span className='mr-2'>Please login to continue paying for the order!</span>
           <Button text={'Login'} bgColor='bg-secondary2' textColor='text-white' onClick={() => goLogin(false)} />
         </div>
       ) : (
-        <div className='footer'>
+        <div className='footer center'>
           <NavLink to={path.HOME} className='btn center'>COUNTINUE TO BUY</NavLink>
           {cartItems.length !== 0 &&
             <NavLink to={'/' + path.PAYMENT} className='btn center'>PAYMENT</NavLink>

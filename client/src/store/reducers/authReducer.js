@@ -1,10 +1,10 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
-    isLoggedIn: false,
-    token: null,
     msg: '',
+    token: null,
     update: false,
+    isLoggedIn: false,
 }
 
 const authReducer = (state = initState, action) => {

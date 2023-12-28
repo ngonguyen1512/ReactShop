@@ -3,7 +3,7 @@ import { Button } from '../../components'
 import { path } from '../../utils/constant'
 import * as actions from '../../store/actions'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 const { BiDetail, CiEdit } = icons;
@@ -81,11 +81,9 @@ const Product = () => {
                         />
                     </td>
                     <td className={`w-[4%] ${styletd}`}>
-                        <Link to={path.UPDATE_PRODUCT + `/${item.id}`}>
-                            <Button fullWidth IcAfter={CiEdit} textColor='text-secondary'
-                            // onClick={handleUpdate(item.id)}
-                            />
-                        </Link>
+                        <NavLink to={path.UPDATE_PRODUCT + `/${item.id}`}>
+                            <Button fullWidth IcAfter={CiEdit} textColor='text-secondary'/>
+                        </NavLink>
                     </td>
                 </tr>
                 {isShowDetail && payload.id === item.id && (

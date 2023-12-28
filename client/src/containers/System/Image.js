@@ -60,11 +60,9 @@ const Image = () => {
 
     return (
         <div className='image'>
-            <div className='header-image between'>
-                <span></span>
-                <input
+            <div className='header-image end'>
+                <input type="text"
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-                    type="text"
                     placeholder='Search by id product'
                     value={searchValue}
                     onChange={handleSearch}

@@ -41,7 +41,7 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
   useEffect(() => {
     if (Array.isArray(likes)) {
       const hasLiked = likes.some(
-        (item) => item.idProduct === id && item.idAccount === idCurrent
+        item => item.idProduct === id && item.idAccount === idCurrent
       )
       setIsLiked(hasLiked)
     }
@@ -107,10 +107,9 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
               <div className='price'>
                 <IntlProvider locale="vi">
                   <FormattedNumber
-                    value={price}
-                    currency="VND"
+                    value={price} currency="VND"
                     minimumFractionDigits={0}
-                  /> đ
+                  /><span className='underline'>đ</span>
                 </IntlProvider>
               </div>
             </div>
@@ -122,17 +121,16 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
                     value={(price * (100 - discount)) / 100}
                     currency="VND"
                     minimumFractionDigits={0}
-                  /> đ
+                  /><span className='underline'>đ</span>
                 </IntlProvider>
               </div>
               <div className='basic_price-discount'>
                 <div className='basic_price'>
                   <IntlProvider locale="vi">
                     <FormattedNumber
-                      value={price}
-                      currency="VND"
+                      value={price} currency="VND"
                       minimumFractionDigits={0}
-                    /> đ
+                    /><span className='underline'>đ</span>
                   </IntlProvider>
                 </div>
                 <span className='discount'>-{discount}%</span>

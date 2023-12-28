@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    font-family: 'Oswald' !important;
-}
+* {font-family: 'Oswald' !important;}
 .center {
     display: flex;
     align-items: center;

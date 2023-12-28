@@ -61,34 +61,27 @@ const Dashboard = () => {
       <div className='chart-number'>
         <div className='number'>
           {invoices?.length > 0 && (
-            <Frame
-              icon={<RiMoneyPoundCircleFill />} title="Revenue"
+            <Frame icon={<RiMoneyPoundCircleFill />} title="Revenue"
               total={invoices
                 .filter((item) => item?.idState === 5)
                 .reduce((acc, item) => acc + item?.total, 0)}
-              background='#008000' color='#008000'
+               color='#008000'
             />
           )}
-          <Frame
-            icon={<MdSwitchAccount />} title="Account"
-            total={counta} background='#FFA500' color='#FFA500'
+          <Frame icon={<MdSwitchAccount />} title="Account"
+            total={counta} color='#FFA500'
           />
-          <Frame
-            icon={<FaClipboardList />} title="Product"
-            total={countp} background='#0000FF' color='#0000FF'
+          <Frame icon={<FaClipboardList />} title="Product"
+            total={countp} color='#0000FF'
           />
           {invoices?.length > 0 && (
-            <Frame
-              icon={<FaFileInvoiceDollar />} title="Invoice"
-              total={invoices
-                .filter((item) => item?.idState === 5).length}
-              background='#000' color='#000'
+            <Frame icon={<FaFileInvoiceDollar />} title="Invoice"
+              total={invoices.filter(item => item?.idState === 5).length}
+              color='#000'
             />
           )}
         </div>
-        <div className='chart'>
-          <RevenueChart />
-        </div>
+        <div className='chart'><RevenueChart /></div>
       </div>
       <div className='seller-account'>
         {/* <div className='seller-account_header '>

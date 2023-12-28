@@ -29,18 +29,12 @@ const CreateProduct = () => {
         title: 'Bạn có muốn thêm detail product hay thêm detail accessories hay thoát?',
         icon: 'question',
         showCancelButton: true,
-        showDenyButton: true,
-        confirmButtonText: 'Thêm detail product',
+        confirmButtonText: 'Thêm detail',
         cancelButtonText: 'Thoát',
-        denyButtonText: 'Thêm detail accessories',
-        denyButtonColor: '#0000FF',
       }).then((result) => {
         if (result.isConfirmed) {
           setPayload([]);
           navigate(path.CREATE_DETAIL, { replace: true })
-        } else if (result.isDenied) {
-          setPayload([]);
-          navigate(path.CREATE_DETAIL2, { replace: true });
         } else {
           navigate(path.PRODUCT)
         }
@@ -76,7 +70,7 @@ const CreateProduct = () => {
   }, [dispatch])
 
   return (
-    <div className='create_product'>
+    <div className='create_product mt-[5%]'>
       <div className='form-create_product'>
         <div>
           <label className='text-xs mt-4'>CATEGORY</label>
@@ -100,32 +94,29 @@ const CreateProduct = () => {
             )}
           </select>
         </div>
-        <InputForm
+        <InputForm type='text'
           setInvalidFields={setInvalidFields}
           invalidFields={invalidFields}
           label={'NAME'}
           value={payload.name}
           setValue={setPayload}
           keyPayload={'name'}
-          type='text'
         />
-        <InputForm
+        <InputForm type='number'
           setInvalidFields={setInvalidFields}
           invalidFields={invalidFields}
           label={'DISCOUNT'}
           value={payload.discount}
           setValue={setPayload}
           keyPayload={'discount'}
-          type='number'
         />
-        <InputForm
+        <InputForm type='number'
           setInvalidFields={setInvalidFields}
           invalidFields={invalidFields}
           label={'PRICE'}
           value={payload.price}
           setValue={setPayload}
           keyPayload={'price'}
-          type='number'
         />
         <div>
           <label className='text-xs mt-4'>STATE</label>
@@ -138,14 +129,13 @@ const CreateProduct = () => {
             ))}
           </select>
         </div>
-        <TextArea
+        <TextArea type='text'
           setInvalidFields={setInvalidFields}
           invalidFields={invalidFields}
           label={'INFORMATION'}
           value={payload.information}
           setValue={setPayload}
           keyPayload={'information'}
-          type='text'
         />
       </div>
       <div className='center mt-5'>

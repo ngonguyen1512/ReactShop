@@ -9,7 +9,7 @@ const styletd = 'text-center py-2 '
 const { TiDeleteOutline, BiDetail } = icons
 
 const Account = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [searchValue, setSearchValue] = useState("")
   const { states } = useSelector(state => state.state)
   const [invalidFields, setInvalidFields] = useState([])
@@ -198,11 +198,9 @@ const Account = () => {
 
   return (
     <div className='account'>
-      <div className='header-account between'>
-        <span></span>
-        <input
+      <div className='header-account end'>
+        <input type="text"
           className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-          type="text"
           placeholder='Search by name'
           value={searchValue}
           onChange={handleSearch}
@@ -236,8 +234,7 @@ const Account = () => {
               </div>
               <span></span>
               <div className='update-category'>
-                <Button
-                  fullWidth
+                <Button fullWidth
                   class='col-span-2'
                   text={'UPDATE'}
                   value={payloadu.id}
@@ -253,50 +250,45 @@ const Account = () => {
           )}
           {!payload.id && (
             <>
-              <InputForm
+              <InputForm type='text'
                 setInvalidFields={setInvalidFields}
                 invalidFields={invalidFields}
                 label={'NAME'}
                 value={payload.name}
                 setValue={setPayload}
                 keyPayload={'name'}
-                type='text'
               />
-              <InputForm
+              <InputForm type='tel'
                 setInvalidFields={setInvalidFields}
                 invalidFields={invalidFields}
                 label={'PHONE'}
                 value={payload.phone}
                 setValue={setPayload}
                 keyPayload={'phone'}
-                type='tel'
               />
-              <InputForm
+              <InputForm type='email'
                 setInvalidFields={setInvalidFields}
                 invalidFields={invalidFields}
                 label={'EMAIL'}
                 value={payload.email}
                 setValue={setPayload}
                 keyPayload={'email'}
-                type='email'
               />
-              <InputForm
+              <InputForm type='text'
                 setInvalidFields={setInvalidFields}
                 invalidFields={invalidFields}
                 label={'ADDRESS'}
                 value={payload.address}
                 setValue={setPayload}
                 keyPayload={'address'}
-                type='text'
-              />
-              <InputForm
+              /> 
+              <InputForm type='password'
                 setInvalidFields={setInvalidFields}
                 invalidFields={invalidFields}
                 label={'PASSWORD'}
                 value={payload.password}
                 setValue={setPayload}
                 keyPayload={'password'}
-                type='password'
               />
               <div>
                 <label className='text-xs mt-4'>PERMISSION</label>

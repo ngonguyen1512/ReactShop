@@ -134,11 +134,7 @@ const Slide = () => {
                 <td className={styletd}>{item.idState}</td>
                 {functions?.length > 0 && functions.map(item => item.name === 'Delete' && item.idPermission === 1 && (
                     <th className='w-[8%]'>
-                        <Button
-                            IcAfter={MdOutlineDeleteSweep}
-                            value={item.id}
-                            onClick={handleSubmitDelete}
-                        />
+                        <Button IcAfter={MdOutlineDeleteSweep} value={item.id} onClick={handleSubmitDelete}/>
                     </th>
                 ))}
             </tr>
@@ -148,9 +144,8 @@ const Slide = () => {
     return (
         <div className='slide'>
             <div className='header-slide end'>
-                <input
+                <input type="text"
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-                    type="text"
                     placeholder='Search by name'
                     value={searchValue}
                     onChange={handleSearch}
@@ -158,23 +153,21 @@ const Slide = () => {
             </div>
             {functions?.length > 0 && functions.map(item => item.name === 'Create' && item.idPermission === 1 && (
                 <div className='form-slide'>
-                    <InputForm
+                    <InputForm type='file'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'IMAGE'}
                         value={payload.image}
                         setValue={setPayload}
                         keyPayload={'image'}
-                        type='file'
                     />
-                    <InputForm
+                    <InputForm type='text'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'NAME'}
                         value={payload.name}
                         setValue={setPayload}
                         keyPayload={'name'}
-                        type='text'
                     />
                     <div>
                         <label className='text-xs mt-4'>STATE</label>
@@ -189,8 +182,7 @@ const Slide = () => {
                     </div>
                     {payload.id ? (
                         <div className='update-color'>
-                            <Button
-                                fullWidth
+                            <Button fullWidth
                                 text={'UPDATE'}
                                 value={payload.id}
                                 onClick={handleSubmitUpdate}
@@ -201,10 +193,7 @@ const Slide = () => {
                             </span>
                         </div>
                     ) : (
-                        <Button
-                            text={'CREATE'}
-                            onClick={handleSubmitCreate}
-                        />
+                        <Button text={'CREATE'} onClick={handleSubmitCreate}/>
                     )}
                 </div>
             ))}

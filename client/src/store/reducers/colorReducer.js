@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    colors: [],
     msg: '',
+    colors: [],
 }
 
 const colorReducer = (state = initState, action) => {

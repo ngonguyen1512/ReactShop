@@ -25,19 +25,16 @@ const Pagination = ({ count, currentPage, setCurrentPage, counts }) => {
       {!isHideStart &&
         <PageNumber icon={<GrPrevious />} text={1} setCurrentPage={setCurrentPage} />
       }
-      {arrPage.length > 0 && arrPage.map(item => {
-        return (
-          <PageNumber key={item} text={item}
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-          />
-        )
-      })}
+      {arrPage.length > 0 && arrPage.map(item => (
+        <PageNumber key={item} text={item}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      ))}
       {!isHideEnd &&
-        <PageNumber icon={<GrNext />}
+        <PageNumber icon={<GrNext />} type='end'
           text={Math.ceil(count / counts.length)}
           setCurrentPage={setCurrentPage}
-          type='end'
         />
       }
     </div>

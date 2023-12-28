@@ -5,11 +5,10 @@ import { IoIosMenu } from "react-icons/io"
 import { GiWolfHowl } from "react-icons/gi"
 import { TiDeleteOutline } from "react-icons/ti"
 import { GrNext, GrPrevious } from "react-icons/gr"
-import { FaFileInvoiceDollar } from "react-icons/fa6"
+import { RiMoneyPoundCircleFill } from "react-icons/ri"
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5"
-import { RiMoneyPoundCircleFill } from "react-icons/ri";
-import { FaSquareGithub, FaSquareInstagram, FaSquareFacebook, FaClipboardList } from "react-icons/fa6"
 import { MdOutlineShoppingCart, MdSwitchAccount, MdOutlineDeleteSweep } from "react-icons/md"
+import { FaSquareGithub, FaSquareInstagram, FaSquareFacebook, FaClipboardList, FaFileInvoiceDollar } from "react-icons/fa6"
 
 const icons = {
     CiEdit,

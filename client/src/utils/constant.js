@@ -41,7 +41,6 @@ export const path = {
     PRODUCT: 'product',
     CREATE_IMAGE: 'create_image',
     CREATE_DETAIL: 'create_detail',
-    CREATE_DETAIL2: 'create_detail2',
     CREATE_PRODUCT: 'create_product',
     UPDATE_PRODUCT: 'update_product',
     QUANTITY: 'quantity',

@@ -63,7 +63,7 @@ const Detail = () => {
     const firstColor = quantities.find(item => item.idProduct === id);
     if (quantities?.length > 0) {
       setIdColor(firstColor.idColor)
-      setIdSize(quantities[0].idSize)
+      setIdSize(firstColor.idSize)
       setSelectedColor(firstColor?.quantity_color.code);
     }
   }, [id, images, quantities, location.pathname]);
@@ -123,7 +123,7 @@ const Detail = () => {
 
   const formatInformation = (information) => {
     const formattedDescriptions = information.split(/\n(?=\S)|\n(?=[A-Z])/)
-      .map((desc, index) => <p key={index}>- {desc.trim()}</p>);
+      .map((desc, index) => <ul className='detail_infor' key={index}><li>{desc.trim()}</li></ul>);
     return formattedDescriptions;
   };
   const handleMouseMove = (event) => {
@@ -138,135 +138,122 @@ const Detail = () => {
 
   return (
     <>
-      {products?.length > 0 && products.map(product => {
-        if (product.id === id)
-          return (
-            <div className='detail'>
-              <div className='detail_image'>
-                <div className='detail_image-bar'>
-                  <ul>{generateThumbnailList()}</ul>
-                </div>
-                {selectedImageUrl && (
-                  <div class="image-container" onMouseMove={handleMouseMove}>
-                    <img
-                      id="zoomImage"
-                      src={`/images/${selectedImageUrl}`}
-                      alt={product.name}
-                      className={`image-img object-cover transition duration-300 ${isHovered ? 'zoomed' : ''}`}
-                    />
+      {products?.length > 0 && products.map(product => (
+        product.id === id &&
+        <div className='detail'>
+          <div className='detail_image'>
+            <div className='detail_image-bar'>
+              <ul>{generateThumbnailList()}</ul>
+            </div>
+            {selectedImageUrl && (
+              <div class="image-container" onMouseMove={handleMouseMove}>
+                <img id="zoomImage" alt={product.name}
+                  src={`/images/${selectedImageUrl}`}
+                  className={`image-img object-cover transition duration-300 ${isHovered ? 'zoomed' : ''}`}
+                />
+              </div>
+            )}
+            <div className='space-bar'></div>
+          </div>
+          <div className='detail_content'>
+            {isLoggedIn && (
+              <div className='like-unlike'>
+                {isLiked ? (
+                  <span className="icons" onClick={() => handleUnLike(id)}><IoHeartSharp style={{ color: 'red' }} /></span>
+                ) : (
+                  <span className="icons" onClick={() => handleLike(id)}><IoHeartOutline /></span>
+                )}
+              </div>
+            )}
+            <div className='detail_content-title'>{product.name}</div>
+            <div className='detail_content-id'>ID: {product.id}</div>
+            <div className='detail_content-price'>
+              {product.discount === 0 ? (
+                <p className='price'>{product.price.toLocaleString()}<span className='underline'>đ</span></p>
+              ) : (
+                <p className='price flex items-center'>
+                  <span className='discount'>-{product.discount}%</span>
+                  <span className='price_discount'>{((product.price * (100 - product.discount)) / 100).toLocaleString()}<span className='underline'>đ</span></span>
+                  <span className='price_basic'>{product.price.toLocaleString()}<span className='underline'>đ</span></span>
+                </p>
+              )}
+            </div>
+            <div className='detail_content-select'>
+              <div className='select-color'>
+                <div className=''>Color</div>
+                {quantities?.length > 0 && (
+                  <div className='select-color_box'>
+                    {quantities.filter(item => item.idProduct === id).reduce((uniqueColors, item) => {
+                      if (!uniqueColors.some(color => color.code === item.quantity_color.code))
+                        uniqueColors.push({ code: item.quantity_color.code, sizes: [] });
+                      const colorIndex = uniqueColors.findIndex(color => color.code === item.quantity_color.code);
+                      uniqueColors[colorIndex].sizes.push(item.size);
+                      return uniqueColors;
+                    }, [])
+                      .map(color => (
+                        <div className={`p-[0.5%] mr-2% rounded-full ${selectedColor === color.code ? 'selected' : ''}`}
+                          style={{ border: selectedColor === color.code ? '1px solid black' : '' }}>
+                          <div key={color.id}
+                            className={`box_color center ${selectedColor === color.code ? 'selected' : ''}`}
+                            style={{ backgroundColor: color.code }}
+                            onClick={() => handleSelectIdColor(color.code)}
+                          ></div>
+                        </div>
+                      ))}
                   </div>
                 )}
-                <div className='space-bar'></div>
               </div>
-              <div className='detail_content'>
-                {isLoggedIn ? (
-                  <div className='like-unlike'>
-                    {isLiked ? (
-                      <span className="icons" onClick={() => handleUnLike(id)}><IoHeartSharp style={{ color: 'red' }} /></span>
-                    ) : (
-                      <span className="icons" onClick={() => handleLike(id)}><IoHeartOutline /></span>
-                    )}
-                  </div>
-                ) : (<></>)}
-                <div className='detail_content-title'>{product.name}</div>
-                <div className='detail_content-id'>ID: {product.id}</div>
-                <div className='detail_content-price'>
-                  {product.discount === 0 ? (
-                    <p className='price'>{product.price.toLocaleString()} đ</p>
-                  ) : (
-                    <p className='price flex items-center'>
-                      <span>{((product.price * (100 - product.discount)) / 100).toLocaleString()} đ</span>
-                      <span className='line-through text-base pl-1 text-[#a0a0a0]'>{product.price.toLocaleString()}</span>
-                      <span className='text-base ml-1 px-[0.35rem] py-[0.025rem] text-[#fff] bg-[#000]'>-{product.discount}%</span>
-                    </p>
-                  )}
-                </div>
-                <div className='detail_content-select'>
-                  <div className='select-color'>
-                    <div className=''>Color</div>
-                    {quantities?.length > 0 && (
-                      <div className='select-color_box'>
-                        {quantities.filter(item => item.idProduct === id).reduce((uniqueColors, item) => {
-                          if (!uniqueColors.some(color => color.code === item.quantity_color.code))
-                            uniqueColors.push({ code: item.quantity_color.code, sizes: [] });
-                          const colorIndex = uniqueColors.findIndex(color => color.code === item.quantity_color.code);
-                          uniqueColors[colorIndex].sizes.push(item.size);
-                          return uniqueColors;
-                        }, [])
-                          .map(color => (
-                            <div className={`p-[0.5%] mr-2% rounded-full ${selectedColor === color.code ? 'selected' : ''}`}
-                              style={{ border: selectedColor === color.code ? '1px solid black' : '' }}>
-                              <div
-                                key={color.id}
-                                className={`box_color center ${selectedColor === color.code ? 'selected' : ''}`}
-                                style={{ backgroundColor: color.code }}
-                                onClick={() => handleSelectIdColor(color.code)}
-                              ></div>
-                            </div>
-                          ))}
-                      </div>
-                    )}
-                  </div>
-                  <div className='select-size'>
-                    <div className=''>Size</div>
-                    <div className='box_size'>
-                      {quantities?.length > 0 && quantities.map((item) =>
-                        item.idProduct === id && item.quantity > 2 && (
-                          <>
-                            {dimensions?.length > 0 && dimensions.map(size => {
-                              if (size.id === item.idSize && !uniqueSizeIds.has(size.id)) {
-                                const isSelected = size.id === idSize;
-                                uniqueSizeIds.add(size.id);
-                                return (
-                                  <Button
-                                    fullWidth
-                                    key={size.id}
-                                    text={size.code}
-                                    onClick={() => {
-                                      handleSelectIdSize(size.id)
-                                    }}
-                                    backgroundSelect={isSelected ? '#000' : ''}
-                                    colorSelect={isSelected ? '#fff' : ''}
-                                  />
-                                );
-                              }
-                              return null;
-                            })}
-                          </>
-                        ))}
-                    </div>
-                  </div>
-                </div>
-                <div className='detail_content-button'>
-                  <CartContext.Consumer>
-                    {({ addToCart }) =>
+              <div className='select-size'>
+                <div className=''>Size</div>
+                <div className='box_size'>
+                  {quantities?.length > 0 && quantities.map((item) =>
+                    item.idProduct === id && item.quantity > 2 && (
                       <>
-                        <Button
-                          fullWidth
-                          text={'ADD TO CART'}
-                          onClick={() => addToCart(product, idColor, idSize)}
-                        />
-                        <Button
-                          fullWidth
-                          text={'BUY NOW'}
-                          onClick={() => {
-                            addToCart(product, idColor, idSize)
-                            navigate('/' + path.CART)
-                          }}
-                        />
+                        {dimensions?.length > 0 && dimensions.map(size => {
+                          if (size.id === item.idSize && !uniqueSizeIds.has(size.id)) {
+                            const isSelected = size.id === idSize;
+                            uniqueSizeIds.add(size.id);
+                            return (
+                              <Button fullWidth key={size.id} text={size.code}
+                                onClick={() => {
+                                  handleSelectIdSize(size.id)
+                                }}
+                                backgroundSelect={isSelected ? '#000' : ''}
+                                colorSelect={isSelected ? '#fff' : ''}
+                              />
+                            );
+                          }
+                          return null;
+                        })}
                       </>
-                    }
-                  </CartContext.Consumer>
-                </div>
-                <div className='detail_content-infor'>
-                  <div className='infor_title'>INFORMATION</div>
-                  {formatInformation(product.information)}
+                    ))}
                 </div>
               </div>
             </div>
-          )
-        return null;
-      })}
+            <div className='detail_content-button'>
+              <CartContext.Consumer>
+                {({ addToCart }) =>
+                  <>
+                    <Button fullWidth text={'ADD TO CART'}
+                      onClick={() => addToCart(product, idColor, idSize)}
+                    />
+                    <Button fullWidth text={'BUY NOW'}
+                      onClick={() => {
+                        addToCart(product, idColor, idSize)
+                        navigate('/' + path.CART)
+                      }}
+                    />
+                  </>
+                }
+              </CartContext.Consumer>
+            </div>
+            <div className='detail_content-infor'>
+              <div className='infor_title'>INFORMATION</div>
+              {formatInformation(product.information)}
+            </div>
+          </div>
+        </div>
+      ))}
     </>
   )
 }

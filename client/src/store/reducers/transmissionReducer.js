@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    transmissions: [],
     msg: '',
+    transmissions: [],
     alltransmissions: [],
 }
 

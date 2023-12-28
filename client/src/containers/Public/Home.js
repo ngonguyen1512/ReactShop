@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import $ from 'jquery'
 import { Footer, Header } from './index'
-import { Outlet, useLocation, useSearchParams } from 'react-router-dom'
+import * as actions from '../../store/actions'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Slide, Tag, TextSlide } from '../../components/index'
-import $ from 'jquery';
-import * as actions from '../../store/actions'
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom'
 
 const Home = () => {
   const headerRef = useRef()
@@ -19,17 +19,13 @@ const Home = () => {
   const { categories } = useSelector(state => state.category)
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location.pathname]);
-  useEffect(() => {
-
     headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [page, sample])
+  }, [location.pathname, page, sample])
 
   useEffect(() => {
     const handleScroll = () => {
-      var scroll = $(window).scrollTop();
-      if (scroll > 0) $('.header').addClass('fixed');
-      else $('.header').removeClass('fixed');
+      const scroll = $(window).scrollTop();
+      $('.header').toggleClass('fixed', scroll > 0);
     };
     $(window).scroll(handleScroll);
     return () => { $(window).off('scroll', handleScroll) };
@@ -53,13 +49,13 @@ const Home = () => {
               <Tag id={item?.id} name={item?.name} image={item?.image} />
             ))}
           </div>
-          <TextSlide texts='NEW ARRIVAL' quantity={2}/>
+          <TextSlide texts='NEW ARRIVAL' quantity={2} />
         </>
       }
       <div className='main'>
         <Outlet />
       </div>
-      <TextSlide texts='WELCOME TO FASHION STORE' quantity={1}/>
+      <TextSlide texts='WELCOME TO FASHION STORE' quantity={1} />
       <Footer />
     </div>
   )

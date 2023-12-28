@@ -25,7 +25,7 @@ const Type = () => {
             <div className='header-type'>
                 {allocations?.length > 0 && allocations.map(item => (
                     <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content'>
-                        <span>{item.name}</span>
+                        {item.name}
                     </NavLink>
                 )
                 )}

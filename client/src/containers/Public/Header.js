@@ -61,10 +61,10 @@ const Header = () => {
   }, [navigate])
 
   const handleLogout = () => {
-    removeAllFromCart();
-    setIsShowMenu(false);
-    dispatch(actions.logout());
-    navigate('/');
+    removeAllFromCart()
+    setIsShowMenu(false)
+    dispatch(actions.logout())
+    navigate('/')
   }
 
   useEffect(() => {

@@ -105,11 +105,9 @@ const Color = () => {
 
     return (
         <div className='color'>
-            <div className='header-color between'>
-                <span></span>
-                <input
+            <div className='header-color end'>
+                <input type="text"
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-                    type="text"
                     placeholder='Search by name'
                     value={searchValue}
                     onChange={handleSearch}
@@ -117,23 +115,21 @@ const Color = () => {
             </div>
             {functions?.length > 0 && functions.map(item => item.name === 'Create' && item.idPermission === 1 && (
                 <div className='form-color'>
-                    <InputForm
+                    <InputForm type="text"
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'CODE'}
                         value={payload.code}
                         setValue={setPayload}
                         keyPayload={'code'}
-                        type='text'
                     />
-                    <InputForm
+                    <InputForm type="text"
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'NAME'}
                         value={payload.name}
                         setValue={setPayload}
                         keyPayload={'name'}
-                        type='text'
                     />
                     <div>
                         <label className='text-xs mt-4'>STATE</label>
@@ -148,8 +144,7 @@ const Color = () => {
                     </div>
                     {payload.id ? (
                         <div className='update-color'>
-                            <Button
-                                fullWidth
+                            <Button fullWidth
                                 text={'UPDATE'}
                                 value={payload.id}
                                 onClick={handleSubmitUpdate}
@@ -160,10 +155,7 @@ const Color = () => {
                             </span>
                         </div>
                     ) : (
-                        <Button
-                            text={'CREATE'}
-                            onClick={handleSubmitCreate}
-                        />
+                        <Button text={'CREATE'} onClick={handleSubmitCreate}/>
                     )}
                 </div>
             ))}

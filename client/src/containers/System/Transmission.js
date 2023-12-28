@@ -79,8 +79,7 @@ const Transmission = () => {
           </div>
           {payload.id ? (
             <div className='update-transmission'>
-              <Button
-                fullWidth
+              <Button fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}
@@ -91,11 +90,7 @@ const Transmission = () => {
               </span>
             </div>
           ) : (
-            <Button
-              class='col-span-2'
-              text={'CREATE'}
-              onClick={handleSubmitCreate}
-            />
+            <Button class='col-span-2' text={'CREATE'} onClick={handleSubmitCreate}/>
           )}
         </div>
       ))}
@@ -125,11 +120,7 @@ const Transmission = () => {
                   <td className={styletd}>{item.idPermission}</td>
                   {functions?.length > 0 && functions.map(items => items.name === 'Delete' && items.idPermission === 1 && (
                     <th className='w-[5%]'>
-                      <Button
-                        IcAfter={MdOutlineDeleteSweep}
-                        value={item.id}
-                        onClick={handleSubmitDelete}
-                      />
+                      <Button IcAfter={MdOutlineDeleteSweep} value={item.id} onClick={handleSubmitDelete}/>
                     </th>
                   ))}
                 </tr>

@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom'
 const Information = () => {
   const navigate = useNavigate()
   const { currentData } = useSelector(state => state.user)
-
   const handleUpdate =() => {
     navigate(path.UPDATE_ACCOUNT)
   }
@@ -21,10 +20,7 @@ const Information = () => {
         <li>{currentData.email}</li>
         <li>{currentData.address}</li>
       </ul>
-      <Button 
-        text={'Update account'}
-        onClick={handleUpdate}
-      />
+      <Button text={'Update account'} onClick={handleUpdate}/>
     </div>
   )
 }

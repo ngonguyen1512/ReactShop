@@ -1,8 +1,8 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
-    menus: [],
     msg: '',
+    menus: [],
 }
 
 const userReducer = (state = initState, action) => {

@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    images: [],
     msg: '',
+    images: [],
     update: false,
 }
 

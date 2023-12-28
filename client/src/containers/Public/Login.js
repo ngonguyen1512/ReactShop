@@ -74,31 +74,25 @@ const Login = () => {
             <div className='frame'>
                 <h3 className='title'>LOGIN</h3>
                 <div className='forminput'>
-                    <InputForm
+                    <InputForm type='tel'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'PHONE'}
                         value={payload.phone}
                         setValue={setPayload}
                         keyPayload={'phone'}
-                        type='tel'
                     />
-                    <InputForm
+                    <InputForm type='password'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'PASSWORD'}
                         value={payload.password}
                         setValue={setPayload}
                         keyPayload={'password'}
-                        type='password'
                     />
                 </div>
                 <div className='formbutton'>
-                    <Button
-                        text='LOGIN'
-                        fullWidth
-                        onClick={handleSubmit}
-                    />
+                    <Button text='LOGIN' fullWidth onClick={handleSubmit}/>
                 </div>
                 <div className='transit between'>
                     <small className='text'

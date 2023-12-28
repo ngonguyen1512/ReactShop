@@ -8,7 +8,7 @@ import {
 import {
   HomeServer, Dashboard, Type, Sample, Category, Account, List, Menu, Dimension, State, Slide, Color,
   Image, Invoice, Product, Transfer, Quantity, Function, CreateImage, Permission, Role, Transmission, Allocation,
-  TransferPage, CreateProduct, UpdateProduct, CreateDetail, CreateDetail2 , Completion, Processing
+  TransferPage, CreateProduct, UpdateProduct, CreateDetail , Completion, Processing
 } from './containers/System'
 
 function App() {
@@ -56,7 +56,6 @@ function App() {
               <Route path={path.PRODUCT} element={<Product />}>
                 <Route path={path.CREATE_IMAGE} element={<CreateImage />} />
                 <Route path={path.CREATE_DETAIL} element={<CreateDetail />} />
-                <Route path={path.CREATE_DETAIL2} element={<CreateDetail2 />} />
                 <Route path={path.CREATE_PRODUCT} element={<CreateProduct />} />
                 <Route path={path.UPDATE_PRODUCT} element={<UpdateProduct />} />
               </Route>

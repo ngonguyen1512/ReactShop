@@ -13,9 +13,8 @@ const HomeServer = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      var scroll = $(window).scrollTop();
-      if (scroll > 0) $('.navigation').addClass('fixed');
-      else $('.navigation').removeClass('fixed');
+      const scroll = $(window).scrollTop();
+      $('.header').toggleClass('fixed', scroll > 0);
     };
     $(window).scroll(handleScroll);
     return () => { $(window).off('scroll', handleScroll) };

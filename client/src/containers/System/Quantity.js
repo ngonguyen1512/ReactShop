@@ -73,9 +73,8 @@ const Quantity = () => {
     return (
         <div className='quantity'>
             <div className='header-quantity end'>
-                <input
+                <input type="text"
                     className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-                    type="text"
                     placeholder='Search by id product'
                     value={searchValue}
                     onChange={handleSearch}
@@ -83,19 +82,17 @@ const Quantity = () => {
             </div>
             {functions?.length > 0 && functions.map(item => item.name === 'Update' && (
                 <div className='form-quantity'>
-                    <InputForm
+                    <InputForm type='number'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'QUANTITY'}
                         value={payload.quantity}
                         setValue={setPayload}
                         keyPayload={'quantity'}
-                        type='number'
                     />
                     <div>
                         <label className='text-xs mt-4'>STATE</label>
-                        <select
-                            value={payload.idState}
+                        <select value={payload.idState}
                             onChange={(e) => setPayload({ ...payload, idState: e.target.value })}
                             className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'
                         >
@@ -110,8 +107,7 @@ const Quantity = () => {
                     </div>
                     <span className='hide'></span>
                     <div className='update-quantity'>
-                        <Button
-                            fullWidth
+                        <Button fullWidth
                             text={'UPDATE'}
                             value={payload.id}
                             setValue={setPayload}

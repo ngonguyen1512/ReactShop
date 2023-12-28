@@ -95,9 +95,8 @@ const Forgot = () => {
                     />
                 </div>
                 <div className="formbutton">
-                    <Button
+                    <Button fullWidth
                         text='GET NEW PASSWORD'
-                        fullWidth
                         onClick={handleSubmit}
                     />
                     <div className='transit center'>

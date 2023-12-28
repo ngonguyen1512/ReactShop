@@ -49,7 +49,7 @@ const CreateImage = () => {
             confirmButtonText: 'Hoành thành',
             cancelButtonText: 'Thêm tiếp',
         }).then((result) => {
-            if (result.isConfirmed) 
+            if (result.isConfirmed)
                 navigate(path.PRODUCT);
             else {
                 setPayload([]);
@@ -66,74 +66,66 @@ const CreateImage = () => {
     }, [dispatch])
 
     return (
-        <div className='create_image mt-[15%]'>
+        <div className='create_image mt-[5%]'>
             <div className='form-create_image'>
                 <div>
                     <label className='text-xs mt-4'>PRODUCT</label>
-                    <select
-                        value={payload.idProduct}
+                    <select value={payload.idProduct}
                         onChange={(e) => setPayload({ ...payload, idProduct: e.target.value })}
                         className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'
                     >
                         <option value="">Select PRODUCT</option>
-                        {products?.length > 0 &&
-                            products.map((item) => (
-                                <option key={item.id} value={item.id}>
-                                    {item.id} - {item.name}
-                                </option>
-                            ))}
+                        {products?.length > 0 && products.map((item) => (
+                            <option key={item.id} value={item.id}>
+                                {item.id} - {item.name}
+                            </option>
+                        ))}
                     </select>
                 </div>
-                <InputForm
+                <InputForm type='file'
                     setInvalidFields={setInvalidFields}
                     invalidFields={invalidFields}
                     label={'IMAGE 1'}
                     value={payload.image1}
                     setValue={setPayload}
                     keyPayload={'image1'}
-                    type='file'
                 />
-                <InputForm
+                <InputForm type='file'
                     setInvalidFields={setInvalidFields}
                     invalidFields={invalidFields}
                     label={'IMAGE 2'}
                     value={payload.image2}
                     setValue={setPayload}
                     keyPayload={'image2'}
-                    type='file'
                 />
-                <InputForm
+                <InputForm type='file'
                     setInvalidFields={setInvalidFields}
                     invalidFields={invalidFields}
                     label={'IMAGE 3'}
                     value={payload.image3}
                     setValue={setPayload}
                     keyPayload={'image3'}
-                    type='file'
                 />
-                <InputForm
+                <InputForm type='file'
                     setInvalidFields={setInvalidFields}
                     invalidFields={invalidFields}
                     label={'IMAGE 4'}
                     value={payload.image4}
                     setValue={setPayload}
                     keyPayload={'image4'}
-                    type='file'
                 />
                 <div>
                     <label className='text-xs mt-4'>COLOR</label>
-                    <select
-                        value={payload.idColor}
+                    <select value={payload.idColor}
                         onChange={(e) => setPayload({ ...payload, idColor: e.target.value })}
                         className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 w-full cursor-pointer'
                     >
                         <option value="">Select COLOR</option>
-                        {colors?.length > 0 &&
-                            colors.map((item) => (
-                                <option key={item.id} value={item.id}>
-                                    {item.id} - {item.name}
-                                </option>
-                            ))}
+                        {colors?.length > 0 && colors.map((item) => (
+                            <option key={item.id} value={item.id}>
+                                {item.id} - {item.name}
+                            </option>
+                        ))}
                     </select>
                 </div>
             </div>

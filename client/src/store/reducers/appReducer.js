@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    likes: [],
     msg: '',
+    likes: [],
 }
 
 const appReducer = (state = initState, action) => {

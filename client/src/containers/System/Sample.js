@@ -99,9 +99,8 @@ const Sample = () => {
   return (
     <div className='sample'>
       <div className='header-sample end'>
-        <input
+        <input type="text"
           className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-          type="text"
           placeholder='Search by name'
           value={searchValue}
           onChange={handleSearch}
@@ -120,14 +119,13 @@ const Sample = () => {
               ))}
             </select>
           </div>
-          <InputForm
+          <InputForm type='text'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'NAME'}
             value={payload.name}
             setValue={setPayload}
             keyPayload={'name'}
-            type='text'
           />
           <div>
             <label className='text-xs mt-4'>STATE</label>
@@ -143,8 +141,7 @@ const Sample = () => {
           <span className='hide'></span>
           {payload.id ? (
             <div className='update-category'>
-              <Button
-                fullWidth
+              <Button fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}
@@ -155,10 +152,7 @@ const Sample = () => {
               </span>
             </div>
           ) : (
-            <Button
-              text={'CREATE'}
-              onClick={handleSubmitCreate}
-            />
+            <Button text={'CREATE'} onClick={handleSubmitCreate}/>
           )}
         </div>
       ))}

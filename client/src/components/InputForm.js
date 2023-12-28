@@ -4,10 +4,8 @@ const InputForm = ({ label, text, value, multiple, setValue, keyPayload, type, i
   return (
     <div>
       <label htmlFor='phone' className='text-xs mt-4'>{label}</label>
-      <input
-        type={type}
-        value={value}
-        id={keyPayload}
+      <input id={keyPayload}
+        type={type} value={value}
         placeholder={text}
         disabled={disabled}
         multiple={multiple}

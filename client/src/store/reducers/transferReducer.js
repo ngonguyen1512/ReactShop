@@ -1,8 +1,8 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
-    transfers: [],
     msg: '',
+    transfers: [],
 }
 
 const transferReducer = (state = initState, action) => {

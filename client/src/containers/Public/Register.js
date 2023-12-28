@@ -88,58 +88,49 @@ const Register = () => {
             <div className='frame'>
                 <h3 className='title'>REGISTER</h3>
                 <div className='forminput'>
-                    <InputForm
+                    <InputForm type='text'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'NAME'}
                         value={payload.name}
                         setValue={setPayload}
                         keyPayload={'name'}
-                        type='text'
                     />
-                    <InputForm
+                    <InputForm type='tel'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'PHONE'}
                         value={payload.phone}
                         setValue={setPayload}
                         keyPayload={'phone'}
-                        type='tel'
                     />
-                    <InputForm
+                    <InputForm type='email'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'EMAIL'}
                         value={payload.email}
                         setValue={setPayload}
                         keyPayload={'email'}
-                        type='email'
                     />
-                    <InputForm
+                    <InputForm type='text'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'ADDRESS'}
                         value={payload.address}
                         setValue={setPayload}
                         keyPayload={'address'}
-                        type='text'
                     />
-                    <InputForm
+                    <InputForm type='password'
                         setInvalidFields={setInvalidFields}
                         invalidFields={invalidFields}
                         label={'PASSWORD'}
                         value={payload.password}
                         setValue={setPayload}
                         keyPayload={'password'}
-                        type='password'
                     />
                 </div>
                 <div className='formbutton'>
-                    <Button
-                        text={'REGISTER'}
-                        fullWidth
-                        onClick={handleSubmit}
-                    />
+                    <Button text={'REGISTER'} fullWidth onClick={handleSubmit}/>
                 </div>
                 <div className='transit'>
                     <small>Do you have an account? <span className='text'

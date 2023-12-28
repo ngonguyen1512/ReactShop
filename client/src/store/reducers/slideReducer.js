@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    slides: [],
     msg: '',
+    slides: [],
     update: false,
 }
 

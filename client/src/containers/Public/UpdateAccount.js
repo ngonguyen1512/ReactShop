@@ -56,40 +56,33 @@ const UpdateAccount = () => {
     <div className='bg-frame center'>
       <div className='frame'>
         <div className='forminput'>
-          <InputForm
+          <InputForm type='text'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'NAME'}
             value={payload.name}
             setValue={setPayload}
             keyPayload={'name'}
-            type='text'
           />
-          <InputForm
+          <InputForm type='email'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'EMAIL'}
             value={payload.email}
             setValue={setPayload}
             keyPayload={'email'}
-            type='email'
           />
-          <InputForm
+          <InputForm type='text'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'ADDRESS'}
             value={payload.address}
             setValue={setPayload}
             keyPayload={'address'}
-            type='text'
           />
         </div>
         <div className='formbutton'>
-          <Button
-            text='UPDATE'
-            fullWidth
-            onClick={handleSubmit}
-          />
+          <Button text='UPDATE' fullWidth onClick={handleSubmit}/>
         </div>
       </div>
     </div>

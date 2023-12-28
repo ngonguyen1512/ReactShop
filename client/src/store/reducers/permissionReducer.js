@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    permissions: [],
     msg: '',
+    permissions: [],
 }
 
 const permissionReducer = (state = initState, action) => {

@@ -135,11 +135,9 @@ const Category = () => {
 
   return (
     <div className='category'>
-      <div className='header-category between'>
-        <span></span>
-        <input
+      <div className='header-category end'>
+        <input type="text"
           className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-          type="text"
           placeholder='Search by name'
           value={searchValue}
           onChange={handleSearch}
@@ -147,29 +145,26 @@ const Category = () => {
       </div>
       {functions?.length > 0 && functions.map(item => item.name === 'Create' && item.idPermission === 1 && (
         <div className='form-category'>
-          <InputForm
+          <InputForm type="text"
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'NAME'}
             value={payload.name}
             setValue={setPayload}
             keyPayload={'name'}
-            type='text'
           />
-          <InputForm
+          <InputForm type='file'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'IMAGE'}
             value={payload.image}
             setValue={setPayload}
             keyPayload={'image'}
-            type='file'
           />
           <span className='hide'></span>
           {payload.id ? (
             <div className='update-category'>
-              <Button
-                fullWidth
+              <Button fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}
@@ -180,10 +175,7 @@ const Category = () => {
               </span>
             </div>
           ) : (
-            <Button
-              text={'CREATE'}
-              onClick={handleSubmitCreate}
-            />
+            <Button text={'CREATE'} onClick={handleSubmitCreate}/>
           )}
         </div>
       ))}

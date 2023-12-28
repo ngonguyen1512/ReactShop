@@ -1,8 +1,8 @@
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 import * as actions from '../../store/actions'
 import { CartContext } from '../../contexts/Cart'
 import { Button, InputForm } from '../../components'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useContext, useEffect, useState } from 'react'
 
@@ -137,48 +137,40 @@ const Payment = () => {
       <div className='payment_information'>
         <p className='payment_title'>INFORMATION</p>
         <div className='information'>
-          <InputForm
+          <InputForm type='text'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'NAME'}
             value={payload.name}
             setValue={setPayload}
             keyPayload={'name'}
-            type='text'
           />
-          <InputForm
+          <InputForm type='tel'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'PHONE'}
             value={payload.phone}
             setValue={setPayload}
             keyPayload={'phone'}
-            type='tel'
           />
-          <InputForm
+          <InputForm type='email'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'EMAIL'}
             value={payload.email}
             setValue={setPayload}
             keyPayload={'email'}
-            type='email'
           />
-          <InputForm
+          <InputForm type='text'
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'ADDRESS'}
             value={payload.address}
             setValue={setPayload}
             keyPayload={'address'}
-            type='text'
           />
           <div className='mt-[2%]'>
-            <Button
-              text='COMPLETE'
-              fullWidth
-              onClick={() => handleCreateInvoices(cartItems)}
-            />
+            <Button text='COMPLETE' fullWidth onClick={() => handleCreateInvoices(cartItems)}/>
           </div>
         </div>
       </div>

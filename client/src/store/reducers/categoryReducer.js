@@ -1,8 +1,8 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    categories: [],
     msg: '',
     count: 0,
+    categories: [],
 }
 
 const categoryReducer = (state = initState, action) => {

@@ -15,7 +15,7 @@ const List = ({ category }) => {
   const idcurrent = parseInt(currentData.id)
 
   useEffect(() => {
-    dispatch(actions.getProductsLimit())
+    dispatch(actions.getProducts())
   })
   useEffect(() => {
     let params = [];
@@ -34,8 +34,7 @@ const List = ({ category }) => {
   return (
     <div className='lists'>
       {parts !== '' && products_limit?.length > 0 && products_limit.map(item => item.idState === 2 && (
-        <Item
-          id={item?.id}
+        <Item id={item?.id}
           name={item?.name}
           price={item?.price}
           idCurrent={idcurrent}
@@ -45,13 +44,11 @@ const List = ({ category }) => {
         />
       ))}
       {parts === '' && products_limit?.length > 0 &&
-        products_limit
-          .filter(item => item.idState === 2)
+        products_limit.filter(item => item.idState === 2)
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map(item => (
-            <Item
+            <Item id={item?.id}
               key={item?.id}
-              id={item?.id}
               name={item?.name}
               price={item?.price}
               idCurrent={idcurrent}

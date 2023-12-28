@@ -35,12 +35,10 @@ const PageNumber = ({ text, currentPage, icon, setCurrentPage }) => {
   }
   return (
     <div onClick={handleChangePage}
-      className={+text === +currentPage ? 
-        `${active} ${text === '...' ? 'cursor-text' : 'cursor-pointer'}` : 
+      className={+text === +currentPage ?
+        `${active} ${text === '...' ? 'cursor-text' : 'cursor-pointer'}` :
         `${notActive} ${text === '...' ? 'cursor-text' : 'cursor-pointer'}`}
-    > 
-      {icon || text} 
-    </div>
+    > {icon || text} </div>
   )
 }
 

@@ -110,11 +110,9 @@ const Allocations = () => {
 
   return (
     <div className='allocation'>
-      <div className='header-allocation between'>
-        <span></span>
-        <input
+      <div className='header-allocation end'>
+        <input type="text"
           className='text-[#000] outline-none bg-[#e7e7e7] p-2 w-[40%] '
-          type="text"
           placeholder='Search by name'
           value={searchValue}
           onChange={handleSearch}
@@ -133,19 +131,17 @@ const Allocations = () => {
               ))}
             </select>
           </div>
-          <InputForm
+          <InputForm type="text"
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={'NAME'}
             value={payload.name}
             setValue={setPayload}
             keyPayload={'name'}
-            type='text'
           />
           {payload.id ? (
             <div className='update-transmission'>
-              <Button
-                fullWidth
+              <Button fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}
@@ -156,11 +152,7 @@ const Allocations = () => {
               </span>
             </div>
           ) : (
-            <Button
-              class='col-span-2'
-              text={'CREATE'}
-              onClick={handleSubmitCreate}
-            />
+            <Button class='col-span-2' text={'CREATE'} onClick={handleSubmitCreate}/>
           )}
         </div>
       ))}

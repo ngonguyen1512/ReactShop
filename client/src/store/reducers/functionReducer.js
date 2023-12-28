@@ -1,9 +1,9 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-    functions: [],
     msg: '',
-    allfunctions: [],
     update: false,
+    functions: [],
+    allfunctions: [],
 }
 
 const functionReducer = (state = initState, action) => {

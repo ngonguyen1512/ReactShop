@@ -23,16 +23,12 @@ export class CartProvider extends Component {
             return; 
         }
         const existingProductIndex = this.state.cartItems.findIndex(item =>
-            item.id === product.id &&
-            item.idColor === idColor &&
-            item.idSize === idSize
+            item.id === product.id && item.idColor === idColor && item.idSize === idSize
         );
         if (existingProductIndex >= 0) {
             const updatedCartItems = [...this.state.cartItems];
             updatedCartItems[existingProductIndex].quantity++;
-            this.setState({
-                cartItems: updatedCartItems
-            });
+            this.setState({ cartItems: updatedCartItems });
         } else {
             this.setState({
                 cartItems: [...this.state.cartItems, { ...product, quantity: 1, idColor: idColor, idSize: idSize }]
@@ -51,9 +47,7 @@ export class CartProvider extends Component {
                 return { ...item, quantity: newQuantity };
             return item;
         });
-        this.setState({
-            cartItems: updatedCartItems
-        });
+        this.setState({ cartItems: updatedCartItems });
     }
     removeFromCart(idProduct, idSize, idColor) {
         const updatedCartItems = this.state.cartItems.filter(
@@ -74,9 +68,7 @@ export class CartProvider extends Component {
                     removeFromCart: this.removeFromCart,
                     removeAllFromCart: this.removeAllFromCart
                 }}
-            >
-                {this.props.children}
-            </CartContext.Provider>
+            > {this.props.children} </CartContext.Provider>
         );
     }
 }

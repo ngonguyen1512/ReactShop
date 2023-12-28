@@ -4,12 +4,8 @@ const TextArea = ({ label, text, value, setValue, keyPayload, type, invalidField
   return (
     <div>
       <label htmlFor='phone' className='text-xs mt-4'>{label}</label>
-      <textarea
-        type={type}
-        value={value}
-        id={keyPayload}
-        placeholder={text}
-        disabled={disabled}
+      <textarea type={type} value={value} id={keyPayload}
+        placeholder={text} disabled={disabled}
         onFocus={() => setInvalidFields([])}
         className='outline-none bg-[#e7e7e7] p-2 h-24 w-full text-black'
         onChange={(e) => setValue(prev => ({ ...prev, [keyPayload]: e.target.value }))}

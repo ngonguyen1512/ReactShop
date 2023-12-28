@@ -1,8 +1,8 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
-    states: [],
     msg: '',
+    states: [],
 }
 
 const stateReducer = (state = initState, action) => {
