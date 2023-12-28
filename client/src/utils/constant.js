@@ -55,6 +55,6 @@ export const path = {
 
     TRANSFER: 'transfer',
     TRANSMISSION: 'transmission',
-    TRANSFERPAGE: 'transfer',
+    TRANSFERPAGE: 'all',
     ALLOCATION: 'allocation',
 }

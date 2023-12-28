@@ -145,6 +145,7 @@ const Function = () => {
           {payload.id ? (
             <div className='update-function'>
               <Button
+                fullWidth
                 text={'UPDATE'}
                 value={payload.id}
                 onClick={handleSubmitUpdate}

@@ -91,10 +91,10 @@ const Dashboard = () => {
         </div>
       </div>
       <div className='seller-account'>
-        <div className='seller-account_header '>
+        {/* <div className='seller-account_header '>
           <span className='title center'>SELLER</span>
-          {/* <input type='date' className='input bg-[#e7e7e7]' value={selectedDate} onChange={handleSearch} /> */}
-        </div>
+          <input type='date' className='input bg-[#e7e7e7]' value={selectedDate} onChange={handleSearch} /> 
+        </div> */}
         <div className='seller-account_table'>
           <div className='seller_table'>
             <table className='w-full'>

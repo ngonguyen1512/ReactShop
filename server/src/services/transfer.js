@@ -2,9 +2,7 @@ import db from '../models';
 
 export const getAllTransfersService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Transfer.findAll({
-            attributes: ['id', 'name']
-        });
+        const response = await db.Transfer.findAll();
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get transfer',

@@ -5,7 +5,6 @@ export const getTransmissionsService = (permis) => new Promise(async (resolve, r
         let response;
         if (permis) {
             response = await db.Transmission.findAll({
-                attributes: [ 'id', 'idTransfer', 'idPermission' ],
                 include: [
                     { model: db.Transfer, as: 'transmission_transfer', attributes: ['name'] },
                     { model: db.Permission, as: 'transmission_permission', attributes: ['name'] },
@@ -31,7 +30,6 @@ export const getTransmissionsService = (permis) => new Promise(async (resolve, r
 export const getAllTransmissionsService = () => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Transmission.findAll({
-            attributes: [ 'id', 'idTransfer', 'idPermission' ],
             include: [
                 { model: db.Transfer, as: 'transmission_transfer', attributes: ['name'] },
                 { model: db.Permission, as: 'transmission_permission', attributes: ['name'] },

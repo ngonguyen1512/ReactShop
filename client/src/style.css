@@ -413,6 +413,7 @@
 .quantity .list-quantity {
     margin: 1rem 0;
     height: 480px;
+    overflow: auto;
 }
 .product .list-product, .image .list-image, .slide .list-slide,
 .transmission .list-transmission {

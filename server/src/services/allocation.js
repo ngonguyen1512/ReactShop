@@ -5,9 +5,6 @@ export const getAllocationsService = (idTransfer) => new Promise(async (resolve,
         let response;
         if (idTransfer) {
             response = await db.Allocation.findAll({
-                attributes: [
-                    'id', 'idTransfer', 'name'
-                ],
                 include: [
                     { model: db.Transfer, as: 'allocation_transfer', attributes: ['name'] },
                 ],

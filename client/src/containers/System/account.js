@@ -166,11 +166,12 @@ const Account = () => {
         setIsShowDetail(true);
       }
     }
+    const createdAtDate = new Date(item?.createdAt).toLocaleDateString();
     return (
       <>
         <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
           <td className={`w-[4%] ${styletd}`}>{item.id}</td>
-          <td className={styletd}>{new Date(item.createdAt).toLocaleDateString()}</td>
+          <td className={styletd}>{createdAtDate}</td>
           <td className='py-2'>{item.name}</td>
           <td className={styletd}>{item.phone}</td>
           <td className={styletd}>{item.idPermission}</td>

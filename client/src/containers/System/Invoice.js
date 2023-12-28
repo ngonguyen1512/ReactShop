@@ -30,10 +30,10 @@ const Invoice = () => {
         ))}
       </div>
       <div className='main-invoice'>
-        {last === 'completion' ? (
-          <Completion />
-        ) : (
+        {last === 'processing' ? (
           <Processing />
+        ) : (
+          <Completion />
         )}
       </div>
     </div>

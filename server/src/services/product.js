@@ -13,6 +13,7 @@ export const getAllProductsService = () => new Promise(async (resolve, reject) =
                 { model: db.State, as: 'product_state', attributes: ['name'] },
                 { model: db.Sample, as: 'product_sample', attributes: ['idCategory', 'name'] },
             ],
+            order: [['updatedAt', 'DESC']],
         });
         resolve({
             err: response ? 0 : 1,
@@ -29,13 +30,13 @@ export const getProductsLimitService = (page, category, query, { min, max, sampl
         const whereClause = {};
         if (min) {
             whereClause.price = {
-                [db.Sequelize.Op.gt]: min, // Greater than min
+                [db.Sequelize.Op.gt]: min // Greater than min
             };
         }
         if (max) {
             whereClause.price = {
                 ...(whereClause.price || {}),
-                [db.Sequelize.Op.lt]: max,
+                [db.Sequelize.Op.lt]: max
             };
         }
         if (sample) whereClause.idSample = sample;

@@ -60,7 +60,7 @@ const Quantity = () => {
         return (
             <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>
                 <td className={styletd}>{item.id}</td>
-                <td className={styletd}>{item.idProduct} - {item?.quantity_product?.name}</td>
+                <td className={styletd}>{item.idProduct}</td>
                 <td className={styletd}>{item.idColor} - {item?.quantity_color?.name}</td>
                 <td className={styletd}>{item.idSize} - {item?.quantity_size?.name}</td>
                 <td className={styletd}>{(item.quantity)}</td>

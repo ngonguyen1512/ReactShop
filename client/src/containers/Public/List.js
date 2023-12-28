@@ -9,13 +9,13 @@ const List = ({ category }) => {
   const location = useLocation()
   const pathurl = location.pathname
   const parts = pathurl.split('/')[1]
-  const [searchParmas] = useSearchParams();
+  const [searchParmas] = useSearchParams()
   const { products_limit } = useSelector(state => state.product)
   const { currentData } = useSelector(state => state.user)
   const idcurrent = parseInt(currentData.id)
 
   useEffect(() => {
-    dispatch(actions.getProducts())
+    dispatch(actions.getProductsLimit())
   })
   useEffect(() => {
     let params = [];
