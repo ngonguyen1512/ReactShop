@@ -233,6 +233,10 @@
     font-size: large;
     background-color: #be1e2d;
 }
+.detail .detail_content .detail_content-price .prices {
+    font-weight: 600;
+    font-size: x-large;
+}
 .detail .detail_content .detail_content-price .price .price_discount {
     margin: 0 2%;
     font-size: x-large;
@@ -249,7 +253,6 @@
     background-color: initial;
     background-image: url(	https://file.hstatic.net/1000306633/file/111_ae69cf24dc964f258349efab9c4ae975.png) !important;
 }
-
 .detail .detail_content .detail_content-select .select-color .select-color_box {
     display: flex;
 }
@@ -468,14 +471,17 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.processing .processing_approve .processing_approve-detail-input .processing_approve-input  .button2 button{
+        margin-bottom: 2px;
+}
 .processing .processing_approve {
-    height: 270px;
+    height: 370px;
 }
 .processing .processing_approve .processing_approve-table {
-    height: 270px;
+    height: 370px;
 }
-.processing .processing_approve .processing_approve-detail-input .processing_approve-detail {
-    height: 190px;
+.processing .processing_approve .processing_approve-detail-input .processing_approve-detail{
+    height: 250px;
 }
 .processing .processing_ship,
 .processing .processing_approve .processing_approve-table,
@@ -501,7 +507,7 @@
     padding: 0.5%
 }
 .processing .processing_ship {
-    height: 200px;
+    height: 100px;
     margin-top: 2%;
 }
 .completion .completion_header .input {

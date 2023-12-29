@@ -294,7 +294,6 @@ export const completeInvoicesService = ({ id, idState }) => new Promise(async (r
                         idSize: invoiceDetail.idSize
                     }
                 });
-
                 for (const quantity of quantities) {
                     const updatedQuantity = quantity.quantity - invoiceDetail.quantity;
                     await quantity.update({
@@ -304,6 +303,18 @@ export const completeInvoicesService = ({ id, idState }) => new Promise(async (r
             }
 
         }
+        resolve({
+            err: response ? 0 : 2,
+            msg: response ? 'Cập nhật invoice thành công.' : 'Cập nhật invoice không thành công',
+            response: response || null
+        })
+    } catch (error) { reject(error); }
+});
+
+export const unsuccessfulInvoicesService = ({ id, idState }) => new Promise(async (resolve, reject) => {
+    try {
+        const invoice = await db.Invoice.findByPk(id);
+        const response = await invoice.update({idState});
         resolve({
             err: response ? 0 : 2,
             msg: response ? 'Cập nhật invoice thành công.' : 'Cập nhật invoice không thành công',

@@ -122,7 +122,7 @@ const Slide = () => {
 
     const renderTableRow = (item) => {
         const handleClickRow = () => {
-            setPayload({ ...payload, id: item.id, name: item.name, idState: item.idState });
+            setPayload({ ...payload, id: item.id, name: item.name, idState: item.idState});
         };
         return (
             <tr key={item.id} onClick={handleClickRow} className='hover:bg-blue-200 cursor-pointer'>

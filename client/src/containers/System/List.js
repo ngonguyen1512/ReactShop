@@ -28,7 +28,7 @@ const List = () => {
             <div className='header-list'>
                 {allocations?.length > 0 && allocations.map(item => (
                     <NavLink key={item.id} to={`${formatVietnameseToString(item.name)}`} className='content'>
-                        {item.name}
+                        <span>{item.name}</span>
                     </NavLink>
                 ))}
             </div>

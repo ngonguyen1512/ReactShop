@@ -5,7 +5,9 @@ import * as actions from '../../store/actions'
 const Completion = () => {
   const dispatch = useDispatch()
   const uniqueSizeIds = new Set()
+  const { states } = useSelector(state => state.state)
   const [selectedDate, setSelectedDate] = useState('')
+  const [selectedState, setSelectedState] = useState('')
   const { colors } = useSelector(state => state.color)
   const { dimensions } = useSelector(state => state.dimension)
   const { invoicesall } = useSelector(state => state.invoice)
@@ -14,25 +16,39 @@ const Completion = () => {
   const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
 
   const handleSearch = (event) => {
-    setSelectedDate(event.target.value);
+    setSelectedDate(event.target.value)
+    setShouldReload(event.target.value !== "");
+  };
+  const handleSearchState = (event) => {
+    selectedState(event.target.value)
     setShouldReload(event.target.value !== "");
   };
 
   let filteredInvoices = [];
 
   if (invoicesall && Array.isArray(invoicesall)) {
-    filteredInvoices = invoicesall.filter((item) =>
-      item.createdAt.includes(selectedDate) 
+    filteredInvoices = invoicesall.filter((item) => {
+      item.createdAt.includes(selectedDate);
+    });
+  }
+  let filteredState = [];
+  const searchValueAsNumber = parseInt(selectedState, 10); // Chuyển đổi searchValue thành số nguyên
+
+  if (!isNaN(searchValueAsNumber) && invoicesall && Array.isArray(invoicesall)) {
+    filteredState = invoicesall.filter((item) =>
+      Number.isInteger(item?.detail_invoice.idState) && item?.detail_invoice.idState === searchValueAsNumber
     );
   }
 
   useEffect(() => {
     if (shouldRefetch) {
+      dispatch(actions.getStates())
       dispatch(actions.getColors())
       dispatch(actions.getInvoices())
       dispatch(actions.getDimensions())
       setShouldRefetch(false);
     } else {
+      dispatch(actions.getStates())
       dispatch(actions.getColors())
       dispatch(actions.getInvoices())
       dispatch(actions.getDimensions())
@@ -64,6 +80,16 @@ const Completion = () => {
   return (
     <div className='completion'>
       <div className='completion_header end'>
+        <div>
+          <label className='text-xs mt-4'>STATE</label>
+          <select 
+            className='text-[#000] outline-none h-[46px] bg-[#e7e7e7] p-2 rounded-md w-full cursor-pointer'>
+            <option value="">Select STATE</option>
+            {states?.length > 0 && states.map(item => (item.id === 5 || item.id === 6 || item.id === 7) && (
+              <option value={item.id} onChange={handleSearchState}>{item.id} - {item.name}</option>
+            ))}
+          </select>
+        </div>
         <input type='date' className='input bg-[#e7e7e7]' value={selectedDate} onChange={handleSearch} />
       </div>
       <div className='completion_table'>
@@ -82,6 +108,7 @@ const Completion = () => {
           </thead>
           <tbody>
             {shouldReload && filteredInvoices.length > 0 && mapInvoiceDetails(filteredInvoices)}
+            {shouldReload && filteredState.length > 0 && mapInvoiceDetails(filteredState)}
             {!shouldReload && invoicesall?.length > 0 && mapInvoiceDetails(invoicesall)}
           </tbody>
         </table>

@@ -13,6 +13,7 @@ const Payment = () => {
   const { colors } = useSelector(state => state.color)
   const { images } = useSelector(state => state.image)
   const [invalidFields, setInvalidFields] = useState([])
+  const { isLoggedIn } = useSelector(state => state.auth)
   const { currentData } = useSelector(state => state.user)
   const { dimensions } = useSelector(state => state.dimension)
   const { cartItems, removeAllFromCart } = useContext(CartContext)
@@ -62,6 +63,13 @@ const Payment = () => {
     dispatch(actions.getImages())
     dispatch(actions.getDimensions())
   }, [dispatch])
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      Swal.fire('Oops!', 'You can not access this page. THANKS!!!', 'error');
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate])
 
   return (
     <div className='payment'>

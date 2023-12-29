@@ -42,6 +42,16 @@
     display: block;
 }
 
+.button {
+    font-weight: 600;
+    padding: 4px 8px;
+    border: 1px solid #000;
+}
+.button:hover {
+    color: #fff;
+    background-color: #000;
+}
+
 .home {
     width: 100%;
     min-height: 100%;
@@ -161,10 +171,15 @@
     right: -30%;
     top: 40px;
     position: absolute;
-    background-color: #a0a0a0;
+    background-color: #e7e7e7;
 }
 .header .header-content .search-cart-login .search .search_content {
     right: -100%;
+}
+.header .header-content .search-cart-login .minicart .minicart_content p a {
+    color: #3482F6;
+    margin-left: 2px;
+    text-decoration: underline;
 }
 .header .header-content .search-cart-login .minicart .minicart_content {
     right: -100%;
@@ -179,7 +194,7 @@
     font-size: medium;
     position: absolute;
     flex-direction: column;
-    background-color: #a0a0a0;
+    background-color: #e7e7e7;
     border-radius: 10px;
     padding:  0.75rem 1.25rem 0.75rem 1.25rem;
     box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);

@@ -169,7 +169,7 @@ const Detail = () => {
             <div className='detail_content-id'>ID: {product.id}</div>
             <div className='detail_content-price'>
               {product.discount === 0 ? (
-                <p className='price'>{product.price.toLocaleString()}<span className='underline'>đ</span></p>
+                <p className='prices'>{product.price.toLocaleString()}<span className='underline'>đ</span></p>
               ) : (
                 <p className='price flex items-center'>
                   <span className='discount'>-{product.discount}%</span>
@@ -207,26 +207,22 @@ const Detail = () => {
                 <div className=''>Size</div>
                 <div className='box_size'>
                   {quantities?.length > 0 && quantities.map((item) =>
-                    item.idProduct === id && item.quantity > 2 && (
-                      <>
-                        {dimensions?.length > 0 && dimensions.map(size => {
-                          if (size.id === item.idSize && !uniqueSizeIds.has(size.id)) {
-                            const isSelected = size.id === idSize;
-                            uniqueSizeIds.add(size.id);
-                            return (
-                              <Button fullWidth key={size.id} text={size.code}
-                                onClick={() => {
-                                  handleSelectIdSize(size.id)
-                                }}
-                                backgroundSelect={isSelected ? '#000' : ''}
-                                colorSelect={isSelected ? '#fff' : ''}
-                              />
-                            );
-                          }
-                          return null;
-                        })}
-                      </>
-                    ))}
+                    item.idProduct === id && item.quantity > 2 &&
+                    dimensions?.length > 0 && dimensions.map(size => {
+                      if (size.id === item.idSize && !uniqueSizeIds.has(size.id)) {
+                        const isSelected = item.idSize === idSize;
+                        uniqueSizeIds.add(size.id);
+                        return (
+                          <button key={size.id}
+                            onClick={() => handleSelectIdSize(size.id)}
+                            style={{ background: isSelected ? '#000' : '', color: isSelected ? '#fff' : '' }}
+                            className='button center w-full'
+                          >{size.code}</button>
+                        );
+                      }
+                      return null;
+                    })
+                  )}
                 </div>
               </div>
             </div>

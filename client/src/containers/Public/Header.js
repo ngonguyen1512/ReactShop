@@ -198,8 +198,12 @@ const Header = () => {
                         <>
                           <span className='square'></span>
                           {cartItems.length === 0 ? (
-                            <div className='minicart_content center min-w-[200px]'>
-                              <p>There is no product</p>
+                            <div className='minicart_content center min-w-[250px]'>
+                              <p>There is no product!
+                                <NavLink to={'/' + path.CART} onClick={() => setIsShowMiniCart(false)}>
+                                  Go to cart
+                                </NavLink>
+                              </p>
                             </div>
                           ) : (
                             <div className='minicart_content min-w-[600px]'>

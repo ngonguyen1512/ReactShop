@@ -42,6 +42,12 @@ const invoiceReducer = (state = initState, action) => {
                 invoicesall: action.data,
                 msg: action.msg || '',
             }
+        case actionTypes.UNSUCCESSFUL_INVOICE:
+            return {
+                ...state,
+                invoicesall: action.data,
+                msg: action.msg || '',
+            }
         case actionTypes.GET_SELLER:
             return {
                 ...state,

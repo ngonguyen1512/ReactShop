@@ -111,6 +111,28 @@ export const completeInvoices = (payload) => async (dispatch) => {
     }
 }
 
+export const unsuccessfulInvoices = (payload) => async (dispatch) => {
+    try {
+        const response = await apis.apiUnsuccessfulInvoices(payload);
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.UNSUCCESSFUL_INVOICE,
+                data: response.data.response,
+            })
+        } else {
+            dispatch({
+                type: actionTypes.UNSUCCESSFUL_INVOICE,
+                msg: response.data.msg,
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.UNSUCCESSFUL_INVOICE,
+            data: null,
+        })
+    }
+}
+
 export const getSellerProducts = () => async (dispatch) => {
     try {
         const response = await apis.apiGetSellerProducts();

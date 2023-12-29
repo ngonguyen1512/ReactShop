@@ -13,9 +13,9 @@ const Processing = () => {
   const [selectedInvoiceId, setSelectedInvoiceId] = useState(null)
   const { currentData } = useSelector(state => state.user)
   const idcurrent = parseInt(currentData.id)
-  
+
   const [payload, setPayload] = useState({
-    id: '', idAccept: idcurrent, idShip: '' || 0, idState: ''
+    id: '', idAccept: idcurrent, idShip: '' || null, idState: ''
   })
 
   const handleSubmitApprove = async () => {
@@ -25,7 +25,7 @@ const Processing = () => {
   }
 
   const handleSubmitNo = async () => {
-    setPayload(prevPayload => ({ ...prevPayload, idAccept: idcurrent, idState: 6}));
+    setPayload(prevPayload => ({ ...prevPayload, idAccept: idcurrent, idState: 6 }));
     dispatch(actions.updateInvoices(payload))
     setShouldRefetch(true);
   }
@@ -33,6 +33,11 @@ const Processing = () => {
   const handleSubmitComplete = async (id) => {
     const payloads = ({ id: id, idState: 5 })
     dispatch(actions.completeInvoices(payloads))
+    setShouldRefetch(true);
+  }
+  const handleSubmitUnsuccessfull = async (id) => {
+    const payloads = ({ id: id, idState: 7 })
+    dispatch(actions.unsuccessfulInvoices(payloads))
     setShouldRefetch(true);
   }
 
@@ -60,7 +65,6 @@ const Processing = () => {
                     <th>DATE</th>
                     <th>ACCOUNT</th>
                     <th>TOTAL</th>
-                    <th>REFUSE</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -74,9 +78,6 @@ const Processing = () => {
                           <td className='text-center'>{createdAtDate}</td>
                           <td className='text-center'>{item?.detail_invoice?.idAccount}</td>
                           <td className='text-center'>{(item?.detail_invoice?.total).toLocaleString()}</td>
-                          <th>
-                            <Button text={'No'} fullWidth onClick={handleSubmitNo}/>
-                          </th>
                         </tr>
                       )
                     } return null
@@ -138,7 +139,10 @@ const Processing = () => {
                     ))}
                   </select>
                 </div>
-                <Button fullWidth text={'Approve'} onClick={handleSubmitApprove}/>
+                <div className='button2'>
+                  <Button fullWidth text={'Approve'} onClick={handleSubmitApprove} />
+                  <Button text={'No'} fullWidth onClick={handleSubmitNo} />
+                </div>
               </div>
             </div>
           </div>
@@ -193,6 +197,7 @@ const Processing = () => {
                 <th>SHIPPER</th>
                 <th>STATE</th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -212,7 +217,11 @@ const Processing = () => {
                       <td className='text-center'>{item?.detail_invoice?.idState}</td>
                       <th>
                         <Button text={'Complete'} fullWidth
-                          onClick={() => handleSubmitComplete(item?.detail_invoice?.id)}/>
+                          onClick={() => handleSubmitComplete(item?.detail_invoice?.id)} />
+                      </th>
+                      <th>
+                        <Button text={'Unsuccessfull'} fullWidth
+                          onClick={() => handleSubmitUnsuccessfull(item?.detail_invoice?.id)} />
                       </th>
                     </tr>
                   )
