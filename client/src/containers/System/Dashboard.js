@@ -41,16 +41,16 @@ const Dashboard = () => {
     if (shouldRefetch) {
       dispatch(actions.getImages())
       dispatch(actions.getProducts())
-      dispatch(actions.getAccounts())
       dispatch(actions.getInvoices())
+      dispatch(actions.getCountAccounts())
       dispatch(actions.getSellerAccounts())
       dispatch(actions.getSellerProducts())
       setShouldRefetch(false);
     } else {
       dispatch(actions.getImages())
       dispatch(actions.getProducts())
-      dispatch(actions.getAccounts())
       dispatch(actions.getInvoices())
+      dispatch(actions.getCountAccounts())
       dispatch(actions.getSellerAccounts())
       dispatch(actions.getSellerProducts())
     }

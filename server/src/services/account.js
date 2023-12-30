@@ -4,9 +4,35 @@ require('dotenv').config();
 
 const hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(12));
 
-export const getAllAccountsService = () => new Promise(async (resolve, reject) => {
+export const getCountAccountService = () => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Account.findAndCountAll();
+        const response = await db.Account.findAndCountAll()
+        resolve({
+            err: response ? 0 : 1,
+            msg: response ? 'Get account successful' : 'Get account failed.',
+            response
+        });
+    } catch (error) { reject(error) }
+})
+export const getAllAccountsService = (permis) => new Promise(async (resolve, reject) => {
+    try {
+        let response;
+        if (permis === '1') {
+            response = await db.Account.findAndCountAll({
+                where: { idPermission: [2, 3, 4] }
+            });
+        } else if (permis === '2') {
+            response = await db.Account.findAndCountAll({
+                where: { idPermission: [3, 4] }
+            });
+        } else {
+            resolve({
+                err: 1,
+                msg: 'Permission not found.',
+                response,
+            });
+            return;
+        }
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'Get account successful' : 'Get account failed.',

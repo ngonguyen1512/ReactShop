@@ -10,6 +10,8 @@ const HomeServer = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isLoggedIn } = useSelector(state => state.auth)
+  const { currentData } = useSelector(state => state.user)
+  const idpermis = parseInt(currentData.idPermission)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,14 +23,14 @@ const HomeServer = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      Swal.fire('Oops!', 'You can not access this page. THANKS!!!', 'error');
-      navigate('/');
-    }
     setTimeout(() => {
       isLoggedIn && dispatch(actions.getCurrent())
+      if (!isLoggedIn || idpermis === 4) {
+        Swal.fire('Oops!', 'You can not access this page. THANKS!!!', 'error');
+        navigate('/');
+      }
     }, 100)
-  }, [isLoggedIn, dispatch, navigate])
+  }, [isLoggedIn, dispatch, navigate, idpermis])
 
   return (
     <div className='home'>

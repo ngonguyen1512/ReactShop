@@ -138,13 +138,13 @@ const Account = () => {
     if (permis) searchParamsObject.permis = permis
     if (shouldRefetch) {
       dispatch(actions.getStates())
-      dispatch(actions.getAccounts())
+      dispatch(actions.getAccounts(searchParamsObject))
       dispatch(actions.getPermissions())
       dispatch(actions.getFunctions(searchParamsObject))
       setShouldRefetch(false)
     } else {
       dispatch(actions.getStates())
-      dispatch(actions.getAccounts())
+      dispatch(actions.getAccounts(searchParamsObject))
       dispatch(actions.getPermissions())
       dispatch(actions.getFunctions(searchParamsObject))
     }

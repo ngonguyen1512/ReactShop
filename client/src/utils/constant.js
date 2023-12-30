@@ -22,7 +22,7 @@ export const path = {
     UPDATE_ACCOUNT: 'update_account',
     CHANGEPASSWORD: 'change_password',
     
-    HOMESERVER: 'webserver/*',
+    HOMESERVER: 'webserver',
     DASHBOARD: 'dashboard',
     ACCOUNT: 'account',
     SLIDE: 'slide',

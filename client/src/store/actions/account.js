@@ -1,9 +1,32 @@
 import actionTypes from './actionTypes';
 import * as apis from '../../services';
 
-export const getAccounts = () => async (dispatch) => {
+export const getCountAccounts = () => async (dispatch) => {
     try {
-        const response = await apis.apiGetAccounts();
+        const response = await apis.apiGetCountAccounts();
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.COUNT_ACCOUNT,
+                accounts: response.data.response?.rows,
+                counta: response.data.response?.count
+            })
+        } else {
+            dispatch({
+                type: actionTypes.COUNT_ACCOUNT,
+                msg: response.data.msg,
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_ACCOUNT,
+            accounts: null,
+        })
+    }
+}
+
+export const getAccounts = (query) => async (dispatch) => {
+    try {
+        const response = await apis.apiGetAccounts(query);
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.GET_ACCOUNT,

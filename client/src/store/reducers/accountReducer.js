@@ -7,6 +7,13 @@ const initState = {
 
 const accountReducer = (state = initState, action) => {
     switch (action.type) {
+        case actionTypes.COUNT_ACCOUNT:
+            return {
+                ...state,
+                accounts: action.accounts || [],
+                counta: action.counta || [],
+                msg: action.msg || '',
+            }
         case actionTypes.GET_ACCOUNT:
             return {
                 ...state,

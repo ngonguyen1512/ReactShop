@@ -38,7 +38,7 @@ function App() {
           </Route>
 
           <Route path={path.HOMESERVER} element={<HomeServer />}>
-            <Route path='*' element={<Dashboard />} />
+            <Route path={'*'} element={<Dashboard />} />
             <Route path={path.SLIDE} element={<Slide />} />
             <Route path={path.ACCOUNT} element={<Account />} />
             <Route path={path.INVOICE} element={<Invoice />}>

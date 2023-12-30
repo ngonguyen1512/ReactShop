@@ -1,8 +1,20 @@
 import * as services from '../services';
 
-export const getAccounts = async (req, res) => {
+export const getCountAccounts = async (req, res) => {
     try {
-        const response = await services.getAllAccountsService();
+        const response = await services.getCountAccountService();
+        return res.status(200).json(response);
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            message: 'Failed at account controller' + error,
+        })
+    }
+}
+export const getAccounts = async (req, res) => {
+    const { permis } = req.query
+    try {
+        const response = await services.getAllAccountsService(permis);
         return res.status(200).json(response);
     } catch (error) {
         return res.status(500).json({

@@ -43,11 +43,11 @@ const Processing = () => {
 
   useEffect(() => {
     if (shouldRefetch) {
-      dispatch(actions.getAccounts())
+      dispatch(actions.getCountAccounts())
       dispatch(actions.getInvoices())
       setShouldRefetch(false);
     } else {
-      dispatch(actions.getAccounts())
+      dispatch(actions.getCountAccounts())
       dispatch(actions.getInvoices())
     }
   }, [dispatch, shouldRefetch])

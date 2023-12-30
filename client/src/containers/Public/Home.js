@@ -4,10 +4,12 @@ import * as actions from '../../store/actions'
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Slide, Tag, TextSlide } from '../../components/index'
-import { Outlet, useLocation, useSearchParams } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { path } from '../../utils/constant'
 
 const Home = () => {
   const headerRef = useRef()
+  const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch()
   const pathurl = location.pathname
@@ -16,9 +18,11 @@ const Home = () => {
   const page = searchParams.get('page')
   const sample = searchParams.get('sample')
   const { isLoggedIn } = useSelector(state => state.auth)
+  const { currentData } = useSelector(state => state.user)
   const { categories } = useSelector(state => state.category)
+  const idpermis = parseInt(currentData.idPermission)
+
   useEffect(() => {
-    window.scrollTo(0, 0);
     headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [location.pathname, page, sample])
 
@@ -34,9 +38,11 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       isLoggedIn && dispatch(actions.getCurrent())
+      if(idpermis === 1 || idpermis === 2 ) navigate(path.HOMESERVER+'/'+path.DASHBOARD)
+      else if (idpermis === 3) navigate(path.HOMESERVER+'/'+path.INVOICE+'/'+path.PROCESSING)
     }, 100)
     dispatch(actions.getCategories())
-  }, [isLoggedIn, dispatch])
+  }, [isLoggedIn, dispatch, idpermis, navigate])
 
   return (
     <div ref={headerRef} className='home'>

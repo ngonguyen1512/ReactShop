@@ -96,9 +96,8 @@ const Allocations = () => {
           <td className='py-2'>{item.name}</td>
           {functions?.length > 0 && functions.map(items => items.name === 'Delete' && items.idPermission === 1 && (
             <th className='w-[5%]'>
-              <Button
+              <Button value={item.id}
                 IcAfter={MdOutlineDeleteSweep}
-                value={item.id}
                 onClick={handleSubmitDelete}
               />
             </th>

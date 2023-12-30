@@ -1,10 +1,23 @@
 import axiosConfig from '../axiosConfig'
 
-export const apiGetAccounts = () => new Promise(async (resolve, reject) => {
+export const apiGetCountAccounts = () => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: 'api/v1/account/count',
+        })
+        resolve(response);
+    } catch (error) {
+        reject(error);
+    }
+});
+
+export const apiGetAccounts = (query) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'get',
             url: 'api/v1/account/all',
+            params: query
         })
         resolve(response);
     } catch (error) {

@@ -100,13 +100,13 @@ const Cart = () => {
       {!isLoggedIn ? (
         <div className='footer center'>
           <span className='mr-2'>Please login to continue paying for the order!</span>
-          <Button text={'Login'} bgColor='bg-secondary2' textColor='text-white' onClick={() => goLogin(false)} />
+          <Button text={'Login'} onClick={() => goLogin(false)} />
         </div>
       ) : (
-        <div className='footer center'>
-          <NavLink to={path.HOME} className='btn center'>COUNTINUE TO BUY</NavLink>
+        <div className='footer center gap-2'>
+          <NavLink to={path.HOME} className='button center'>COUNTINUE TO BUY</NavLink>
           {cartItems.length !== 0 &&
-            <NavLink to={'/' + path.PAYMENT} className='btn center'>PAYMENT</NavLink>
+            <NavLink to={'/' + path.PAYMENT} className='button center'>PAYMENT</NavLink>
           }
         </div>
       )}
