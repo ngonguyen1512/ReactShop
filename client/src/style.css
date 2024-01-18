@@ -72,6 +72,9 @@
     justify-content: end;
     font-size: larger;
 }
+.like-unlike .icons:hover {
+    font-size: 30px;
+}
 .pagination {
     margin-top: 4%;
 }
