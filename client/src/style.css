@@ -72,6 +72,11 @@
     justify-content: end;
     font-size: larger;
 }
+.like-unlike .icons {
+    cursor: pointer;
+    font-size: 20px;
+    transition: font-size 0.3s ease;
+}
 .like-unlike .icons:hover {
     font-size: 30px;
 }

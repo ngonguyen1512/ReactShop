@@ -11,7 +11,7 @@ import { NavLink, createSearchParams, useLocation, useNavigate } from 'react-rou
 const { IoIosMenu, GoSearch, GiWolfHowl, MdOutlineShoppingCart, TiDeleteOutline } = icons
 
 const Header = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch()
   const showMenuRef = useRef(null)
@@ -40,20 +40,20 @@ const Header = () => {
     navigate({
       pathname: location?.pathname,
       search: createSearchParams({ id }).toString()
-    });
-  };
+    })
+  }
 
   const handleSearch = (event) => {
     setSearchValue(event.target.value);
     setShouldReload(event.target.value !== "")
-  };
+  }
 
   let filteredProducts = [];
   if (products && Array.isArray(products)) {
     const searchRegex = new RegExp(searchValue, 'i')
     filteredProducts = products.filter((item) =>
       searchRegex.test(item.name)
-    );
+    )
   }
 
   const goLogin = useCallback((flag) => {
@@ -179,7 +179,7 @@ const Header = () => {
                         onChange={handleSearch}
                       />
                       {searchValue && (
-                        <div className='search_product'>
+                        <div className='search_product border-t border-[#808080] pt-2'>
                           {shouldReload && filteredProducts.length > 0 && filteredProducts.map((item) => renderTableRow(item))}
                         </div>
                       )}

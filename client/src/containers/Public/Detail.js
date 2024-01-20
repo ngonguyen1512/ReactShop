@@ -98,9 +98,9 @@ const Detail = () => {
   const handleLike = (id) => {
     const updatedPayload = { idAccount: currentData.id, idProduct: id };
     if (Array.isArray(likes) && !likes.some((item) => item.idProduct === id && item.idAccount === currentData.id)) {
-      dispatch(actions.createLikes(updatedPayload));
-      setLikess([...likess, updatedPayload]);
-      setIsLiked(true);
+      dispatch(actions.createLikes(updatedPayload))
+      setLikess([...likess, updatedPayload])
+      setIsLiked(true)
     }
   };
 
@@ -108,9 +108,18 @@ const Detail = () => {
     const updatedPayload = { idAccount: currentData.id, idProduct: id };
     dispatch(actions.deleteLikes(updatedPayload));
     const updatedLikes = likess.filter((item) => item.idProduct !== id || item.idAccount !== currentData.id);
-    setLikess(updatedLikes);
+    setLikess(updatedLikes)
     setIsLiked(updatedLikes.some((item) => item.idProduct === id && item.idAccount === currentData.id) || false);
   };
+
+  useEffect(() => {
+    if (Array.isArray(likes)) {
+      const hasLiked = likes.some(
+        item => item.idProduct === id && item.idAccount === currentData.id
+      )
+      setIsLiked(hasLiked)
+    }
+  }, [likes, id, currentData.id])
 
   useEffect(() => {
     dispatch(actions.getLikes())
@@ -159,9 +168,9 @@ const Detail = () => {
             {isLoggedIn && (
               <div className='like-unlike'>
                 {isLiked ? (
-                  <span className="icons" onClick={() => handleUnLike(id)}><IoHeartSharp style={{ color: 'red' }} /></span>
+                  <span className="icons" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleUnLike(id); }}><IoHeartSharp style={{ color: 'red' }} /></span>
                 ) : (
-                  <span className="icons" onClick={() => handleLike(id)}><IoHeartOutline /></span>
+                  <span className="icons" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleLike(id) }}><IoHeartOutline /></span>
                 )}
               </div>
             )}
