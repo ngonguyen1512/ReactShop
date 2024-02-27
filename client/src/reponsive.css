@@ -84,6 +84,9 @@
     .structure {
         height: 100%;
     }
+    .promotion .item {
+        width: 250px;
+    }
 }
 
 @media (max-width: 809px) {
@@ -98,6 +101,9 @@
     }
     .lists {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .promotion .item {
+        width: 200px;
     }
 }
 

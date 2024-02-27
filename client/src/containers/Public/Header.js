@@ -166,7 +166,7 @@ const Header = () => {
           {parts !== 'webserver' &&
             <>
               <div className='search' >
-                <span onClick={() => setIsShowSearch(prev => !prev)}><GoSearch /></span>
+                <span onClick={() => setIsShowSearch(prev => !prev)}><GoSearch /></span> 
                 {isShowSearch &&
                   <>
                     <span className='square'></span>

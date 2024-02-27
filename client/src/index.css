@@ -61,6 +61,32 @@
     align-items: center;
     flex-direction: column;
 }
+.homepage .title {
+    font-weight: 700;
+    font-size: xx-large;
+    letter-spacing: 0.125em;
+}
+.promotion {
+    gap: 2%;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap; 
+    width: 100%;
+}
+.promotion::-webkit-scrollbar {
+    height: 10px; 
+    margin-top: 2%;
+}
+.promotion .item {
+    flex-shrink: 0;
+    height: 100%;
+    cursor: pointer;
+    width: 290px;
+}
+/* flex-shrink: 0;
+    height: 100%;
+    cursor: pointer;
+    width: 275px; */
 
 .header {
     display: flex;

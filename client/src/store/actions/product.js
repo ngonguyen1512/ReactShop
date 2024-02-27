@@ -24,6 +24,28 @@ export const getProducts = () => async (dispatch) => {
     }
 }
 
+export const getProductsPromotion = () => async (dispatch) => {
+    try {
+        const response = await apis.apiGetProductsPromotion();
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.GET_PRODUCT_PROMOTION,
+                products_promotion: response.data.response
+            })
+        } else {
+            dispatch({
+                type: actionTypes.GET_PRODUCT_PROMOTION,
+                msg: response.data.msg,
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_PRODUCT_PROMOTION,
+            data: null,
+        })
+    }
+}
+
 export const getProductsLimit = (query) => async (dispatch) => {
     try {
         const response = await apis.apiGetProductsLimit(query);

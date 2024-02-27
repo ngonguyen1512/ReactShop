@@ -1,4 +1,3 @@
-import moment from 'moment'
 import icons from '../../utils/icons'
 import React, { useEffect, useState } from 'react'
 import * as actions from '../../store/actions'
@@ -9,7 +8,6 @@ const { MdSwitchAccount, RiMoneyPoundCircleFill, FaClipboardList, FaFileInvoiceD
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const moment = require('moment')
   const { images } = useSelector(state => state.image)
   const { counta } = useSelector(state => state.account)
   const { countp } = useSelector(state => state.product)

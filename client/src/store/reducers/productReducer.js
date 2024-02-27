@@ -6,6 +6,7 @@ const initState = {
     productid: [],
     update: false,
     products_limit: [],
+    products_promotion: [],
 }
 
 const productReducer = (state = initState, action) => {
@@ -16,6 +17,12 @@ const productReducer = (state = initState, action) => {
                 products: action.products || [],
                 msg: action.msg || '',
                 countp: action.countp || 0
+            }
+        case actionTypes.GET_PRODUCT_PROMOTION:
+            return {
+                ...state,
+                products_promotion: action.products_promotion || [],
+                msg: action.msg || '',
             }
         case actionTypes.GET_PRODUCT_LIMIT:
             return {

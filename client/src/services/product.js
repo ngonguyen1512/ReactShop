@@ -12,6 +12,18 @@ export const apiGetProducts = () => new Promise(async (resolve, reject) => {
     }
 });
 
+export const apiGetProductsPromotion = () => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: 'api/v1/product/promotion',
+        })
+        resolve(response);
+    } catch (error) {
+        reject(error);
+    }
+});
+
 export const apiGetProductsLimit = (query) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
@@ -38,7 +50,7 @@ export const apiCreateProducts = (payload) => new Promise(async (resolve, reject
     }
 });
 
-export const apiUpdateProducts = (payload) => new Promise(async(resolve, reject) => {
+export const apiUpdateProducts = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'put',
