@@ -166,7 +166,7 @@ const Header = () => {
           {parts !== 'webserver' &&
             <>
               <div className='search' >
-                <span onClick={() => setIsShowSearch(prev => !prev)}><GoSearch /></span> 
+                <span onClick={() => setIsShowSearch(prev => !prev)}><GoSearch /></span>
                 {isShowSearch &&
                   <>
                     <span className='square'></span>
@@ -280,7 +280,7 @@ const Header = () => {
             ) : (
               <div className='account' ref={showMenuRef}>
                 <Button
-                  text={'Account'}
+                  text={currentData.name}
                   onClick={() => setIsShowMenu(prev => !prev)}
                 />
                 {isShowMenu &&
