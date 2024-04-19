@@ -22,6 +22,8 @@ const Home = () => {
   const { categories } = useSelector(state => state.category)
   const idpermis = parseInt(currentData.idPermission)
 
+  // useEffect được sử dụng để thay thế cho lifecycle methods như componentDidMount, componentDidUpdate, và 
+  // componentWillUnmount. useEffect được sử dụng để thực hiện các tác vụ sau mỗi lần render.
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [location.pathname, page, sample])

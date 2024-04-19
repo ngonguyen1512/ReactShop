@@ -16,11 +16,14 @@ function App() {
     <div className="h-screen w-full bg-white">
       <CartProvider>
         <Routes>
+          {/* Component-Based Routing: sử dụng element để chỉ định component cần hiển thị cho mỗi route */}
           <Route path={path.HOME} element={<Home />}>
+            {/* Wildcard Route:   sử dụng route với * để xác định một route mặc định */}
             <Route path='*' element={<HomePage />} />
             <Route path={path.LOGIN} element={<Login />} />
             <Route path={path.FORGOT} element={<Forgot />} />
             <Route path={path.REGISTER} element={<Register />} />
+            {/* Nested Routes: sử dụng route lồng nhau */}
             <Route path={path.PERSONAL} element={<Personal />}>
               <Route path={path.LIKE} element={<Like />} />
               <Route path={path.ORDER} element={<Order />} />

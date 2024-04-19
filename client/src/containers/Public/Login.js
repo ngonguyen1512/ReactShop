@@ -9,8 +9,12 @@ import { useDispatch, useSelector } from 'react-redux'
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    // isLoggedIn, msg, update: Đây là props được truyền vào từ Redux store thông qua hook useSelector. 
+    // Các props này chứa thông tin trạng thái đăng nhập, thông báo lỗi và cập nhật.
     const { isLoggedIn, msg, update } = useSelector(state => state.auth)
-    const [invalidFields, setInvalidFields] = useState([])
+    const [invalidFields, setInvalidFields] = useState([]) 
+    // setInvalidFields, setPayload: Đây là hàm setter dùng để cập nhật state
+    // state của component invlideFielda, payload
     const [payload, setPayload] = useState({
         phone: '', password: '',
     });
@@ -68,11 +72,13 @@ const Login = () => {
     useEffect(() => {
         msg && Swal.fire('Oops !', msg, 'error')
     }, [msg, update])
-
+    
     return (
         <div className='bg-frame center'>
             <div className='frame'>
                 <h3 className='title'>LOGIN</h3>
+                {/* Trong component InputForm, các props như label, value, setValue, invalidFields 
+                và setInvalidFields để điều khiển các trường nhập của form */}
                 <div className='forminput'>
                     <InputForm type='tel'
                         setInvalidFields={setInvalidFields}
