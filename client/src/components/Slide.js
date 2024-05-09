@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import * as actions from '../store/actions'
 import { Fade } from 'react-slideshow-image'
@@ -29,4 +29,4 @@ const Slide = () => {
     )
 }
 
-export default Slide;
+export default memo(Slide);

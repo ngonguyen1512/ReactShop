@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 const TextSlide = ({ texts, quantity }) => {
     const textContent = Array.from({ length: quantity }, (_, index) => texts).join(' ');
@@ -12,4 +12,4 @@ const TextSlide = ({ texts, quantity }) => {
     )
 }
 
-export default TextSlide
+export default memo(TextSlide)
