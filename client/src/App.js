@@ -8,7 +8,7 @@ import {
 import {
   HomeServer, Dashboard, Type, Sample, Category, Account, List, Menu, Dimension, State, Slide, Color,
   Image, Invoice, Product, Transfer, Quantity, Function, CreateImage, Permission, Role, Transmission, Allocation,
-  TransferPage, CreateProduct, UpdateProduct, CreateDetail , Completion, Processing
+  TransferPage, CreateProduct, UpdateProduct, CreateDetail, Completion, Processing
 } from './containers/System'
 
 function App() {

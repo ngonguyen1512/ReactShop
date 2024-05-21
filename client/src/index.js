@@ -1,6 +1,6 @@
-import './style.css'
-import './index.css'
-import './reponsive.css'
+import './styles/style.css'
+import './styles/index.css'
+import './styles/reponsive.css'
 import App from './App'
 import React from 'react'
 import reduxStore from './redux'
@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom"
 import { PersistGate } from 'redux-persist/integration/react'
 import 'resize-observer-polyfill/dist/ResizeObserver.global';
+import './firebase/config'
 
 const { store, persistor } = reduxStore();
 
