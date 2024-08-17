@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost
--- Thời gian đã tạo: Th4 19, 2024 lúc 10:48 AM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.0.28
+-- Host: localhost
+-- Generation Time: Aug 17, 2024 at 09:02 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `fashion`
+-- Database: `fashion`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Accounts`
+-- Table structure for table `Accounts`
 --
 
 CREATE TABLE `Accounts` (
@@ -41,13 +41,13 @@ CREATE TABLE `Accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Accounts`
+-- Dumping data for table `Accounts`
 --
 
 INSERT INTO `Accounts` (`id`, `name`, `phone`, `email`, `address`, `password`, `idPermission`, `idState`, `createdAt`, `updatedAt`) VALUES
-(1, 'Admin', 811111111, 'ngonguyenkey1512@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$Qu/ToZaxPWntHegdwCrO4eQb5elEGWtscpK/QKj/GXfCKaDM40rY6', 1, 2, '2023-11-25 07:14:05', '2023-12-07 05:26:09'),
+(1, 'Admin', 811111111, 'ngonguyenkey1512@gmail.com', '273 An Dương Vương P3 Q5 TP HCM', '$2a$12$Qu/ToZaxPWntHegdwCrO4eQb5elEGWtscpK/QKj/GXfCKaDM40rY6', 1, 2, '2023-11-25 07:14:05', '2024-08-17 05:29:20'),
 (2, 'Bảo', 811111112, 'key43baechu@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$1tzb6QdmR4beq/fCJJyE8.MyOQa1J4Y5KZkB1LTJSIOR5U/G9jrQa', 2, 2, '2023-11-25 07:17:07', '2023-12-30 05:08:05'),
-(3, 'Nguyên', 865673597, 'ngotnnguyen1512@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$WYFYRkgAJKGyjXiGS2zxeOlh8GkJHPA1l3uBpoHyF2IvVIt0yyynu', 4, 2, '2023-11-25 08:00:38', '2024-04-08 10:27:36'),
+(3, 'Nguyên', 865673597, 'ngotnnguyen1512@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$Zj/.Ta2PiE34lDVkLarnL.M9LVpq7ZpDsj19xiw58dH5Fpcp19kku', 4, 2, '2023-11-25 08:00:38', '2024-04-19 10:35:51'),
 (4, 'Kha', 811111113, 'key43baechu@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$E4HpVnSDvMxUNsjS2Bppu.io4ARamiBKDnr5I2PN8iPsGjtudkc/G', 3, 2, '2023-11-25 10:45:44', '2023-11-28 11:29:02'),
 (5, 'Trân', 811111114, 'key43baechu@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$1J2vYYyrxBdmz8GHaQWwzOpSge5KbEkTUvnzN3KPSfsQrfEoNkYpq', 2, 2, '2023-11-29 03:18:44', '2023-11-29 03:27:41'),
 (6, 'Jackson', 811111115, 'key43baechu@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$kzyiv4MBS5gRGidvW4T8BOwyxjfNTdxYaHROi3s3PI.G3FPOLotya', 3, 2, '2023-11-29 03:27:28', '2023-11-29 03:27:28'),
@@ -56,12 +56,13 @@ INSERT INTO `Accounts` (`id`, `name`, `phone`, `email`, `address`, `password`, `
 (9, 'Irene', 899999997, 'ngotnnguyen1512@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$gH1.jhl/QjBf1AAPcOFq4.Smcoqk.pO58TgWUgMH2AnoWBZXn9AYu', 4, 2, '2023-12-27 07:56:33', '2023-12-27 07:56:33'),
 (10, 'a', 899999996, 'ngotnnguyen1512@gmail.com', '273 An Dương Vương P3 Q5', '$2a$12$CHHarCMItpXNReq5ime/jeOCbX9./2ebyEIhOKGLTrh.2bDsIkr7S', 4, 2, '2023-12-28 04:20:12', '2023-12-28 04:20:12'),
 (11, 'An', 899999995, 'ngotnnguyen1512@gmail.com', 'C17/10 ấp 3 xã Bình Chánh, huyện Bình Chánh', '$2a$12$cJGdULmbjp26VuQI/BIVIuB9.Adh0HItb4F/qMbtudaMzyK1jOVQi', 4, 2, '2023-12-30 06:20:15', '2023-12-30 06:20:15'),
-(12, 'Lâm', 811111116, 'key43baechu@gmail.com', 'Hồ Chí Minh', '$2a$12$22oSIBjxXcugdYIVyGRvoOlDX1gLc0EUuk2M5/JfzBdVxrq1m13xi', 2, 2, '2024-03-21 08:05:45', '2024-03-21 08:05:45');
+(12, 'Lâm', 811111116, 'key43baechu@gmail.com', 'Hồ Chí Minh', '$2a$12$22oSIBjxXcugdYIVyGRvoOlDX1gLc0EUuk2M5/JfzBdVxrq1m13xi', 2, 2, '2024-03-21 08:05:45', '2024-03-21 08:05:45'),
+(13, 'abc', 898989898, 'ngotnnguyen1512@gmail.com', 'abc', '$2a$12$QakPnlpHS4InAIQEA1UqN.uF5pjzXDy7BxbRcH/4eyVP2SGBOfxnC', 4, 2, '2024-06-04 02:11:44', '2024-06-04 02:11:44');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Allocations`
+-- Table structure for table `Allocations`
 --
 
 CREATE TABLE `Allocations` (
@@ -73,7 +74,7 @@ CREATE TABLE `Allocations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Allocations`
+-- Dumping data for table `Allocations`
 --
 
 INSERT INTO `Allocations` (`id`, `idTransfer`, `name`, `createdAt`, `updatedAt`) VALUES
@@ -96,7 +97,7 @@ INSERT INTO `Allocations` (`id`, `idTransfer`, `name`, `createdAt`, `updatedAt`)
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Categories`
+-- Table structure for table `Categories`
 --
 
 CREATE TABLE `Categories` (
@@ -108,7 +109,7 @@ CREATE TABLE `Categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Categories`
+-- Dumping data for table `Categories`
 --
 
 INSERT INTO `Categories` (`id`, `image`, `name`, `createdAt`, `updatedAt`) VALUES
@@ -120,7 +121,7 @@ INSERT INTO `Categories` (`id`, `image`, `name`, `createdAt`, `updatedAt`) VALUE
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Colors`
+-- Table structure for table `Colors`
 --
 
 CREATE TABLE `Colors` (
@@ -133,7 +134,7 @@ CREATE TABLE `Colors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Colors`
+-- Dumping data for table `Colors`
 --
 
 INSERT INTO `Colors` (`id`, `code`, `name`, `idState`, `createdAt`, `updatedAt`) VALUES
@@ -151,7 +152,7 @@ INSERT INTO `Colors` (`id`, `code`, `name`, `idState`, `createdAt`, `updatedAt`)
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Functions`
+-- Table structure for table `Functions`
 --
 
 CREATE TABLE `Functions` (
@@ -163,7 +164,7 @@ CREATE TABLE `Functions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Functions`
+-- Dumping data for table `Functions`
 --
 
 INSERT INTO `Functions` (`id`, `name`, `idPermission`, `createdAt`, `updatedAt`) VALUES
@@ -176,7 +177,7 @@ INSERT INTO `Functions` (`id`, `name`, `idPermission`, `createdAt`, `updatedAt`)
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Images`
+-- Table structure for table `Images`
 --
 
 CREATE TABLE `Images` (
@@ -192,7 +193,7 @@ CREATE TABLE `Images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Images`
+-- Dumping data for table `Images`
 --
 
 INSERT INTO `Images` (`id`, `idProduct`, `image1`, `image2`, `image3`, `image4`, `idColor`, `createdAt`, `updatedAt`) VALUES
@@ -226,7 +227,7 @@ INSERT INTO `Images` (`id`, `idProduct`, `image1`, `image2`, `image3`, `image4`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `InvoiceDetails`
+-- Table structure for table `InvoiceDetails`
 --
 
 CREATE TABLE `InvoiceDetails` (
@@ -244,7 +245,7 @@ CREATE TABLE `InvoiceDetails` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `InvoiceDetails`
+-- Dumping data for table `InvoiceDetails`
 --
 
 INSERT INTO `InvoiceDetails` (`id`, `idInvoice`, `idProduct`, `idSize`, `idColor`, `quantity`, `price`, `discount`, `amount`, `createdAt`, `updatedAt`) VALUES
@@ -313,12 +314,14 @@ INSERT INTO `InvoiceDetails` (`id`, `idInvoice`, `idProduct`, `idSize`, `idColor
 (64, 34, 16, 3, 5, 2, 450000, 0, 2160000, '2024-03-21 08:38:01', '2024-03-21 08:38:01'),
 (65, 34, 17, 3, 7, 3, 420000, 0, 2160000, '2024-03-21 08:38:01', '2024-03-21 08:38:01'),
 (66, 35, 18, 1, 4, 1, 520000, 45, 1190000, '2024-04-08 10:27:54', '2024-04-08 10:27:54'),
-(67, 35, 33, 5, 1, 1, 670000, 19, 1190000, '2024-04-08 10:27:54', '2024-04-08 10:27:54');
+(67, 35, 33, 5, 1, 1, 670000, 19, 1190000, '2024-04-08 10:27:54', '2024-04-08 10:27:54'),
+(68, 36, 23, 2, 4, 2, 495000, 5, 990000, '2024-06-04 02:07:40', '2024-06-04 02:07:40'),
+(69, 37, 25, 2, 1, 2, 690000, 0, 1380000, '2024-06-04 02:12:02', '2024-06-04 02:12:02');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Invoices`
+-- Table structure for table `Invoices`
 --
 
 CREATE TABLE `Invoices` (
@@ -336,7 +339,7 @@ CREATE TABLE `Invoices` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Invoices`
+-- Dumping data for table `Invoices`
 --
 
 INSERT INTO `Invoices` (`id`, `idAccount`, `phone`, `address`, `ship`, `total`, `idAccept`, `idShip`, `idState`, `createdAt`, `updatedAt`) VALUES
@@ -373,12 +376,14 @@ INSERT INTO `Invoices` (`id`, `idAccount`, `phone`, `address`, `ship`, `total`, 
 (32, 11, 899999995, 'C17/10 ấp 3 xã Bình Chánh, huyện Bình Chánh', 40000, 7350000, 2, 6, 5, '2023-12-30 06:21:36', '2023-12-30 06:24:56'),
 (33, 8, 899999998, '273 An Dương Vương P3 Q5', 40000, 690000, 2, 4, 5, '2024-01-17 02:11:05', '2024-01-17 02:14:43'),
 (34, 3, 865673597, '273 An Dương Vương P3 Q5', 40000, 2200000, 1, 4, 5, '2024-03-21 08:38:01', '2024-03-21 08:41:48'),
-(35, 3, 865673597, '273 An Dương Vương P3 Q5', 40000, 1230000, 1, 4, 5, '2024-04-08 10:27:54', '2024-04-08 10:28:58');
+(35, 3, 865673597, '273 An Dương Vương P3 Q5', 40000, 1230000, 1, 4, 5, '2024-04-08 10:27:54', '2024-04-08 10:28:58'),
+(36, 3, 865673597, '273 An Dương Vương P3 Q5', 40000, 1030000, 1, 4, 7, '2024-06-04 02:07:40', '2024-06-04 02:13:30'),
+(37, 13, 898989898, 'abc', 40000, 1420000, 1, 4, 5, '2024-06-04 02:12:02', '2024-06-04 02:13:28');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Likes`
+-- Table structure for table `Likes`
 --
 
 CREATE TABLE `Likes` (
@@ -390,19 +395,16 @@ CREATE TABLE `Likes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Likes`
+-- Dumping data for table `Likes`
 --
 
 INSERT INTO `Likes` (`id`, `idAccount`, `idProduct`, `createdAt`, `updatedAt`) VALUES
-(19, 3, 14, '2023-12-13 04:08:26', '2023-12-13 04:08:26'),
 (20, 8, 14, '2023-12-16 11:27:09', '2023-12-16 11:27:09'),
-(21, 3, 16, '2023-12-16 12:54:12', '2023-12-16 12:54:12'),
 (25, 1, 18, '2023-12-21 04:15:16', '2023-12-21 04:15:16'),
 (28, 1, 14, '2023-12-21 04:18:50', '2023-12-21 04:18:50'),
 (29, 3, 30, '2023-12-24 02:33:15', '2023-12-24 02:33:15'),
 (30, 10, 30, '2023-12-28 04:20:57', '2023-12-28 04:20:57'),
 (31, 10, 14, '2023-12-28 04:21:03', '2023-12-28 04:21:03'),
-(33, 3, 33, '2023-12-28 05:03:39', '2023-12-28 05:03:39'),
 (34, 9, 14, '2023-12-30 05:01:42', '2023-12-30 05:01:42'),
 (35, 9, 20, '2023-12-30 05:01:49', '2023-12-30 05:01:49'),
 (36, 7, 33, '2023-12-30 05:03:51', '2023-12-30 05:03:51'),
@@ -411,12 +413,12 @@ INSERT INTO `Likes` (`id`, `idAccount`, `idProduct`, `createdAt`, `updatedAt`) V
 (39, 8, 34, '2024-01-17 02:08:56', '2024-01-17 02:08:56'),
 (40, 9, 25, '2024-01-18 00:53:40', '2024-01-18 00:53:40'),
 (41, 3, 18, '2024-01-20 06:45:57', '2024-01-20 06:45:57'),
-(43, 3, 22, '2024-01-20 07:10:41', '2024-01-20 07:10:41');
+(45, 3, 15, '2024-08-17 03:34:13', '2024-08-17 03:34:13');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Menus`
+-- Table structure for table `Menus`
 --
 
 CREATE TABLE `Menus` (
@@ -429,22 +431,22 @@ CREATE TABLE `Menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Menus`
+-- Dumping data for table `Menus`
 --
 
 INSERT INTO `Menus` (`id`, `url`, `name`, `idPermission`, `createdAt`, `updatedAt`) VALUES
 (1, 'webserver', 'WebServer', 1, '2023-11-25 08:25:54', '2023-11-25 08:25:54'),
 (2, 'webserver', 'WebServer', 2, '2023-11-25 08:26:04', '2023-11-25 08:26:04'),
 (3, 'webserver', 'WebServer', 3, '2023-11-25 08:26:09', '2023-11-25 08:26:09'),
-(7, 'personal', 'Personal', 1, '2023-11-25 08:27:24', '2023-11-25 08:27:24'),
-(8, 'personal', 'Personal', 2, '2023-11-25 08:27:28', '2023-11-25 08:27:28'),
-(9, 'personal', 'Personal', 3, '2023-11-25 08:27:32', '2023-11-25 08:27:32'),
+(7, 'webserver/personal', 'Personal', 1, '2023-11-25 08:27:24', '2023-11-25 08:27:24'),
+(8, 'webserver/personal', 'Personal', 2, '2023-11-25 08:27:28', '2023-11-25 08:27:28'),
+(9, 'webserver/personal', 'Personal', 3, '2023-11-25 08:27:32', '2023-11-25 08:27:32'),
 (10, 'personal', 'Personal', 4, '2023-11-25 08:27:35', '2023-11-25 08:27:35');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Permissions`
+-- Table structure for table `Permissions`
 --
 
 CREATE TABLE `Permissions` (
@@ -456,7 +458,7 @@ CREATE TABLE `Permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Permissions`
+-- Dumping data for table `Permissions`
 --
 
 INSERT INTO `Permissions` (`id`, `name`, `idState`, `createdAt`, `updatedAt`) VALUES
@@ -469,7 +471,7 @@ INSERT INTO `Permissions` (`id`, `name`, `idState`, `createdAt`, `updatedAt`) VA
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Products`
+-- Table structure for table `Products`
 --
 
 CREATE TABLE `Products` (
@@ -486,7 +488,7 @@ CREATE TABLE `Products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Products`
+-- Dumping data for table `Products`
 --
 
 INSERT INTO `Products` (`id`, `idCategory`, `idSample`, `name`, `discount`, `price`, `information`, `idState`, `createdAt`, `updatedAt`) VALUES
@@ -512,12 +514,13 @@ INSERT INTO `Products` (`id`, `idCategory`, `idSample`, `name`, `discount`, `pri
 (33, 4, 9, 'Block Backpack', 19, 670000, 'Chống thấm nước\nNgăn chứa đồ rộng rãi\nChất liệu: Simili', 2, '2023-12-27 08:47:50', '2023-12-28 04:56:08'),
 (34, 4, 11, 'Shufling Bag', 0, 650000, 'Túi khoá kéo chắc chắn\nDây đeo điều chỉnh được độ dài\nChi tiết flag label tạo điểm nhấn\nChống thấm nước\nChất liệu: Vải dù gân, có chần bông mềm mại', 2, '2023-12-27 08:55:38', '2023-12-28 07:35:38'),
 (35, 4, 11, 'Minute Bag', 30, 380000, 'Dây rút điều chỉnh được độ dài \nNgăn lớn để vừa điện thoại, ví tiền\nNgăn nhỏ có khoá kéo chắc chắn\nChống thấm nước\nChất liệu: Simili', 2, '2023-12-28 07:42:34', '2023-12-28 07:42:34'),
-(36, 1, 1, 'Football Jersey', 0, 450000, 'Áo Jersey tay dài thiết kế unisex.', 1, '2024-03-21 08:24:15', '2024-03-21 08:24:15');
+(36, 1, 1, 'Football Jersey', 0, 450000, 'Áo Jersey tay dài thiết kế unisex.', 1, '2024-03-21 08:24:15', '2024-03-21 08:24:15'),
+(37, 2, 3, 'abc', 0, 10000, 'abc', 1, '2024-06-04 06:09:25', '2024-06-04 06:09:25');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Quantities`
+-- Table structure for table `Quantities`
 --
 
 CREATE TABLE `Quantities` (
@@ -532,7 +535,7 @@ CREATE TABLE `Quantities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Quantities`
+-- Dumping data for table `Quantities`
 --
 
 INSERT INTO `Quantities` (`id`, `idProduct`, `idSize`, `idColor`, `quantity`, `idState`, `createdAt`, `updatedAt`) VALUES
@@ -576,7 +579,7 @@ INSERT INTO `Quantities` (`id`, `idProduct`, `idSize`, `idColor`, `quantity`, `i
 (86, 24, 3, 1, 30, 2, '2023-12-16 13:17:18', '2023-12-16 13:17:18'),
 (87, 24, 2, 1, 30, 2, '2023-12-16 13:17:18', '2023-12-16 13:17:18'),
 (88, 25, 1, 1, 19, 2, '2023-12-16 13:19:38', '2023-12-26 08:00:33'),
-(89, 25, 2, 1, 20, 2, '2023-12-16 13:19:38', '2023-12-16 13:19:38'),
+(89, 25, 2, 1, 18, 2, '2023-12-16 13:19:38', '2024-06-04 02:13:28'),
 (90, 25, 3, 1, 20, 2, '2023-12-16 13:19:38', '2023-12-16 13:19:38'),
 (91, 26, 1, 1, 18, 2, '2023-12-16 13:21:07', '2023-12-27 08:00:56'),
 (92, 26, 2, 1, 17, 2, '2023-12-16 13:21:07', '2023-12-30 06:24:56'),
@@ -606,7 +609,7 @@ INSERT INTO `Quantities` (`id`, `idProduct`, `idSize`, `idColor`, `quantity`, `i
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Samples`
+-- Table structure for table `Samples`
 --
 
 CREATE TABLE `Samples` (
@@ -619,7 +622,7 @@ CREATE TABLE `Samples` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Samples`
+-- Dumping data for table `Samples`
 --
 
 INSERT INTO `Samples` (`id`, `idCategory`, `name`, `idState`, `createdAt`, `updatedAt`) VALUES
@@ -637,13 +640,12 @@ INSERT INTO `Samples` (`id`, `idCategory`, `name`, `idState`, `createdAt`, `upda
 (12, 1, 'Baby Tee', 2, '2023-11-30 03:10:59', '2023-11-30 03:10:59'),
 (13, 3, 'Cardigan', 2, '2023-12-16 13:26:29', '2023-12-16 13:26:29'),
 (14, 3, 'Gile', 2, '2023-12-16 13:26:42', '2023-12-16 13:26:42'),
-(15, 4, 'Cap', 2, '2023-12-28 07:35:13', '2023-12-28 07:35:13'),
-(17, 4, 'abcdssaa', 2, '2024-03-21 08:14:14', '2024-03-21 08:14:46');
+(15, 4, 'Cap', 2, '2023-12-28 07:35:13', '2023-12-28 07:35:13');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `SequelizeMeta`
+-- Table structure for table `SequelizeMeta`
 --
 
 CREATE TABLE `SequelizeMeta` (
@@ -651,7 +653,7 @@ CREATE TABLE `SequelizeMeta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `SequelizeMeta`
+-- Dumping data for table `SequelizeMeta`
 --
 
 INSERT INTO `SequelizeMeta` (`name`) VALUES
@@ -678,7 +680,7 @@ INSERT INTO `SequelizeMeta` (`name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Sizes`
+-- Table structure for table `Sizes`
 --
 
 CREATE TABLE `Sizes` (
@@ -691,7 +693,7 @@ CREATE TABLE `Sizes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Sizes`
+-- Dumping data for table `Sizes`
 --
 
 INSERT INTO `Sizes` (`id`, `code`, `name`, `idState`, `createdAt`, `updatedAt`) VALUES
@@ -706,7 +708,7 @@ INSERT INTO `Sizes` (`id`, `code`, `name`, `idState`, `createdAt`, `updatedAt`) 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Slides`
+-- Table structure for table `Slides`
 --
 
 CREATE TABLE `Slides` (
@@ -719,7 +721,7 @@ CREATE TABLE `Slides` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Slides`
+-- Dumping data for table `Slides`
 --
 
 INSERT INTO `Slides` (`id`, `image`, `name`, `idState`, `createdAt`, `updatedAt`) VALUES
@@ -730,7 +732,7 @@ INSERT INTO `Slides` (`id`, `image`, `name`, `idState`, `createdAt`, `updatedAt`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `States`
+-- Table structure for table `States`
 --
 
 CREATE TABLE `States` (
@@ -741,7 +743,7 @@ CREATE TABLE `States` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `States`
+-- Dumping data for table `States`
 --
 
 INSERT INTO `States` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
@@ -751,13 +753,12 @@ INSERT INTO `States` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 (4, 'Delivery', '2023-11-28 02:40:38', '2023-11-28 02:41:50'),
 (5, 'Done', '2023-11-28 02:41:07', '2023-11-28 02:41:07'),
 (6, 'Cancel', '2023-11-28 02:41:22', '2023-11-28 02:41:22'),
-(7, 'Unsuccessful', '2023-12-29 05:17:48', '2023-12-29 05:17:48'),
-(9, 'ddabc', '2024-03-21 08:56:48', '2024-03-21 08:57:07');
+(7, 'Unsuccessful', '2023-12-29 05:17:48', '2023-12-29 05:17:48');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Transfers`
+-- Table structure for table `Transfers`
 --
 
 CREATE TABLE `Transfers` (
@@ -768,7 +769,7 @@ CREATE TABLE `Transfers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Transfers`
+-- Dumping data for table `Transfers`
 --
 
 INSERT INTO `Transfers` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
@@ -784,7 +785,7 @@ INSERT INTO `Transfers` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `Transmissions`
+-- Table structure for table `Transmissions`
 --
 
 CREATE TABLE `Transmissions` (
@@ -796,7 +797,7 @@ CREATE TABLE `Transmissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `Transmissions`
+-- Dumping data for table `Transmissions`
 --
 
 INSERT INTO `Transmissions` (`id`, `idTransfer`, `idPermission`, `createdAt`, `updatedAt`) VALUES
@@ -817,11 +818,11 @@ INSERT INTO `Transmissions` (`id`, `idTransfer`, `idPermission`, `createdAt`, `u
 (16, 8, 1, '2023-11-30 07:34:28', '2023-11-30 07:34:28');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `Accounts`
+-- Indexes for table `Accounts`
 --
 ALTER TABLE `Accounts`
   ADD PRIMARY KEY (`id`),
@@ -829,34 +830,34 @@ ALTER TABLE `Accounts`
   ADD KEY `account_permission` (`idPermission`);
 
 --
--- Chỉ mục cho bảng `Allocations`
+-- Indexes for table `Allocations`
 --
 ALTER TABLE `Allocations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `allocation_transfer` (`idTransfer`);
 
 --
--- Chỉ mục cho bảng `Categories`
+-- Indexes for table `Categories`
 --
 ALTER TABLE `Categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `Colors`
+-- Indexes for table `Colors`
 --
 ALTER TABLE `Colors`
   ADD PRIMARY KEY (`id`),
   ADD KEY `color_state` (`idState`);
 
 --
--- Chỉ mục cho bảng `Functions`
+-- Indexes for table `Functions`
 --
 ALTER TABLE `Functions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `function_permission` (`idPermission`);
 
 --
--- Chỉ mục cho bảng `Images`
+-- Indexes for table `Images`
 --
 ALTER TABLE `Images`
   ADD PRIMARY KEY (`id`),
@@ -864,7 +865,7 @@ ALTER TABLE `Images`
   ADD KEY `image_product` (`idProduct`);
 
 --
--- Chỉ mục cho bảng `InvoiceDetails`
+-- Indexes for table `InvoiceDetails`
 --
 ALTER TABLE `InvoiceDetails`
   ADD PRIMARY KEY (`id`),
@@ -872,7 +873,7 @@ ALTER TABLE `InvoiceDetails`
   ADD KEY `product_invoicedetail` (`idProduct`);
 
 --
--- Chỉ mục cho bảng `Invoices`
+-- Indexes for table `Invoices`
 --
 ALTER TABLE `Invoices`
   ADD PRIMARY KEY (`id`),
@@ -880,7 +881,7 @@ ALTER TABLE `Invoices`
   ADD KEY `invoice_account` (`idAccount`);
 
 --
--- Chỉ mục cho bảng `Likes`
+-- Indexes for table `Likes`
 --
 ALTER TABLE `Likes`
   ADD PRIMARY KEY (`id`),
@@ -888,21 +889,21 @@ ALTER TABLE `Likes`
   ADD KEY `like_product` (`idProduct`);
 
 --
--- Chỉ mục cho bảng `Menus`
+-- Indexes for table `Menus`
 --
 ALTER TABLE `Menus`
   ADD PRIMARY KEY (`id`),
   ADD KEY `menu_permission` (`idPermission`);
 
 --
--- Chỉ mục cho bảng `Permissions`
+-- Indexes for table `Permissions`
 --
 ALTER TABLE `Permissions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `permission_state` (`idState`);
 
 --
--- Chỉ mục cho bảng `Products`
+-- Indexes for table `Products`
 --
 ALTER TABLE `Products`
   ADD PRIMARY KEY (`id`),
@@ -911,7 +912,7 @@ ALTER TABLE `Products`
   ADD KEY `product_category` (`idCategory`);
 
 --
--- Chỉ mục cho bảng `Quantities`
+-- Indexes for table `Quantities`
 --
 ALTER TABLE `Quantities`
   ADD PRIMARY KEY (`id`),
@@ -921,7 +922,7 @@ ALTER TABLE `Quantities`
   ADD KEY `quantity_state` (`idState`);
 
 --
--- Chỉ mục cho bảng `Samples`
+-- Indexes for table `Samples`
 --
 ALTER TABLE `Samples`
   ADD PRIMARY KEY (`id`),
@@ -929,40 +930,40 @@ ALTER TABLE `Samples`
   ADD KEY `sample_category` (`idCategory`);
 
 --
--- Chỉ mục cho bảng `SequelizeMeta`
+-- Indexes for table `SequelizeMeta`
 --
 ALTER TABLE `SequelizeMeta`
   ADD PRIMARY KEY (`name`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Chỉ mục cho bảng `Sizes`
+-- Indexes for table `Sizes`
 --
 ALTER TABLE `Sizes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `size_state` (`idState`);
 
 --
--- Chỉ mục cho bảng `Slides`
+-- Indexes for table `Slides`
 --
 ALTER TABLE `Slides`
   ADD PRIMARY KEY (`id`),
   ADD KEY `slide_state` (`idState`);
 
 --
--- Chỉ mục cho bảng `States`
+-- Indexes for table `States`
 --
 ALTER TABLE `States`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `Transfers`
+-- Indexes for table `Transfers`
 --
 ALTER TABLE `Transfers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `Transmissions`
+-- Indexes for table `Transmissions`
 --
 ALTER TABLE `Transmissions`
   ADD PRIMARY KEY (`id`),
@@ -970,194 +971,194 @@ ALTER TABLE `Transmissions`
   ADD KEY `transmission_permission` (`idPermission`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `Accounts`
+-- AUTO_INCREMENT for table `Accounts`
 --
 ALTER TABLE `Accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT cho bảng `Allocations`
+-- AUTO_INCREMENT for table `Allocations`
 --
 ALTER TABLE `Allocations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT cho bảng `Categories`
+-- AUTO_INCREMENT for table `Categories`
 --
 ALTER TABLE `Categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT cho bảng `Colors`
+-- AUTO_INCREMENT for table `Colors`
 --
 ALTER TABLE `Colors`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `Functions`
+-- AUTO_INCREMENT for table `Functions`
 --
 ALTER TABLE `Functions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `Images`
+-- AUTO_INCREMENT for table `Images`
 --
 ALTER TABLE `Images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT cho bảng `InvoiceDetails`
+-- AUTO_INCREMENT for table `InvoiceDetails`
 --
 ALTER TABLE `InvoiceDetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
--- AUTO_INCREMENT cho bảng `Invoices`
+-- AUTO_INCREMENT for table `Invoices`
 --
 ALTER TABLE `Invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT cho bảng `Likes`
+-- AUTO_INCREMENT for table `Likes`
 --
 ALTER TABLE `Likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT cho bảng `Menus`
+-- AUTO_INCREMENT for table `Menus`
 --
 ALTER TABLE `Menus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT cho bảng `Permissions`
+-- AUTO_INCREMENT for table `Permissions`
 --
 ALTER TABLE `Permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `Products`
+-- AUTO_INCREMENT for table `Products`
 --
 ALTER TABLE `Products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT cho bảng `Quantities`
+-- AUTO_INCREMENT for table `Quantities`
 --
 ALTER TABLE `Quantities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
--- AUTO_INCREMENT cho bảng `Samples`
+-- AUTO_INCREMENT for table `Samples`
 --
 ALTER TABLE `Samples`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT cho bảng `Sizes`
+-- AUTO_INCREMENT for table `Sizes`
 --
 ALTER TABLE `Sizes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `Slides`
+-- AUTO_INCREMENT for table `Slides`
 --
 ALTER TABLE `Slides`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `States`
+-- AUTO_INCREMENT for table `States`
 --
 ALTER TABLE `States`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT cho bảng `Transfers`
+-- AUTO_INCREMENT for table `Transfers`
 --
 ALTER TABLE `Transfers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT cho bảng `Transmissions`
+-- AUTO_INCREMENT for table `Transmissions`
 --
 ALTER TABLE `Transmissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `Accounts`
+-- Constraints for table `Accounts`
 --
 ALTER TABLE `Accounts`
   ADD CONSTRAINT `account_permission` FOREIGN KEY (`idPermission`) REFERENCES `Permissions` (`id`),
   ADD CONSTRAINT `account_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Allocations`
+-- Constraints for table `Allocations`
 --
 ALTER TABLE `Allocations`
   ADD CONSTRAINT `allocation_transfer` FOREIGN KEY (`idTransfer`) REFERENCES `Transfers` (`id`);
 
 --
--- Các ràng buộc cho bảng `Colors`
+-- Constraints for table `Colors`
 --
 ALTER TABLE `Colors`
   ADD CONSTRAINT `color_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Functions`
+-- Constraints for table `Functions`
 --
 ALTER TABLE `Functions`
   ADD CONSTRAINT `function_permission` FOREIGN KEY (`idPermission`) REFERENCES `Permissions` (`id`);
 
 --
--- Các ràng buộc cho bảng `Images`
+-- Constraints for table `Images`
 --
 ALTER TABLE `Images`
   ADD CONSTRAINT `image_color` FOREIGN KEY (`idColor`) REFERENCES `Colors` (`id`),
   ADD CONSTRAINT `image_product` FOREIGN KEY (`idProduct`) REFERENCES `Products` (`id`);
 
 --
--- Các ràng buộc cho bảng `InvoiceDetails`
+-- Constraints for table `InvoiceDetails`
 --
 ALTER TABLE `InvoiceDetails`
   ADD CONSTRAINT `detail_invoice` FOREIGN KEY (`idInvoice`) REFERENCES `Invoices` (`id`),
   ADD CONSTRAINT `product_invoicedetail` FOREIGN KEY (`idProduct`) REFERENCES `Products` (`id`);
 
 --
--- Các ràng buộc cho bảng `Invoices`
+-- Constraints for table `Invoices`
 --
 ALTER TABLE `Invoices`
   ADD CONSTRAINT `invoice_account` FOREIGN KEY (`idAccount`) REFERENCES `Accounts` (`id`),
   ADD CONSTRAINT `invoice_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Likes`
+-- Constraints for table `Likes`
 --
 ALTER TABLE `Likes`
   ADD CONSTRAINT `like_account` FOREIGN KEY (`idAccount`) REFERENCES `Accounts` (`id`),
   ADD CONSTRAINT `like_product` FOREIGN KEY (`idProduct`) REFERENCES `Products` (`id`);
 
 --
--- Các ràng buộc cho bảng `Menus`
+-- Constraints for table `Menus`
 --
 ALTER TABLE `Menus`
   ADD CONSTRAINT `menu_permission` FOREIGN KEY (`idPermission`) REFERENCES `Permissions` (`id`);
 
 --
--- Các ràng buộc cho bảng `Permissions`
+-- Constraints for table `Permissions`
 --
 ALTER TABLE `Permissions`
   ADD CONSTRAINT `permission_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Products`
+-- Constraints for table `Products`
 --
 ALTER TABLE `Products`
   ADD CONSTRAINT `product_category` FOREIGN KEY (`idCategory`) REFERENCES `Categories` (`id`),
@@ -1165,7 +1166,7 @@ ALTER TABLE `Products`
   ADD CONSTRAINT `product_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Quantities`
+-- Constraints for table `Quantities`
 --
 ALTER TABLE `Quantities`
   ADD CONSTRAINT `quantity_color` FOREIGN KEY (`idColor`) REFERENCES `Colors` (`id`),
@@ -1174,26 +1175,26 @@ ALTER TABLE `Quantities`
   ADD CONSTRAINT `quantity_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Samples`
+-- Constraints for table `Samples`
 --
 ALTER TABLE `Samples`
   ADD CONSTRAINT `sample_category` FOREIGN KEY (`idCategory`) REFERENCES `Categories` (`id`),
   ADD CONSTRAINT `sample_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Sizes`
+-- Constraints for table `Sizes`
 --
 ALTER TABLE `Sizes`
   ADD CONSTRAINT `size_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Slides`
+-- Constraints for table `Slides`
 --
 ALTER TABLE `Slides`
   ADD CONSTRAINT `slide_state` FOREIGN KEY (`idState`) REFERENCES `States` (`id`);
 
 --
--- Các ràng buộc cho bảng `Transmissions`
+-- Constraints for table `Transmissions`
 --
 ALTER TABLE `Transmissions`
   ADD CONSTRAINT `transmission_permission` FOREIGN KEY (`idPermission`) REFERENCES `Permissions` (`id`),
