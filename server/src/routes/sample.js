@@ -7,5 +7,6 @@ router.get('/depend', controllers.getSamples)
 router.get('/all', controllers.getAllSamples)
 router.put('/update', controllers.updateSamples)
 router.post('/create', controllers.createSamples)
+router.delete('/delete', controllers.deleteSamples)
 
 export default router;

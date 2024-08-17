@@ -37,3 +37,16 @@ export const apiUpdateCategories = (payload) => new Promise(async(resolve, rejec
         reject(error)
     }
 })
+
+export const apiDeleteCategories = (payload) => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'put',
+            url: 'api/v1/category/delete',
+            data: payload
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

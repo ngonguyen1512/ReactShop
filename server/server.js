@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
 cons(app);
 
-const port = process.env.PORT || 8888;
+const port = 5001;
 const listener = app.listen(port, () => {
     console.log(`Server listening on port: http://localhost:${listener.address().port}`);
 });

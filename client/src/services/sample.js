@@ -50,3 +50,16 @@ export const apiUpdateSamples = (payload) => new Promise(async(resolve, reject) 
         reject(error)
     }
 })
+
+export const apiDeleteSamples = (payload) => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'delete',
+            url: 'api/v1/sample/delete',
+            data: payload
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

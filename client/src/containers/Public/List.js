@@ -32,23 +32,13 @@ const List = ({ category }) => {
   }, [searchParmas, category, dispatch]);
 
   return (
-    <div className='lists'>
-      {parts !== '' && products_limit?.length > 0 && products_limit.map(item => item.idState === 2 && (
-        <Item id={item?.id}
-          name={item?.name}
-          price={item?.price}
-          idCurrent={idcurrent}
-          discount={item?.discount}
-          idCategory={item?.idCategory}
-          nameCategory={item?.product_category?.name}
-        />
-      ))}
-      {parts === '' && products_limit?.length > 0 &&
-        products_limit.filter(item => item.idState === 2)
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-          .map(item => (
+    <>
+      {products_limit?.length === 0 ? (
+        <div className='alert_product'>There are not any goods available right now.</div>
+      ):(
+        <div className='lists'>
+          {parts !== '' && products_limit?.length > 0 && products_limit.map(item => item.idState === 2 && (
             <Item id={item?.id}
-              key={item?.id}
               name={item?.name}
               price={item?.price}
               idCurrent={idcurrent}
@@ -56,9 +46,25 @@ const List = ({ category }) => {
               idCategory={item?.idCategory}
               nameCategory={item?.product_category?.name}
             />
-          ))
-      }
-    </div>
+          ))}
+          {parts === '' && products_limit?.length > 0 &&
+            products_limit.filter(item => item.idState === 2)
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map(item => (
+                <Item id={item?.id}
+                  key={item?.id}
+                  name={item?.name}
+                  price={item?.price}
+                  idCurrent={idcurrent}
+                  discount={item?.discount}
+                  idCategory={item?.idCategory}
+                  nameCategory={item?.product_category?.name}
+                />
+              ))
+          }
+        </div>
+      )}
+    </>
   )
 }
 

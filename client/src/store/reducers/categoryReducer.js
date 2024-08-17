@@ -25,6 +25,13 @@ const categoryReducer = (state = initState, action) => {
                 categories: action.data,
                 msg: action.msg || '',
             }
+
+        case actionTypes.DELETE_CATEGORIES:
+            return {
+                ...state,
+                categories: action.data,
+                msg: action.msg || '',
+            }
         default:
             return state;
     }

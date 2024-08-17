@@ -32,6 +32,12 @@ const sampleReducer = (state = initState, action) => {
                 samples: action.data,
                 msg: action.msg || '',
             }
+        case actionTypes.DELETE_SAMPLE:
+            return {
+                ...state,
+                samples: action.data,
+                msg: action.msg || '',
+            }
         default:
             return state;
     }

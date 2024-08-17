@@ -48,6 +48,11 @@ function App() {
               <Route path={path.COMPLETION} element={<Completion />} />
               <Route path={path.PROCESSING} element={<Processing />} />
             </Route>
+            <Route path={path.PERSONAL} element={<Personal />}>
+              <Route path={path.INFORMATION} element={<Information />} />
+              <Route path={path.UPDATE_ACCOUNT} element={<UpdateAccount />} />
+              <Route path={path.CHANGEPASSWORD} element={<ChangePassword />} />
+            </Route>
             <Route path={path.TYPE} element={<Type />}>
               <Route path={path.SAMPLE} element={<Sample />} />
               <Route path={path.CATEGORY} element={<Category />} />
