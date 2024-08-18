@@ -23,29 +23,29 @@ const Item = ({ id, name, discount, price, idCurrent, nameCategory }) => {
 
   const handleLike = (id) => {
     const updatedPayload = { idAccount: idCurrent, idProduct: id };
-    if (Array.isArray(likes) && !likes.some((item) => item.idProduct === id && item.idAccount === idCurrent)) {
-      dispatch(actions.createLikes(updatedPayload))
-      setLikess([...likess, updatedPayload])
-      setIsLiked(true)
+    if (!isLiked) {
+      dispatch(actions.createLikes(updatedPayload));
+      setLikess([...likess, updatedPayload]);
+      setIsLiked(true); // Cập nhật trạng thái ngay lập tức
     }
   };
-
+  
   const handleUnLike = (id) => {
     const updatedPayload = { idAccount: idCurrent, idProduct: id };
     dispatch(actions.deleteLikes(updatedPayload));
     const updatedLikes = likess.filter((item) => item.idProduct !== id || item.idAccount !== idCurrent);
-    setLikess(updatedLikes)
-    setIsLiked(updatedLikes.some((item) => item.idProduct === id && item.idAccount === idCurrent) || false);
-  };
+    setLikess(updatedLikes);
+    setIsLiked(false); // Cập nhật trạng thái ngay lập tức
+  };  
 
   useEffect(() => {
     if (Array.isArray(likes)) {
       const hasLiked = likes.some(
         item => item.idProduct === id && item.idAccount === idCurrent
-      )
-      setIsLiked(hasLiked)
+      );
+      setIsLiked(hasLiked);
     }
-  }, [likes, id, idCurrent])
+  }, [likes, id, idCurrent, likess]);
 
   useEffect(() => {
     dispatch(actions.getLikes())
